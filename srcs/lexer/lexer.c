@@ -6,7 +6,7 @@
 /*   By: asaboure <asaboure@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/06 17:06:14 by asaboure          #+#    #+#             */
-/*   Updated: 2022/01/06 21:13:05 by asaboure         ###   ########.fr       */
+/*   Updated: 2022/01/07 16:04:43 by asaboure         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,50 +50,27 @@ int	getchartype(char c)
 	return (CHAR_GENERAL);
 }
 
-int	setTokenQuote(t_token *token, int *j)
+void	tokenize_general(t_lexer *lexerbuf, t_token *token, char *input
+	, int size)
 {
-	token->data[*j++] = CHAR_QUOTE;
-	token->type = TOKEN;
-	return (STATE_IN_QUOTE);
-}
-
-int	setTokenDquote(t_token *token, int *j)
-{
-	token->data[*j++] = CHAR_DQUOTE;
-	token->type = TOKEN;
-	return (STATE_IN_DQUOTE);
-}
-
-void	setTokenEscSeq(t_token *token, int *j, int *i, char *input)
-{
-	token->data[*j++] = input[*++i];
-	token->type = TOKEN;
-}
-
-void	setTokenGeneral(t_token *token, int *j, char c)
-{
-	token->data[*j++] = c;
-	token->type = TOKEN;
-}
-
-void	setTokenWhitespace(t_token *token, int *j, int size, int i)
-{
-	if (j > 0)
-	{
-		token->data[*j] = 0;
-		token->next = malloc(sizeof(t_token));
-		token = token->next;
-		tok_init(token, size - i);
-		*j = 0;
-	}
+	if (lexerbuf->chtype == CHAR_QUOTE)
+		lexerbuf->state = set_token_quote(token, &lexerbuf->j);
+	if (lexerbuf->chtype == CHAR_DQUOTE)
+		lexerbuf->state = set_token_dquote(token, &lexerbuf->j);
+	if (lexerbuf->chtype == CHAR_ESCAPESEQUENCE)
+		set_token_esc_seq(token, &lexerbuf->j, &lexerbuf->i, input);
+	if (lexerbuf->chtype == CHAR_GENERAL)
+		set_token_general(token, &lexerbuf->j, lexerbuf->c);
+	if (lexerbuf->chtype == CHAR_WHITESPACE || lexerbuf->chtype
+		== CHAR_SEMICOLON || lexerbuf->chtype == CHAR_GREATER
+		|| lexerbuf->chtype == CHAR_LESSER || lexerbuf->chtype
+		== CHAR_LESSER || lexerbuf->chtype == CHAR_AMPERSAND || lexerbuf
+		->chtype == CHAR_PIPE)
+		set_token_whitespace(token, &lexerbuf->j, size, lexerbuf->i);
 }
 
 int	lexer_build(char *input, int size, t_lexer *lexerbuf)
 {
-	int		i;
-	int		j;
-	char	c;
-	int		chtype;
 	t_token	*token;
 
 	if (!lexerbuf)
@@ -106,26 +83,14 @@ int	lexer_build(char *input, int size, t_lexer *lexerbuf)
 	token = lexerbuf->tokenlist;
 	token_init(token, size);
 	lexerbuf->state = STATE_GENERAL;
-	i = 0;
-	do
+	lexerbuf->i = 0;
+	while (1)
 	{
-		c = input[i++];
-		chtype = getchartype(c);
+		lexerbuf->c = input[lexerbuf->i++];
+		lexerbuf->chtype = getchartype(lexerbuf->c);
 		if (lexerbuf->state == STATE_GENERAL)
-		{
-			if (chtype == CHAR_QUOTE)
-				lexerbuf->state = setTokenQuote(token, &j);
-			if (chtype == CHAR_DQUOTE)
-				lexerbuf->state = setTokenDquote(token, &j);
-			if (chtype == CHAR_ESCAPESEQUENCE)
-				setTokenEscSeq(token, &j, &i, input);
-			if (chtype == CHAR_GENERAL)
-				setTokenGeneral(token, &j, c);
-			if (chtype == CHAR_WHITESPACE || chtype == CHAR_SEMICOLON || chtype
-					== CHAR_GREATER || chtype == CHAR_LESSER || chtype
-					== CHAR_LESSER || chtype == CHAR_AMPERSAND || chtype
-					== CHAR_PIPE)
-				setTokenWhitespace(token, &j, size, i);
-		}
-	} while (c != '\0');
+			tokenize_general(lexerbuf, token, input, size);
+		if (lexerbuf->c == '\0')
+			break ;
+	}
 }

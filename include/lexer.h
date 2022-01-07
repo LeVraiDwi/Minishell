@@ -6,7 +6,7 @@
 /*   By: asaboure <asaboure@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/06 17:10:10 by asaboure          #+#    #+#             */
-/*   Updated: 2022/01/06 20:47:54 by asaboure         ###   ########.fr       */
+/*   Updated: 2022/01/07 15:12:15 by asaboure         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,16 @@ typedef struct s_lexer
 	t_token	*tokenlist;
 	int		ntokens;
 	int		state;
+	int		i;
+	int		j;
+	int		chtype;
+	char	c;
 }				t_lexer;
+
+int		set_token_quote(t_token *token, int *j);
+int		set_token_dquote(t_token *token, int *j);
+void	set_token_esc_seq(t_token *token, int *j, int *i, char *input);
+void	set_token_general(t_token *token, int *j, char c);
+void	set_token_whitespace(t_token *token, int *j, int size, int i);
 
 #endif
