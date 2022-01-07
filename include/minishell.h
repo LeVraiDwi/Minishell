@@ -13,7 +13,13 @@
 #ifndef MINISHELL_H
 # define MINISHELL_H
 # include <unistd.h>
-
+# include <stdio.h>
+# include <sys/types.h>
+# include <sys/types.h>
+# include <sys/stat.h>
+# include <fcntl.h>
+# include <sys/wait.h>
+# include <errno.h>
 
 typedef struct	s_parsing
 {
