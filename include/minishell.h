@@ -6,7 +6,7 @@
 /*   By: asaboure <asaboure@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/06 18:22:04 by asaboure          #+#    #+#             */
-/*   Updated: 2022/01/10 13:59:20 by tcosse           ###   ########.fr       */
+/*   Updated: 2022/01/10 14:36:51 by tcosse           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,10 @@ typedef struct	s_parsing
 	unsigned int		flag;
 	int					in;
 	int					out;
+	int					err;
 	char				*str_in;
 	char				*str_out;
+	char				*str_err;
 	void				*next;
 }				t_parsing;
 
