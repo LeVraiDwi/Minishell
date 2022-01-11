@@ -6,7 +6,7 @@
 /*   By: asaboure <asaboure@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/06 17:10:10 by asaboure          #+#    #+#             */
-/*   Updated: 2022/01/10 15:45:55 by asaboure         ###   ########.fr       */
+/*   Updated: 2022/01/11 18:46:18 by asaboure         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,9 +41,9 @@ enum	e_inputState
 
 typedef struct s_token
 {
-	char	*data;
-	int		type;
-	t_token	*next;
+	char			*data;
+	int				type;
+	struct s_token	*next;
 }				t_token;
 
 typedef struct s_lexer
@@ -73,5 +73,7 @@ void	tokenize_general(t_lexer *lexerbuf, t_token *token, char *input,
 void	tokenize_in_dquote(t_lexer *lexerbuf, t_token *token);
 void	tokenize_in_quote(t_lexer *lexerbuf, t_token *token);
 void	tokenize_null(t_lexer *lexerbuf, t_token *token);
+void	lexer_build(char *input, int size, t_lexer *lexerbuf);
+char	**get_pathv(char **env);
 
 #endif

@@ -6,12 +6,13 @@
 /*   By: asaboure <asaboure@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/07 14:53:21 by asaboure          #+#    #+#             */
-/*   Updated: 2022/01/07 18:57:14 by asaboure         ###   ########.fr       */
+/*   Updated: 2022/01/11 18:17:27 by asaboure         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 #include "lexer.h"
+#include <stdlib.h>
 
 void	tokenize_general(t_lexer *lexerbuf, t_token *token, char *input
 	, int size)

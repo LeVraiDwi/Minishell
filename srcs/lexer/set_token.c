@@ -6,12 +6,13 @@
 /*   By: asaboure <asaboure@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/07 14:53:21 by asaboure          #+#    #+#             */
-/*   Updated: 2022/01/07 18:56:24 by asaboure         ###   ########.fr       */
+/*   Updated: 2022/01/11 18:15:46 by asaboure         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 #include "lexer.h"
+#include <stdlib.h>
 
 int	set_token_quote(t_token *token, int *j)
 {
@@ -46,7 +47,7 @@ void	set_token_whitespace(t_token *token, int *j, int size, int i)
 		token->data[*j] = 0;
 		token->next = malloc(sizeof(t_token));
 		token = token->next;
-		tok_init(token, size - i);
+		token_init(token, size - i);
 		*j = 0;
 	}
 }

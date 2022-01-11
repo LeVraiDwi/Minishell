@@ -6,12 +6,13 @@
 /*   By: asaboure <asaboure@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/07 18:48:48 by asaboure          #+#    #+#             */
-/*   Updated: 2022/01/07 18:50:41 by asaboure         ###   ########.fr       */
+/*   Updated: 2022/01/11 18:16:47 by asaboure         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 #include "lexer.h"
+#include <stdlib.h>
 
 void	token_init(t_token *tok, int datasize)
 {
