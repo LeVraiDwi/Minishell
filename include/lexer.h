@@ -6,7 +6,7 @@
 /*   By: asaboure <asaboure@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/06 17:10:10 by asaboure          #+#    #+#             */
-/*   Updated: 2022/01/07 18:59:52 by asaboure         ###   ########.fr       */
+/*   Updated: 2022/01/10 15:45:55 by asaboure         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ typedef struct s_token
 typedef struct s_lexer
 {
 	t_token	*tokenlist;
+	char	**path;
 	int		ntokens;
 	int		state;
 	int		i;
@@ -68,7 +69,7 @@ int		getchartype(char c);
 
 void	tokenize(t_lexer *lexerbuf, t_token *token, int size, char *input);
 void	tokenize_general(t_lexer *lexerbuf, t_token *token, char *input,
-	int size);
+			int size);
 void	tokenize_in_dquote(t_lexer *lexerbuf, t_token *token);
 void	tokenize_in_quote(t_lexer *lexerbuf, t_token *token);
 void	tokenize_null(t_lexer *lexerbuf, t_token *token);
