@@ -6,7 +6,7 @@
 /*   By: asaboure <asaboure@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/07 14:53:21 by asaboure          #+#    #+#             */
-/*   Updated: 2022/01/11 18:17:27 by asaboure         ###   ########.fr       */
+/*   Updated: 2022/01/12 20:45:45 by asaboure         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include "lexer.h"
 #include <stdlib.h>
 
-void	tokenize_general(t_lexer *lexerbuf, t_token *token, char *input
+t_token	*tokenize_general(t_lexer *lexerbuf, t_token *token, char *input
 	, int size)
 {
 	if (lexerbuf->chtype == CHAR_QUOTE)
@@ -26,7 +26,7 @@ void	tokenize_general(t_lexer *lexerbuf, t_token *token, char *input
 	if (lexerbuf->chtype == CHAR_GENERAL)
 		set_token_general(token, &lexerbuf->j, lexerbuf->c);
 	if (lexerbuf->chtype == CHAR_WHITESPACE)
-		set_token_whitespace(token, &lexerbuf->j, size, lexerbuf->i);
+		token = set_token_whitespace(token, &lexerbuf->j, size, lexerbuf->i);
 	if (lexerbuf->chtype == CHAR_SEMICOLON || lexerbuf->chtype == CHAR_GREATER
 		|| lexerbuf->chtype == CHAR_LESSER || lexerbuf->chtype
 		== CHAR_LESSER || lexerbuf->chtype == CHAR_AMPERSAND || lexerbuf
@@ -40,6 +40,7 @@ void	tokenize_general(t_lexer *lexerbuf, t_token *token, char *input
 		token = token->next;
 		token_init(token, size - lexerbuf->i);
 	}
+	return (token);
 }
 
 void	tokenize_in_dquote(t_lexer *lexerbuf, t_token *token)
@@ -71,14 +72,13 @@ void	tokenize(t_lexer *lexerbuf, t_token *token, int size, char *input)
 		lexerbuf->c = input[lexerbuf->i++];
 		lexerbuf->chtype = getchartype(lexerbuf->c);
 		if (lexerbuf->state == STATE_GENERAL)
-			tokenize_general(lexerbuf, token, input, size);
+			token = tokenize_general(lexerbuf, token, input, size);
 		else if (lexerbuf->state == STATE_IN_DQUOTE)
 			tokenize_in_dquote(lexerbuf, token);
 		else if (lexerbuf->state == STATE_IN_QUOTE)
 			tokenize_in_quote(lexerbuf, token);
 		if (lexerbuf->chtype == CHAR_NULL && lexerbuf->j > 0)
 			tokenize_null(lexerbuf, token);
-		lexerbuf->i++;
 		if (lexerbuf->c == '\0')
 			break ;
 	}

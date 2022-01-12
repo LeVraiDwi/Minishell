@@ -6,7 +6,7 @@
 /*   By: asaboure <asaboure@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/05 19:23:06 by asaboure          #+#    #+#             */
-/*   Updated: 2022/01/11 18:45:51 by asaboure         ###   ########.fr       */
+/*   Updated: 2022/01/12 17:29:49 by asaboure         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,14 +20,16 @@ int	main(int ac, char **av, char **env)
 {
 	//char	*prompt = "minishell> ";
 	//char	*line;
-	int		i;
-	char	**path;
+	// int		i;
 	t_lexer	lexerbuf;
-	char	*input = "plouf";
+	char	*input = "plouf d";
 	//line = readline(prompt);
-	i = 0;
-
+	// i = 0;
+	(void)ac;
+	(void)av;
 	lexerbuf.path = get_pathv(env);
+	lexerbuf.tokenlist = malloc(sizeof(t_token));
+	lexerbuf.j = 0;
 	// while(path[i])
 	// {
 	// 	printf("%s\n", path[i]);
@@ -35,4 +37,9 @@ int	main(int ac, char **av, char **env)
 	// }
 
 	lexer_build(input, ft_strlen(input), &lexerbuf);
+	while(lexerbuf.tokenlist)
+	{
+ 		printf("%s\n", lexerbuf.tokenlist->data);
+	 	lexerbuf.tokenlist = lexerbuf.tokenlist->next;
+	}
 }

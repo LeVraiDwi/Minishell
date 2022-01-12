@@ -6,7 +6,7 @@
 /*   By: asaboure <asaboure@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/06 17:06:14 by asaboure          #+#    #+#             */
-/*   Updated: 2022/01/11 19:20:22 by asaboure         ###   ########.fr       */
+/*   Updated: 2022/01/12 20:46:12 by asaboure         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,10 +75,15 @@ char	**check_cmd(char **path, t_token *token, t_lexer *lexerbuf)
 		free(pathcmd);
 		i++;
 	}
+	if (j == 0)
+	{
+		free(cmd);
+		return (NULL);
+	}
 	return (cmd);
 }
 
-void	strip_quotes(char *src, t_lexer *lexerbuf)
+void	strip_quotes(t_token *token)
 {
 	char	*dest;
 	int		i;
@@ -86,15 +91,15 @@ void	strip_quotes(char *src, t_lexer *lexerbuf)
 	char	lastquote;
 	char	c;
 
-	dest = malloc(ft_strlen(src) + 1);
-	if (ft_strlen(src) <= 1)
+	dest = malloc(ft_strlen(token->data) + 1);
+	if (ft_strlen(token->data) <= 1)
 		return ;
 	i = -1;
 	j = 0;
 	lastquote = 0;
-	while (++i < ft_strlen(src))
+	while (++i < (int)ft_strlen(token->data))
 	{
-		c = src[i];
+		c = token->data[i];
 		if ((c == '\'' || c == '\"') && lastquote == 0)
 			lastquote = 0;
 		else if (c == lastquote)
@@ -103,8 +108,8 @@ void	strip_quotes(char *src, t_lexer *lexerbuf)
 			dest[j++] = c;
 	}
 	dest[j] = 0;
-	free(src);
-	src = dest;
+	free(token->data);
+	token->data = dest;
 }
 
 //TODO: Protect mallocs 
@@ -129,7 +134,7 @@ void	lexer_build(char *input, int size, t_lexer *lexerbuf)
 		if (token->type == TOKEN)
 		{
 			cmd = check_cmd(lexerbuf->path, token, lexerbuf);
-			if (lexerbuf->ntokens)
+			if (cmd)
 			{
 				saved = token->next;
 				free(token->data);
@@ -148,7 +153,7 @@ void	lexer_build(char *input, int size, t_lexer *lexerbuf)
 			}
 			else
 			{
-				strip_quotes(token->data, lexerbuf);
+				strip_quotes(token);
 				lexerbuf->ntokens++;
 			}
 		}
