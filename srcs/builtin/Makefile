@@ -31,22 +31,22 @@ RM = rm -f
 CD = cd
 
 .c.o:
-                        ${CC} ${FLAGS} ${HEADER} -c $< -o $@
+			${CC} ${FLAGS} ${HEADER} -c $< -o $@
 
-${NAME}:        ${ECHO_OBJS} ${CD_OBJS} ${PWD_OBJS}
-                        ${CC} -o ${NAME1} ${ECHO_OBJS} ${FLAGS} ${LIBFT}
-                        ${CC} -o ${NAME2} ${CD_OBJS} ${FLAGS} ${LIBFT}
-                        ${CC} -o ${NAME3} ${PWD_OBJS} ${FLAGS} ${LIBFT}
+${NAME}:		${ECHO_OBJS} ${CD_OBJS} ${PWD_OBJS}
+			${CC} -o ${NAME1} ${ECHO_OBJS} ${FLAGS} ${LIBFT}
+			${CC} -o ${NAME2} ${CD_OBJS} ${FLAGS} ${LIBFT}
+			${CC} -o ${NAME3} ${PWD_OBJS} ${FLAGS} ${LIBFT}
 
-all:            ${NAME}
+all:			${NAME}
 
 clean:
-                        ${RM} ${ECHO_OBJS} ${CD_OBJS} ${PWD_OBJS}
+			${RM} ${ECHO_OBJS} ${CD_OBJS} ${PWD_OBJS}
 
-fclean:         clean
-                        ${RM} ${NAME1} ${NAME2} ${NAME3}
+fclean:			clean
+			${RM} ${NAME1} ${NAME2} ${NAME3}
 
-re:                     fclean all
+re:			fclean all
 
-.PHONY =        all clean fclean re
+.PHONY =		all clean fclean re
 

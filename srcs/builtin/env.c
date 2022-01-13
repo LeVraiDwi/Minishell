@@ -1,6 +1,6 @@
 #include "minishell.h"
 
-int	env(t_term term, char **cmd)
+int	ft_env(t_term term, char **cmd)
 {
 	if (!strisstr(*cmd, "env") || cmd[1])
 	{

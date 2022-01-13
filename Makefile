@@ -1,10 +1,10 @@
 SRCS = $(addprefix $(SRC_PATH)/,$(SRC_NAME))
 
-UNAME_S = $(shell uname -s)
+SRC_PATH = ./srcs
 
-SRC_PATH = ./src
-
-SRC_NAME =	main.c 
+SRC_NAME = main.c env_utils.c env_util.c\
+	   strisstr.c builtin/env.c builtin/export.c\
+	   builtin/unset.c\
 
 LIBFT = ./libft/libft.a
 

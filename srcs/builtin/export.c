@@ -16,22 +16,30 @@ int	ft_is_var(char *var)
 	return (0);
 }
 
-int	export(t_term *term, char **cmd)
+int	ft_export(t_term *term, char **cmd)
 {
 	int	l;
 	int	flag;
+	int	ret;
 
 	l = 1;
 	flag = 0;
+	ret = 0;
 	while (cmd[l])
 	{
 		if (ft_is_var(cmd[l]))
+		{
+			ret = 0;
 			add_env(term, cmd[l]);
+		}
 		else if (!flag)
 		{
-			printf("export: %s: invalide parameter name\n");
+			ret = 1;
+			printf("export: %s: invalide parameter name\n", cmd[l]);
 			flag  = 1;
 		}
+		else
+			ret = 1;
 		l++;
 	}
 	return (0);
