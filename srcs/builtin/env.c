@@ -2,7 +2,7 @@
 
 int	env(t_term term, char **cmd)
 {
-	if (!strisstr(*cmd, "env"))
+	if (!strisstr(*cmd, "env") || cmd[1])
 	{
 		strerror(E2BIG);
 		return (1);

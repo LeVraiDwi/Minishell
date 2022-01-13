@@ -19,9 +19,19 @@
 # include <sys/stat.h>
 # include <fcntl.h>
 # include <sys/wait.h>
+# include <string.h>
 # include <errno.h>
+# include "libft.h"
+# include "built.h"
+# include "env.h"
+# include "strisstr.h"
 # define STDIN 0
 # define STDOUT 1
+
+typedef struct	s_term
+{
+	char	**env;
+}		t_term;
 
 typedef struct	s_parsing
 {
@@ -37,5 +47,8 @@ typedef struct	s_parsing
 	char				*str_err;
 	void				*next;
 }				t_parsing;
+
+int	strisstr(char *str, char *s);
+int	ft_free(void **p);
 
 #endif

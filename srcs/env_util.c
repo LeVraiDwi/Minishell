@@ -1,6 +1,6 @@
-#include "Minishell.h"
+#include "minishell.h"
 
-int	ft_init_env(t_term term, char **env)
+int	ft_init_env(t_term *term, char **env)
 {
 	int	l;
 	char	**new;
@@ -11,7 +11,7 @@ int	ft_init_env(t_term term, char **env)
 	new = (char **)malloc(sizeof(char *) * (l + 1));
 	if (!new)
 		return (0);
-	new[l] = 0
+	new[l] = 0;
 	l = 0;
 	while (env[l])
 	{
@@ -20,7 +20,7 @@ int	ft_init_env(t_term term, char **env)
 			return (0);
 		l++;
 	}
-	term->env = env;
+	term->env = new;
 	return (1);
 }
 
@@ -35,7 +35,7 @@ int	ft_is_env_var(char *env, char *var)
 			return (0);
 		i++;
 	}
-	if (env[i] == '=' && !var[i])
+	if (env[i] == '=' && (var[i] == '=' || !var[i]))
 		return (1);
 	return (0);
 }
@@ -49,11 +49,12 @@ int	ft_is_env(char **env, char *var)
 	{
 		if (ft_is_env_var(env[i], var))
 			return (i);
+		i++;
 	}
 	return (0);
 }
 
-int	ft_realloc_env(t_term term, char *var)
+int	ft_realloc_env(t_term *term, char *var)
 {
 	int	l;
 	char	**tmp;
@@ -71,12 +72,16 @@ int	ft_realloc_env(t_term term, char *var)
 		tmp[l] = term->env[l];
 		l++;
 	}
-	tmp[l] = var;
+	tmp[l] = ft_strdup(var);
+	if (!tmp[l])
+		return (ft_free_env(tmp));
+	free(term->env);
+	term->env = tmp;
 	return (1);
 
 }
 
-int	add_env(t_term term, char *var)
+int	add_env(t_term *term, char *var)
 {
 	int	i;
 
@@ -85,8 +90,7 @@ int	add_env(t_term term, char *var)
 	i = ft_is_env(term->env, var);
 	if (i)
 	{
-		ft_free(term->&env[i]);
-		env[i] = var;
+		replace_env(term, var, i);
 		return (1);
 	}
 	else

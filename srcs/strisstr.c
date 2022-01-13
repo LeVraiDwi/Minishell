@@ -1,6 +1,6 @@
 #include "minishell.h"
 
-int	strisstr(char str, char s)
+int	strisstr(char *str, char *s)
 {
 	int i;
 
@@ -9,7 +9,7 @@ int	strisstr(char str, char s)
 		return (0);
 	while (str[i] && s[i] && str[i] == s[i])
 		i++;
-	if (str[i] || str[i])
+	if (str[i] || s[i])
 		return (0);
 	return (1);
 }
