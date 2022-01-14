@@ -1,13 +1,16 @@
 #include "minishell.h"
 
-int	main(int argc, char **argv)
+int	ft_cd(char **cmd)
 {
-	if (argc != 2)
+	int	l;
+
+	l = ft_cmd_length(cmd);
+	if (l != 2)
 	{
 		strerror(E2BIG);
 		return (1);
 	}
-	if(chdir(argv[1]) < 0)
+	if(chdir(cmd[1]) < 0)
 	{
 		perror("Error:");
 		return (1);

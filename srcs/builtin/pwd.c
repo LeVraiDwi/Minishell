@@ -1,11 +1,12 @@
 #include "minishell.h"
 
-int	main(int argc, char **argv)
+int	ft_pwd(char **cmd)
 {
-	if (argc != 1)
-	{
-		strerror(E2BIG);
+	char	buf[200];
+	
+	if (!strisstr(cmd[0], "pwd"))
 		return (1);
-	}
+	getcwd(buf, 200);
+	printf("%s\n", buf);
 	return (0);
 }
