@@ -30,6 +30,7 @@
 
 typedef struct	s_term
 {
+	char	*user;
 	char	**env;
 }		t_term;
 
