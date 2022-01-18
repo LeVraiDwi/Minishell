@@ -6,7 +6,7 @@
 /*   By: asaboure <asaboure@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/07 14:53:21 by asaboure          #+#    #+#             */
-/*   Updated: 2022/01/12 20:45:45 by asaboure         ###   ########.fr       */
+/*   Updated: 2022/01/17 18:31:35 by asaboure         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ t_token	*tokenize_general(t_lexer *lexerbuf, t_token *token, char *input
 		== CHAR_LESSER || lexerbuf->chtype == CHAR_AMPERSAND || lexerbuf
 		->chtype == CHAR_PIPE)
 	{
-		set_token_whitespace(token, &lexerbuf->j, size, lexerbuf->i);
+		token = set_token_whitespace(token, &lexerbuf->j, size, lexerbuf->i);
 		token->data[0] = lexerbuf->chtype;
 		token->data[1] = 0;
 		token->type = lexerbuf->chtype;
