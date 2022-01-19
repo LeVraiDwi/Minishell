@@ -2,7 +2,6 @@
 
 char *get_val(char *env)
 {
-	char	*new;
 	int	i;
 
 	i = 0;
@@ -21,7 +20,20 @@ char	*get_env_var(char **env, char *var)
 	return (0);
 }
 
-int	update_pwd()
+int	ft_update_pwd(t_term *term, char *path)
 {
+	char	*tmp;
+	char	*var;
+
+	var = get_env_var(term->env, "PWD");
+	if (!var)
+		return (0);
+	tmp = ft_strjoin("OLDPWD=", var);
+	free(var);
+	add_env(term, tmp);
+	free(tmp);
+	var = (ft_strjoin("PWD=", path));
+	add_env(term, var);
+	return (1);
 
 }

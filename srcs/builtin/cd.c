@@ -1,6 +1,6 @@
 #include "minishell.h"
 
-int	ft_cd(char **cmd)
+int	ft_cd(t_term *term, char **cmd)
 {
 	int	l;
 
@@ -15,5 +15,7 @@ int	ft_cd(char **cmd)
 		perror("Error:");
 		return (1);
 	}
+	if(!ft_update_pwd(term, cmd[1]))
+		return (0);
 	return (0);
 }

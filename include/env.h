@@ -13,5 +13,6 @@ int	replace_env(t_term *term, char *var, int i);
 int	ft_dealloc_env(t_term *term, int i);
 int	remove_env(t_term *term, char *var);
 void	print_env(t_term term);
+int	ft_update_pwd(t_term *term, char *path);
 
 #endif

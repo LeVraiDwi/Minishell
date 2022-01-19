@@ -9,7 +9,7 @@ int	ft_is_var(char *var)
 	i = 0;
 	if (!var)
 		return (0);
-	while (var[i] && ft_isalnum(var[i]))
+	while (var[i] && (ft_isalnum(var[i]) || var[i] == '_'))
 		i++;
 	if (var[i] == '=')
 		return (1);

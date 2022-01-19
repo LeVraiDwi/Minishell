@@ -2,7 +2,8 @@
 
 int	ft_env(t_term term, char **cmd)
 {
-	if (!strisstr(*cmd, "env") || cmd[1])
+	printf("%p\n", cmd[1]);
+	if (!strisstr(cmd[0], "env") || cmd[1])
 	{
 		strerror(E2BIG);
 		return (1);

@@ -1,6 +1,6 @@
 #include "minishell.h"
 
-int	ft_pwd(char **cmd)
+int	ft_pwd(t_term *term, char **cmd)
 {
 	char	buf[200];
 	

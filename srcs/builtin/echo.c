@@ -25,12 +25,13 @@ int	ft_cmd_length(char **cmd)
 	return (l);
 }
 
-int	ft_echo(char **cmd)
+int	ft_echo(t_term *term, char **cmd)
 {
 	int	flag;
 	int	i;
 	int	l;
 
+	(void)term;
 	l = ft_cmd_length(cmd);
 	flag = 0;
 	if (l  == 1)

@@ -21,6 +21,8 @@
 # include <sys/wait.h>
 # include <string.h>
 # include <errno.h>
+# include <readline/readline.h>
+# include <readline/history.h>
 # include "libft.h"
 # include "built.h"
 # include "env.h"
@@ -30,7 +32,8 @@
 
 typedef struct	s_term
 {
-	char	*user;
+	int	exit;
+	int	(*built[6])(t_term *term, char **cmd);
 	char	**env;
 }		t_term;
 
@@ -51,5 +54,7 @@ typedef struct	s_parsing
 
 int	strisstr(char *str, char *s);
 int	ft_free(void **p);
+int	init_term(t_term *term, char **env);
+void	init_built(t_term *term);
 
 #endif

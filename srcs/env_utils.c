@@ -19,7 +19,6 @@ int	replace_env(t_term *term, char *var, int i)
 {
 	char	*tmp;
 
-	tmp = term->env[i];
 	tmp = ft_strdup(var);
 	if (!tmp)
 		return (0);
