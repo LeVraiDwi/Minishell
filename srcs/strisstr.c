@@ -11,5 +11,6 @@ int	strisstr(char *str, char *s)
 		i++;
 	if (str[i] || s[i])
 		return (0);
+	printf("fin strisstr\n");
 	return (1);
 }

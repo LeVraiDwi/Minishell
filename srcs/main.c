@@ -6,7 +6,7 @@ int	main(int argc, char **argv, char **env)
 	char	*str;
 	char	**cmd;
 	int	i;
-	//char	*cmd[] = {"env", 0};
+	//char	*cmd1[] = {"env", 0};
 	//char	*cmd1[] = {"export", "a=12", "jaime=", "pain=jamenfkfhssflf", "0"};
 
 	(void)argv;
@@ -17,8 +17,7 @@ int	main(int argc, char **argv, char **env)
 	{
 		str = readline("\033[34;01mMinishell\033[00m$ ");
 		cmd = ft_split(str, ' ');
-		printf("%p\n", cmd[1]);
-		i = ft_is_builtin(cmd[0]);
+		i = ft_is_builtin(*cmd);
 		printf("%d\n", i);
 		if (i == 6)
 			term.exit = 1;
