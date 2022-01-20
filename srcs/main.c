@@ -21,7 +21,7 @@ int	main(int argc, char **argv, char **env)
 		printf("%d\n", i);
 		if (i == 6)
 			term.exit = 1;
-		else if (i > 0)
+		else if (i >= 0)
 			term.built[i](&term, cmd);
 		free(str);
 	}
