@@ -13,7 +13,6 @@ t_parsing	*parse_init(char *line, char **env)
 	lexer_build(line, ft_strlen(line), &lexerbuf);
 	parserbuf = malloc(sizeof(t_parsing));
 	parse(&lexerbuf, parserbuf);
-	parserbuf->path = check_cmd(parserbuf->argv[0], lexerbuf.path);
 	return (parserbuf);
 }
 

@@ -6,7 +6,7 @@
 /*   By: asaboure <asaboure@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/05 19:23:06 by asaboure          #+#    #+#             */
-/*   Updated: 2022/01/21 17:17:44 by asaboure         ###   ########.fr       */
+/*   Updated: 2022/01/21 18:09:55 by asaboure         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,6 @@ int	main(int ac, char **av, char **env)
 	lexer_build(line, ft_strlen(line), &lexerbuf);
 	parserbuf = malloc(sizeof(t_parsing));
 	parse(&lexerbuf, parserbuf);
-	parserbuf->path = check_cmd(parserbuf->argv[0], lexerbuf.path);
 
 	// while(lexerbuf.tokenlist)
 	// {
@@ -60,6 +59,7 @@ int	main(int ac, char **av, char **env)
 			i++;
 		}
 		printf("\n");
+		printf("path: %s\n", parserbuf->path);
 		printf("redir in: %s, (flag %d)\n", parserbuf->str_in, parserbuf->in);
 		printf("redir out: %s (flag %d)\n", parserbuf->str_out, parserbuf->out);
 		printf("redir err: %s (flag %d)\n", parserbuf->str_err, parserbuf->err);

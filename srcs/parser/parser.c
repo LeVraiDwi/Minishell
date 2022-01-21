@@ -6,7 +6,7 @@
 /*   By: asaboure <asaboure@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/13 14:20:53 by asaboure          #+#    #+#             */
-/*   Updated: 2022/01/18 20:37:08 by asaboure         ###   ########.fr       */
+/*   Updated: 2022/01/21 18:10:19 by asaboure         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,10 @@ int	parse(t_lexer *lexerbuf, t_parsing	*parsebuf)
 	parsebuf->str_out = parse_redir_out(lexerbuf->tokenlist, &parsebuf->out);
 	parsebuf->str_err = parse_redir_err(lexerbuf->tokenlist, &parsebuf->err);
 	if (lexerbuf->tokenlist->type == TOKEN)
+	{
 		parsebuf->argv = parse_args(lexerbuf->tokenlist, lexerbuf);
+		parsebuf->path = check_cmd(parsebuf->argv[0], lexerbuf->path);
+	}
 	while (lexerbuf->tokenlist)
 	{
 		if (lexerbuf->tokenlist->type == CHAR_PIPE)
