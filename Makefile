@@ -3,11 +3,16 @@ SRCS = $(addprefix $(SRC_PATH)/,$(SRC_NAME))
 SRC_PATH = ./srcs
 
 SRC_NAME = main.c env_utils.c env_util.c\
-	   strisstr.c builtin/env.c builtin/export.c\
-	   builtin/unset.c init.c builtin/echo.c\
-	   builtin/cd.c builtin/pwd.c env_util_access.c\
-	   builtin/utils.c\
-
+		strisstr.c builtin/env.c builtin/export.c\
+		builtin/unset.c init.c builtin/echo.c\
+		builtin/cd.c builtin/pwd.c env_util_access.c\
+		builtin/utils.c\
+		lexer/lexer.c															\
+		lexer/tokenize.c 														\
+		lexer/set_token.c														\
+		lexer/lexer_utils.c														\
+		parser/parser.c															\
+		parser/parser_utils.c
 LIBFT = ./libft/libft.a
 
 OBJS = ${SRCS:.c=.o}
