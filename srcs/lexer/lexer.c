@@ -6,7 +6,7 @@
 /*   By: asaboure <asaboure@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/06 17:06:14 by asaboure          #+#    #+#             */
-/*   Updated: 2022/01/18 18:43:10 by asaboure         ###   ########.fr       */
+/*   Updated: 2022/01/21 17:29:39 by asaboure         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,54 +34,43 @@ char	**get_pathv(char **env)
 }
 
 //counts the number of valid paths and increments ntokens
-int	count_paths(char **path, t_token *token, t_lexer *lexerbuf)
+// int	count_paths(char **path,  char *cmd)
+// {
+// 	int		i;
+// 	char	*pathcmd;
+
+// 	i = 0;
+// 	while (path[i])
+// 	{
+// 		pathcmd = ft_strjoin(path[i], cmd);
+// 		if (!pathcmd)
+// 			return (0);
+// 		if (access(pathcmd, X_OK | F_OK) == 0)
+// 			lexerbuf->ntokens++;
+// 		free(pathcmd);
+// 		i++;
+// 	}
+// 	return (i);
+// }
+
+char	*check_cmd(char *input, char **path)
 {
 	int		i;
 	char	*pathcmd;
+	char	*cmd;
 
 	i = 0;
 	while (path[i])
 	{
-		pathcmd = ft_strjoin(path[i], token->data);
+		pathcmd = ft_strjoin(path[i], input);
 		if (!pathcmd)
 			return (0);
 		if (access(pathcmd, X_OK | F_OK) == 0)
-			lexerbuf->ntokens++;
+			return (ft_strdup(pathcmd));
 		free(pathcmd);
 		i++;
 	}
-	return (i);
-}
-
-char	**check_cmd(char **path, t_token *token, t_lexer *lexerbuf)
-{
-	int		i;
-	int		j;
-	char	*pathcmd;
-	char	**cmd;
-
-	i = count_paths(path, token, lexerbuf);
-	cmd = (char **)malloc(sizeof(char *) * (i + 1));
-	if (!cmd)
-		return (0);
-	i = 0;
-	j = 0;
-	while (path[i])
-	{
-		pathcmd = ft_strjoin(path[i], token->data);
-		if (!pathcmd)
-			return (0);
-		if (access(pathcmd, X_OK | F_OK) == 0)
-			cmd[j++] = ft_strdup(pathcmd);
-		free(pathcmd);
-		i++;
-	}
-	if (j == 0)
-	{
-		free(cmd);
-		return (NULL);
-	}
-	return (cmd);
+	return (NULL);
 }
 
 void	strip_quotes(t_token *token)
