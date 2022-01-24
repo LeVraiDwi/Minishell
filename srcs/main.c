@@ -1,6 +1,4 @@
 #include "minishell.h"
-#include "lexer.h"
-#include "parser.h"
 
 t_parsing	*parse_init(char *line, char **env)
 {

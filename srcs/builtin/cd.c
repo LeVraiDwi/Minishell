@@ -15,7 +15,7 @@ int	ft_cd(t_term *term, char **cmd)
 		perror("Error:");
 		return (1);
 	}
-	if(!ft_update_pwd(term, cmd[1]))
+	if(!ft_update_pwd(term))
 		return (0);
 	return (0);
 }

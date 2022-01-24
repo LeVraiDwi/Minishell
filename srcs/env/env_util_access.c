@@ -20,10 +20,11 @@ char	*get_env_var(char **env, char *var)
 	return (0);
 }
 
-int	ft_update_pwd(t_term *term, char *path)
+int	ft_update_pwd(t_term *term)
 {
 	char	*tmp;
 	char	*var;
+	char	buf[500];
 
 	var = get_env_var(term->env, "PWD");
 	if (!var)
@@ -32,8 +33,10 @@ int	ft_update_pwd(t_term *term, char *path)
 	free(var);
 	add_env(term, tmp);
 	free(tmp);
-	var = (ft_strjoin("PWD=", path));
-	add_env(term, var);
+	getcwd(buf, 500);
+	tmp = ft_strjoin("PWD=", buf);
+	add_env(term, tmp);
+	free(tmp);
 	return (1);
 
 }

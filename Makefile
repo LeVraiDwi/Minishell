@@ -1,19 +1,29 @@
-SRCS = $(addprefix $(SRC_PATH)/,$(SRC_NAME))
+SRCS = $(addprefix $(SRC_PATH)/,$(SRC_NAME)) $(addprefix $(BUILT_PATH)/,$(BUILT_NAME)) $(addprefix $(ENV_PATH)/,$(ENV_NAME)) $(addprefix $(PARSER_PATH)/,$(PARSER_NAME)) $(addprefix $(LEXER_PATH)/,$(LEXER_NAME))
 
-SRC_PATH = ./srcs
-
-SRC_NAME = main.c env_utils.c env_util.c\
-		strisstr.c builtin/env.c builtin/export.c\
-		builtin/unset.c init.c builtin/echo.c\
-		builtin/cd.c builtin/pwd.c env_util_access.c\
-		builtin/utils.c\
-		lexer/lexer.c															\
-		lexer/tokenize.c 														\
-		lexer/set_token.c														\
-		lexer/lexer_utils.c														\
-		parser/parser.c															\
-		parser/parser_utils.c
 LIBFT = ./libft/libft.a
+
+SRC_PATH =      ./srcs
+
+SRC_NAME =      main.c strisstr.c init.c\
+                free_term.c\
+
+BUILT_PATH =    ./srcs/builtin
+
+BUILT_NAME =    env.c export.c unset.c\
+                echo.c cd.c pwd.c\
+                utils.c\
+
+ENV_PATH =      ./srcs/env
+
+ENV_NAME =      env_util.c env_utils.c env_util_access.c\
+
+LEXER_PATH = ./srcs/lexer
+
+LEXER_NAME = lexer.c lexer_utils.c set_token.c tokenize.c
+
+PARSER_PATH = ./srcs/parser
+
+PARSER_NAME = parser.c parser_utils.c
 
 OBJS = ${SRCS:.c=.o}
 

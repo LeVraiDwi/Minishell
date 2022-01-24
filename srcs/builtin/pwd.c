@@ -4,6 +4,7 @@ int	ft_pwd(t_term *term, char **cmd)
 {
 	char	buf[200];
 	
+	(void)term;
 	if (!strisstr(cmd[0], "pwd"))
 		return (1);
 	getcwd(buf, 200);

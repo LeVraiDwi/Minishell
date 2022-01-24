@@ -27,6 +27,8 @@
 # include "built.h"
 # include "env.h"
 # include "strisstr.h"
+# include "lexer.h"
+# include "parser.h"
 # define STDIN 0
 # define STDOUT 1
 
