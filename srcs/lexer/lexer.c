@@ -6,7 +6,7 @@
 /*   By: asaboure <asaboure@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/06 17:06:14 by asaboure          #+#    #+#             */
-/*   Updated: 2022/01/21 18:10:44 by asaboure         ###   ########.fr       */
+/*   Updated: 2022/01/21 18:25:26 by asaboure         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,7 +109,7 @@ int	count_tokens(t_token *token)
 	int	i;
 
 	i = 0;
-	while(token)
+	while (token)
 	{
 		i++;
 		token = token->next;
@@ -121,9 +121,6 @@ int	count_tokens(t_token *token)
 void	lexer_build(char *input, int size, t_lexer *lexerbuf)
 {
 	t_token	*token;
-//	t_token	*saved;
-//	char	**cmd;
-//	int		i;
 
 	if (!lexerbuf)
 		return ;
@@ -135,37 +132,4 @@ void	lexer_build(char *input, int size, t_lexer *lexerbuf)
 	tokenize(lexerbuf, token, size, input);
 	token = lexerbuf->tokenlist;
 	lexerbuf->ntokens = count_tokens(token);
-	/******************************* pas ici mdr ******************************/
-	// while (token)
-	// {
-	// 	if (token->type == TOKEN)
-	// 	{
-	// 		cmd = check_cmd(lexerbuf->path, token, lexerbuf);
-	// 		if (cmd)
-	// 		{
-	// 			saved = token->next;
-	// 			free(token->data);
-	// 			token->data = ft_strdup(cmd[0]);
-	// 			i = 1;
-	// 			while (i < lexerbuf->ntokens)
-	// 			{
-	// 				token->next = malloc(sizeof(t_token));
-	// 				token_init(token->next, ft_strlen(cmd[i]));
-	// 				token = token->next;
-	// 				token->type = TOKEN;
-	// 				token->data = ft_strdup(cmd[i]);
-	// 				i++;
-	// 			}
-	// 			token->next = saved;
-	// 		}
-	// 		else
-	// 		{
-	// 			strip_quotes(token);
-	// 			lexerbuf->ntokens++;
-	// 		}
-	// 	}
-	// 	token = token->next;
-	// }
-
-	/******************************* pas ici mdr ******************************/
 }

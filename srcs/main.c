@@ -21,7 +21,6 @@ int	main(int argc, char **argv, char **env)
 	t_term		term;
 	t_parsing	*parsebuf;
 	char		*str;
-	char		**cmd;
 	int			i;
 	//char	*cmd1[] = {"env", 0};
 	//char	*cmd1[] = {"export", "a=12", "jaime=", "pain=jamenfkfhssflf", "0"};
@@ -34,13 +33,12 @@ int	main(int argc, char **argv, char **env)
 	{
 		str = readline("\033[34;01mMinishell\033[00m$ ");
 		parsebuf = parse_init(str, env);
-		cmd = ft_split(str, ' ');
-		i = ft_is_builtin(*cmd);
+		i = ft_is_builtin(parsebuf->argv[0]);
 		printf("%d\n", i);
 		if (i == 6)
 			term.exit = 1;
 		else if (i >= 0)
-			term.built[i](&term, cmd);
+			term.built[i](&term, parsebuf->argv);
 		free(str);
 	}
 	return (0);
