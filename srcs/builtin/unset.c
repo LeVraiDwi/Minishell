@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   unset.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tcosse <tcosse@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/01/24 13:21:27 by tcosse            #+#    #+#             */
+/*   Updated: 2022/01/24 13:32:46 by tcosse           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
 int	ft_is_valid_name(char *cmd)
@@ -33,7 +45,7 @@ int	ft_unset(t_term *term, char **cmd)
 		else if (!flag)
 		{
 			printf("unset: %s: invalide parameter name\n", cmd[l]);
-			flag  = 1;
+			flag = 1;
 			ret = 1;
 		}
 		else

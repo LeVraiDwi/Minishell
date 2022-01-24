@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   struct_pars.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tcosse <tcosse@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/01/24 13:19:17 by tcosse            #+#    #+#             */
+/*   Updated: 2022/01/24 13:43:23 by tcosse           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <minishell.h>
 
 void	ft_init_struct(t_parsing *pars)
@@ -15,7 +27,7 @@ void	ft_init_struct(t_parsing *pars)
 
 t_parsing	*ft_creat_pars(void)
 {
-	t_parsing *new;
+	t_parsing	*new;
 
 	new = (t_parsing *)malloc(sizeof(t_parsing) * 1);
 	if (!new)

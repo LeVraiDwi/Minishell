@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   echo.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tcosse <tcosse@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/01/24 13:20:40 by tcosse            #+#    #+#             */
+/*   Updated: 2022/01/24 13:33:15 by tcosse           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
 int	is_flag(char *arg)
@@ -25,6 +37,12 @@ int	ft_cmd_length(char **cmd)
 	return (l);
 }
 
+int	return_new_line(void)
+{
+	write(1, "\n", 1);
+	return (0);
+}
+
 int	ft_echo(t_term *term, char **cmd)
 {
 	int	flag;
@@ -34,11 +52,8 @@ int	ft_echo(t_term *term, char **cmd)
 	(void)term;
 	l = ft_cmd_length(cmd);
 	flag = 0;
-	if (l  == 1)
-	{
-		write(1, "\n", 1);
-		return (0);
-	}
+	if (l == 1)
+		return (return_mew_line());
 	else if (l > 1)
 		flag = is_flag(cmd[1]);
 	if (flag)

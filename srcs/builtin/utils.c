@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   utils.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tcosse <marvin@42.fr>                      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/01/24 13:29:32 by tcosse            #+#    #+#             */
+/*   Updated: 2022/01/24 13:32:17 by tcosse           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
 int	ft_is_builtin(char *cmd)
@@ -13,8 +25,8 @@ int	ft_is_builtin(char *cmd)
 	if (strisstr("env", cmd))
 		return (ENV);
 	if (strisstr("echo", cmd))
-		return(ECHO);
+		return (ECHO);
 	if (strisstr("EXIT", cmd))
-		return(6);
+		return (-1);
 	return (-1);
 }

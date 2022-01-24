@@ -44,7 +44,7 @@ RM = rm -f
 CD = cd
 
 .c.o:
-		${CC} ${FLAGS} ${HEADER} ${RL} -c $< -o $@
+		${CC} ${FLAGS} ${HEADER} -c $< -o $@
 
 ${NAME}:	${OBJS}
 		cd libft; make;

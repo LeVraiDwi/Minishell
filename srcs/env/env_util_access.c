@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   env_util_access.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tcosse <tcosse@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/01/24 13:20:01 by tcosse            #+#    #+#             */
+/*   Updated: 2022/01/24 13:26:19 by tcosse           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
-char *get_val(char *env)
+char	*get_val(char *env)
 {
 	int	i;
 
@@ -13,7 +25,7 @@ char *get_val(char *env)
 char	*get_env_var(char **env, char *var)
 {
 	int	i;
-	
+
 	i = ft_is_env(env, var);
 	if (i)
 		return (get_val(env[i]));
@@ -38,5 +50,4 @@ int	ft_update_pwd(t_term *term)
 	add_env(term, tmp);
 	free(tmp);
 	return (1);
-
 }

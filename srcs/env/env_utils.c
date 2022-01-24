@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   env_utils.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tcosse <tcosse@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/01/24 13:20:18 by tcosse            #+#    #+#             */
+/*   Updated: 2022/01/24 13:25:48 by tcosse           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
 int	ft_free_env(char **env)
@@ -29,8 +41,8 @@ int	replace_env(t_term *term, char *var, int i)
 
 int	ft_dealloc_env(t_term *term, int i)
 {
-	int	l;
-	int	j;
+	int		l;
+	int		j;
 	char	**tmp;
 
 	l = 0;
@@ -38,7 +50,7 @@ int	ft_dealloc_env(t_term *term, int i)
 		l++;
 	tmp = (char **)malloc(sizeof(char *) * l);
 	if (!tmp)
-		return(0);
+		return (0);
 	tmp[l - 1] = 0;
 	l = 0;
 	j = 0;
@@ -67,7 +79,7 @@ int	remove_env(t_term *term, char *var)
 	return (0);
 }
 
-void print_env(t_term term)
+void	print_env(t_term term)
 {
 	int	i;
 
