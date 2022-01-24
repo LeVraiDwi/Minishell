@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   export.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tcosse <tcosse@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/01/24 13:21:12 by tcosse            #+#    #+#             */
+/*   Updated: 2022/01/24 14:51:02 by tcosse           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
 int	ft_is_var(char *var)
@@ -36,7 +48,7 @@ int	ft_export(t_term *term, char **cmd)
 		{
 			ret = 1;
 			printf("export: %s: invalide parameter name\n", cmd[l]);
-			flag  = 1;
+			flag = 1;
 		}
 		else
 			ret = 1;

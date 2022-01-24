@@ -1,8 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   env_util.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tcosse <tcosse@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/01/24 13:20:12 by tcosse            #+#    #+#             */
+/*   Updated: 2022/01/24 13:24:38 by tcosse           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
 int	ft_init_env(t_term *term, char **env)
 {
-	int	l;
+	int		l;
 	char	**new;
 
 	l = 0;
@@ -45,7 +57,7 @@ int	ft_is_env(char **env, char *var)
 	int	i;
 
 	i = 0;
-	while(env[i])
+	while (env[i])
 	{
 		if (ft_is_env_var(env[i], var))
 			return (i);
@@ -56,7 +68,7 @@ int	ft_is_env(char **env, char *var)
 
 int	ft_realloc_env(t_term *term, char *var)
 {
-	int	l;
+	int		l;
 	char	**tmp;
 
 	l = 0;
@@ -78,7 +90,6 @@ int	ft_realloc_env(t_term *term, char *var)
 	free(term->env);
 	term->env = tmp;
 	return (1);
-
 }
 
 int	add_env(t_term *term, char *var)
@@ -94,7 +105,7 @@ int	add_env(t_term *term, char *var)
 		return (1);
 	}
 	else
-		if(!ft_realloc_env(term, var))
+		if (!ft_realloc_env(term, var))
 			return (0);
 	return (1);
 }

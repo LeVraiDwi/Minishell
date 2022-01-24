@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   exec.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tcosse <tcosse@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/01/24 13:19:33 by tcosse            #+#    #+#             */
+/*   Updated: 2022/01/24 13:45:44 by tcosse           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
 int	ft_error_pipe(t_parsing cmd)
@@ -10,12 +22,12 @@ int	ft_error_pipe(t_parsing cmd)
 	exit(EXIT_FAILURE);
 }
 
-int	ft_child(t_parsing cmd, int nb_child, int	last_child)
+int	ft_child(t_parsing cmd, int nb_child, int last_child)
 {
 	int	status;
 
 	status = 0;
-	if(last_child != 0)
+	if (last_child != 0)
 		waitpid(last_child, &status, 0);
 	if (dub2(cmd->in, STDIN) < 0)
 		exit(ft_error_pipe(cmd));
