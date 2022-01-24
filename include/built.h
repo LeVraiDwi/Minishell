@@ -6,7 +6,7 @@
 /*   By: tcosse <tcosse@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/24 13:39:34 by tcosse            #+#    #+#             */
-/*   Updated: 2022/01/24 13:40:10 by tcosse           ###   ########.fr       */
+/*   Updated: 2022/01/24 15:38:16 by tcosse           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,4 +34,5 @@ int		ft_pwd(t_term *term, char **cmd);
 int		ft_echo(t_term *term, char **cmd);
 int		ft_cd(t_term *term, char **cmd);
 int		ft_is_builtin(char *cmd);
+int		return_new_line(void);
 #endif

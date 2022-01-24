@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tcosse <tcosse@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/01/24 13:17:17 by tcosse            #+#    #+#             */
+/*   Updated: 2022/01/24 15:31:39 by tcosse           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
 t_parsing	*parse_init(char *line, char **env)
@@ -21,7 +33,6 @@ int	main(int argc, char **argv, char **env)
 	char		*str;
 	char		**cmd;
 	int			i;
-	//char	*cmd1[] = {"env", 0};
 	//char	*cmd1[] = {"export", "a=12", "jaime=", "pain=jamenfkfhssflf", "0"};
 
 	(void)argv;
@@ -34,8 +45,8 @@ int	main(int argc, char **argv, char **env)
 		parsebuf = parse_init(str, env);
 		cmd = ft_split(str, ' ');
 		i = ft_is_builtin(*cmd);
-		printf("%d\n", i);
-		if (i == 6)
+		printf("%s\n", parsebuf->path);
+		if (i < 0)
 			term.exit = 1;
 		else if (i >= 0)
 			term.built[i](&term, cmd);

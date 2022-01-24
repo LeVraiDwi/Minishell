@@ -6,7 +6,7 @@
 /*   By: tcosse <tcosse@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/24 13:20:40 by tcosse            #+#    #+#             */
-/*   Updated: 2022/01/24 13:33:15 by tcosse           ###   ########.fr       */
+/*   Updated: 2022/01/24 14:01:45 by tcosse           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ int	ft_echo(t_term *term, char **cmd)
 	l = ft_cmd_length(cmd);
 	flag = 0;
 	if (l == 1)
-		return (return_mew_line());
+		return (return_new_line());
 	else if (l > 1)
 		flag = is_flag(cmd[1]);
 	if (flag)

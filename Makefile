@@ -1,4 +1,4 @@
-SRCS = $(addprefix $(SRC_PATH)/,$(SRC_NAME)) $(addprefix $(BUILT_PATH)/,$(BUILT_NAME)) $(addprefix $(ENV_PATH)/,$(ENV_NAME)) $(addprefix $(PARSER_PATH)/,$(PARSER_NAME)) $(addprefix $(LEXER_PATH)/,$(LEXER_NAME))
+SRCS = $(addprefix $(SRC_PATH)/,$(SRC_NAME)) $(addprefix $(BUILT_PATH)/,$(BUILT_NAME)) $(addprefix $(ENV_PATH)/,$(ENV_NAME)) $(addprefix $(PARSER_PATH)/,$(PARSER_NAME)) $(addprefix $(LEXER_PATH)/,$(LEXER_NAME)) $(addprefix $(EXPANSER_PATH)/,$(EXPANSER_NAME))
 
 LIBFT = ./libft/libft.a
 
@@ -24,6 +24,10 @@ LEXER_NAME = lexer.c lexer_utils.c set_token.c tokenize.c
 PARSER_PATH = ./srcs/parser
 
 PARSER_NAME = parser.c parser_utils.c
+
+EXPANSER_PATH = ./srcs/expanser
+
+EXPANSER_NAME = expanser.c expanser_utils.c
 
 OBJS = ${SRCS:.c=.o}
 

@@ -6,7 +6,7 @@
 /*   By: tcosse <tcosse@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/24 13:39:19 by tcosse            #+#    #+#             */
-/*   Updated: 2022/01/24 13:42:49 by tcosse           ###   ########.fr       */
+/*   Updated: 2022/01/24 15:44:09 by tcosse           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,4 +26,5 @@ int		ft_dealloc_env(t_term *term, int i);
 int		remove_env(t_term *term, char *var);
 void	print_env(t_term term);
 int		ft_update_pwd(t_term *term);
+char	get_env_var(char *var);
 #endif
