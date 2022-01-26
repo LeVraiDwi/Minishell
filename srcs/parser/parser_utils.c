@@ -6,7 +6,7 @@
 /*   By: asaboure <asaboure@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/18 16:58:12 by asaboure          #+#    #+#             */
-/*   Updated: 2022/01/18 17:05:56 by asaboure         ###   ########.fr       */
+/*   Updated: 2022/01/26 18:58:03 by asaboure         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,4 +92,16 @@ char	*parse_redir_err(t_token *token, int *flag)
 		token = token->next;
 	}
 	return (NULL);
+}
+
+void	free_split(char **split)
+{
+	int	i;
+
+	i = 0;
+	while (split[i])
+	{
+		free (split[i]);
+		i++;
+	}
 }

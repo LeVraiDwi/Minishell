@@ -6,7 +6,7 @@
 /*   By: asaboure <asaboure@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/07 18:48:48 by asaboure          #+#    #+#             */
-/*   Updated: 2022/01/12 15:50:40 by asaboure         ###   ########.fr       */
+/*   Updated: 2022/01/26 16:26:19 by asaboure         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@
 void	token_init(t_token *tok, int datasize)
 {
 	tok->data = malloc(datasize + 1);
+	if (!tok->data)
+		return ;
 	tok->data[0] = 0;
 	tok->type = CHAR_NULL;
 	tok->next = NULL;

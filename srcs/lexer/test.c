@@ -6,7 +6,7 @@
 /*   By: asaboure <asaboure@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/05 19:23:06 by asaboure          #+#    #+#             */
-/*   Updated: 2022/01/21 18:09:55 by asaboure         ###   ########.fr       */
+/*   Updated: 2022/01/26 18:56:54 by asaboure         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,31 +24,12 @@ int	main(int ac, char **av, char **env)
 	char	*prompt = "minishell> ";
 	char	*line;
 	int		i = 0;
-	t_lexer	lexerbuf;
 	t_parsing	*parserbuf;
 
 	line = readline(prompt);
 	(void)ac;
 	(void)av;
-	lexerbuf.path = get_pathv(env);
-	lexerbuf.tokenlist = malloc(sizeof(t_token));
-	lexerbuf.j = 0;
-	// while(path[i])
-	// {
-	// 	printf("%s\n", path[i]);
-	// 	i++;
-	// }
-
-	lexer_build(line, ft_strlen(line), &lexerbuf);
-	parserbuf = malloc(sizeof(t_parsing));
-	parse(&lexerbuf, parserbuf);
-
-	// while(lexerbuf.tokenlist)
-	// {
- 	// 	printf("%s (%d)\n", lexerbuf.tokenlist->data, lexerbuf.tokenlist->type);
-	//  	lexerbuf.tokenlist = lexerbuf.tokenlist->next;
-	// }
-
+	parserbuf = parse_init(line, env);
 	while (parserbuf)
 	{
 		printf("args: ");

@@ -6,7 +6,7 @@
 /*   By: asaboure <asaboure@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/17 16:20:44 by asaboure          #+#    #+#             */
-/*   Updated: 2022/01/24 13:37:57 by tcosse           ###   ########.fr       */
+/*   Updated: 2022/01/26 18:58:19 by asaboure         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,4 +28,5 @@ t_token		*skip_lesser(t_token *token);
 t_token		*skip_greater(t_token *token);
 t_token		*skip_redir(t_token *token);
 char		**parse_args(t_token *tokenlist, t_lexer *lexerbuf);
+void		free_split(char **split);
 #endif

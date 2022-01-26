@@ -6,7 +6,7 @@
 /*   By: asaboure <asaboure@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/06 17:06:14 by asaboure          #+#    #+#             */
-/*   Updated: 2022/01/21 18:25:26 by asaboure         ###   ########.fr       */
+/*   Updated: 2022/01/26 18:59:51 by asaboure         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,18 +118,21 @@ int	count_tokens(t_token *token)
 }
 
 //TODO: Protect mallocs 
-void	lexer_build(char *input, int size, t_lexer *lexerbuf)
+int	lexer_build(char *input, int size, t_lexer *lexerbuf)
 {
 	t_token	*token;
 
 	if (!lexerbuf)
-		return ;
+		return (0);
 	lexerbuf->ntokens = 0;
 	if (size == 0)
-		return ;
+		return (0);
 	token = lexerbuf->tokenlist;
 	token_init(token, size);
+	if (!token->data)
+		return (0);
 	tokenize(lexerbuf, token, size, input);
 	token = lexerbuf->tokenlist;
 	lexerbuf->ntokens = count_tokens(token);
+	return (1);
 }

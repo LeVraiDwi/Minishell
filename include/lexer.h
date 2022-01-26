@@ -6,7 +6,7 @@
 /*   By: asaboure <asaboure@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/06 17:10:10 by asaboure          #+#    #+#             */
-/*   Updated: 2022/01/12 20:44:35 by asaboure         ###   ########.fr       */
+/*   Updated: 2022/01/26 18:46:08 by asaboure         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ void	tokenize_in_dquote(t_lexer *lexerbuf, t_token *token);
 void	tokenize_in_quote(t_lexer *lexerbuf, t_token *token);
 void	tokenize_null(t_lexer *lexerbuf, t_token *token);
 
-void	lexer_build(char *input, int size, t_lexer *lexerbuf);
+int		lexer_build(char *input, int size, t_lexer *lexerbuf);
 char	**get_pathv(char **env);
 
 #endif

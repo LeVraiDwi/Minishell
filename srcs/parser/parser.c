@@ -6,7 +6,7 @@
 /*   By: asaboure <asaboure@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/13 14:20:53 by asaboure          #+#    #+#             */
-/*   Updated: 2022/01/21 18:27:20 by asaboure         ###   ########.fr       */
+/*   Updated: 2022/01/26 18:51:29 by asaboure         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,4 +86,27 @@ int	parse(t_lexer *lexerbuf, t_parsing	*parsebuf)
 		lexerbuf->tokenlist = lexerbuf->tokenlist->next;
 	}
 	return (0);
+}
+
+void	*exit_parsing(t_lexer *lexerbuf)
+{
+	free_split(lexerbuf->path);
+	free(lexerbuf->path);
+	free(lexerbuf->tokenlist);
+	return (NULL);
+}
+
+t_parsing	*parse_init(char *line, char **env)
+{
+	t_lexer		lexerbuf;
+	t_parsing	*parserbuf;
+
+	lexerbuf.path = get_pathv(env);
+	lexerbuf.tokenlist = malloc(sizeof(t_token));
+	lexerbuf.j = 0;
+	if (!lexer_build(line, ft_strlen(line), &lexerbuf))
+		return (exit_parsing(&lexerbuf));
+	parserbuf = malloc(sizeof(t_parsing));
+	parse(&lexerbuf, parserbuf);
+	return (parserbuf);
 }
