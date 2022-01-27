@@ -19,6 +19,7 @@ char	*get_val(char *env)
 	i = 0;
 	while (env[i] && env[i] != '=')
 		i++;
+	i++;
 	return (ft_strdup(env + i));
 }
 

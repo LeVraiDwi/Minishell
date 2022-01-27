@@ -1,24 +1,14 @@
 #include "minishell.h"
 
-int	replace_var(char **cmd)
+int	replace_var(t_term *term, char **cmd)
 {
 	int	i;
-	int	l;
 
 	i = 0;
 	while (cmd[i])
 	{
-		l = 0;
-		while (cmd[i][l])
-		{
-			if (ft_is_special_char(cmd[i][l]))
-			{
-				l = insert_var(cmd + i, l);
-				if (l < 0)
-					return (-1);
-			}
-			l++;
-		}
+		if(insert_var(term->env, &cmd[i]) < 0)
+			return (-1);
 		i++;
 	}
 	return (0);

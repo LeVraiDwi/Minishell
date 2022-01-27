@@ -23,5 +23,5 @@ typedef struct s_parsing
 	char				*str_out;
 	char				*str_err;
 	void				*next;
-};
+}		t_parsing;
 #endif
