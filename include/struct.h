@@ -1,7 +1,7 @@
 #ifndef STRUCT_H
 # define STRUCT_H
 
-typedef struct s_term	t_term;
+typedef struct s_term t_term;
 
 typedef struct s_term
 {

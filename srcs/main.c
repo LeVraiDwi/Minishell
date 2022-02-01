@@ -27,14 +27,35 @@ int	main(int argc, char **argv, char **env)
 		return (0);
 	while (!term.exit)
 	{
+		i = 0;
 		str = readline("\033[34;01mMinishell\033[00m$ ");
-		parsebuf = parse_init(str, env);
 		cmd = ft_split(str, ' ');
-		i = ft_is_builtin(*cmd);
+		if (replace_var(&term, cmd) < 0)
+			return (-1);
+		parsebuf = parse_init(str, env);
+		printf("okay:%p, %p\n", parsebuf, parsebuf->argv);
+		if (expanser(&term, parsebuf) < 0)
+			perror("error");
+		printf("okay:%p, %p\n", parsebuf, parsebuf->argv);
+		while (parsebuf->argv && parsebuf->argv[i])
+		{
+			printf("cmd:%s\n", parsebuf->argv[i]);
+			i++;
+		}
+		printf("%s\n", parsebuf->str_in);
+		printf("%s\n", parsebuf->str_out);
+		printf("%s\n", parsebuf->str_err);
+		printf("%d\n", parsebuf->flag);
+		printf("in: %d\n", parsebuf->in);
+		printf("out: %d\n", parsebuf->out);
+		printf("err: %d\n", parsebuf->err);
+		write(parsebuf->out, "ha", 2);
+		close(parsebuf->out);
+	/*	i = ft_is_builtin(*cmd);
 		if (i < 0)
 			term.exit = 1;
 		else if (i >= 0)
-			term.built[i](&term, cmd);
+			term.built[i](&term, cmd);*/
 		free(str);
 	}
 	return (0);

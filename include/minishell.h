@@ -20,6 +20,7 @@
 # include <fcntl.h>
 # include <sys/wait.h>
 # include <string.h>
+# include <dirent.h>
 # include <errno.h>
 # include <readline/readline.h>
 # include <readline/history.h>
@@ -33,6 +34,7 @@
 # include "expanser.h"
 # define STDIN 0
 # define STDOUT 1
+# define APPEND 2
 
 int		strisstr(char *str, char *s);
 int		ft_free(void **p);
