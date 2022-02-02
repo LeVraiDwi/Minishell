@@ -19,24 +19,27 @@ int	main(int argc, char **argv, char **env)
 	char		*str;
 	char		**cmd;
 	int			i;
+	t_parsing	*tmp;
 	//char	*cmd1[] = {"export", "a=12", "jaime=", "pain=jamenfkfhssflf", "0"};
 
 	(void)argv;
 	(void)argc;
-	if(!init_term(&term, env))
+	if(init_term(&term, env))
 		return (0);
 	while (!term.exit)
 	{
 		i = 0;
 		str = readline("\033[34;01mMinishell\033[00m$ ");
 		cmd = ft_split(str, ' ');
-		if (replace_var(&term, cmd) < 0)
-			return (-1);
 		parsebuf = parse_init(str, env);
 		printf("okay:%p, %p\n", parsebuf, parsebuf->argv);
-		if (expanser(&term, parsebuf) < 0)
-			perror("error");
-		printf("okay:%p, %p\n", parsebuf, parsebuf->argv);
+		i = 0;
+		while (parsebuf->argv && parsebuf->argv[i])
+		{
+			printf("cmd:%s\n", parsebuf->argv[i]);
+			i++;
+		}
+		i = 0;
 		while (parsebuf->argv && parsebuf->argv[i])
 		{
 			printf("cmd:%s\n", parsebuf->argv[i]);
@@ -49,9 +52,39 @@ int	main(int argc, char **argv, char **env)
 		printf("in: %d\n", parsebuf->in);
 		printf("out: %d\n", parsebuf->out);
 		printf("err: %d\n", parsebuf->err);
-		write(parsebuf->out, "ha", 2);
-		close(parsebuf->out);
-	/*	i = ft_is_builtin(*cmd);
+		printf("======================debut expanser==================\n");
+		expanser(&term, parsebuf);
+		printf("okay:%p, %p\n", parsebuf, parsebuf->argv);
+		tmp = parsebuf;
+		while (parsebuf)
+		{
+			i = 0;
+			while (parsebuf->argv && parsebuf->argv[i])
+			{
+				printf("cmd:%s\n", parsebuf->argv[i]);
+				i++;
+			}
+			i = 0;
+			while (parsebuf->argv && parsebuf->argv[i])
+			{
+				printf("cmd:%s\n", parsebuf->argv[i]);
+				i++;
+			}
+			printf("%s\n", parsebuf->str_in);
+			printf("%s\n", parsebuf->str_out);
+			printf("%s\n", parsebuf->str_err);
+			printf("%d\n", parsebuf->flag);
+			printf("in: %d\n", parsebuf->in);
+			printf("out: %d\n", parsebuf->out);
+			printf("err: %d\n", parsebuf->err);
+			if (parsebuf->out)
+				write(parsebuf->out, "ha", 2);
+			if (parsebuf->out)
+				close(parsebuf->out);
+			parsebuf = parsebuf->next;
+		}
+		ft_free_pars(tmp);
+		/*	i = ft_is_builtin(*cmd);
 		if (i < 0)
 			term.exit = 1;
 		else if (i >= 0)

@@ -51,9 +51,11 @@ int	insert_var(char **env, char **cmd)
 			else
 				tmp = ft_strdup(HOME);
 			var = get_env_var(env, tmp);
-			free(tmp);
+			if (tmp)
+				free(tmp);
 			tmp = ft_insertvar(*cmd, var, i, l);
-			free(var);
+			if (var)
+				free(var);
 			if (!tmp)
 				return (-1);
 			i += ft_strlen(var);
@@ -75,8 +77,6 @@ char	*ft_insertvar(char *s, char *str, int var_start, int var_l)
 	l = 0;
 	l = ft_strlen(s) + ft_strlen(str) - var_l;
 	new = (char *)malloc(sizeof(char) * (l + 1));
-	if (!new)
-		return (0);
 	new[l] = 0;
 	l = 0;
 	while (*s)

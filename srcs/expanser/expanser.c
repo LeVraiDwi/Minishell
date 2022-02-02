@@ -11,6 +11,7 @@ int	replace_var(t_term *term, char **cmd)
 	{
 		if(insert_var(term->env, &cmd[i]) < 0)
 			return (-1);
+		printf("%s\n", cmd[i]);
 		i++;
 	}
 	return (0);
@@ -42,6 +43,8 @@ int	expanser(t_term  *term, t_parsing *parsing)
 		if (parsing->str_err)
 			if (ft_stdopen(parsing->str_err, &parsing->err, parsing->flag, O_RDWR) < 0)
 				return (-1);
+		if (parsing->next)
+			ft_in_out(term, parsing);
 		parsing = parsing->next;
 	}
 	return (0);

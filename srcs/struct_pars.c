@@ -19,8 +19,8 @@ void	ft_init_struct(t_parsing *pars)
 	pars->env = 0;
 	pars->flag = 0;
 	pars->next = 0;
-	pars->in = 0;
-	pars->out = 0;
+	pars->in = STDIN;
+	pars->out = STDOUT;
 	pars->str_in = 0;
 	pars->str_out = 0;
 }
@@ -36,13 +36,14 @@ t_parsing	*ft_creat_pars(void)
 	return (new);
 }
 
-void	ft_free(void **p)
+int	ft_free(void **p)
 {
 	if (*p)
 	{
 		free(*p);
 		*p = 0;
 	}
+	return (0);
 }
 
 void	ft_free_argv(char ***argv)
@@ -53,7 +54,7 @@ void	ft_free_argv(char ***argv)
 	if (argv)
 	{
 		while (argv[i])
-			ft_free(&argv[i++]);
+			ft_free((void **)&argv[i++]);
 		ft_free(&argv);
 	}
 }
@@ -61,7 +62,7 @@ void	ft_free_argv(char ***argv)
 int	ft_free_pars(t_parsing *pars)
 {
 	if (pars->next)
-		ft_rm_pars(pars->next);
+		ft_free_pars(pars->next);
 	if (pars->path)
 		ft_free(&pars->path);
 	ft_free_argv(pars->argv);
@@ -70,5 +71,5 @@ int	ft_free_pars(t_parsing *pars)
 	if (pars->str_out)
 		ft_free(&pars->str_out);
 	ft_free(&pars);
-	exit(EXIT_FAILURE);
+	return (0);
 }

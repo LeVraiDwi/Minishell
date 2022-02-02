@@ -25,9 +25,11 @@ void	init_built(t_term *term)
 int	init_term(t_term *term, char **env)
 {
 	if (!ft_init_env(term, env))
-		return (0);
+		return (-1);
 	term->exit = 0;
 	init_built(term);
+	if(pipe(term->pipefd))
+		return (-1);
 	rl_clear_history();
-	return (1);
+	return (0);
 }
