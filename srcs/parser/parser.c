@@ -6,7 +6,7 @@
 /*   By: asaboure <asaboure@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/13 14:20:53 by asaboure          #+#    #+#             */
-/*   Updated: 2022/01/27 21:04:43 by asaboure         ###   ########.fr       */
+/*   Updated: 2022/02/04 15:53:49 by asaboure         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ char	**parse_args(t_token *tokenlist, t_lexer *lexerbuf)
 	while (token)
 	{
 		token = skip_redir(token);
-		if (!token || token->type == CHAR_PIPE)
+		if (!token || token->type == CHAR_PIPE || token->type == CHAR_NULL)
 		{
 			args[i] = NULL;
 			return (args);
