@@ -18,3 +18,17 @@ int	ft_in_out(t_parsing *parsing)
 		next->in = parsing->out;
 	return (0);
 }
+
+int	ft_set_redir(t_parsing *parsing)
+{
+	t_parsing	*next;
+
+	next = parsing->next;
+	if (parsing->str_out && !next->str_in)
+	{
+		next->str_in = ft_strdup(parsing->str_out);
+		if (!next->str_in)
+			return (-1);
+	}
+	return (0);
+}
