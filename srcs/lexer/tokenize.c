@@ -6,7 +6,7 @@
 /*   By: asaboure <asaboure@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/07 14:53:21 by asaboure          #+#    #+#             */
-/*   Updated: 2022/01/17 18:31:35 by asaboure         ###   ########.fr       */
+/*   Updated: 2022/01/27 19:05:26 by asaboure         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,12 +33,18 @@ t_token	*tokenize_general(t_lexer *lexerbuf, t_token *token, char *input
 		->chtype == CHAR_PIPE)
 	{
 		token = set_token_whitespace(token, &lexerbuf->j, size, lexerbuf->i);
+		if (!token)
+			return (NULL);
 		token->data[0] = lexerbuf->chtype;
 		token->data[1] = 0;
 		token->type = lexerbuf->chtype;
 		token->next = malloc(sizeof(t_token));
+		if (!token->next)
+			return (NULL);
 		token = token->next;
 		token_init(token, size - lexerbuf->i);
+		if (!token->data)
+			return (NULL);
 	}
 	return (token);
 }
@@ -63,7 +69,7 @@ void	tokenize_null(t_lexer *lexerbuf, t_token *token)
 	lexerbuf->j = 0;
 }
 
-void	tokenize(t_lexer *lexerbuf, t_token *token, int size, char *input)
+int	tokenize(t_lexer *lexerbuf, t_token *token, int size, char *input)
 {
 	lexerbuf->state = STATE_GENERAL;
 	lexerbuf->i = 0;
@@ -77,9 +83,12 @@ void	tokenize(t_lexer *lexerbuf, t_token *token, int size, char *input)
 			tokenize_in_dquote(lexerbuf, token);
 		else if (lexerbuf->state == STATE_IN_QUOTE)
 			tokenize_in_quote(lexerbuf, token);
+		if (!token)
+			return (0);
 		if (lexerbuf->chtype == CHAR_NULL && lexerbuf->j > 0)
 			tokenize_null(lexerbuf, token);
 		if (lexerbuf->c == '\0')
 			break ;
 	}
+	return(1);
 }

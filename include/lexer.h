@@ -6,7 +6,7 @@
 /*   By: asaboure <asaboure@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/06 17:10:10 by asaboure          #+#    #+#             */
-/*   Updated: 2022/01/26 18:46:08 by asaboure         ###   ########.fr       */
+/*   Updated: 2022/01/27 17:25:00 by asaboure         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ t_token	*set_token_whitespace(t_token *token, int *j, int size, int i);
 void	token_init(t_token *tok, int datasize);
 int		getchartype(char c);
 
-void	tokenize(t_lexer *lexerbuf, t_token *token, int size, char *input);
+int		tokenize(t_lexer *lexerbuf, t_token *token, int size, char *input);
 t_token	*tokenize_general(t_lexer *lexerbuf, t_token *token, char *input,
 			int size);
 void	tokenize_in_dquote(t_lexer *lexerbuf, t_token *token);

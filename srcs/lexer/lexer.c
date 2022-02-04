@@ -6,7 +6,7 @@
 /*   By: asaboure <asaboure@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/06 17:06:14 by asaboure          #+#    #+#             */
-/*   Updated: 2022/01/26 18:59:51 by asaboure         ###   ########.fr       */
+/*   Updated: 2022/01/27 19:10:34 by asaboure         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ char	*check_cmd(char *input, char **path)
 	{
 		pathcmd = ft_strjoin(path[i], input);
 		if (!pathcmd)
-			return (0);
+			return (NULL);
 		if (access(pathcmd, X_OK | F_OK) == 0)
 			return (ft_strdup(pathcmd));
 		free(pathcmd);
@@ -84,6 +84,8 @@ void	strip_quotes(t_token *token)
 	char	c;
 
 	dest = malloc(ft_strlen(token->data) + 1);
+	if (!dest)
+		return ;
 	if (ft_strlen(token->data) <= 1)
 		return ;
 	i = -1;
@@ -131,7 +133,8 @@ int	lexer_build(char *input, int size, t_lexer *lexerbuf)
 	token_init(token, size);
 	if (!token->data)
 		return (0);
-	tokenize(lexerbuf, token, size, input);
+	if (!tokenize(lexerbuf, token, size, input))
+		return (0);
 	token = lexerbuf->tokenlist;
 	lexerbuf->ntokens = count_tokens(token);
 	return (1);

@@ -6,7 +6,7 @@
 /*   By: asaboure <asaboure@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/13 14:20:53 by asaboure          #+#    #+#             */
-/*   Updated: 2022/01/26 18:51:29 by asaboure         ###   ########.fr       */
+/*   Updated: 2022/01/27 21:04:43 by asaboure         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,7 @@ char	**parse_args(t_token *tokenlist, t_lexer *lexerbuf)
 	return (args);
 }
 
+//returns -1 if malloc error
 int	parse(t_lexer *lexerbuf, t_parsing	*parsebuf)
 {
 	parsebuf->str_in = parse_redir_in(lexerbuf->tokenlist, &parsebuf->in);
@@ -73,7 +74,11 @@ int	parse(t_lexer *lexerbuf, t_parsing	*parsebuf)
 	if (lexerbuf->tokenlist->type == TOKEN)
 	{
 		parsebuf->argv = parse_args(lexerbuf->tokenlist, lexerbuf);
+		if (!parsebuf->argv)
+			return (-1);
 		parsebuf->path = check_cmd(parsebuf->argv[0], lexerbuf->path);
+		if (!parsebuf->path)
+			return (-1);
 	}
 	while (lexerbuf->tokenlist)
 	{
@@ -85,28 +90,47 @@ int	parse(t_lexer *lexerbuf, t_parsing	*parsebuf)
 		}
 		lexerbuf->tokenlist = lexerbuf->tokenlist->next;
 	}
-	return (0);
+	return (1);
 }
 
-void	*exit_parsing(t_lexer *lexerbuf)
+void	destroy_tokenlist(t_token *token)
 {
-	free_split(lexerbuf->path);
+	t_token	*tmp;
+	while (token)
+	{
+		tmp = token->next;
+		free(token);
+		token = tmp;
+	}	
+}
+
+void	*exit_parsing(t_lexer *lexerbuf, t_token *token)
+{
+	if (lexerbuf->path)
+		free_split(lexerbuf->path);
 	free(lexerbuf->path);
-	free(lexerbuf->tokenlist);
+	if (token)
+		destroy_tokenlist(token);
 	return (NULL);
 }
 
+//returns NULL in case of malloc error
 t_parsing	*parse_init(char *line, char **env)
 {
 	t_lexer		lexerbuf;
 	t_parsing	*parserbuf;
+	t_token		*saved;
 
 	lexerbuf.path = get_pathv(env);
 	lexerbuf.tokenlist = malloc(sizeof(t_token));
+	saved = lexerbuf.tokenlist;
+	if (!lexerbuf.tokenlist || !lexerbuf.path)
+		return (exit_parsing(&lexerbuf, saved));
 	lexerbuf.j = 0;
 	if (!lexer_build(line, ft_strlen(line), &lexerbuf))
-		return (exit_parsing(&lexerbuf));
+		return (exit_parsing(&lexerbuf, saved));
 	parserbuf = malloc(sizeof(t_parsing));
-	parse(&lexerbuf, parserbuf);
+	if (!parse(&lexerbuf, parserbuf))
+		return (NULL);
 	return (parserbuf);
 }
