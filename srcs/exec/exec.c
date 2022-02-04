@@ -73,33 +73,34 @@ int	exec(t_term *term, t_parsing *cmd)
 
 	nb_child = 0;
 	last_child = 0;
-	status = ft_exec_builtin(term, cmd);
-	if (status < 0)
-		return (-1);
-	else if (!status)
-		return (0);
-	status = 0;
 	while (cmd)
 	{
-		status = ft_exec_builtin(term, cmd);
-		if (status < 0)
-			return (-1);
-		if (cmd->path)
+		if (ft_setflux(cmd) < 0)
 		{
-			child = fork();
-			if (child < 0)
-				return (0);
-			else if (child == 0)
-				ft_child(term, cmd, last_child);
-			nb_child++;
-			last_child = child;
+			status = ft_exec_builtin(term, cmd);
+			if (status < 0)
+				return (-1);
+			if (cmd->path)
+			{
+				child = fork();
+				if (child < 0)
+					return (0);
+				else if (child == 0)
+					ft_child(term, cmd, last_child);
+				nb_child++;
+				last_child = child;
+				if (waitpid(-1, &status, 0) < 0)
+					exit(EXIT_FAILURE);
+			}
 		}
+		else
+			perror(cmd->argv[0]);
 		cmd = cmd->next;
 	}
-	while (nb_child--)
+/*	while (nb_child--)
 	{
 		if (waitpid(-1, &status, 0) < 0)
 			exit(EXIT_FAILURE);
-	}
+	}*/
 	return (0);
 }
