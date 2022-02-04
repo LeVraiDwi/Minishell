@@ -6,7 +6,7 @@
 /*   By: asaboure <asaboure@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/13 14:20:53 by asaboure          #+#    #+#             */
-/*   Updated: 2022/02/04 15:53:49 by asaboure         ###   ########.fr       */
+/*   Updated: 2022/02/04 16:47:17 by asaboure         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,9 +68,9 @@ char	**parse_args(t_token *tokenlist, t_lexer *lexerbuf)
 //returns -1 if malloc error
 int	parse(t_lexer *lexerbuf, t_parsing	*parsebuf)
 {
-	parsebuf->str_in = parse_redir_in(lexerbuf->tokenlist, &parsebuf->in);
-	parsebuf->str_out = parse_redir_out(lexerbuf->tokenlist, &parsebuf->out);
-	parsebuf->str_err = parse_redir_err(lexerbuf->tokenlist, &parsebuf->err);
+	parsebuf->str_in = parse_redir_in(lexerbuf->tokenlist, &parsebuf->flag);
+	parsebuf->str_out = parse_redir_out(lexerbuf->tokenlist, &parsebuf->flag);
+	parsebuf->str_err = parse_redir_err(lexerbuf->tokenlist, &parsebuf->flag);
 	if (lexerbuf->tokenlist->type == TOKEN)
 	{
 		parsebuf->argv = parse_args(lexerbuf->tokenlist, lexerbuf);
@@ -80,6 +80,8 @@ int	parse(t_lexer *lexerbuf, t_parsing	*parsebuf)
 		if (!parsebuf->path)
 			return (-1);
 	}
+	else
+		parsebuf->argv = malloc(sizeof(char *));
 	while (lexerbuf->tokenlist)
 	{
 		if (lexerbuf->tokenlist->type == CHAR_PIPE)
@@ -132,5 +134,6 @@ t_parsing	*parse_init(char *line, char **env)
 	parserbuf = malloc(sizeof(t_parsing));
 	if (!parse(&lexerbuf, parserbuf))
 		return (NULL);
+printf("plouf\n");
 	return (parserbuf);
 }
