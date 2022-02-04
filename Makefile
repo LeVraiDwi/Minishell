@@ -1,11 +1,11 @@
-SRCS = $(addprefix $(SRC_PATH)/,$(SRC_NAME)) $(addprefix $(BUILT_PATH)/,$(BUILT_NAME)) $(addprefix $(ENV_PATH)/,$(ENV_NAME)) $(addprefix $(PARSER_PATH)/,$(PARSER_NAME)) $(addprefix $(LEXER_PATH)/,$(LEXER_NAME)) $(addprefix $(EXPANSER_PATH)/,$(EXPANSER_NAME))
+SRCS = $(addprefix $(SRC_PATH)/,$(SRC_NAME)) $(addprefix $(BUILT_PATH)/,$(BUILT_NAME)) $(addprefix $(ENV_PATH)/,$(ENV_NAME)) $(addprefix $(PARSER_PATH)/,$(PARSER_NAME)) $(addprefix $(LEXER_PATH)/,$(LEXER_NAME)) $(addprefix $(EXPANSER_PATH)/,$(EXPANSER_NAME)) $(addprefix $(EXEC_PATH)/,$(EXEC_NAME))
 
 LIBFT = ./libft/libft.a
 
 SRC_PATH =      ./srcs
 
 SRC_NAME =      main.c strisstr.c init.c\
-                free_term.c\
+                free_term.c struct_pars.c\
 
 BUILT_PATH =    ./srcs/builtin
 
@@ -27,7 +27,12 @@ PARSER_NAME = parser.c parser_utils.c
 
 EXPANSER_PATH = ./srcs/expanser
 
-EXPANSER_NAME = expanser.c expanser_utils.c
+EXPANSER_NAME = expanser.c expanser_utils.c expanser_file.c\
+		in_out.c
+
+EXEC_PATH = ./srcs/exec
+
+EXEC_NAME = exec.c
 
 OBJS = ${SRCS:.c=.o}
 

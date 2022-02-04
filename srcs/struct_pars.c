@@ -51,11 +51,11 @@ void	ft_free_argv(char ***argv)
 	int	i;
 
 	i = 0;
-	if (argv)
+	if (*argv)
 	{
 		while (argv[i])
 			ft_free((void **)&argv[i++]);
-		ft_free(&argv);
+		ft_free((void **)argv);
 	}
 }
 
@@ -64,12 +64,12 @@ int	ft_free_pars(t_parsing *pars)
 	if (pars->next)
 		ft_free_pars(pars->next);
 	if (pars->path)
-		ft_free(&pars->path);
-	ft_free_argv(pars->argv);
+		ft_free((void **)&pars->path);
+	ft_free_argv(&pars->argv);
 	if (pars->str_in)
-		ft_free(&pars->str_in);
+		ft_free((void **)&pars->str_in);
 	if (pars->str_out)
-		ft_free(&pars->str_out);
-	ft_free(&pars);
+		ft_free((void **)&pars->str_out);
+	ft_free((void **)&pars);
 	return (0);
 }

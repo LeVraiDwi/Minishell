@@ -32,6 +32,7 @@
 # include "lexer.h"
 # include "parser.h"
 # include "expanser.h"
+# include "exec.h"
 # define STDIN 0
 # define STDOUT 1
 # define APPEND 2
