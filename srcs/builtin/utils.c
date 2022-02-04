@@ -28,5 +28,5 @@ int	ft_is_builtin(char *cmd)
 		return (ECHO);
 	if (strisstr("EXIT", cmd))
 		return (-1);
-	return (-1);
+	return (1);
 }

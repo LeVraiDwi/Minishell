@@ -38,10 +38,17 @@ int	ft_child(t_term *term, t_parsing *cmd, int last_child)
 	printf("child\n");
 	if (last_child != 0)
 		waitpid(last_child, &status, 0);
-	if (dup2(cmd->in, STDIN) < 0)
+	if (dup2(STDIN, cmd->in) < 0)
 		exit(ft_error_pipe(cmd));
-	if (dup2(cmd->out, STDOUT) < 0)
+	if (dup2(STDOUT, cmd->out) < 0)
 		exit(ft_error_pipe(cmd));
+	status = ft_exec_builtin(term, cmd);
+	if (status <= 0)
+		ft_free_pars(cmd);
+	if (status < 0)
+		return (-1);
+	else if (!status)
+		return (0);
 	ft_close_pipe(term, cmd);
 	printf("child\n");
 	execve(cmd->path, cmd->argv, term->env);
@@ -78,6 +85,9 @@ int	exec(t_term *term, t_parsing *cmd)
 	status = 0;
 	while (cmd)
 	{
+		status = ft_exec_builtin(term, cmd);
+		if (status < 0)
+			return (-1);
 		if (cmd->path)
 		{
 			child = fork();
