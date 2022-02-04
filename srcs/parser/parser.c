@@ -6,7 +6,7 @@
 /*   By: asaboure <asaboure@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/13 14:20:53 by asaboure          #+#    #+#             */
-/*   Updated: 2022/02/04 16:47:17 by asaboure         ###   ########.fr       */
+/*   Updated: 2022/02/04 17:18:08 by asaboure         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,20 @@ t_token	*skip_redir(t_token *token)
 	return (token);
 }
 
+int	is_redir(t_token *token)
+{
+	if (!token)
+		return (0);
+	if (token->type == TOKEN && ft_isnum(token->data))
+	{
+		if (token->next->type == CHAR_GREATER)
+			return (1);
+	}
+	if (token->type == CHAR_GREATER || token->type == CHAR_LESSER)
+		return (1);
+	return (0);
+}
+
 char	**parse_args(t_token *tokenlist, t_lexer *lexerbuf)
 {
 	t_token	*token;
@@ -51,7 +65,8 @@ char	**parse_args(t_token *tokenlist, t_lexer *lexerbuf)
 	i = 0;
 	while (token)
 	{
-		token = skip_redir(token);
+		while (is_redir(token))
+			token = skip_redir(token);
 		if (!token || token->type == CHAR_PIPE || token->type == CHAR_NULL)
 		{
 			args[i] = NULL;
