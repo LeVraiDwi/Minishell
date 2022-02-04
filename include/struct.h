@@ -7,7 +7,6 @@ typedef struct s_term
 {
 	int		exit;
 	int		(*built[6])(t_term *term, char **cmd);
-	int		pipefd[2];
 	char	**env;
 }				t_term;
 
@@ -15,7 +14,6 @@ typedef struct s_parsing
 {
 	char				*path;
 	char				**argv;
-	char				**env;
 	unsigned int		flag;
 	int					in;
 	int					out;

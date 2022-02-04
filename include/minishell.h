@@ -6,7 +6,7 @@
 /*   By: asaboure <asaboure@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/06 18:22:04 by asaboure          #+#    #+#             */
-/*   Updated: 2022/01/24 15:36:00 by tcosse           ###   ########.fr       */
+/*   Updated: 2022/02/04 16:35:51 by tcosse           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,12 @@
 # include "exec.h"
 # define STDIN 0
 # define STDOUT 1
+# define DOUBLE_STDIN 1
+# define DOUBLE_STDOUT 2
+# define SIMPLE_STDIN 4
+# define SIMPLE_STDOUT 8
+# define SIMPLE_STDERR 16
+# define DOUBLE_STDERR 32
 # define APPEND 2
 
 int		strisstr(char *str, char *s);

@@ -6,7 +6,7 @@
 /*   By: tcosse <tcosse@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/24 13:19:17 by tcosse            #+#    #+#             */
-/*   Updated: 2022/01/24 13:43:23 by tcosse           ###   ########.fr       */
+/*   Updated: 2022/02/04 16:27:27 by tcosse           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ void	ft_init_struct(t_parsing *pars)
 {
 	pars->path = 0;
 	pars->argv = 0;
-	pars->env = 0;
 	pars->flag = 0;
 	pars->next = 0;
 	pars->in = STDIN;

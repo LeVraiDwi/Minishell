@@ -1,4 +1,5 @@
 /* ************************************************************************** */
+
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
@@ -6,7 +7,7 @@
 /*   By: tcosse <tcosse@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/24 13:19:33 by tcosse            #+#    #+#             */
-/*   Updated: 2022/01/24 13:45:44 by tcosse           ###   ########.fr       */
+/*   Updated: 2022/02/04 15:48:13 by tcosse           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,34 +23,29 @@ int	ft_error_pipe(t_parsing *cmd)
 	exit(EXIT_FAILURE);
 }
 
-void ft_close_pipe(t_term *term, t_parsing *cmd)
+void	ft_close(t_parsing *cmd)
 {
-	if (term->pipefd[0] != cmd->in)
-		close(term->pipefd[0]);
-	if (term->pipefd[1] != cmd->out)
-		close(term->pipefd[1]);
+	if (cmd->in != STDIN)
+		close(cmd->in);
+	if (cmd->out != STDOUT)
+		close(cmd->out);
 }
 
 int	ft_child(t_term *term, t_parsing *cmd, int last_child)
 {
 	int	status;
 
-	status = 0;
 	printf("child\n");
-	if (last_child != 0)
-		waitpid(last_child, &status, 0);
-	if (dup2(STDIN, cmd->in) < 0)
-		exit(ft_error_pipe(cmd));
-	if (dup2(STDOUT, cmd->out) < 0)
-		exit(ft_error_pipe(cmd));
+	redir_flux(cmd, last_child);
 	status = ft_exec_builtin(term, cmd);
 	if (status <= 0)
 		ft_free_pars(cmd);
 	if (status < 0)
-		return (-1);
+		exit(EXIT_FAILURE);
 	else if (!status)
-		return (0);
-	ft_close_pipe(term, cmd);
+		exit(EXIT_SUCCESS);
+	printf("%d\n", cmd->out);
+	ft_close(cmd);
 	printf("child\n");
 	execve(cmd->path, cmd->argv, term->env);
 	perror("ERROR:\n");

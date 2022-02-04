@@ -6,7 +6,7 @@
 /*   By: asaboure <asaboure@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/24 13:17:17 by tcosse            #+#    #+#             */
-/*   Updated: 2022/01/26 18:51:02 by asaboure         ###   ########.fr       */
+/*   Updated: 2022/02/04 16:18:06 by tcosse           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,10 +69,6 @@ int	main(int argc, char **argv, char **env)
 			printf("in: %d\n", parsebuf->in);
 			printf("out: %d\n", parsebuf->out);
 			printf("err: %d\n", parsebuf->err);
-			if (parsebuf->out)
-				write(parsebuf->out, "ha", 2);
-			if (parsebuf->out)
-				close(parsebuf->out);
 			parsebuf = parsebuf->next;
 		}
 		printf("======================fin expanser==================\n");

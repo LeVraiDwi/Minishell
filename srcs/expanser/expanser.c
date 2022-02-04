@@ -44,7 +44,8 @@ int	expanser(t_term  *term, t_parsing *parsing)
 			if (ft_stdopen(parsing->str_err, &parsing->err, parsing->flag, O_RDWR) < 0)
 				return (-1);
 		if (parsing->next)
-			ft_in_out(term, parsing);
+		if	(ft_in_out(parsing) < 0)
+			return (-1);
 		parsing = parsing->next;
 	}
 	return (0);

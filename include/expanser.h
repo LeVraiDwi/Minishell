@@ -13,5 +13,5 @@ int		ft_stdopen(char *path, int *fd, int flags, int right);
 int		ft_isfile(char *path);
 int		ft_checkright(char *path, int right);
 int		ft_openfile(char *path, int flags, int right);
-void		ft_in_out(t_term *term, t_parsing *parsing);
+int		ft_in_out(t_parsing *parsing);
 #endif
