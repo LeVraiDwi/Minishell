@@ -6,7 +6,7 @@
 /*   By: asaboure <asaboure@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/05 19:23:06 by asaboure          #+#    #+#             */
-/*   Updated: 2022/01/26 18:56:54 by asaboure         ###   ########.fr       */
+/*   Updated: 2022/02/04 16:52:12 by asaboure         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,9 +41,9 @@ int	main(int ac, char **av, char **env)
 		}
 		printf("\n");
 		printf("path: %s\n", parserbuf->path);
-		printf("redir in: %s, (flag %d)\n", parserbuf->str_in, parserbuf->in);
-		printf("redir out: %s (flag %d)\n", parserbuf->str_out, parserbuf->out);
-		printf("redir err: %s (flag %d)\n", parserbuf->str_err, parserbuf->err);
+		printf("redir in: %s, (flag %d)\n", parserbuf->str_in, parserbuf->flag);
+		printf("redir out: %s (flag %d)\n", parserbuf->str_out, parserbuf->flag);
+		printf("redir err: %s (flag %d)\n", parserbuf->str_err, parserbuf->flag);
 		parserbuf = parserbuf->next;
 		printf("\n");
 	}

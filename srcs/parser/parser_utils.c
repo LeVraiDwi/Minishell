@@ -6,7 +6,7 @@
 /*   By: asaboure <asaboure@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/18 16:58:12 by asaboure          #+#    #+#             */
-/*   Updated: 2022/02/04 16:46:05 by asaboure         ###   ########.fr       */
+/*   Updated: 2022/02/04 19:37:20 by asaboure         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ char	*parse_redir_in(t_token *token, unsigned int *flag)
 		{
 			if (token->next->type == CHAR_LESSER)
 			{
-				*flag += DOUBLE_STDOUT;
+				*flag += DOUBLE_STDIN;
 				return (token->next->next->data);
 			}
 			*flag += SIMPLE_STDIN;

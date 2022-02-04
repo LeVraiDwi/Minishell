@@ -6,7 +6,7 @@
 /*   By: asaboure <asaboure@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/13 14:20:53 by asaboure          #+#    #+#             */
-/*   Updated: 2022/02/04 17:18:08 by asaboure         ###   ########.fr       */
+/*   Updated: 2022/02/04 19:51:51 by asaboure         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,12 +54,53 @@ int	is_redir(t_token *token)
 	return (0);
 }
 
-char	**parse_args(t_token *tokenlist, t_lexer *lexerbuf)
+char	**ft_realloc_args(char **args, int i)
+{
+	char	**tmp;
+	int		j;
+
+	j = 0;
+	tmp = args;
+	args = malloc(sizeof(char *) * (i + 2));
+	while(j <= i)
+	{
+		args[j] = tmp[i];
+		j++;
+	}
+	free(tmp);
+	return (args);
+}
+
+char	**read_args(char *last)
+{
+	char	**args;
+	char	**tmp;
+	char	*line;
+	int		i;
+	int		size;
+
+	i = 0;
+	args = malloc(sizeof(char *));
+	line = readline("heredoc> ");
+	while (ft_strncmp(last, line, ft_strlen(last) + 1))
+	{
+		args[i] = line;
+		args = ft_realloc_args(args, i);
+		line = readline("heredoc> ");
+		i++;
+	}
+	args[i] = 0;
+	return (args);
+}
+
+char	**parse_args(t_token *tokenlist, t_lexer *lexerbuf, t_parsing *parsebuf)
 {
 	t_token	*token;
 	char	**args;
 	int		i;
 
+	if (parsebuf->flag & DOUBLE_STDIN)
+		return (read_args(parsebuf->str_in));
 	token = tokenlist;
 	args = malloc(sizeof(char *) * (lexerbuf->ntokens + 1));
 	i = 0;
@@ -83,12 +124,13 @@ char	**parse_args(t_token *tokenlist, t_lexer *lexerbuf)
 //returns -1 if malloc error
 int	parse(t_lexer *lexerbuf, t_parsing	*parsebuf)
 {
+	parsebuf->flag = 0;
 	parsebuf->str_in = parse_redir_in(lexerbuf->tokenlist, &parsebuf->flag);
 	parsebuf->str_out = parse_redir_out(lexerbuf->tokenlist, &parsebuf->flag);
 	parsebuf->str_err = parse_redir_err(lexerbuf->tokenlist, &parsebuf->flag);
 	if (lexerbuf->tokenlist->type == TOKEN)
 	{
-		parsebuf->argv = parse_args(lexerbuf->tokenlist, lexerbuf);
+		parsebuf->argv = parse_args(lexerbuf->tokenlist, lexerbuf, parsebuf);
 		if (!parsebuf->argv)
 			return (-1);
 		parsebuf->path = check_cmd(parsebuf->argv[0], lexerbuf->path);
@@ -149,6 +191,5 @@ t_parsing	*parse_init(char *line, char **env)
 	parserbuf = malloc(sizeof(t_parsing));
 	if (!parse(&lexerbuf, parserbuf))
 		return (NULL);
-printf("plouf\n");
 	return (parserbuf);
 }
