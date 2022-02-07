@@ -5,7 +5,7 @@ LIBFT = ./libft/libft.a
 SRC_PATH =      ./srcs
 
 SRC_NAME =      main.c strisstr.c init.c\
-                free_term.c struct_pars.c\
+                term.c struct_pars.c\
 
 BUILT_PATH =    ./srcs/builtin
 
@@ -32,7 +32,7 @@ EXPANSER_NAME = expanser.c expanser_utils.c expanser_file.c\
 
 EXEC_PATH = ./srcs/exec
 
-EXEC_NAME = exec.c
+EXEC_NAME = exec.c exec_util.c
 
 OBJS = ${SRCS:.c=.o}
 
@@ -57,7 +57,7 @@ CD = cd
 
 ${NAME}:	${OBJS}
 		cd libft; make;
-		${CC} -o ${NAME} ${OBJS} ${FLAGS} ${LIBFT} ${RL}
+		${CC} -o ${NAME} ${OBJS} ${FLAGS} ${LIBFT} ${RL} ${DEBUG}
 
 all:		${NAME}
 
