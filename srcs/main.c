@@ -17,7 +17,6 @@ int	main(int argc, char **argv, char **env)
 	t_term		term;
 	t_parsing	*parsebuf;
 	char		*str;
-	char		**cmd;
 	int			i;
 	t_parsing	*tmp;
 	//char	*cmd1[] = {"export", "a=12", "jaime=", "pain=jamenfkfhssflf", "0"};
@@ -30,10 +29,9 @@ int	main(int argc, char **argv, char **env)
 	{
 		i = 0;
 		str = readline("\033[34;01mMinishell\033[00m$ ");
-		cmd = ft_split(str, ' ');
 		printf("======================debut parsing==================\n");
 		parsebuf = parse_init(str, env);
-		printf("okay:%p, %p\n", parsebuf, parsebuf->argv);
+		printf("okay:%p, %p, next:%p\n", parsebuf, parsebuf->argv, parsebuf->next);
 		i = 0;
 		while (parsebuf->argv && parsebuf->argv[i])
 		{
@@ -50,8 +48,8 @@ int	main(int argc, char **argv, char **env)
 		printf("err: %d\n", parsebuf->err);
 		printf("======================fin parsing==================\n");
 		printf("======================debut expanser==================\n");
+		printf("okay:%p, %p, next:%p\n", parsebuf, parsebuf->argv, parsebuf->next);
 		expanser(&term, parsebuf);
-		printf("okay:%p, %p\n", parsebuf, parsebuf->argv);
 		tmp = parsebuf;
 		while (parsebuf)
 		{
@@ -75,6 +73,8 @@ int	main(int argc, char **argv, char **env)
 		printf("======================debut exec==================\n");
 		exec(&term, tmp);
 		printf("======================fin exec==================\n");
+		if (strisstr("EXIT", tmp->argv[0]))
+			term.exit = 1;
 		ft_free_pars(tmp);
 		/*	i = ft_is_builtin(*cmd);
 		if (i < 0)
@@ -83,5 +83,6 @@ int	main(int argc, char **argv, char **env)
 			term.built[i](&term, cmd);*/
 		free(str);
 	}
+	ft_free_term(&term);
 	return (0);
 }

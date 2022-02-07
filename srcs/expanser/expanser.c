@@ -28,19 +28,26 @@ int	ft_stdopen(char *path, int *fd, int flags, int right)
 int	expanser(t_term  *term, t_parsing *parsing)
 {
 	int	i;
+	t_parsing	*tmp;
 
 	i = 0;
-	while (parsing)
+	tmp = parsing;
+	tmp->next = 0;
+	while (tmp)
 	{
-		if(replace_var(term, parsing->argv) < 0)
+		tmp->in = 0;
+		tmp->out = 0;
+		tmp->err = 0;
+		if(replace_var(term, tmp->argv) < 0)
 			return (-1);
-		if(replace_var(term, &parsing->str_in) < 0)
+		if(replace_var(term, &tmp->str_in) < 0)
 			return (-1);
-		if(replace_var(term, &parsing->str_out) < 0)
+		if(replace_var(term, &tmp->str_out) < 0)
 			return (-1);
-		if(replace_var(term, &parsing->str_err) < 0)
+		if(replace_var(term, &tmp->str_err) < 0)
 			return (-1);
-		parsing = parsing->next;
+		printf("%p\n", tmp);
+		tmp = tmp->next;
 	}
 	return (0);
 }

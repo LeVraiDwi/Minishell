@@ -43,7 +43,11 @@ int	ft_child(t_term *term, t_parsing *cmd, int last_child)
 	if (status < 0)
 		exit(EXIT_FAILURE);
 	else if (!status)
+	{
+		//free_term(term);
+		ft_free_pars(cmd);
 		exit(EXIT_SUCCESS);
+	}
 	printf("%d\n", cmd->out);
 	ft_close(cmd);
 	printf("child\n");
@@ -75,11 +79,8 @@ int	exec(t_term *term, t_parsing *cmd)
 	last_child = 0;
 	while (cmd)
 	{
-		if (ft_setflux(cmd) < 0)
+		if (!ft_setflux(cmd))
 		{
-			status = ft_exec_builtin(term, cmd);
-			if (status < 0)
-				return (-1);
 			if (cmd->path)
 			{
 				child = fork();
