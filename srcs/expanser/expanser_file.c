@@ -49,3 +49,17 @@ int	ft_openfile(char *path, int flags, int right)
 		return (-1);
 	return (fd);
 }
+
+int	ft_setfilename(t_parsing *parsing)
+{
+	t_parsing	*tmp;
+
+	tmp = parsing->next;
+	if (parsing->str_out && !tmp->str_in)
+	{
+		tmp->str_in = ft_strdup(parsing->str_out);
+		if (!tmp->str_in)
+			return (-1);
+	}
+	return (0);
+}

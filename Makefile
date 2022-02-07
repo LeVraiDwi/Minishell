@@ -1,3 +1,4 @@
+
 SRCS = $(addprefix $(SRC_PATH)/,$(SRC_NAME)) $(addprefix $(BUILT_PATH)/,$(BUILT_NAME)) $(addprefix $(ENV_PATH)/,$(ENV_NAME)) $(addprefix $(PARSER_PATH)/,$(PARSER_NAME)) $(addprefix $(LEXER_PATH)/,$(LEXER_NAME)) $(addprefix $(EXPANSER_PATH)/,$(EXPANSER_NAME)) $(addprefix $(EXEC_PATH)/,$(EXEC_NAME))
 
 LIBFT = ./libft/libft.a
@@ -57,7 +58,7 @@ CD = cd
 
 ${NAME}:	${OBJS}
 		cd libft; make;
-		${CC} -o ${NAME} ${OBJS} ${FLAGS} ${LIBFT} ${RL} ${DEBUG}
+		${CC} -o ${NAME} ${OBJS} ${FLAGS} ${LIBFT} ${RL}
 
 all:		${NAME}
 

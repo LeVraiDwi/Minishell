@@ -36,6 +36,8 @@ int	ft_child(t_term *term, t_parsing *cmd, int last_child)
 	int	status;
 
 	printf("child\n");
+	if (last_child)
+		waitpid(last_child, &status, 0);
 	redir_flux(cmd, last_child);
 	status = ft_exec_builtin(term, cmd);
 	if (status <= 0)
@@ -49,6 +51,7 @@ int	ft_child(t_term *term, t_parsing *cmd, int last_child)
 		exit(EXIT_SUCCESS);
 	}
 	printf("%d\n", cmd->out);
+	printf("%d\n", cmd->in);
 	ft_close(cmd);
 	printf("child\n");
 	execve(cmd->path, cmd->argv, term->env);
@@ -74,12 +77,15 @@ int	exec(t_term *term, t_parsing *cmd)
 	int				status;
 	int				last_child;
 	int				nb_child;
+	int				pipefd[2];
 
-	nb_child = 0;
 	last_child = 0;
+	nb_child = 0;
+	if (pipe(pipefd) < 0)
+		return (-1);
 	while (cmd)
 	{
-		if (!ft_setflux(cmd))
+		if (!ft_setflux(cmd, pipefd))
 		{
 			if (cmd->path)
 			{
@@ -88,20 +94,23 @@ int	exec(t_term *term, t_parsing *cmd)
 					return (0);
 				else if (child == 0)
 					ft_child(term, cmd, last_child);
-				nb_child++;
+				status = 0;
 				last_child = child;
-				if (waitpid(-1, &status, 0) < 0)
-					exit(EXIT_FAILURE);
+				nb_child++;
 			}
 		}
 		else
 			perror(cmd->argv[0]);
 		cmd = cmd->next;
 	}
-/*	while (nb_child--)
+	printf("fin\n");
+	while (nb_child--)
 	{
 		if (waitpid(-1, &status, 0) < 0)
 			exit(EXIT_FAILURE);
-	}*/
+	}
+	printf("fin\n");
+	close (pipefd[0]);
+	close (pipefd[1]);
 	return (0);
 }

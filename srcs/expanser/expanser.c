@@ -25,6 +25,21 @@ int	ft_stdopen(char *path, int *fd, int flags, int right)
 	return (0);
 }
 
+int	ft_setstd(t_parsing *parsing)
+{
+	t_parsing *tmp;
+
+	tmp = parsing;
+	while (tmp)
+	{
+		tmp->in = STDIN;
+		tmp->out = STDOUT;
+		tmp->err = STDERR;
+		tmp = tmp->next;
+	}
+	return (0);
+}
+
 int	expanser(t_term  *term, t_parsing *parsing)
 {
 	int	i;
@@ -32,11 +47,9 @@ int	expanser(t_term  *term, t_parsing *parsing)
 
 	i = 0;
 	tmp = parsing;
+	ft_setstd(parsing);
 	while (tmp)
 	{
-		tmp->in = 0;
-		tmp->out = 0;
-		tmp->err = 0;
 		if(replace_var(term, tmp->argv) < 0)
 			return (-1);
 		if(replace_var(term, &tmp->str_in) < 0)
@@ -45,7 +58,9 @@ int	expanser(t_term  *term, t_parsing *parsing)
 			return (-1);
 		if(replace_var(term, &tmp->str_err) < 0)
 			return (-1);
-		printf("%p\n", tmp);
+		if (tmp->next)
+			if(ft_setfilename(parsing) < 0)
+				return (-1);
 		tmp = tmp->next;
 	}
 	return (0);
