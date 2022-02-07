@@ -32,7 +32,6 @@ int	expanser(t_term  *term, t_parsing *parsing)
 
 	i = 0;
 	tmp = parsing;
-	tmp->next = 0;
 	while (tmp)
 	{
 		tmp->in = 0;
