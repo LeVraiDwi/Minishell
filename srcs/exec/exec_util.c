@@ -7,6 +7,8 @@ int	redir_flux(t_parsing *cmd, int last_child)
 	status = 0;
 	if (last_child != 0)
 		waitpid(last_child, &status, 0);*/
+	printf("child: %d, %d\n", last_child, cmd->in);
+	printf("child: %d, %d\n", last_child, cmd->out);
 	if (cmd->in != STDIN)
 		if (dup2(cmd->in, STDIN) < 0)
 			return (ft_error_pipe(cmd));
@@ -32,13 +34,13 @@ int	define_flags(int flag, int std)
 int	ft_setflux(t_parsing *cmd, int *pipefd)
 {
 	if (cmd->str_in)
-		if (ft_stdopen(cmd->path, &cmd->in, 0, O_RDONLY) < 0)
+		if (ft_stdopen(cmd->str_in, &cmd->in, 0, O_RDONLY) < 0)
 			return (-1);
 	if (cmd->str_out)
-		if (ft_stdopen(cmd->path, &cmd->out, define_flags(cmd->flag, STDOUT), O_RDWR) < 0)
+		if (ft_stdopen(cmd->str_out, &cmd->out, define_flags(cmd->flag, STDOUT), O_RDWR) < 0)
 			return (-1);
 	if (cmd->str_err)
-		if (ft_stdopen(cmd->path, &cmd->err, define_flags(cmd->flag, STDOUT), O_RDWR) < 0)
+		if (ft_stdopen(cmd->str_err, &cmd->err, define_flags(cmd->flag, STDOUT), O_RDWR) < 0)
 			return (-1);
 	if (cmd->next)
 		if (ft_in_out(cmd, pipefd) < 0)

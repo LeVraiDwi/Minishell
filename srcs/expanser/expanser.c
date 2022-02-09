@@ -11,7 +11,6 @@ int	replace_var(t_term *term, char **cmd)
 	{
 		if(insert_var(term->env, &cmd[i]) < 0)
 			return (-1);
-		printf("%s\n", cmd[i]);
 		i++;
 	}
 	return (0);

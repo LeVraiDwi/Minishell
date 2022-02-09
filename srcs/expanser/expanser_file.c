@@ -35,16 +35,16 @@ int	ft_openfile(char *path, int flags, int right)
 
 	if (!path)
 		return (0);
-	if (ft_isfile(path) < 0)
-		return (-1);
 	if (!access(path, F_OK))
 	{
+		if (ft_isfile(path) < 0)
+			return (-1);
 		if (ft_checkright(path, right))
 			return (-1);
 		fd = open(path, flags | right);
 	}
 	else
-		fd = open(path, O_CREAT | flags | right, S_IRUSR | S_IWUSR | S_IRGRP | S_IWGRP | S_IROTH | S_IWOTH);
+		fd = open(path, O_CREAT | right | right, S_IRUSR | S_IWUSR | S_IRGRP | S_IWGRP | S_IROTH | S_IWOTH);
 	if (fd < 0)
 		return (-1);
 	return (fd);
