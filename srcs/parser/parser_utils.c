@@ -6,7 +6,7 @@
 /*   By: asaboure <asaboure@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/18 16:58:12 by asaboure          #+#    #+#             */
-/*   Updated: 2022/02/04 19:37:20 by asaboure         ###   ########.fr       */
+/*   Updated: 2022/02/10 15:23:01 by asaboure         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ char	*parse_redir_out(t_token *token, unsigned int *flag)
 	t_token	*saved;
 
 	saved = token;
-	while (token)
+	while (token && token->type != CHAR_PIPE)
 	{
 		if (token->type == CHAR_GREATER && !(saved && ft_strncmp(saved->data,
 					"2", 2) == 0))
@@ -52,7 +52,7 @@ char	*parse_redir_out(t_token *token, unsigned int *flag)
 
 char	*parse_redir_in(t_token *token, unsigned int *flag)
 {
-	while (token)
+	while (token && token->type != CHAR_PIPE)
 	{
 		if (token->type == CHAR_LESSER)
 		{
@@ -71,7 +71,7 @@ char	*parse_redir_in(t_token *token, unsigned int *flag)
 
 char	*parse_redir_err(t_token *token, unsigned int *flag)
 {
-	while (token)
+	while (token && token->type != CHAR_PIPE)
 	{
 		if (ft_strncmp(token->data, "2", 2) == 0)
 		{

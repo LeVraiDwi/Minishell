@@ -6,7 +6,7 @@
 /*   By: asaboure <asaboure@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/13 14:20:53 by asaboure          #+#    #+#             */
-/*   Updated: 2022/02/07 15:39:00 by asaboure         ###   ########.fr       */
+/*   Updated: 2022/02/10 15:19:17 by asaboure         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,10 +74,8 @@ char	**ft_realloc_args(char **args, int i)
 char	**read_args(char *last)
 {
 	char	**args;
-	char	**tmp;
 	char	*line;
 	int		i;
-	int		size;
 
 	i = 0;
 	args = malloc(sizeof(char *));
