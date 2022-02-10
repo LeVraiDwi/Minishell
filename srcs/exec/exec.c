@@ -36,7 +36,7 @@ int	ft_child(t_term *term, t_parsing *cmd, int last_child)
 	int	status;
 
 	redir_flux(cmd, last_child);
-	status = ft_exec_builtin(term, cmd);
+	status = ft_exec_builtin(term, cmd, 0);
 	if (status <= 0)
 	{
 		ft_close(cmd->in, cmd->out);
@@ -57,12 +57,14 @@ int	ft_child(t_term *term, t_parsing *cmd, int last_child)
 	exit(EXIT_FAILURE);
 }
 
-int	ft_exec_builtin(t_term *term, t_parsing *parsing)
+int	ft_exec_builtin(t_term *term, t_parsing *parsing, int exec)
 {
 	int	i;
 
 	i = ft_is_builtin(parsing->argv[0]);
-	if (i > 0)
+	if (i >= 0 && i < 3 && exec)
+		return (term->built[i](term, parsing->argv));
+	if (i >= 3 && i <= 5 && !exec)
 		return (term->built[i](term, parsing->argv));
 	return (1);
 }
@@ -78,9 +80,9 @@ int	exec(t_term *term, t_parsing *cmd)
 	nb_child = 0;
 	while (cmd) 
 	{
-		if (!ft_setflux(cmd))
+		if (cmd->path && !ft_setflux(cmd))
 		{
-			if (cmd->path)
+			if (ft_exec_builtin(term, cmd, 1) == 1)
 			{
 				child = fork();
 				if (child < 0)

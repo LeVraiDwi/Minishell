@@ -14,9 +14,9 @@
 # define BUILT_H
 # define FLAG_N 1
 # define CD 0
-# define PWD 1
-# define EXPORT 2
-# define UNSET 3
+# define EXPORT 1
+# define UNSET 2
+# define PWD 3
 # define ENV 4
 # define ECHO 5
 
