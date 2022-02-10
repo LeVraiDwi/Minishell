@@ -23,34 +23,36 @@ int	ft_error_pipe(t_parsing *cmd)
 	exit(EXIT_FAILURE);
 }
 
-void	ft_close(int *pipefd)
+void	ft_close(int fd1, int fd2)
 {
-	close(pipefd[0]);
-	close(pipefd[1]);
+	if (fd1 > 1)
+		close(fd1);
+	if (fd2 > 1)
+		close(fd2);
 }
 
-int	ft_child(t_term *term, t_parsing *cmd, int pipefd[2], int last_child)
+int	ft_child(t_term *term, t_parsing *cmd, int last_child)
 {
 	int	status;
 
-	printf("%d\n", last_child);
 	redir_flux(cmd, last_child);
 	status = ft_exec_builtin(term, cmd);
 	if (status <= 0)
+	{
+		ft_close(cmd->in, cmd->out);
+		ft_free_term(term);
 		ft_free_pars(cmd);
+	}
 	if (status < 0)
 		exit(EXIT_FAILURE);
 	else if (!status)
 	{
-		//free_term(term);
-		ft_free_pars(cmd);
 		exit(EXIT_SUCCESS);
 	}
-	ft_close(pipefd);
-	printf("child: %d\n", last_child);
+	ft_close(cmd->in, cmd->out);
 	execve(cmd->path, cmd->argv, term->env);
 	perror("ERROR:\n");
-	//free_term(term);
+	ft_free_term(term);
 	ft_free_pars(cmd);
 	exit(EXIT_FAILURE);
 }
@@ -71,15 +73,12 @@ int	exec(t_term *term, t_parsing *cmd)
 	int				status;
 	int				last_child;
 	int				nb_child;
-	int				pipefd[2];
 
 	last_child = 0;
 	nb_child = 0;
-	if (pipe(pipefd) < 0)
-		return (-1);
-	while (cmd)
+	while (cmd) 
 	{
-		if (!ft_setflux(cmd, pipefd))
+		if (!ft_setflux(cmd))
 		{
 			if (cmd->path)
 			{
@@ -87,11 +86,11 @@ int	exec(t_term *term, t_parsing *cmd)
 				if (child < 0)
 					return (0);
 				else if (child == 0)
-					ft_child(term, cmd, pipefd, last_child);
-				printf("fin_child: %d\n", child);
-				last_child = child;
+					ft_child(term, cmd, last_child);
+				ft_close(cmd->in, cmd->out);
 				status = 0;
-				waitpid(-1, &status, 0);
+				waitpid(0, &status, 0);
+				last_child = child;
 				nb_child++;
 			}
 		}
@@ -99,12 +98,9 @@ int	exec(t_term *term, t_parsing *cmd)
 			perror(cmd->argv[0]);
 		cmd = cmd->next;
 	}
-	close (pipefd[0]);
-	close (pipefd[1]);
 	while (nb_child--)
 	{
 	
 	}	
-	printf("fin\n");
 	return (0);
 }

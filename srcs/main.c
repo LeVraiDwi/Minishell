@@ -75,9 +75,9 @@ int	main(int argc, char **argv, char **env)
 		printf("======================fin exec==================\n");
 		if (strisstr("EXIT", tmp->argv[0]))
 			term.exit = 1;
-//		ft_free_pars(tmp);
+		ft_free_pars(tmp);
 		free(str);
 	}
-	ft_free_term(&term);
+//	ft_free_term(&term);
 	return (0);
 }

@@ -26,7 +26,7 @@ typedef struct s_parsing
 
 void		ft_init_struct(t_parsing *pars);
 t_parsing	*ft_creat_pars(void);
-void		ft_free_argv(char ***argv);
+void		ft_free_argv(char **argv);
 int		ft_free_pars(t_parsing *pars);
 int		ft_free_term(t_term *term);
 #endif
