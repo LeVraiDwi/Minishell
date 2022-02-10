@@ -6,7 +6,7 @@
 /*   By: asaboure <asaboure@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/13 14:20:53 by asaboure          #+#    #+#             */
-/*   Updated: 2022/02/10 15:19:17 by asaboure         ###   ########.fr       */
+/*   Updated: 2022/02/10 16:34:11 by asaboure         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,10 +130,11 @@ int	parse(t_lexer *lexerbuf, t_parsing	*parsebuf)
 	{
 		parsebuf->argv = parse_args(lexerbuf->tokenlist, lexerbuf, parsebuf);
 		if (!parsebuf->argv)
+		{
+			parsebuf->next = NULL;
 			return (-1);
+		}
 		parsebuf->path = check_cmd(parsebuf->argv[0], lexerbuf->path);
-		if (!parsebuf->path)
-			return (-1);
 	}
 	else
 		parsebuf->argv = malloc(sizeof(char *));
