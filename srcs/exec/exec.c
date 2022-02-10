@@ -74,7 +74,6 @@ int	exec(t_term *term, t_parsing *cmd)
 	int				child;
 	int				status;
 	int				last_child;
-	int				nb_child;
 
 	last_child = 0;
 	nb_child = 0;
@@ -93,16 +92,11 @@ int	exec(t_term *term, t_parsing *cmd)
 				status = 0;
 				waitpid(0, &status, 0);
 				last_child = child;
-				nb_child++;
 			}
 		}
 		else
 			perror(cmd->argv[0]);
 		cmd = cmd->next;
 	}
-	while (nb_child--)
-	{
-	
-	}	
 	return (0);
 }
