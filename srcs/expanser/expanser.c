@@ -34,6 +34,7 @@ int	ft_setstd(t_parsing *parsing)
 		tmp->in = STDIN;
 		tmp->out = STDOUT;
 		tmp->err = STDERR;
+		tmp->cmd = 0;
 		tmp = tmp->next;
 	}
 	return (0);
@@ -47,6 +48,15 @@ int	expanser(t_term  *term, t_parsing *parsing)
 	i = 0;
 	tmp = parsing;
 	ft_setstd(parsing);
+	if (ft_creat_cmd(parsing))
+		return (-1);
+	if (split_quote(parsing))
+		return (-1);
+	while (parsing->cmd)
+	{
+		printf("slpit_quote:%s, flag:%d\n", parsing->cmd->arg, parsing->cmd->flag);
+		parsing->cmd = parsing->cmd->next;
+	}
 	while (tmp)
 	{
 		if(replace_var(term, tmp->argv) < 0)

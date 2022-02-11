@@ -16,4 +16,9 @@ int		ft_openfile(char *path, int flags, int right);
 int		ft_in_out(t_parsing *parsing);
 int		ft_setfilename(t_parsing *parsing);
 int		ft_setstd(t_parsing *parsing);
+char		ft_is_quote(char c);
+int		ft_quote_len(char *str);
+int		ft_type_quote(char c);
+int		ft_split_quote(t_cmd *cmd, int len_q, char type, int start);
+int		split_quote(t_parsing *parsing);
 #endif

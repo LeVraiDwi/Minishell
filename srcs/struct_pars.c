@@ -18,6 +18,7 @@ void	ft_init_struct(t_parsing *pars)
 	pars->argv = 0;
 	pars->flag = 0;
 	pars->next = 0;
+	pars->cmd = 0;
 	pars->in = STDIN;
 	pars->out = STDOUT;
 	pars->str_in = 0;

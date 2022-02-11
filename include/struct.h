@@ -1,7 +1,17 @@
 #ifndef STRUCT_H
 # define STRUCT_H
+# define JOIN 1
+# define SIMPLE 2
+# define DOUBLE 4
 
 typedef struct s_term t_term;
+
+typedef struct s_cmd
+{
+	char	*arg;
+	int	flag;
+	void	*next;
+}		t_cmd;
 
 typedef struct s_term
 {
@@ -14,6 +24,7 @@ typedef struct s_parsing
 {
 	char				*path;
 	char				**argv;
+	t_cmd				*cmd;
 	unsigned int		flag;
 	int					in;
 	int					out;
@@ -29,4 +40,9 @@ t_parsing	*ft_creat_pars(void);
 void		ft_free_argv(char **argv);
 int		ft_free_pars(t_parsing *pars);
 int		ft_free_term(t_term *term);
+t_cmd		*ft_init_cmd(void);
+int		ft_free_cmd(t_cmd *cmd);
+int		ft_add_end_cmd(t_cmd **first, t_cmd *new);
+void		ft_add_next_cmd(t_cmd *cmd, t_cmd *new);
+int		ft_creat_cmd(t_parsing *parsing);
 #endif

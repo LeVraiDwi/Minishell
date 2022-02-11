@@ -76,7 +76,6 @@ int	exec(t_term *term, t_parsing *cmd)
 	int				last_child;
 
 	last_child = 0;
-	nb_child = 0;
 	while (cmd) 
 	{
 		if (cmd->path && !ft_setflux(cmd))
