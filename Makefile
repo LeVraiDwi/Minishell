@@ -6,7 +6,7 @@ LIBFT = ./libft/libft.a
 SRC_PATH =      ./srcs
 
 SRC_NAME =      main.c strisstr.c init.c\
-                term.c struct_pars.c\
+                term.c struct_pars.c struct_cmd.c\
 
 BUILT_PATH =    ./srcs/builtin
 
@@ -29,7 +29,7 @@ PARSER_NAME = parser.c parser_utils.c
 EXPANSER_PATH = ./srcs/expanser
 
 EXPANSER_NAME = expanser.c expanser_utils.c expanser_file.c\
-		in_out.c
+		in_out.c quote.c arg.c\
 
 EXEC_PATH = ./srcs/exec
 

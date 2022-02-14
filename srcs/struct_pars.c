@@ -76,6 +76,8 @@ int	ft_free_pars(t_parsing *pars)
 		ft_free((void **)&pars->str_in);
 	if (pars->str_out)
 		ft_free((void **)&pars->str_out);
+	if (pars->cmd)
+		ft_free_cmd(pars->cmd);
 	ft_free((void **)&pars);
 	return (0);
 }

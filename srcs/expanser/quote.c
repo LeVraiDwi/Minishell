@@ -84,7 +84,6 @@ int	split_quote(t_parsing *parsing)
 	t_cmd	*cmd;
 
 	cmd = parsing->cmd;
-	printf("split\n");
 	l = 0;
 	while (cmd)
 	{
@@ -96,7 +95,6 @@ int	split_quote(t_parsing *parsing)
 				l = ft_quote_len(cmd->arg + i);
 				if(ft_split_quote(cmd, l, ft_is_quote(cmd->arg[i]), i))
 					return (ft_free_cmd(cmd));
-				printf("cmd:%s\n", cmd->arg);
 				l = -2;
 			}
 			i++;
