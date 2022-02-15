@@ -15,15 +15,17 @@ t_cmd	*ft_init_cmd(void)
 
 int	ft_free_cmd(t_cmd *cmd)
 {
-	if (cmd->next)
-		ft_free_cmd(cmd->next);
-	if (cmd->arg)
-	{
-		free(cmd->arg);
-		cmd->arg = 0;
-	}
 	if (cmd)
+	{
+		if (cmd->next)
+			ft_free_cmd(cmd->next);
+		if (cmd->arg)
+		{
+			free(cmd->arg);
+			cmd->arg = 0;
+		}
 		free(cmd);
+	}
 	cmd = 0;
 	return (-1);
 }

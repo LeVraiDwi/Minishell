@@ -53,9 +53,11 @@ int	main(int argc, char **argv, char **env)
 		tmp = parsebuf;
 		while (parsebuf)
 		{
+			printf("debut while main\n");
 			i = 0;
 			while (parsebuf->argv && parsebuf->argv[i])
 			{
+				printf("debut while main\n");
 				printf("cmd:%s\n", parsebuf->argv[i]);
 				i++;
 			}
@@ -78,6 +80,6 @@ int	main(int argc, char **argv, char **env)
 		ft_free_pars(tmp);
 		free(str);
 	}
-//	ft_free_term(&term);
+	ft_free_term(&term);
 	return (0);
 }

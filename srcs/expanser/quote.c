@@ -77,13 +77,13 @@ int	ft_split_quote(t_cmd *cmd, int len_q, char type, int start)
 	return (0);
 }
 
-int	split_quote(t_parsing *parsing)
+int	split_quote(t_cmd *quote)
 {
 	int	i;
 	int	l;
 	t_cmd	*cmd;
 
-	cmd = parsing->cmd;
+	cmd = quote;
 	l = 0;
 	while (cmd)
 	{

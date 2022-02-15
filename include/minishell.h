@@ -48,4 +48,5 @@ int		strisstr(char *str, char *s);
 int		ft_free(void **p);
 int		init_term(t_term *term, char **env);
 void	init_built(t_term *term);
+void	ft_set_null(char **str, int l);
 #endif

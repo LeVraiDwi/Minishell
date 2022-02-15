@@ -30,8 +30,11 @@ typedef struct s_parsing
 	int					out;
 	int					err;
 	char				*str_in;
+	t_cmd				*quote_in;
 	char				*str_out;
+	t_cmd				*quote_out;
 	char				*str_err;
+	t_cmd				*quote_err;
 	void				*next;
 }		t_parsing;
 
@@ -45,4 +48,5 @@ int		ft_free_cmd(t_cmd *cmd);
 int		ft_add_end_cmd(t_cmd **first, t_cmd *new);
 void		ft_add_next_cmd(t_cmd *cmd, t_cmd *new);
 int		ft_creat_cmd(t_parsing *parsing);
+int		ft_make_cmd(char *str, t_cmd **cmd);
 #endif

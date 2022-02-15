@@ -14,7 +14,7 @@ int     ft_creat_argv(t_parsing *parsing)
 	new = (char **)malloc(sizeof(char *) * (l + 1));
 	if (!new)
 		return (-1);
-	ft_bzero((void *)new, l);
+	ft_set_null(new, l + 1);
 	l = 0;
         while (tmp)
         {
@@ -32,6 +32,8 @@ int     ft_creat_argv(t_parsing *parsing)
 			{
 				c_tmp = new[l];
 				new[l] = ft_strjoin(c_tmp, tmp->arg);
+				if (c_tmp)
+					free(c_tmp);
 				if (!new[l])
 					return (-1);
 			}
@@ -59,4 +61,48 @@ int	count_argv(t_parsing *parsing)
 		tmp = tmp->next;
 	}
 	return (l);
+}
+
+int	ft_creat_std(char **std, t_cmd *cmd)
+{
+	t_cmd	*tmp;
+	char	*c_tmp;
+
+	tmp = cmd;
+	if (std && cmd)
+	{
+		*std = ft_strdup(cmd->arg);
+		if (!*std && cmd->arg)
+			return (-1);
+	}
+	else
+		return (0);
+	tmp = tmp->next;
+	while (tmp)
+	{
+		if (tmp->arg)
+		{
+			c_tmp = ft_strjoin(*std, tmp->arg);
+			if (!c_tmp)
+				return (-1);
+			if (*std)
+				free(*std);
+			*std = c_tmp;
+		}
+		tmp = tmp->next;
+	}
+	return (0);
+}
+
+int	ft_creat_all_arg(t_parsing *parsing)
+{
+	if (ft_creat_argv(parsing) < 0)
+		return (-1);
+	if (ft_creat_std(&parsing->str_in, parsing->quote_in) < 0)
+		return (-1);
+	if (ft_creat_std(&parsing->str_out, parsing->quote_out) < 0)
+		return (-1);
+	if (ft_creat_std(&parsing->str_err, parsing->quote_err) < 0)
+		return (-1);
+	return (0);
 }

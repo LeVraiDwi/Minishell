@@ -89,13 +89,13 @@ char	*ft_insertvar(char *s, char *str, int var_start, int var_l)
 	return (new);
 }
 
-int	ft_replace_cmd(t_term *term, t_parsing *parsing)
+int	ft_replace_cmd(t_term *term, t_cmd *cmd)
 {
 	t_cmd	*tmp;
 
-	if (!parsing)
+	if (!cmd)
 		return (0);
-	tmp = parsing->cmd;
+	tmp = cmd;
 	while (tmp)
 	{
 		if (tmp->arg && !(tmp->flag & SIMPLE))

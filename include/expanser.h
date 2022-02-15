@@ -20,8 +20,11 @@ char		ft_is_quote(char c);
 int		ft_quote_len(char *str);
 int		ft_type_quote(char c);
 int		ft_split_quote(t_cmd *cmd, int len_q, char type, int start);
-int		split_quote(t_parsing *parsing);
-int		ft_replace_cmd(t_term *term, t_parsing *parsing);
+int		split_quote(t_cmd *quote);
+int		ft_replace_cmd(t_term *term, t_cmd *cmd);
 int		ft_creat_argv(t_parsing *parsing);
 int		count_argv(t_parsing *parsing);
+int		ft_creat_all_arg(t_parsing *parsing);
+int		ft_creat_std(char **std, t_cmd *cmd);
+int		make_quote(t_parsing *parsing);
 #endif
