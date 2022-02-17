@@ -31,7 +31,7 @@ EXPANSER_PATH = ./srcs/expanser
 
 EXPANSER_NAME = expanser.c expanser_utils.c expanser_file.c\
 		in_out.c quote.c arg.c\
-		quote_util.c\
+		quote_util.c arg_util.c\
 
 EXEC_PATH = ./srcs/exec
 

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   expanser_utils.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tcosse <tcosse@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/02/17 17:06:04 by tcosse            #+#    #+#             */
+/*   Updated: 2022/02/17 17:17:27 by tcosse           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
 int	ft_var_len(char *var)
@@ -15,59 +27,40 @@ int	ft_is_special_char(char *cmd, int l)
 	int	i;
 
 	i = 0;
-	if (cmd[l] == '$' && (cmd[l + 1] && (ft_isalnum(cmd[l + 1]) || cmd[l + 1] == '_')))
+	if (cmd[l] == '$' && (cmd[l + 1]
+			&& (ft_isalnum(cmd[l + 1]) || cmd[l + 1] == '_')))
 	{
 		i++;
 		while (ft_isalnum(cmd[l + i]) || cmd[l + i] == '_')
 			i++;
 		return (i);
 	}
-	else if (cmd[l] == '~' && (cmd[l + 1] == 0 ||  cmd[l + 1] == ' ' || ft_is_special_char(cmd, l + 1) || cmd[l + 1] == '/') && (l == 0 || (l > 0 && cmd[l - 1] == ' ')))
+	else if (cmd[l] == '~' && (cmd[l + 1] == 0 || cmd[l + 1] == ' '
+			|| ft_is_special_char(cmd, l + 1) || cmd[l + 1] == '/')
+		&& (l == 0 || (l > 0 && cmd[l - 1] == ' ')))
 		return (1);
 	return (0);
 }
 
 int	insert_var(char **env, char **cmd)
 {
-	char	*var;
-	char	*tmp;
-	int	l;
-	int	i;
+	int		l;
+	int		i;
 
 	i = 0;
 	if (!cmd || !*cmd)
 		return (0);
 	l = ft_is_special_char(*cmd, i);
 	if (l)
-	{
-		if ((*cmd)[i] == '$')
-		{
-			tmp = ft_substr(*cmd, i + 1, l - 1);
-			if (!tmp)
-				return (-1);
-		}
-		else
-			tmp = ft_strdup(HOME);
-		var = get_env_var(env, tmp);
-		if (tmp)
-			free(tmp);
-		tmp = ft_insertvar(*cmd, var, i, l);
-		if (var)
-			free(var);
-		if (!tmp)
+		if (ft_insert_var(cmd, l, i, env) < 0)
 			return (-1);
-		i += ft_strlen(var);
-		free(*cmd);
-		*cmd = tmp;
-		i++;
-	}
 	return (0);
 }
 
 char	*ft_insertvar(char *s, char *str, int var_start, int var_l)
 {
 	int		l;
-	char		*new;
+	char	*new;
 
 	if (!s)
 		return (0);

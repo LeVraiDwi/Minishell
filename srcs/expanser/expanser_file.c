@@ -1,9 +1,21 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   expanser_file.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tcosse <tcosse@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/02/17 17:04:49 by tcosse            #+#    #+#             */
+/*   Updated: 2022/02/17 17:05:37 by tcosse           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
 int	ft_isfile(char *path)
 {
 	DIR	*dp;
-	
+
 	dp = opendir(path);
 	if (dp)
 	{
@@ -31,7 +43,7 @@ int	ft_checkright(char *path, int right)
 
 int	ft_openfile(char *path, int flags, int right)
 {
-	int fd;
+	int	fd;
 
 	if (!path)
 		return (0);
@@ -44,7 +56,8 @@ int	ft_openfile(char *path, int flags, int right)
 		fd = open(path, flags | right);
 	}
 	else
-		fd = open(path, O_CREAT | right | right, S_IRUSR | S_IWUSR | S_IRGRP | S_IWGRP | S_IROTH | S_IWOTH);
+		fd = open(path, O_CREAT | right | right,
+				S_IRUSR | S_IWUSR | S_IRGRP | S_IWGRP | S_IROTH | S_IWOTH);
 	if (fd < 0)
 		return (-1);
 	return (fd);

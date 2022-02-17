@@ -6,7 +6,7 @@
 /*   By: tcosse <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/24 13:29:32 by tcosse            #+#    #+#             */
-/*   Updated: 2022/01/24 13:32:17 by tcosse           ###   ########.fr       */
+/*   Updated: 2022/02/17 14:14:50 by tcosse           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,5 +28,5 @@ int	ft_is_builtin(char *cmd)
 		return (ECHO);
 	if (strisstr("EXIT", cmd))
 		return (-1);
-	return (1);
+	return (-1);
 }

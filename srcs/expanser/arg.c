@@ -1,45 +1,64 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   arg.c                                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tcosse <tcosse@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/02/17 16:30:26 by tcosse            #+#    #+#             */
+/*   Updated: 2022/02/17 17:03:32 by tcosse           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
-int     ft_creat_argv(t_parsing *parsing)
+int	ft_join_arg(t_cmd *tmp, char **new, int *l)
 {
-        t_cmd   *tmp;
+	char	*c_tmp;
+
+	if (!(tmp->flag & JOIN))
+	{
+		if (new[*l])
+			*l += 1;
+		new[*l] = ft_strdup(tmp->arg);
+		if (!new[*l])
+			return (-1);
+	}
+	else
+	{
+		c_tmp = new[*l];
+		new[*l] = ft_strjoin(c_tmp, tmp->arg);
+		if (c_tmp)
+			free(c_tmp);
+		if (!new[*l])
+			return (-1);
+	}
+	return (1);
+}
+
+int	ft_creat_argv(t_parsing *parsing)
+{
+	t_cmd	*tmp;
 	char	**new;
 	char	*c_tmp;
-	int	l;
+	int		l;
 
-        if (!parsing && parsing->argv)
-                return (0);
-        tmp = parsing->cmd;
+	if (!parsing && parsing->argv)
+		return (0);
+	tmp = parsing->cmd;
 	l = count_argv(parsing);
 	new = (char **)malloc(sizeof(char *) * (l + 1));
 	if (!new)
 		return (-1);
 	ft_set_null(new, l + 1);
 	l = 0;
-        while (tmp)
-        {
-                if (tmp->arg)
-		{
-			if (!(tmp->flag & JOIN))
-			{
-				if (new[l])
-					l++;
-				new[l] = ft_strdup(tmp->arg);
-				if (!new[l])
-					return (-1);
-			}
-			else
-			{
-				c_tmp = new[l];
-				new[l] = ft_strjoin(c_tmp, tmp->arg);
-				if (c_tmp)
-					free(c_tmp);
-				if (!new[l])
-					return (-1);
-			}
-		}
+	while (tmp)
+	{
+		if (tmp->arg)
+			if (ft_join_arg(tmp, new, &l) < 0)
+				return (-1);
 		tmp = tmp->next;
-        }
+	}
 	ft_free_argv(parsing->argv);
 	parsing->argv = new;
 	return (1);
@@ -47,8 +66,8 @@ int     ft_creat_argv(t_parsing *parsing)
 
 int	count_argv(t_parsing *parsing)
 {
+	int		l;
 	t_cmd	*tmp;
-	int	l;
 
 	if (!parsing)
 		return (0);
@@ -81,14 +100,8 @@ int	ft_creat_std(char **std, t_cmd *cmd)
 	while (tmp)
 	{
 		if (tmp->arg)
-		{
-			c_tmp = ft_strjoin(*std, tmp->arg);
-			if (!c_tmp)
+			if (ft_join(std, tmp) < 0)
 				return (-1);
-			if (*std)
-				free(*std);
-			*std = c_tmp;
-		}
 		tmp = tmp->next;
 	}
 	return (0);

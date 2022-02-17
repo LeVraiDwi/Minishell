@@ -6,7 +6,7 @@
 /*   By: tcosse <tcosse@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/24 13:21:12 by tcosse            #+#    #+#             */
-/*   Updated: 2022/01/24 14:51:02 by tcosse           ###   ########.fr       */
+/*   Updated: 2022/02/17 14:18:42 by tcosse           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,8 @@ int	ft_export(t_term *term, char **cmd)
 		if (ft_is_var(cmd[l]))
 		{
 			ret = 0;
-			add_env(term, cmd[l]);
+			if (add_env(term, cmd[l]) < 0)
+				return (-1);
 		}
 		else if (!flag)
 		{

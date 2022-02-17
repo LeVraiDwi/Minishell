@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   expanser.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tcosse <tcosse@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/02/17 16:28:34 by tcosse            #+#    #+#             */
+/*   Updated: 2022/02/17 17:04:38 by tcosse           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
 int	replace_var(t_term *term, t_parsing *parsing)
@@ -28,7 +40,7 @@ int	ft_stdopen(char *path, int *fd, int flags, int right)
 
 int	ft_setstd(t_parsing *parsing)
 {
-	t_parsing *tmp;
+	t_parsing	*tmp;
 
 	tmp = parsing;
 	while (tmp)
@@ -45,9 +57,9 @@ int	ft_setstd(t_parsing *parsing)
 	return (0);
 }
 
-int	expanser(t_term  *term, t_parsing *parsing)
+int	expanser(t_term *term, t_parsing *parsing)
 {
-	int	i;
+	int			i;
 	t_parsing	*tmp;
 
 	i = 0;
@@ -62,7 +74,7 @@ int	expanser(t_term  *term, t_parsing *parsing)
 		if (ft_creat_all_arg(tmp) < 0)
 			return (-1);
 		if (tmp->next)
-			if(ft_setfilename(tmp) < 0)
+			if (ft_setfilename(tmp) < 0)
 				return (-1);
 		ft_free_cmd(tmp->cmd);
 		ft_free_cmd(tmp->quote_in);
