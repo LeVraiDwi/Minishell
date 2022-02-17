@@ -17,7 +17,10 @@ typedef struct s_term
 {
 	int		exit;
 	int		(*built[6])(t_term *term, char **cmd);
-	char	**env;
+	char		**env;
+	int		last_ret;
+	char		**err;
+
 }				t_term;
 
 typedef struct s_parsing

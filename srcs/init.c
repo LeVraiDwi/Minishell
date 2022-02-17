@@ -27,6 +27,8 @@ int	init_term(t_term *term, char **env)
 	if (!ft_init_env(term, env))
 		return (-1);
 	term->exit = 0;
+	term->err = 0;
+	term->last_ret = 0;
 	init_built(term);
 	rl_clear_history();
 	return (0);

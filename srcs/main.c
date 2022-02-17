@@ -32,20 +32,26 @@ int	main(int argc, char **argv, char **env)
 		printf("======================debut parsing==================\n");
 		parsebuf = parse_init(str, env);
 		printf("okay:%p, %p, next:%p\n", parsebuf, parsebuf->argv, parsebuf->next);
-		i = 0;
-		while (parsebuf->argv && parsebuf->argv[i])
+		tmp = parsebuf;
+		while (parsebuf)
 		{
-			printf("cmd:%s\n", parsebuf->argv[i]);
-			i++;
+			i = 0;
+			while (parsebuf->argv && parsebuf->argv[i])
+			{
+				printf("cmd:%s\n", parsebuf->argv[i]);
+				i++;
+			}
+			printf("%s\n", parsebuf->str_in);
+			printf("%s\n", parsebuf->str_out);
+			printf("%s\n", parsebuf->str_err);
+			printf("%s\n", parsebuf->path);
+			printf("%d\n", parsebuf->flag);
+			printf("in: %d\n", parsebuf->in);
+			printf("out: %d\n", parsebuf->out);
+			printf("err: %d\n", parsebuf->err);
+			parsebuf = parsebuf->next;
 		}
-		printf("%s\n", parsebuf->str_in);
-		printf("%s\n", parsebuf->str_out);
-		printf("%s\n", parsebuf->str_err);
-		printf("%s\n", parsebuf->path);
-		printf("%d\n", parsebuf->flag);
-		printf("in: %d\n", parsebuf->in);
-		printf("out: %d\n", parsebuf->out);
-		printf("err: %d\n", parsebuf->err);
+		parsebuf = tmp;
 		printf("======================fin parsing==================\n");
 		printf("======================debut expanser==================\n");
 		printf("okay:%p, %p, next:%p\n", parsebuf, parsebuf->argv, parsebuf->next);
@@ -53,11 +59,10 @@ int	main(int argc, char **argv, char **env)
 		tmp = parsebuf;
 		while (parsebuf)
 		{
-			printf("debut while main\n");
+			printf("parsebuf next: %p, %p\n", parsebuf->argv, parsebuf->argv[0]);
 			i = 0;
 			while (parsebuf->argv && parsebuf->argv[i])
 			{
-				printf("debut while main\n");
 				printf("cmd:%s\n", parsebuf->argv[i]);
 				i++;
 			}

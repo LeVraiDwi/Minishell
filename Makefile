@@ -7,6 +7,7 @@ SRC_PATH =      ./srcs
 
 SRC_NAME =      main.c strisstr.c init.c\
                 term.c struct_pars.c struct_cmd.c\
+		string_utils.c struct_cmd2.c\
 
 BUILT_PATH =    ./srcs/builtin
 
@@ -30,6 +31,7 @@ EXPANSER_PATH = ./srcs/expanser
 
 EXPANSER_NAME = expanser.c expanser_utils.c expanser_file.c\
 		in_out.c quote.c arg.c\
+		quote_util.c\
 
 EXEC_PATH = ./srcs/exec
 
