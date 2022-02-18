@@ -17,5 +17,7 @@ to do list:
 	signal:
 		faire les signal dans >>
 		faire les signal dans le term
-	expanser
+	expanser:
 		tester ~/
+	pipe:
+		retester les pipe en bash cluster cat Makefile > test | cat
