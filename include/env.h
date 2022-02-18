@@ -24,7 +24,7 @@ int		ft_free_env(char **env);
 int		replace_env(t_term *term, char *var, int i);
 int		ft_dealloc_env(t_term *term, int i);
 int		remove_env(t_term *term, char *var);
-void		print_env(t_term term);
+void		print_env(t_term term, int std);
 int		ft_update_pwd(t_term *term);
 char		*get_env_var(char **env, char *var);
 #endif

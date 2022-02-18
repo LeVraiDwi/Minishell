@@ -43,12 +43,14 @@ int	return_new_line(void)
 	return (0);
 }
 
-int	ft_echo(t_term *term, char **cmd)
+int	ft_echo(t_term *term, t_parsing *parsing)
 {
 	int	flag;
 	int	i;
 	int	l;
+	char	**cmd;
 
+	cmd = parsing->argv;
 	(void)term;
 	l = ft_cmd_length(cmd);
 	flag = 0;
@@ -62,11 +64,14 @@ int	ft_echo(t_term *term, char **cmd)
 		i = 1;
 	while (i < l)
 	{
-		write(1, cmd[i], ft_strlen(cmd[i]));
+		write(parsing->out, cmd[i], ft_strlen(cmd[i]));
 		i++;
 		if (i < l)
-			write(1, " ", 1);
+			write(parsing->out, " ", 1);
 	}
 	ft_echo_new_line(flag);
+	if (parsing->out > 1)
+		close(parsing->out);
+	parsing->out = 0;
 	return (0);
 }

@@ -79,14 +79,15 @@ int	remove_env(t_term *term, char *var)
 	return (0);
 }
 
-void	print_env(t_term term)
+void	print_env(t_term term, int std)
 {
 	int	i;
 
 	i = 0;
 	while (term.env[i])
 	{
-		printf("%s\n", term.env[i]);
+		write(std, term.env[i], ft_strlen(term.env[i]));
+		write(std, "\n", 1);
 		i++;
 	}
 }

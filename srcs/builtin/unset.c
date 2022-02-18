@@ -26,15 +26,17 @@ int	ft_is_valid_name(char *cmd)
 	return (1);
 }
 
-int	ft_unset(t_term *term, char **cmd)
+int	ft_unset(t_term *term, t_parsing *parsing)
 {
 	int	l;
 	int	flag;
 	int	ret;
+	char	**cmd;
 
 	l = 0;
 	flag = 0;
 	ret = 0;
+	cmd = parsing->argv;
 	while (cmd[l])
 	{
 		if (ft_is_valid_name(cmd[l]))
@@ -52,5 +54,8 @@ int	ft_unset(t_term *term, char **cmd)
 			ret = 1;
 		l++;
 	}
+	if (parsing->out > 1)
+		close(parsing->out);
+	parsing->out = 0;
 	return (ret);
 }

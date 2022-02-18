@@ -12,14 +12,19 @@
 
 #include "minishell.h"
 
-int	ft_pwd(t_term *term, char **cmd)
+int	ft_pwd(t_term *term, t_parsing *parsing)
 {
+	char	**cmd;
 	char	buf[200];
 
+	cmd = parsing->argv;
 	(void)term;
 	if (!strisstr(cmd[0], "pwd"))
 		return (1);
 	getcwd(buf, 200);
-	printf("%s\n", buf);
+	write(parsing->out, buf, ft_strlen(buf));
+	if (parsing->out > 1)
+		close(parsing->out);
+	parsing->out = 0;
 	return (0);
 }

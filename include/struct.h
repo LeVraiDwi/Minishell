@@ -13,16 +13,6 @@ typedef struct s_cmd
 	void	*next;
 }		t_cmd;
 
-typedef struct s_term
-{
-	int		exit;
-	int		(*built[6])(t_term *term, char **cmd);
-	char		**env;
-	int		last_ret;
-	char		**err;
-
-}				t_term;
-
 typedef struct s_parsing
 {
 	char				*path;
@@ -40,6 +30,15 @@ typedef struct s_parsing
 	t_cmd				*quote_err;
 	void				*next;
 }		t_parsing;
+
+typedef struct s_term
+{
+	int		exit;
+	int		(*built[6])(t_term *term, t_parsing *parsing);
+	char		**env;
+	int		last_ret;
+	char		**err;
+}				t_term;
 
 void		ft_init_struct(t_parsing *pars);
 t_parsing	*ft_creat_pars(void);

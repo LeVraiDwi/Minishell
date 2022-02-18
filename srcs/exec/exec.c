@@ -62,12 +62,10 @@ int	ft_exec_builtin(t_term *term, t_parsing *parsing, int exec)
 	int	i;
 
 	i = ft_is_builtin(parsing->argv[0]);
-	if (parsing->str_in)
-
 	if (i >= 0 && i < 3 && exec)
-		return (term->built[i](term, parsing->argv));
+		return (term->built[i](term, parsing));
 	if (i >= 3 && i <= 5 && !exec)
-		return (term->built[i](term, parsing->argv));
+		return (term->built[i](term, parsing));
 	return (1);
 }
 

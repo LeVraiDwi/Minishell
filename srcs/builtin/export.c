@@ -28,34 +28,36 @@ int	ft_is_var(char *var)
 	return (0);
 }
 
-int	ft_export(t_term *term, char **cmd)
+int	ft_export(t_term *term, t_parsing *parsing)
 {
 	int	l;
-	int	flag;
 	int	ret;
+	char	**cmd;
 
 	l = 1;
-	flag = 0;
 	ret = 0;
+	cmd = parsing->argv;
 	if (!cmd[1])
-		ft_env(term, cmd);
+	{
+		ft_env(term, parsing);
+		return (0);
+	}
 	while (cmd[l])
 	{
 		if (ft_is_var(cmd[l]))
 		{
-			ret = 0;
 			if (add_env(term, cmd[l]) < 0)
 				return (-1);
 		}
-		else if (!flag)
-		{
-			ret = 1;
-			printf("export: %s: invalide parameter name\n", cmd[l]);
-			flag = 1;
-		}
 		else
-			ret = 1;
+		{
+			ret = -1;
+			errno = 22;
+		}
 		l++;
 	}
-	return (0);
+	if (parsing->out > 1)
+		close(parsing->out);
+	parsing->out = 0;
+	return (ret);
 }
