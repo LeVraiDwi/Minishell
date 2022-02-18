@@ -37,6 +37,8 @@ int	ft_export(t_term *term, char **cmd)
 	l = 1;
 	flag = 0;
 	ret = 0;
+	if (!cmd[1])
+		ft_env(term, cmd);
 	while (cmd[l])
 	{
 		if (ft_is_var(cmd[l]))

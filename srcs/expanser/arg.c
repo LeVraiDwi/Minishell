@@ -40,7 +40,6 @@ int	ft_creat_argv(t_parsing *parsing)
 {
 	t_cmd	*tmp;
 	char	**new;
-	char	*c_tmp;
 	int		l;
 
 	if (!parsing && parsing->argv)
@@ -85,7 +84,6 @@ int	count_argv(t_parsing *parsing)
 int	ft_creat_std(char **std, t_cmd *cmd)
 {
 	t_cmd	*tmp;
-	char	*c_tmp;
 
 	tmp = cmd;
 	if (std && cmd)

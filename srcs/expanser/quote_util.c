@@ -61,7 +61,6 @@ int	ft_split_var(t_cmd *cmd, int i)
 {
 	int		l;
 	char	*tmp;
-	t_cmd	*new;
 
 	l = ft_var_len(cmd->arg + i + 1);
 	if (l)

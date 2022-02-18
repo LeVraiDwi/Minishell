@@ -62,7 +62,8 @@ int	ft_exec_builtin(t_term *term, t_parsing *parsing, int exec)
 	int	i;
 
 	i = ft_is_builtin(parsing->argv[0]);
-	printf("exec:%d\n", i);
+	if (parsing->str_in)
+
 	if (i >= 0 && i < 3 && exec)
 		return (term->built[i](term, parsing->argv));
 	if (i >= 3 && i <= 5 && !exec)
@@ -81,7 +82,6 @@ int	exec(t_term *term, t_parsing *cmd)
 	{
 		if ((cmd->path || (cmd->argv && cmd->argv[0] && (ft_is_builtin(cmd->argv[0]) >= 0))) && !ft_setflux(cmd))
 		{
-			printf("path:%s\n", cmd->path);
 			if (ft_exec_builtin(term, cmd, 1) == 1)
 			{
 				child = fork();

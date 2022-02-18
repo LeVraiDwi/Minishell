@@ -91,7 +91,6 @@ int	split_quote(t_cmd *quote)
 		i = 0;
 		while (l != -2 && cmd->arg[i])
 		{
-			printf("ha:%s\n", cmd->arg);
 			if (ft_do_quote(&cmd, i, &l) < 0)
 				return (-1);
 			i++;
