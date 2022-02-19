@@ -37,22 +37,25 @@ int	ft_unset(t_term *term, t_parsing *parsing)
 	flag = 0;
 	ret = 0;
 	cmd = parsing->argv;
-	while (cmd[l])
+	if (!parsing->next)
 	{
-		if (ft_is_valid_name(cmd[l]))
+		while (cmd[l])
 		{
-			ret = 0;
-			remove_env(term, cmd[l]);
+			if (ft_is_valid_name(cmd[l]))
+			{
+				ret = 0;
+				remove_env(term, cmd[l]);
+			}
+			else if (!flag)
+			{
+				printf("unset: %s: invalide parameter name\n", cmd[l]);
+				flag = 1;
+				ret = 1;
+			}
+			else
+				ret = 1;
+			l++;
 		}
-		else if (!flag)
-		{
-			printf("unset: %s: invalide parameter name\n", cmd[l]);
-			flag = 1;
-			ret = 1;
-		}
-		else
-			ret = 1;
-		l++;
 	}
 	if (parsing->out > 1)
 		close(parsing->out);

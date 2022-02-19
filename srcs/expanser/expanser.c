@@ -74,7 +74,7 @@ int	expanser(t_term *term, t_parsing *parsing)
 		if (ft_creat_all_arg(tmp) < 0)
 			return (-1);
 		if (tmp->next)
-			if (ft_setfilename(tmp) < 0)
+			if (ft_setfilename(parsing) < 0)
 				return (-1);
 		ft_free_cmd(tmp->cmd);
 		ft_free_cmd(tmp->quote_in);

@@ -15,14 +15,20 @@
 int	ft_pwd(t_term *term, t_parsing *parsing)
 {
 	char	**cmd;
-	char	buf[200];
+	char	buf[1000];
 
 	cmd = parsing->argv;
 	(void)term;
 	if (!strisstr(cmd[0], "pwd"))
-		return (1);
-	getcwd(buf, 200);
+	{
+		if (parsing->out > 1)
+			close(parsing->out);
+		parsing->out = 0;
+		return (-1);
+	}
+	getcwd(buf, 1000);
 	write(parsing->out, buf, ft_strlen(buf));
+	write(parsing->out, "\n", 1);
 	if (parsing->out > 1)
 		close(parsing->out);
 	parsing->out = 0;

@@ -42,19 +42,27 @@ int	ft_export(t_term *term, t_parsing *parsing)
 		ft_env(term, parsing);
 		return (0);
 	}
-	while (cmd[l])
+	if (!parsing->next)
 	{
-		if (ft_is_var(cmd[l]))
+		while (cmd[l])
 		{
-			if (add_env(term, cmd[l]) < 0)
-				return (-1);
+			if (ft_is_var(cmd[l]))
+			{
+				if (add_env(term, cmd[l]) < 0)
+				{
+					if (parsing->out > 1)
+						close(parsing->out);
+					parsing->out = 0;
+					return (-1);
+				}
+			}
+			else
+			{
+				ret = -1;
+				errno = 22;
+			}
+			l++;
 		}
-		else
-		{
-			ret = -1;
-			errno = 22;
-		}
-		l++;
 	}
 	if (parsing->out > 1)
 		close(parsing->out);

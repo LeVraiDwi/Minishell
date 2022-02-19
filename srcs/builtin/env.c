@@ -20,8 +20,14 @@ int	ft_env(t_term *term, t_parsing *parsing)
 	if (cmd[1])
 	{
 		strerror(E2BIG);
-		return (1);
+		if (parsing->out > 1)
+			close(parsing->out);
+		parsing->out = 0;
+		return (-1);
 	}
 	print_env(*term, parsing->out);
+	if (parsing->out > 1)
+		close(parsing->out);
+	parsing->out = 0;
 	return (0);
 }

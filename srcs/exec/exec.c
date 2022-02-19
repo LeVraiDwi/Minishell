@@ -15,9 +15,9 @@
 
 int	ft_error_pipe(t_parsing *cmd)
 {
-	if (cmd->in  > 1)
+	if (cmd->in >= 0)
 		close(cmd->in);
-	if (cmd->out > 1)
+	if (cmd->out >= 0)
 		close(cmd->out);
 	ft_free_pars(cmd);
 	exit(EXIT_FAILURE);

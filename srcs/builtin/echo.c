@@ -55,7 +55,11 @@ int	ft_echo(t_term *term, t_parsing *parsing)
 	l = ft_cmd_length(cmd);
 	flag = 0;
 	if (l == 1)
+	{
+		if (parsing->out > 1)
+			close(parsing->out);
 		return (return_new_line());
+	}
 	else if (l > 1)
 		flag = is_flag(cmd[1]);
 	if (flag)
