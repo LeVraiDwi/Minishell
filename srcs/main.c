@@ -6,7 +6,7 @@
 /*   By: asaboure <asaboure@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/24 13:17:17 by tcosse            #+#    #+#             */
-/*   Updated: 2022/02/21 17:11:53 by tcosse           ###   ########.fr       */
+/*   Updated: 2022/02/21 18:46:56 by tcosse           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,8 @@ int	main(int argc, char **argv, char **env)
 	(void)argc;
 	if(init_term(&term, env))
 		return (0);
-	while (!term.exit)
+	term.exit = 3;
+	while (term.exit)
 	{
 		i = 0;
 		str = readline("\033[34;01mMinishell\033[00m$ ");
@@ -34,9 +35,11 @@ int	main(int argc, char **argv, char **env)
 		printf("%p\n", cmd);
 		if (!cmd)
 			return (-1);
+		if (parser(cmd))
+			return (-1);
 		ft_print_cmd(cmd);
 		ft_free_cmd(cmd);
-		term.exit = 1;
+		term.exit--;
 /*		printf("======================debut parsing==================\n");
 		parsebuf = parse_init(str, env);
 		printf("okay:%p, %p, next:%p\n", parsebuf, parsebuf->argv, parsebuf->next);
@@ -95,6 +98,6 @@ int	main(int argc, char **argv, char **env)
 	}
 	ft_free_term(&term);
 	return (0);*/
-		ft_free_term(&term);
 	}
+	ft_free_term(&term);
 }

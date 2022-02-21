@@ -1,5 +1,4 @@
-
-SRCS = $(addprefix $(SRC_PATH)/,$(SRC_NAME)) $(addprefix $(HISTORY_PATH)/,$(HISTORY_NAME)) $(addprefix $(UTILS_PATH)/,$(UTILS_NAME)) $(addprefix $(LEXER_PATH)/,$(LEXER_NAME)) $(addprefix $(ENV_PATH)/,$(ENV_NAME)) $(addprefix $(BUILT_PATH)/,$(BUILT_NAME)) $(addprefix $(EXPANSER_PATH)/,$(EXPANSER_NAME))
+SRCS = $(addprefix $(SRC_PATH)/,$(SRC_NAME)) $(addprefix $(HISTORY_PATH)/,$(HISTORY_NAME)) $(addprefix $(UTILS_PATH)/,$(UTILS_NAME)) $(addprefix $(LEXER_PATH)/,$(LEXER_NAME)) $(addprefix $(ENV_PATH)/,$(ENV_NAME)) $(addprefix $(BUILT_PATH)/,$(BUILT_NAME)) $(addprefix $(PARSER_PATH)/,$(PARSER_NAME))
 
 LIBFT = ./libft/libft.a
 
@@ -25,7 +24,8 @@ LEXER_NAME = lexer.c
 
 PARSER_PATH = ./srcs/parser
 
-PARSER_NAME = parser.c parser_utils.c
+PARSER_NAME = 	parser.c parser_utils.c quote.c\
+				spe_char.c quote_utils.c\
 
 UTILS_PATH = ./srcs/utils
 

@@ -1,55 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   arg_util.c                                         :+:      :+:    :+:   */
+/*   quote_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tcosse <tcosse@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/17 17:03:50 by tcosse            #+#    #+#             */
-/*   Updated: 2022/02/21 18:44:23 by tcosse           ###   ########.fr       */
+/*   Updated: 2022/02/21 18:45:11 by tcosse           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-int	ft_join(char **std, t_cmd *cmd)
-{
-	char	*tmp;
-
-	tmp = ft_strjoin(*std, cmd->arg);
-	if (!tmp)
-		return (-1);
-	if (*std)
-		free(*std);
-	*std = tmp;
-	return (0);
-}
-
-int	ft_insert_var(char **cmd, int l, int i, char **env)
-{
-	char	*tmp;
-	char	*var;
-
-	if ((*cmd)[i] == '$')
-	{
-		tmp = ft_substr(*cmd, i + 1, l - 1);
-		if (!tmp)
-			return (-1);
-	}
-	else
-		tmp = ft_strdup(HOME);
-	var = get_env_var(env, tmp);
-	if (tmp)
-		free(tmp);
-	tmp = ft_insertvar(*cmd, var, i, l);
-	if (var)
-		free(var);
-	if (!tmp)
-		return (-1);
-	free(*cmd);
-	*cmd = tmp;
-	return (0);
-}
 
 int	ft_add_new_cmd(t_cmd *cmd, char *tmp, int start, int len_q)
 {
@@ -84,18 +45,5 @@ int	ft_do_quote(t_cmd **cmd, int i, int *l)
 			*l = -2;
 		}
 	}
-	return (0);
-}
-
-int	ft_is_home(char *cmd, int l, int flag)
-{
-	if ((flag & DOUBLE) || (flag & SIMPLE))
-		return (0);
-	if (!cmd || !cmd[l])
-		return (0);
-	if (cmd[l] == '~' && (cmd[l + 1] == 0 || cmd[l + 1] == ' '
-			|| ft_is_special_char(cmd, l + 1, flag) || cmd[l + 1] == '/')
-			&& (l == 0 || (l > 0 && cmd[l - 1] == ' ')))
-		return (1);
 	return (0);
 }

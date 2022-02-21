@@ -6,7 +6,7 @@
 /*   By: tcosse <tcosse@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 17:26:48 by tcosse            #+#    #+#             */
-/*   Updated: 2022/02/21 17:33:57 by tcosse           ###   ########.fr       */
+/*   Updated: 2022/02/21 18:27:10 by tcosse           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,6 @@ int	new_cmd(t_cmd **new, char *str, int *l, int *i)
 {
 	char	*tmp;
 
-	(void)i;
 	if (ft_isspace(str[*i]))
 	{
 		tmp = ft_substr(str, *l, *i - *l);
@@ -51,7 +50,7 @@ int	new_cmd(t_cmd **new, char *str, int *l, int *i)
 		*l = *i;
 	}
 	else
-		*i++;
+		*i = *i + 1;
 	return (1);
 }
 
