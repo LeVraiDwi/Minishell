@@ -22,7 +22,7 @@ int	ft_var_len(char *var)
 	return (i);
 }
 
-int	ft_is_special_char(char *cmd, int l)
+int	ft_is_special_char(char *cmd, int l, int flag)
 {
 	int	i;
 
@@ -35,14 +35,12 @@ int	ft_is_special_char(char *cmd, int l)
 			i++;
 		return (i);
 	}
-	else if (cmd[l] == '~' && (cmd[l + 1] == 0 || cmd[l + 1] == ' '
-			|| ft_is_special_char(cmd, l + 1) || cmd[l + 1] == '/')
-		&& (l == 0 || (l > 0 && cmd[l - 1] == ' ')))
+	else if (ft_is_home(cmd, l, flag))
 		return (1);
 	return (0);
 }
 
-int	insert_var(char **env, char **cmd)
+int	insert_var(char **env, char **cmd, int flag)
 {
 	int		l;
 	int		i;
@@ -50,7 +48,7 @@ int	insert_var(char **env, char **cmd)
 	i = 0;
 	if (!cmd || !*cmd)
 		return (0);
-	l = ft_is_special_char(*cmd, i);
+	l = ft_is_special_char(*cmd, i, flag);
 	if (l)
 		if (ft_insert_var(cmd, l, i, env) < 0)
 			return (-1);
@@ -92,7 +90,7 @@ int	ft_replace_cmd(t_term *term, t_cmd *cmd)
 	while (tmp)
 	{
 		if (tmp->arg && !(tmp->flag & SIMPLE))
-			if (insert_var(term->env, &tmp->arg) < 0)
+			if (insert_var(term->env, &tmp->arg, tmp->flag) < 0)
 				return (-1);
 		tmp = tmp->next;
 	}

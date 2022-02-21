@@ -1,5 +1,5 @@
 
-SRCS = $(addprefix $(SRC_PATH)/,$(SRC_NAME)) $(addprefix $(BUILT_PATH)/,$(BUILT_NAME)) $(addprefix $(ENV_PATH)/,$(ENV_NAME)) $(addprefix $(PARSER_PATH)/,$(PARSER_NAME)) $(addprefix $(LEXER_PATH)/,$(LEXER_NAME)) $(addprefix $(EXPANSER_PATH)/,$(EXPANSER_NAME)) $(addprefix $(EXEC_PATH)/,$(EXEC_NAME))
+SRCS = $(addprefix $(SRC_PATH)/,$(SRC_NAME)) $(addprefix $(BUILT_PATH)/,$(BUILT_NAME)) $(addprefix $(ENV_PATH)/,$(ENV_NAME)) $(addprefix $(PARSER_PATH)/,$(PARSER_NAME)) $(addprefix $(LEXER_PATH)/,$(LEXER_NAME)) $(addprefix $(EXPANSER_PATH)/,$(EXPANSER_NAME)) $(addprefix $(EXEC_PATH)/,$(EXEC_NAME)) $(addprefix $(HISTORY_PATH)/,$(HISTORY_NAME))
 
 LIBFT = ./libft/libft.a
 
@@ -33,6 +33,10 @@ EXPANSER_NAME = expanser.c expanser_utils.c expanser_file.c\
 		in_out.c quote.c arg.c\
 		quote_util.c arg_util.c\
 
+HISTORY_PATH = ./srcs/history
+
+HISTORY_NAME = history_add.c
+
 EXEC_PATH = ./srcs/exec
 
 EXEC_NAME = exec.c exec_util.c
@@ -60,7 +64,7 @@ CD = cd
 
 ${NAME}:	${OBJS}
 		cd libft; make;
-		${CC} -o ${NAME} ${OBJS} ${FLAGS} ${LIBFT} ${RL}
+		${CC} -o ${NAME} ${OBJS} ${FLAGS} ${LIBFT} ${RL} ${DEBUG}
 
 all:		${NAME}
 

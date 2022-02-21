@@ -84,12 +84,28 @@ int	ft_do_quote(t_cmd **cmd, int i, int *l)
 			*l = -2;
 		}
 	}
-	else if (ft_is_special_char((*cmd)->arg, i))
+	else if (ft_is_special_char((*cmd)->arg, i, 0))
 	{
 		if (ft_split_var((*cmd), i) < 0)
 			return (ft_free_cmd((*cmd)));
-		*cmd = ((t_cmd *)((*cmd)->next))->next;
+		if ((*cmd)->next)
+			*cmd = ((t_cmd *)((*cmd)->next))->next;
+		else if ((*cmd)->next)
+			*cmd = (*cmd)->next;
 		*l = -2;
 	}
+	return (0);
+}
+
+int	ft_is_home(char *cmd, int l, int flag)
+{
+	if ((flag & DOUBLE) || (flag & SIMPLE))
+		return (0);
+	if (!cmd || !cmd[l])
+		return (0);
+	if (cmd[l] == '~' && (cmd[l + 1] == 0 || cmd[l + 1] == ' '
+			|| ft_is_special_char(cmd, l + 1, flag) || cmd[l + 1] == '/')
+			&& (l == 0 || (l > 0 && cmd[l - 1] == ' ')))
+		return (1);
 	return (0);
 }

@@ -4,8 +4,8 @@
 # define HOME "HOME"
 
 int		ft_var_len(char *var);
-int		ft_is_special_char(char *cmd, int l);
-int		insert_var(char **env, char **cmd);
+int		ft_is_special_char(char *cmd, int l, int flag);
+int		insert_var(char **env, char **cmd, int flag);
 char		*ft_insertvar(char *s, char *str, int var_start, int var_l);
 int		replace_var(t_term *term, t_parsing *parsing);
 int		expanser(t_term *term, t_parsing *parsing);
@@ -34,4 +34,5 @@ int		ft_insert_var(char **cmd, int l, int i, char **env);
 int		ft_add_new_cmd(t_cmd *cmd, char *tmp, int start, int len_q);
 int		ft_do_quote(t_cmd **cmd, int i, int *l);
 int		ft_set_new_cmd(t_cmd *cmd, char *tmp, int start, int l);
+int		ft_is_home(char *cmd, int l, int flag);
 #endif

@@ -29,6 +29,7 @@ int	main(int argc, char **argv, char **env)
 	{
 		i = 0;
 		str = readline("\033[34;01mMinishell\033[00m$ ");
+		ft_add_history(str);
 		printf("======================debut parsing==================\n");
 		parsebuf = parse_init(str, env);
 		printf("okay:%p, %p, next:%p\n", parsebuf, parsebuf->argv, parsebuf->next);

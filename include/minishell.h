@@ -33,6 +33,7 @@
 # include "parser.h"
 # include "expanser.h"
 # include "exec.h"
+# include "history.h"
 # define STDIN 0
 # define STDOUT 1
 # define STDERR 2
