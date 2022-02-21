@@ -47,10 +47,10 @@ int	ft_quote_len(char *str)
 
 int	ft_type_quote(char c, int flag)
 {
-	if (c == '\'' && !(flag & SIMPLE))
-		return (SIMPLE);
-	if (c == '\"' && !(flag & DOUBLE))
-		return (DOUBLE);
+	if (c == '\'' && !(flag & SIMPLE_QUOTE))
+		return (SIMPLE_QUOTE);
+	if (c == '\"' && !(flag & DOUBLE_QUOTE))
+		return (DOUBLE_QUOTE);
 	return (0);
 }
 
@@ -61,20 +61,35 @@ int	ft_split_quote(t_cmd *cmd, int len_q, char type, int start)
 
 	tmp = cmd->arg;
 	cmd->arg = ft_substr(cmd->arg, 0, start);
-	if (!tmp)
+	if (!cmd->arg)
 		return (ft_free((void **)&tmp));
-	new = ft_init_cmd();
-	if (!new)
-		return (ft_free((void **)&tmp));
-	ft_add_next_cmd(cmd, new);
-	new->arg = ft_substr(tmp, start + 1, len_q - 1);
-	if (!new->arg)
-		return (ft_free((void **)&tmp));
-	new->flag += JOIN;
-	new->flag += ft_type_quote(type, cmd->flag);
+	if (cmd->arg && *cmd->arg)
+	{
+		new = ft_init_cmd();
+		if (!new)
+			return (ft_free((void **)&tmp));
+		ft_add_next_cmd(cmd, new);
+		new->arg = ft_substr(tmp, start + 1, len_q - 1);
+		if (!new->arg)
+			return (ft_free((void **)&tmp));
+		new->flag += JOIN;
+		new->flag += ft_type_quote(type, cmd->flag);
+		cmd = cmd->next;
+	}
+	else 
+	{
+		if (cmd->arg)
+			free(cmd->arg);
+		cmd->arg = ft_substr(tmp, start + 1, len_q - 1);
+		if (!cmd->arg)
+			return (ft_free((void **)&tmp));
+		cmd->flag += ft_type_quote(type, cmd->flag);
+		cmd = cmd->next;
+	}
 	if (tmp[start + len_q + 2])
 		if (ft_add_new_cmd(cmd, tmp, start, len_q) < 0)
 			return (-1);
+	free(tmp);
 	return (0);
 }
 

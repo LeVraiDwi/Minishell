@@ -16,61 +16,61 @@ int	ft_is_special_char(char *cmd, int l, int flag)
 {
 	int	i;
 
-	i = ft_is_spe_var(cmd, l);
+	i = ft_is_spe_var(cmd, l, flag);
 	if (i)
 		return (i);
 	else if (ft_is_home(cmd, l, flag))
-		return (1);
+		return (HOME);
 	else if (cmd[l] == '|')
-		return (1);
+		return (PIPE);
 	else
 	{
-		i = ft_is_redir(cmd, l);
+		i = ft_is_redir(cmd, l, flag);
 		if (i)
 			return (i);
 	}
 	return (0);
 }
 
-int	ft_is_spe_var(char *cmd, int l)
+int	ft_is_spe_var(char *cmd, int l, int flag)
 {
 	int	i;
 
 	i = 0;
+	if (flag & SIMPLE_QUOTE)
+		return (0);
 	if (cmd[l] == '$' && (cmd[l + 1]
 			&& (ft_isalnum(cmd[l + 1]) || cmd[l + 1] == '_')))
-	{
-		i++;
-		while (ft_isalnum(cmd[l + i]) || cmd[l + i] == '_')
-			i++;
-	}
+		return (VAR);
 	else if (cmd[l] == '$' && cmd[l + 1] == '?')
-		return (2);
-	return (i);
+		return (LAST_RET);
+	return (0);
 }
 
-int	ft_is_redir(char *cmd, int l)
+int	ft_is_redir(char *cmd, int l, int flag)
 {
+	if ((flag & SIMPLE_QUOTE) || (flag & DOUBLE_QUOTE))
+		return (0);
 	if (cmd[l] == '<')
 	{
 		if (cmd[l + 1] == '<')
-			return (2);
+			return (DOUBLE_REDIR_IN);
 		else
-			return(1);
+			return(SIMPLE_REDIR_IN);
 	}
 	else if (cmd[l] == '>')
 	{
 		if (cmd[l + 1] == '>')
-			return (2);
+			return (DOUBLE_REDIR_OUT);
 		else
-			return(1);
+			return(SIMPLE_REDIR_OUT);
 	}
 	return (0);
 }
 
 int	ft_is_home(char *cmd, int l, int flag)
 {
-	if ((flag & DOUBLE) || (flag & SIMPLE))
+	if ((flag & DOUBLE_QUOTE) || (flag & SIMPLE_QUOTE))
 		return (0);
 	if (!cmd || !cmd[l])
 		return (0);

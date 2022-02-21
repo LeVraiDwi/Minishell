@@ -21,6 +21,10 @@
 # define DOUBLE_REDIR_IN 64
 # define SIMPLE_QUOTE 128
 # define DOUBLE_QUOTE 256
+# define VAR 512
+# define LAST_RET 1024
+# define HOME 2048
+# define JOIN 4096
 
 int		parser(t_cmd *cmd);
 int		ft_quote_len(char *str);
@@ -29,9 +33,14 @@ int		ft_split_quote(t_cmd *cmd, int len_q, char type, int start);
 int		split_quote(t_cmd *quote);
 int		ft_do_quote(t_cmd **cmd, int i, int *l);
 int		ft_is_special_char(char *cmd, int l, int flag);
-int		ft_is_spe_var(char *cmd, int l);
-int		ft_is_redir(char *str, int l);
+int		ft_is_spe_var(char *cmd, int l, int flag);
+int		ft_is_redir(char *str, int l, int flag);
 int		ft_is_home(char *cmd, int l, int flag);
 int		ft_add_new_cmd(t_cmd *cmd, char *tmp, int start, int len_q);
+int		split_spe_char(t_cmd *cmd);
+int		ft_split_var(t_cmd **cmd, int i);
+int		ft_set_new_cmd(t_cmd *cmd, char *tmp, int start, int l);
+int		ft_var_len(char *var);
+t_cmd		*ft_next_cmd(t_cmd *cmd);
 char	ft_is_quote(char c);
 #endif

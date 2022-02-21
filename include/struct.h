@@ -1,8 +1,5 @@
 #ifndef STRUCT_H
 # define STRUCT_H
-# define JOIN 1
-# define SIMPLE 2
-# define DOUBLE 4
 
 typedef struct s_term t_term;
 

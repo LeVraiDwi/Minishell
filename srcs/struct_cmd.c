@@ -61,12 +61,15 @@ int	ft_creat_cmd(t_cmd **first, char *str)
 	t_cmd	*new;
 
 	i = 0;
-	new = ft_init_cmd();
-	if (!new)
-		return (-1);
-	ft_add_end_cmd(first, new);
-	new->arg = ft_strdup(str);
-	if (!new->arg)
-		return (-1);
+	if (str && *str)
+	{
+		new = ft_init_cmd();
+		if (!new)
+			return (-1);
+		ft_add_end_cmd(first, new);
+		new->arg = ft_strdup(str);
+		if (!new->arg)
+			return (-1);
+	}
 	return (0);
 }

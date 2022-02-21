@@ -13,4 +13,6 @@
 #ifndef UTILS_H
 # define UTILS_H
 int	ft_isspace(char c);
+int	ft_isquote(char c);
+int	ft_quotelen(char *str, int start, char c);
 #endif

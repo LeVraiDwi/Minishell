@@ -19,13 +19,12 @@ int	ft_add_new_cmd(t_cmd *cmd, char *tmp, int start, int len_q)
 	new = ft_init_cmd();
 	if (!new)
 		return (ft_free((void **)&tmp));
-	ft_add_next_cmd((t_cmd *)cmd->next, new);
+	ft_add_next_cmd(cmd, new);
 	new->flag = cmd->flag;
 	if (!(new->flag & JOIN))
 		new->flag += JOIN;
 	new->arg = ft_substr(tmp, start + len_q
 			+ 1, ft_strlen(tmp + start + len_q + 1));
-	free(tmp);
 	if (!new->arg)
 		return (-1);
 	return (1);
@@ -35,8 +34,8 @@ int	ft_do_quote(t_cmd **cmd, int i, int *l)
 {
 	if (ft_is_quote((*cmd)->arg[i]))
 	{
-		if (((*cmd)->arg[i] == '\"' && !((*cmd)->flag & SIMPLE))
-			|| ((*cmd)->arg[i] == '\'' && !((*cmd)->flag & DOUBLE)))
+		if (((*cmd)->arg[i] == '\"' && !((*cmd)->flag & SIMPLE_QUOTE))
+			|| ((*cmd)->arg[i] == '\'' && !((*cmd)->flag & DOUBLE_QUOTE)))
 		{
 			*l = ft_quote_len((*cmd)->arg + i);
 			if (*l >= 0)

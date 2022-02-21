@@ -36,6 +36,7 @@ int	main(int argc, char **argv, char **env)
 		if (!cmd)
 			return (-1);
 		ft_print_cmd(cmd);
+		printf("====================parser=====================================\n");
 		if (parser(cmd))
 			return (-1);
 		ft_print_cmd(cmd);

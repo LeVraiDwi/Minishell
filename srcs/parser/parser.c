@@ -7,5 +7,7 @@ int	parser(t_cmd *cmd)
 	tmp = cmd;
 	if (split_quote(cmd) < 0)
 		return (-1);
+	if (split_spe_char(cmd) < 0)
+		return (-1);
 	return (0);
 }

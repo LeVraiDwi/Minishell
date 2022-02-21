@@ -25,7 +25,7 @@ LEXER_NAME = lexer.c
 PARSER_PATH = ./srcs/parser
 
 PARSER_NAME = 	parser.c parser_utils.c quote.c\
-				spe_char.c quote_utils.c\
+				spe_char.c quote_utils.c split.c\
 
 UTILS_PATH = ./srcs/utils
 
