@@ -6,7 +6,7 @@
 /*   By: asaboure <asaboure@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/24 13:17:17 by tcosse            #+#    #+#             */
-/*   Updated: 2022/02/04 16:18:06 by tcosse           ###   ########.fr       */
+/*   Updated: 2022/02/21 17:11:53 by tcosse           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,10 @@
 int	main(int argc, char **argv, char **env)
 {
 	t_term		term;
-	t_parsing	*parsebuf;
+//	t_parsing	*parsebuf;
 	char		*str;
 	int			i;
-	t_parsing	*tmp;
+	t_cmd		*cmd;
 	//char	*cmd1[] = {"export", "a=12", "jaime=", "pain=jamenfkfhssflf", "0"};
 
 	(void)argv;
@@ -30,7 +30,14 @@ int	main(int argc, char **argv, char **env)
 		i = 0;
 		str = readline("\033[34;01mMinishell\033[00m$ ");
 		ft_add_history(str);
-		printf("======================debut parsing==================\n");
+		cmd = lexer(str);
+		printf("%p\n", cmd);
+		if (!cmd)
+			return (-1);
+		ft_print_cmd(cmd);
+		ft_free_cmd(cmd);
+		term.exit = 1;
+/*		printf("======================debut parsing==================\n");
 		parsebuf = parse_init(str, env);
 		printf("okay:%p, %p, next:%p\n", parsebuf, parsebuf->argv, parsebuf->next);
 		tmp = parsebuf;
@@ -87,5 +94,7 @@ int	main(int argc, char **argv, char **env)
 		free(str);
 	}
 	ft_free_term(&term);
-	return (0);
+	return (0);*/
+		ft_free_term(&term);
+	}
 }

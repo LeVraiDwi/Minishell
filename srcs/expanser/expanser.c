@@ -6,7 +6,7 @@
 /*   By: tcosse <tcosse@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/17 16:28:34 by tcosse            #+#    #+#             */
-/*   Updated: 2022/02/17 17:04:38 by tcosse           ###   ########.fr       */
+/*   Updated: 2022/02/21 17:33:52 by tcosse           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,10 +57,10 @@ int	ft_setstd(t_parsing *parsing)
 	return (0);
 }
 
-int	expanser(t_term *term, t_parsing *parsing)
+int	expanser(t_term *term, t_cmd **cmd)
 {
 	int			i;
-	t_parsing	*tmp;
+	t_cmd		*tmp;
 
 	i = 0;
 	tmp = parsing;
@@ -73,9 +73,6 @@ int	expanser(t_term *term, t_parsing *parsing)
 			return (-1);
 		if (ft_creat_all_arg(tmp) < 0)
 			return (-1);
-		if (tmp->next)
-			if (ft_setfilename(parsing) < 0)
-				return (-1);
 		ft_free_cmd(tmp->cmd);
 		ft_free_cmd(tmp->quote_in);
 		ft_free_cmd(tmp->quote_out);

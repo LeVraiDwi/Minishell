@@ -36,6 +36,7 @@ int	ft_setflux(t_parsing *cmd)
 	if (cmd->str_in)
 		if (ft_stdopen(cmd->str_in, &cmd->in, 0, O_RDONLY) < 0)
 			return (-1);
+		else if (parsing->)
 	if (cmd->str_out)
 		if (ft_stdopen(cmd->str_out, &cmd->out, define_flags(cmd->flag, STDOUT), O_RDWR) < 0)
 			return (-1);

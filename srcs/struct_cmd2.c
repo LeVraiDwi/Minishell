@@ -19,3 +19,13 @@ int	ft_make_cmd(char *str, t_cmd **cmd)
 	}
 	return (0);
 }
+
+void	ft_print_cmd(t_cmd *cmd)
+{
+	while (cmd)
+	{
+		printf("cmd:%s|\n", cmd->arg);
+		cmd = cmd->next;
+	}
+	return;
+}

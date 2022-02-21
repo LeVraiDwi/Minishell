@@ -6,7 +6,7 @@
 /*   By: tcosse <tcosse@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/24 13:19:17 by tcosse            #+#    #+#             */
-/*   Updated: 2022/02/04 16:27:27 by tcosse           ###   ########.fr       */
+/*   Updated: 2022/02/21 15:20:04 by tcosse           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,10 @@ void	ft_init_struct(t_parsing *pars)
 	pars->out = STDOUT;
 	pars->str_in = 0;
 	pars->str_out = 0;
+	pars->pipe_in[0] = 0;
+	pars->pipe_in[1] = 0;
+	pars->pipe_out[0] = 0;
+	pars->pipe_out[1] = 0;
 }
 
 t_parsing	*ft_creat_pars(void)

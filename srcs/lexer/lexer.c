@@ -3,139 +3,81 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asaboure <asaboure@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tcosse <tcosse@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/06 17:06:14 by asaboure          #+#    #+#             */
-/*   Updated: 2022/01/27 19:10:34 by asaboure         ###   ########.fr       */
+/*   Created: 2022/02/21 17:26:48 by tcosse            #+#    #+#             */
+/*   Updated: 2022/02/21 17:33:57 by tcosse           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-#include "lexer.h"
-#include "libft.h"
-#include <unistd.h>
 
-char	**get_pathv(char **env)
+int	ft_free_lexer(t_cmd *cmd, char *str, char *tmp)
 {
-	int		i;
-	char	**path;
-
-	i = 0;
-	while (env[i])
-	{
-		if (ft_strncmp(env[i], "PATH=", 5) == 0)
-		{
-			path = ft_split(env[i] + ft_strlen("PATH="), ':');
-			i = -1;
-			while (path[++i])
-				path[i] = ft_strjoin(path[i], "/");
-			return (path);
-		}
-		i++;
-	}
-	return (NULL);
+	if (cmd)
+		ft_free_cmd(cmd);
+	if (str)
+		free(str);
+	if (tmp)
+		free(tmp);
+	return (0);
 }
 
-//counts the number of valid paths and increments ntokens
-// int	count_paths(char **path,  char *cmd)
-// {
-// 	int		i;
-// 	char	*pathcmd;
-
-// 	i = 0;
-// 	while (path[i])
-// 	{
-// 		pathcmd = ft_strjoin(path[i], cmd);
-// 		if (!pathcmd)
-// 			return (0);
-// 		if (access(pathcmd, X_OK | F_OK) == 0)
-// 			lexerbuf->ntokens++;
-// 		free(pathcmd);
-// 		i++;
-// 	}
-// 	return (i);
-// }
-
-char	*check_cmd(char *input, char **path)
-{
-	int		i;
-	char	*pathcmd;
-
-	i = 0;
-	while (path[i])
-	{
-		pathcmd = ft_strjoin(path[i], input);
-		if (!pathcmd)
-			return (NULL);
-		if (access(pathcmd, X_OK | F_OK) == 0)
-			return (ft_strdup(pathcmd));
-		free(pathcmd);
-		i++;
-	}
-	return (NULL);
-}
-
-void	strip_quotes(t_token *token)
-{
-	char	*dest;
-	int		i;
-	int		j;
-	char	lastquote;
-	char	c;
-
-	dest = malloc(ft_strlen(token->data) + 1);
-	if (!dest)
-		return ;
-	if (ft_strlen(token->data) <= 1)
-		return ;
-	i = -1;
-	j = 0;
-	lastquote = 0;
-	while (++i < (int)ft_strlen(token->data))
-	{
-		c = token->data[i];
-		if ((c == '\'' || c == '\"') && lastquote == 0)
-			lastquote = 0;
-		else if (c == lastquote)
-			lastquote = 0;
-		else
-			dest[j++] = c;
-	}
-	dest[j] = 0;
-	free(token->data);
-	token->data = dest;
-}
-
-int	count_tokens(t_token *token)
+int	ft_skip_space(char *str, int start)
 {
 	int	i;
 
 	i = 0;
-	while (token)
-	{
+	while (str[start + i] && ft_isspace(str[start + i]))
 		i++;
-		token = token->next;
-	}
 	return (i);
 }
 
-//TODO: Protect mallocs 
-int	lexer_build(char *input, int size, t_lexer *lexerbuf)
+int	new_cmd(t_cmd **new, char *str, int *l, int *i)
 {
-	t_token	*token;
+	char	*tmp;
 
-	if (!lexerbuf)
-		return (0);
-	lexerbuf->ntokens = 0;
-	if (size == 0)
-		return (0);
-	token = lexerbuf->tokenlist;
-	token_init(token, size);
-	if (!token->data)
-		return (0);
-	if (!tokenize(lexerbuf, token, size, input))
-		return (0);
-	token = lexerbuf->tokenlist;
-	lexerbuf->ntokens = count_tokens(token);
+	(void)i;
+	if (ft_isspace(str[*i]))
+	{
+		tmp = ft_substr(str, *l, *i - *l);
+		if (!tmp)
+			return (ft_free_lexer(*new, str, tmp));
+		if (ft_creat_cmd(new, tmp) < 0)
+			return (ft_free_lexer(*new, str, tmp));
+		free(tmp);
+		tmp = 0;
+		*i += ft_skip_space(str, *i);
+		*l = *i;
+	}
+	else
+		*i++;
 	return (1);
+}
+
+t_cmd	*lexer(char *str)
+{
+	int		i;
+	int		l;
+	t_cmd	*new;
+
+	i = 0;
+	new = 0;
+	i += ft_skip_space(str, i);
+	l = i;
+	while (str && str[i])
+	{
+		if (!new_cmd(&new, str, &l, &i))
+			return (0);
+		else
+			i++;
+	}
+	if (ft_creat_cmd(&new, str + l) < 0)
+	{
+		ft_free_lexer(new, str, 0);
+		return (0);
+	}
+	if (str)
+		free(str);
+	return (new);
 }

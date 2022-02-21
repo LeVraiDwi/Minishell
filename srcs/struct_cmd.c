@@ -55,22 +55,18 @@ void	ft_add_next_cmd(t_cmd *cmd, t_cmd *new)
 	new->next = tmp;
 }
 
-int	ft_creat_cmd(t_parsing *parsing)
+int	ft_creat_cmd(t_cmd **first, char *str)
 {
 	int	i;
 	t_cmd	*new;
 
 	i = 0;
-	while (parsing->argv[i])
-	{
-		new = ft_init_cmd();
-		if (!new)
-			return (ft_free_cmd(parsing->cmd));
-		ft_add_end_cmd(&parsing->cmd, new);
-		new->arg = ft_strdup(parsing->argv[i]);
-		if (!new->arg)
-			return (ft_free_cmd(parsing->cmd));
-		i++;
-	}
+	new = ft_init_cmd();
+	if (!new)
+		return (-1);
+	ft_add_end_cmd(first, new);
+	new->arg = ft_strdup(str);
+	if (!new->arg)
+		return (-1);
 	return (0);
 }

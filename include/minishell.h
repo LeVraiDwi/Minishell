@@ -6,7 +6,7 @@
 /*   By: asaboure <asaboure@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/06 18:22:04 by asaboure          #+#    #+#             */
-/*   Updated: 2022/02/04 17:36:55 by tcosse           ###   ########.fr       */
+/*   Updated: 2022/02/21 16:41:58 by tcosse           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,10 @@
 # include "env.h"
 # include "strisstr.h"
 # include "lexer.h"
-# include "parser.h"
 # include "expanser.h"
 # include "exec.h"
 # include "history.h"
+# include "utils.h"
 # define STDIN 0
 # define STDOUT 1
 # define STDERR 2
