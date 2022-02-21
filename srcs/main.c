@@ -6,7 +6,7 @@
 /*   By: asaboure <asaboure@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/24 13:17:17 by tcosse            #+#    #+#             */
-/*   Updated: 2022/02/21 18:46:56 by tcosse           ###   ########.fr       */
+/*   Updated: 2022/02/21 18:50:53 by tcosse           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ int	main(int argc, char **argv, char **env)
 		printf("%p\n", cmd);
 		if (!cmd)
 			return (-1);
+		ft_print_cmd(cmd);
 		if (parser(cmd))
 			return (-1);
 		ft_print_cmd(cmd);

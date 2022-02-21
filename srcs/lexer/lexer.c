@@ -6,7 +6,7 @@
 /*   By: tcosse <tcosse@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 17:26:48 by tcosse            #+#    #+#             */
-/*   Updated: 2022/02/21 18:27:10 by tcosse           ###   ########.fr       */
+/*   Updated: 2022/02/21 19:00:21 by tcosse           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,7 @@ t_cmd	*lexer(char *str)
 	l = i;
 	while (str && str[i])
 	{
+		printf("%d\n", i);
 		if (!new_cmd(&new, str, &l, &i))
 			return (0);
 		else
