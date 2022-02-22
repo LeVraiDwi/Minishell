@@ -6,7 +6,7 @@
 /*   By: asaboure <asaboure@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/18 16:58:12 by asaboure          #+#    #+#             */
-/*   Updated: 2022/02/10 15:23:01 by asaboure         ###   ########.fr       */
+/*   Updated: 2022/02/22 20:17:46 by asaboure         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,69 +26,18 @@ int	ft_isnum(char *str)
 	return (1);
 }
 
-char	*parse_redir_out(t_token *token, unsigned int *flag)
+int	is_redir(t_token *token)
 {
-	t_token	*saved;
-
-	saved = token;
-	while (token && token->type != CHAR_PIPE)
+	if (!token)
+		return (0);
+	if (token->type == TOKEN && ft_isnum(token->data))
 	{
-		if (token->type == CHAR_GREATER && !(saved && ft_strncmp(saved->data,
-					"2", 2) == 0))
-		{
-			if (token->next->type == CHAR_GREATER)
-			{
-				*flag += DOUBLE_STDOUT;
-				return (token->next->next->data);
-			}
-			*flag += SIMPLE_STDOUT;
-			return (token->next->data);
-		}
-		saved = token;
-		token = token->next;
+		if (token->next->type == CHAR_GREATER)
+			return (1);
 	}
-	return (NULL);
-}
-
-char	*parse_redir_in(t_token *token, unsigned int *flag)
-{
-	while (token && token->type != CHAR_PIPE)
-	{
-		if (token->type == CHAR_LESSER)
-		{
-			if (token->next->type == CHAR_LESSER)
-			{
-				*flag += DOUBLE_STDIN;
-				return (token->next->next->data);
-			}
-			*flag += SIMPLE_STDIN;
-			return (token->next->data);
-		}
-		token = token->next;
-	}
-	return (NULL);
-}
-
-char	*parse_redir_err(t_token *token, unsigned int *flag)
-{
-	while (token && token->type != CHAR_PIPE)
-	{
-		if (ft_strncmp(token->data, "2", 2) == 0)
-		{
-			if (token->next->type == CHAR_GREATER)
-			{
-				if (token->next->next->type == CHAR_GREATER)
-				{
-					*flag += DOUBLE_STDERR;
-					return (token->next->next->next->data);
-				}
-				*flag += SIMPLE_STDERR;
-				return (token->next->next->data);
-			}
-		}
-		token = token->next;
-	}
-	return (NULL);
+	if (token->type == CHAR_GREATER || token->type == CHAR_LESSER)
+		return (1);
+	return (0);
 }
 
 void	free_split(char **split)
@@ -101,4 +50,31 @@ void	free_split(char **split)
 		free (split[i]);
 		i++;
 	}
+}
+
+void	*exit_parsing(t_lexer *lexerbuf, t_token *token)
+{
+	if (lexerbuf->path)
+		free_split(lexerbuf->path);
+	free(lexerbuf->path);
+	if (token)
+		destroy_tokenlist(token);
+	return (NULL);
+}
+
+char	**ft_realloc_args(char **args, int i)
+{
+	char	**tmp;
+	int		j;
+
+	j = 0;
+	tmp = args;
+	args = malloc(sizeof(char *) * (i + 2));
+	while (j <= i)
+	{
+		args[j] = tmp[i];
+		j++;
+	}
+	free(tmp);
+	return (args);
 }

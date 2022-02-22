@@ -21,11 +21,11 @@ ENV_NAME =      env_util.c env_utils.c env_util_access.c\
 
 LEXER_PATH = ./srcs/lexer
 
-LEXER_NAME = lexer.c lexer_utils.c set_token.c tokenize.c
+LEXER_NAME = lexer.c lexer_utils.c set_token.c tokenize.c set_token2.c
 
 PARSER_PATH = ./srcs/parser
 
-PARSER_NAME = parser.c parser_utils.c
+PARSER_NAME = parser.c parser_utils.c parse_redir.c skip.c
 
 EXPANSER_PATH = ./srcs/expanser
 

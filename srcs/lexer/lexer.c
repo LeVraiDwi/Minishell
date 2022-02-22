@@ -6,7 +6,7 @@
 /*   By: asaboure <asaboure@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/06 17:06:14 by asaboure          #+#    #+#             */
-/*   Updated: 2022/01/27 19:10:34 by asaboure         ###   ########.fr       */
+/*   Updated: 2022/02/22 16:39:41 by asaboure         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,37 +73,6 @@ char	*check_cmd(char *input, char **path)
 		i++;
 	}
 	return (NULL);
-}
-
-void	strip_quotes(t_token *token)
-{
-	char	*dest;
-	int		i;
-	int		j;
-	char	lastquote;
-	char	c;
-
-	dest = malloc(ft_strlen(token->data) + 1);
-	if (!dest)
-		return ;
-	if (ft_strlen(token->data) <= 1)
-		return ;
-	i = -1;
-	j = 0;
-	lastquote = 0;
-	while (++i < (int)ft_strlen(token->data))
-	{
-		c = token->data[i];
-		if ((c == '\'' || c == '\"') && lastquote == 0)
-			lastquote = 0;
-		else if (c == lastquote)
-			lastquote = 0;
-		else
-			dest[j++] = c;
-	}
-	dest[j] = 0;
-	free(token->data);
-	token->data = dest;
 }
 
 int	count_tokens(t_token *token)

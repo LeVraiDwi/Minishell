@@ -6,7 +6,7 @@
 /*   By: asaboure <asaboure@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/06 17:10:10 by asaboure          #+#    #+#             */
-/*   Updated: 2022/01/27 17:25:00 by asaboure         ###   ########.fr       */
+/*   Updated: 2022/02/22 19:41:52 by asaboure         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ int		set_token_dquote(t_token *token, int *j);
 void	set_token_esc_seq(t_token *token, int *j, int *i, char *input);
 void	set_token_general(t_token *token, int *j, char c);
 t_token	*set_token_whitespace(t_token *token, int *j, int size, int i);
+t_token	*set_token_separator(t_token *token, t_lexer *lexerbuf, int size);
 
 void	token_init(t_token *tok, int datasize);
 int		getchartype(char c);
@@ -76,5 +77,7 @@ void	tokenize_null(t_lexer *lexerbuf, t_token *token);
 
 int		lexer_build(char *input, int size, t_lexer *lexerbuf);
 char	**get_pathv(char **env);
+int		is_separator(int chtype);
+void	destroy_tokenlist(t_token *token);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: asaboure <asaboure@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/07 18:48:48 by asaboure          #+#    #+#             */
-/*   Updated: 2022/01/26 16:26:19 by asaboure         ###   ########.fr       */
+/*   Updated: 2022/02/22 19:41:00 by asaboure         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,4 +51,24 @@ int	getchartype(char c)
 	if (c == 0)
 		return (CHAR_NULL);
 	return (CHAR_GENERAL);
+}
+
+int	is_separator(int chtype)
+{
+	if (chtype == CHAR_SEMICOLON || chtype == CHAR_GREATER || chtype
+		== CHAR_LESSER || chtype == CHAR_LESSER || chtype == CHAR_AMPERSAND
+		|| chtype == CHAR_PIPE)
+		return (1);
+	return (0);
+}
+
+void	destroy_tokenlist(t_token *token)
+{
+	t_token	*tmp;
+	while (token)
+	{
+		tmp = token->next;
+		free(token);
+		token = tmp;
+	}	
 }

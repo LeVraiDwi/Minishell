@@ -6,7 +6,7 @@
 /*   By: asaboure <asaboure@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/05 19:23:06 by asaboure          #+#    #+#             */
-/*   Updated: 2022/02/22 16:35:11 by asaboure         ###   ########.fr       */
+/*   Updated: 2022/02/22 16:39:51 by asaboure         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
 #include "libft.h"
 #include "lexer.h"
 #include "parser.h"
-
 
 // clang -Wall -Werror -Wextra -I../../libft/ -I ../../include -lreadline -L../../libft -lft test.c lexer.c lexer_utils.c set_token.c tokenize.c ../parser/parser.c ../../libft/libft.a
 int	main(int ac, char **av, char **env)

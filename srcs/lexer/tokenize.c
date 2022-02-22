@@ -6,7 +6,7 @@
 /*   By: asaboure <asaboure@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/07 14:53:21 by asaboure          #+#    #+#             */
-/*   Updated: 2022/01/27 19:05:26 by asaboure         ###   ########.fr       */
+/*   Updated: 2022/02/22 19:34:30 by asaboure         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,25 +27,8 @@ t_token	*tokenize_general(t_lexer *lexerbuf, t_token *token, char *input
 		set_token_general(token, &lexerbuf->j, lexerbuf->c);
 	if (lexerbuf->chtype == CHAR_WHITESPACE)
 		token = set_token_whitespace(token, &lexerbuf->j, size, lexerbuf->i);
-	if (lexerbuf->chtype == CHAR_SEMICOLON || lexerbuf->chtype == CHAR_GREATER
-		|| lexerbuf->chtype == CHAR_LESSER || lexerbuf->chtype
-		== CHAR_LESSER || lexerbuf->chtype == CHAR_AMPERSAND || lexerbuf
-		->chtype == CHAR_PIPE)
-	{
-		token = set_token_whitespace(token, &lexerbuf->j, size, lexerbuf->i);
-		if (!token)
-			return (NULL);
-		token->data[0] = lexerbuf->chtype;
-		token->data[1] = 0;
-		token->type = lexerbuf->chtype;
-		token->next = malloc(sizeof(t_token));
-		if (!token->next)
-			return (NULL);
-		token = token->next;
-		token_init(token, size - lexerbuf->i);
-		if (!token->data)
-			return (NULL);
-	}
+	if (is_separator(lexerbuf->chtype))
+		token = set_token_separator(token, lexerbuf, size);
 	return (token);
 }
 
@@ -90,5 +73,5 @@ int	tokenize(t_lexer *lexerbuf, t_token *token, int size, char *input)
 		if (lexerbuf->c == '\0')
 			break ;
 	}
-	return(1);
+	return (1);
 }
