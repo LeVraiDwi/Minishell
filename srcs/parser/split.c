@@ -29,10 +29,15 @@ int	split_spe_char(t_cmd *cmd)
 		while (cmd->arg && cmd->arg[i])
 		{
 			flag = ft_is_special_char(cmd->arg, i, cmd->flag);
-			printf("flag:%d, %c\n", flag, cmd->arg[i]);
-			if (flag & VAR)
+			if (flag & VAR && !(cmd->flag & SIMPLE_QUOTE))
+			{
 				if (ft_split_var(&cmd, i) < 0)
 					return (-1);
+			}
+			else if (!(cmd->flag & SIMPLE_QUOTE) && !(cmd->flag & DOUBLE_QUOTE))
+			{
+				
+			}
 			flag = 0;
 			i++;
 		}
@@ -63,10 +68,14 @@ int     ft_split_var(t_cmd **comd, int i)
 		}
 		else
 		{
-                	cmd->arg = ft_substr(cmd->arg, 0, i);
+			if (cmd->arg)
+				free(cmd->arg);
+                	cmd->arg = ft_substr(tmp, i, l + 1);
 			if (!cmd->arg)
-				return (0);
+				return (ft_free((void **)&tmp));
 		}
+		if (!(cmd->flag & VAR))
+			cmd->flag += VAR;
 		if (tmp[i + l + 1])
 		{
 			if (ft_set_new_cmd(cmd,
@@ -81,7 +90,7 @@ int     ft_split_var(t_cmd **comd, int i)
 
 void	ft_set_flag(t_cmd *cmd, t_cmd *new)
 {
-        if (!(cmd->flag & JOIN))
+        if (!(new->flag & JOIN))
                 new->flag += JOIN;
 	if ((cmd->flag & DOUBLE_QUOTE) && !(new->flag & DOUBLE_QUOTE))
                 new->flag += DOUBLE_QUOTE;

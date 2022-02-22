@@ -36,7 +36,7 @@ int	ft_quotelen(char *str, int start, char c)
 	while (str[start + l])
 	{
 		if (ft_isquote(str[start + l]) == c)
-			return (l);
+			return (l + 1);
 		l++;
 	}
 	return (l);

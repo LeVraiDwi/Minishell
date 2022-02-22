@@ -72,8 +72,7 @@ int	ft_split_quote(t_cmd **comd, char type, int start, int flag)
 		arg = ft_substr(tmp, start + 1, l - 1);
 		if (!arg)
 			return (-1);
-		printf("start:%s\n", arg);
-		if(ft_add_new_cmd(cmd, arg, ft_make_quote_flag(flag, type, 1, 0)))
+		if(ft_add_new_cmd(cmd, arg, ft_make_quote_flag(flag, type, 1, 0)) < 0)
 			return (ft_free((void **)&tmp));
 		cmd = cmd->next;
 	}
@@ -84,18 +83,15 @@ int	ft_split_quote(t_cmd **comd, char type, int start, int flag)
 		cmd->arg = ft_substr(tmp, start + 1, l - 1);
 		if (!cmd->arg)
 			return (ft_free((void **)&tmp));
-		printf("middle:%s\n", cmd->arg);
-		cmd->flag += ft_make_quote_flag(flag, type, 1, cmd->first);
+		cmd->flag = ft_make_quote_flag(flag, type, 1, cmd->first);
 	}
-	if (tmp[start + l + 2])
+	if (tmp[start + l + 1])
 	{
-		arg = ft_substr(tmp, start + l + 1, ft_strlen(tmp + l + start + 1));
+		arg = ft_substr(tmp, start + l + 1, ft_strlen(tmp + l + start));
 		if (!arg)
 			return (-1);
-		printf("end:%s\n", arg);
 		if (ft_add_new_cmd(cmd, arg, ft_make_quote_flag(flag, 0, 1, 0)) < 0)
 			return (ft_free((void **)&tmp));
-		cmd = cmd->next;
 	}
 	*comd = cmd;
 	free(tmp);

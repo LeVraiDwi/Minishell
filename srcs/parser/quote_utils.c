@@ -17,7 +17,7 @@ int	ft_add_new_cmd(t_cmd *cmd, char *str, int flag)
 	t_cmd	*new;
 
 	if (!str)
-		return (-1);
+		return (0);
 	new = ft_init_cmd();
 	if (!new)
 		return (ft_free((void **)&str));

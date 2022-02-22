@@ -51,7 +51,7 @@ int	new_cmd(t_cmd **new, char *str, int *l, int *i)
 		*l = *i;
 	}
 	else if (ft_isquote(str[*i]))
-		*i = *i + new_cmd_quote(str, *i) + 1;
+		*i = *i + new_cmd_quote(str, *i);
 	else
 		*i = *i + 1;
 	return (1);
@@ -63,11 +63,9 @@ int	new_cmd_quote(char *str, int i)
 	char	c;
 
 	c = ft_is_quote(str[i]);
-	printf("c:%c\n", c);
 	if (c)
 	{
 		l = ft_quotelen(str, i, c);
-		printf("quote l:%d\n", l);
 		if (l > 0)
 			return (l);
 	}
