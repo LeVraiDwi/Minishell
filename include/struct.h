@@ -17,6 +17,7 @@ typedef struct s_parsing
 {
 	char				*path;
 	char				**argv;
+	char				**heredoc;
 	t_cmd				*cmd;
 	unsigned int		flag;
 	int					in;

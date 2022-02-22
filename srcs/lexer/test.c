@@ -6,7 +6,7 @@
 /*   By: asaboure <asaboure@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/05 19:23:06 by asaboure          #+#    #+#             */
-/*   Updated: 2022/02/04 16:52:12 by asaboure         ###   ########.fr       */
+/*   Updated: 2022/02/22 16:35:11 by asaboure         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,17 @@ int	main(int ac, char **av, char **env)
 		{
 			printf("%s, ", parserbuf->argv[i]);
 			i++;
+		}
+		printf("\n");
+		i = 0;
+		if (parserbuf->flag & DOUBLE_STDIN)
+		{
+			printf("heredoc: ");
+			while (parserbuf->heredoc[i])
+			{
+				printf("%s, ", parserbuf->heredoc[i]);
+				i++;
+			}
 		}
 		printf("\n");
 		printf("path: %s\n", parserbuf->path);

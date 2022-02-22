@@ -6,7 +6,7 @@
 /*   By: asaboure <asaboure@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/13 14:20:53 by asaboure          #+#    #+#             */
-/*   Updated: 2022/02/10 16:34:11 by asaboure         ###   ########.fr       */
+/*   Updated: 2022/02/22 16:31:12 by asaboure         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,7 @@ char	**parse_args(t_token *tokenlist, t_lexer *lexerbuf, t_parsing *parsebuf)
 	int		i;
 
 	if (parsebuf->flag & DOUBLE_STDIN)
-		return (read_args(parsebuf->str_in));
+		parsebuf->heredoc = read_args(parsebuf->str_in);
 	token = tokenlist;
 	args = malloc(sizeof(char *) * (lexerbuf->ntokens + 1));
 	i = 0;
