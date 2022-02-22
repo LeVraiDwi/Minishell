@@ -84,7 +84,6 @@ int	ft_split_quote(t_cmd *cmd, int len_q, char type, int start)
 		if (!cmd->arg)
 			return (ft_free((void **)&tmp));
 		cmd->flag += ft_type_quote(type, cmd->flag);
-		cmd = cmd->next;
 	}
 	if (tmp[start + len_q + 2])
 		if (ft_add_new_cmd(cmd, tmp, start, len_q) < 0)

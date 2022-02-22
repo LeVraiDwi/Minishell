@@ -69,7 +69,7 @@ int     ft_split_var(t_cmd **comd, int i)
 		}
 		if (tmp[i + l + 1])
 		{
-			if (ft_set_new_cmd((t_cmd *)cmd->next,
+			if (ft_set_new_cmd(cmd,
 				tmp, i + l + 1, ft_strlen(tmp + i + l + 1)) < 0)
 				return (ft_free((void **)&tmp));
 		}

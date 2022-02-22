@@ -32,11 +32,14 @@ int	ft_add_new_cmd(t_cmd *cmd, char *tmp, int start, int len_q)
 
 int	ft_do_quote(t_cmd **cmd, int i, int *l)
 {
+	int	flag;
+
 	if (ft_is_quote((*cmd)->arg[i]))
 	{
 		if (((*cmd)->arg[i] == '\"' && !((*cmd)->flag & SIMPLE_QUOTE))
 			|| ((*cmd)->arg[i] == '\'' && !((*cmd)->flag & DOUBLE_QUOTE)))
 		{
+			flag = (*cmd)->flag;
 			*l = ft_quote_len((*cmd)->arg + i);
 			if (*l >= 0)
 				if (ft_split_quote(*cmd, *l, ft_is_quote((*cmd)->arg[i]), i))
