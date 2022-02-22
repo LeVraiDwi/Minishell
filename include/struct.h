@@ -7,6 +7,7 @@ typedef struct s_cmd
 {
 	char	*arg;
 	int	flag;
+	int	first;
 	void	*next;
 }		t_cmd;
 

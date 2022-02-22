@@ -12,11 +12,22 @@
 
 #include "minishell.h"
 
-int	ft_add_new_cmd(t_cmd *cmd, char *tmp, int start, int len_q)
+int	ft_add_new_cmd(t_cmd *cmd, char *str, int flag)
 {
 	t_cmd	*new;
 
+	if (!str)
+		return (-1);
 	new = ft_init_cmd();
+	if (!new)
+		return (ft_free((void **)&str));
+	ft_add_next_cmd(cmd, new);
+	new->flag = flag;
+	new->arg = ft_strdup(str);
+	if (!new->arg)
+		return (ft_free((void **)&str));
+	free(str);
+/*	new = ft_init_cmd();
 	if (!new)
 		return (ft_free((void **)&tmp));
 	ft_add_next_cmd(cmd, new);
@@ -26,7 +37,7 @@ int	ft_add_new_cmd(t_cmd *cmd, char *tmp, int start, int len_q)
 	new->arg = ft_substr(tmp, start + len_q
 			+ 1, ft_strlen(tmp + start + len_q + 1));
 	if (!new->arg)
-		return (-1);
+		return (-1);*/
 	return (1);
 }
 
@@ -42,10 +53,23 @@ int	ft_do_quote(t_cmd **cmd, int i, int *l)
 			flag = (*cmd)->flag;
 			*l = ft_quote_len((*cmd)->arg + i);
 			if (*l >= 0)
-				if (ft_split_quote(*cmd, *l, ft_is_quote((*cmd)->arg[i]), i))
+			{
+				if (ft_split_quote(cmd, ft_is_quote((*cmd)->arg[i]), i, flag))
 					return (ft_free_cmd((*cmd)));
-			*l = -2;
+				*l = -2;
+			}
 		}
 	}
 	return (0);
 }
+
+int	ft_make_quote_flag(int old_flag, char type, int join, int first)
+{
+	int	flag;
+
+	flag = old_flag;
+	if (join && !(flag & JOIN) && !first)
+		flag += JOIN;
+	flag += ft_type_quote(type, flag);
+	return (flag);
+}	

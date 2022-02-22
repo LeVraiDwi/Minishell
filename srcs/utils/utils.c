@@ -39,5 +39,5 @@ int	ft_quotelen(char *str, int start, char c)
 			return (l);
 		l++;
 	}
-	return (-1);
+	return (l);
 }

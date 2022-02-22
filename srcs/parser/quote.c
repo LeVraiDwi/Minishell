@@ -47,47 +47,57 @@ int	ft_quote_len(char *str)
 
 int	ft_type_quote(char c, int flag)
 {
-	if (c == '\'' && !(flag & SIMPLE_QUOTE))
+	if (c == '\'' && !(flag & SIMPLE_QUOTE) && !(flag & DOUBLE_QUOTE))
 		return (SIMPLE_QUOTE);
-	if (c == '\"' && !(flag & DOUBLE_QUOTE))
+	if (c == '\"' && !(flag & DOUBLE_QUOTE) && !(flag & SIMPLE_QUOTE))
 		return (DOUBLE_QUOTE);
 	return (0);
 }
 
-int	ft_split_quote(t_cmd *cmd, int len_q, char type, int start)
+int	ft_split_quote(t_cmd **comd, char type, int start, int flag)
 {
 	char	*tmp;
-	t_cmd	*new;
+	char	*arg;
+	t_cmd	*cmd;
+	int	l;
 
+	cmd = *comd;
 	tmp = cmd->arg;
+	l = ft_quote_len(cmd->arg + start);
 	cmd->arg = ft_substr(cmd->arg, 0, start);
 	if (!cmd->arg)
-		return (ft_free((void **)&tmp));
-	if (cmd->arg && *cmd->arg)
+		return (0);
+	if (*cmd->arg)
 	{
-		new = ft_init_cmd();
-		if (!new)
+		arg = ft_substr(tmp, start + 1, l - 1);
+		if (!arg)
+			return (-1);
+		printf("start:%s\n", arg);
+		if(ft_add_new_cmd(cmd, arg, ft_make_quote_flag(flag, type, 1, 0)))
 			return (ft_free((void **)&tmp));
-		ft_add_next_cmd(cmd, new);
-		new->arg = ft_substr(tmp, start + 1, len_q - 1);
-		if (!new->arg)
-			return (ft_free((void **)&tmp));
-		new->flag += JOIN;
-		new->flag += ft_type_quote(type, cmd->flag);
 		cmd = cmd->next;
 	}
 	else 
 	{
 		if (cmd->arg)
 			free(cmd->arg);
-		cmd->arg = ft_substr(tmp, start + 1, len_q - 1);
+		cmd->arg = ft_substr(tmp, start + 1, l - 1);
 		if (!cmd->arg)
 			return (ft_free((void **)&tmp));
-		cmd->flag += ft_type_quote(type, cmd->flag);
+		printf("middle:%s\n", cmd->arg);
+		cmd->flag += ft_make_quote_flag(flag, type, 1, cmd->first);
 	}
-	if (tmp[start + len_q + 2])
-		if (ft_add_new_cmd(cmd, tmp, start, len_q) < 0)
+	if (tmp[start + l + 2])
+	{
+		arg = ft_substr(tmp, start + l + 1, ft_strlen(tmp + l + start + 1));
+		if (!arg)
 			return (-1);
+		printf("end:%s\n", arg);
+		if (ft_add_new_cmd(cmd, arg, ft_make_quote_flag(flag, 0, 1, 0)) < 0)
+			return (ft_free((void **)&tmp));
+		cmd = cmd->next;
+	}
+	*comd = cmd;
 	free(tmp);
 	return (0);
 }
@@ -109,8 +119,9 @@ int	split_quote(t_cmd *quote)
 				return (-1);
 			i++;
 		}
+		if (l != -2)
+			cmd = cmd->next;
 		l = 0;
-		cmd = cmd->next;
 	}
 	return (0);
 }

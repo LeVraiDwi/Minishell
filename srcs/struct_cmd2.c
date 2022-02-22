@@ -24,7 +24,7 @@ void	ft_print_cmd(t_cmd *cmd)
 {
 	while (cmd)
 	{
-		printf("cmd:%s|%d|\n", cmd->arg, cmd->flag);
+		printf("cmd:%s|%d|first:%d|\n", cmd->arg, cmd->flag, cmd->first);
 		cmd = cmd->next;
 	}
 	return;

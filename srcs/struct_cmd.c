@@ -10,6 +10,7 @@ t_cmd	*ft_init_cmd(void)
 	new->next = 0;
 	new->flag = 0;
 	new->arg = 0;
+	new->first = 0;
 	return (new);
 }
 
@@ -70,6 +71,7 @@ int	ft_creat_cmd(t_cmd **first, char *str)
 		new->arg = ft_strdup(str);
 		if (!new->arg)
 			return (-1);
+		new->first = 1;
 	}
 	return (0);
 }

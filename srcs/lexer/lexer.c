@@ -48,39 +48,28 @@ int	new_cmd(t_cmd **new, char *str, int *l, int *i)
 		free(tmp);
 		tmp = 0;
 		*i += ft_skip_space(str, *i);
-		if (new_cmd_quote(new, str, i, l) < 0)
-			return (-1);
 		*l = *i;
 	}
+	else if (ft_isquote(str[*i]))
+		*i = *i + new_cmd_quote(str, *i) + 1;
 	else
 		*i = *i + 1;
 	return (1);
 }
 
-int	new_cmd_quote(t_cmd **new, char *str, int *i, int *start)
+int	new_cmd_quote(char *str, int i)
 {
-	char	*tmp;
 	int	l;
 	char	c;
 
-	c = ft_is_quote(str[*i]);
+	c = ft_is_quote(str[i]);
+	printf("c:%c\n", c);
 	if (c)
 	{
-		l = ft_quotelen(str, *i, c);
+		l = ft_quotelen(str, i, c);
+		printf("quote l:%d\n", l);
 		if (l > 0)
-		{
-			tmp = ft_substr(str, *i, l + 1);
-			if (!tmp)
-				return (ft_free_lexer(*new, str, tmp));
-			if (tmp && *tmp)
-				if (ft_creat_cmd(new, tmp) < 0)
-					return (ft_free_lexer(*new, str, tmp));
-			free(tmp);
-			tmp = 0;
-			*i = *i + l + 1;
-			*i += ft_skip_space(str, *i);
-			*start = *i;
-		}
+			return (l);
 	}
 	return (0);
 }
@@ -95,8 +84,6 @@ t_cmd	*lexer(char *str)
 	new = 0;
 	i += ft_skip_space(str, i);
 	l = i;
-	if (new_cmd_quote(&new, str, &i, &l) < 0)
-		return (0);
 	while (str && str[i])
 	{
 		if (!new_cmd(&new, str, &l, &i))
