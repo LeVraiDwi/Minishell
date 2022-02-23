@@ -6,7 +6,7 @@
 /*   By: asaboure <asaboure@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/06 17:10:10 by asaboure          #+#    #+#             */
-/*   Updated: 2022/02/21 18:45:06 by tcosse           ###   ########.fr       */
+/*   Updated: 2022/02/23 18:15:14 by tcosse           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,10 @@
 # define LAST_RET 1024
 # define HOME 2048
 # define JOIN 4096
+# define IGNORE 8192
+# define IS_SPE 124 
 
-int		parser(t_cmd *cmd);
+int		parser(t_term *term, t_cmd *cmd);
 int		ft_quote_len(char *str);
 int		ft_type_quote(char c, int flag);
 int		ft_split_quote(t_cmd **cmd, char type, int start, int flag);
@@ -42,6 +44,18 @@ int		ft_split_var(t_cmd **cmd, int i);
 int		ft_set_new_cmd(t_cmd *cmd, char *tmp, int start, int l);
 int		ft_var_len(char *var);
 int		ft_make_quote_flag(int old_flag, char type, int join, int first);
-t_cmd		*ft_next_cmd(t_cmd *cmd);
+int		ft_len_spe(int flag);
+int		ft_split_spe(t_cmd **comd, int start, int flag);
+int		ft_make_var(t_term *term, t_cmd *tab);
+int		ft_replace_in_tab(t_term *term, t_cmd *tab);
+int		ft_ahdoc_var_len(char *str);
+int		ft_free_ahdoc(t_term *term, t_cmd *cmd, char *str, int exit_state);
+int		ft_write_tab(t_term *term, t_cmd *cmd, t_cmd *tab);
+int		ft_ahdoc(t_term *term, t_cmd *cmd, char *limiter);
+int		ft_creat_ahdoc(t_term *term, t_cmd *cmd, char *limiter);
+int		ahdoc(t_term *term, t_cmd *cmd);
+void	ft_add_flag(t_cmd *cmd, int flag);
+t_cmd	*ft_next_cmd(t_cmd *cmd);
 char	ft_is_quote(char c);
+char	*ft_is_ahdoc(t_cmd *cmd);
 #endif

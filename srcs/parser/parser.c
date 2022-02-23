@@ -1,14 +1,17 @@
 #include "minishell.h"
 
-int	parser(t_cmd *cmd)
+int	parser(t_term *term, t_cmd *cmd)
 {
 	t_cmd *tmp;
 
 	tmp = cmd;
 	if (split_quote(cmd) < 0)
 		return (-1);
-	ft_print_cmd(cmd);
 	if (split_spe_char(cmd) < 0)
 		return (-1);
+	printf("debut ahdoc\n");
+	if (ahdoc(term, cmd) < 0)
+		return (-1);
+	printf("debut ahdoc\n");
 	return (0);
 }

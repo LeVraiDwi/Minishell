@@ -8,6 +8,7 @@ typedef struct s_cmd
 	char	*arg;
 	int	flag;
 	int	first;
+	int	pipefd[2];
 	void	*next;
 }		t_cmd;
 

@@ -6,7 +6,7 @@ SRC_PATH =      ./srcs
 
 SRC_NAME =      main.c strisstr.c init.c\
                 term.c struct_pars.c struct_cmd.c\
-		string_utils.c struct_cmd2.c\
+				string_utils.c struct_cmd2.c\
 
 BUILT_PATH =    ./srcs/builtin
 
@@ -26,6 +26,8 @@ PARSER_PATH = ./srcs/parser
 
 PARSER_NAME = 	parser.c parser_utils.c quote.c\
 				spe_char.c quote_utils.c split.c\
+				spe_char_utils.c split_spe.c ahdoc.c\
+				ahdoc_utils.c\
 
 UTILS_PATH = ./srcs/utils
 

@@ -10,6 +10,8 @@ t_cmd	*ft_init_cmd(void)
 	new->next = 0;
 	new->flag = 0;
 	new->arg = 0;
+	new->pipefd[0] = 0;
+	new->pipefd[1] = 0;
 	new->first = 0;
 	return (new);
 }
