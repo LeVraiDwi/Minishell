@@ -6,7 +6,7 @@
 /*   By: tcosse <tcosse@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/17 17:03:50 by tcosse            #+#    #+#             */
-/*   Updated: 2022/02/21 18:45:11 by tcosse           ###   ########.fr       */
+/*   Updated: 2022/02/23 19:15:29 by tcosse           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,17 +27,6 @@ int	ft_add_new_cmd(t_cmd *cmd, char *str, int flag)
 	if (!new->arg)
 		return (ft_free((void **)&str));
 	free(str);
-/*	new = ft_init_cmd();
-	if (!new)
-		return (ft_free((void **)&tmp));
-	ft_add_next_cmd(cmd, new);
-	new->flag = cmd->flag;
-	if (!(new->flag & JOIN))
-		new->flag += JOIN;
-	new->arg = ft_substr(tmp, start + len_q
-			+ 1, ft_strlen(tmp + start + len_q + 1));
-	if (!new->arg)
-		return (-1);*/
 	return (1);
 }
 
@@ -72,4 +61,30 @@ int	ft_make_quote_flag(int old_flag, char type, int join, int first)
 		flag += JOIN;
 	flag += ft_type_quote(type, flag);
 	return (flag);
-}	
+}
+
+int	ft_next_or_replace(t_cmd **comd, char *tmp, int start, int l)
+{
+	t_cmd	*cmd;
+	char	*arg;
+
+	cmd = *comd;
+	if (*cmd->arg)
+	{
+		arg = ft_substr(tmp, start + 1, l - 1);
+		if (!arg)
+			return (-1);
+		if (ft_add_new_cmd(cmd, arg, 0) < 0)
+			return (ft_free((void **)&arg));
+		*comd = cmd->next;
+	}
+	else
+	{
+		if (cmd->arg)
+			free(cmd->arg);
+		cmd->arg = ft_substr(tmp, start + 1, l - 1);
+		if (!cmd->arg)
+			return (-1);
+	}
+	return (0);
+}

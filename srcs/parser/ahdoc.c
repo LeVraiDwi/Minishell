@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ahdoc.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tcosse <tcosse@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/02/23 19:51:25 by tcosse            #+#    #+#             */
+/*   Updated: 2022/02/23 20:00:39 by tcosse           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
 int	ft_write_tab(t_term *term, t_cmd *cmd, t_cmd *tab)
@@ -51,7 +63,7 @@ int	ft_creat_ahdoc(t_term *term, t_cmd *cmd, char *limiter)
 		ft_ahdoc(term, cmd, limiter);
 	if (waitpid(0, &status, 0) < 0)
 		return (-1);
-	return (0);	
+	return (0);
 }
 
 char	*ft_is_ahdoc(t_cmd *cmd)
@@ -64,7 +76,7 @@ char	*ft_is_ahdoc(t_cmd *cmd)
 	next = cmd->next;
 	if (next->flag & IS_SPE)
 		return (0);
-	limiter = ft_strdup(next->arg);	
+	limiter = ft_strdup(next->arg);
 	if (!limiter)
 		return (0);
 	ft_add_flag(next, IGNORE);
@@ -74,10 +86,10 @@ char	*ft_is_ahdoc(t_cmd *cmd)
 int	ahdoc(t_term *term, t_cmd *cmd)
 {
 	char	*limiter;
-	
+
 	while (cmd)
 	{
-		if (cmd->flag & DOUBLE_REDIR_IN)
+		if ((cmd->flag & DOUBLE_REDIR_IN) && !(cmd->flag & IGNORE))
 		{
 			limiter = ft_is_ahdoc(cmd);
 			if (limiter)

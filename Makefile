@@ -27,7 +27,7 @@ PARSER_PATH = ./srcs/parser
 PARSER_NAME = 	parser.c parser_utils.c quote.c\
 				spe_char.c quote_utils.c split.c\
 				spe_char_utils.c split_spe.c ahdoc.c\
-				ahdoc_utils.c\
+				ahdoc_utils.c check.c\
 
 UTILS_PATH = ./srcs/utils
 

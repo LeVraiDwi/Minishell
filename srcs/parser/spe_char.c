@@ -6,7 +6,7 @@
 /*   By: tcosse <tcosse@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/17 17:06:04 by tcosse            #+#    #+#             */
-/*   Updated: 2022/02/23 17:37:46 by tcosse           ###   ########.fr       */
+/*   Updated: 2022/02/23 19:17:46 by tcosse           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,14 +56,14 @@ int	ft_is_redir(char *cmd, int l, int flag)
 		if (cmd[l + 1] == '<')
 			return (DOUBLE_REDIR_IN);
 		else
-			return(SIMPLE_REDIR_IN);
+			return (SIMPLE_REDIR_IN);
 	}
 	else if (cmd[l] == '>')
 	{
 		if (cmd[l + 1] == '>')
 			return (DOUBLE_REDIR_OUT);
 		else
-			return(SIMPLE_REDIR_OUT);
+			return (SIMPLE_REDIR_OUT);
 	}
 	return (0);
 }
@@ -76,7 +76,7 @@ int	ft_is_home(char *cmd, int l, int flag)
 		return (0);
 	if (cmd[l] == '~' && (cmd[l + 1] == 0 || cmd[l + 1] == ' '
 			|| ft_is_special_char(cmd, l + 1, flag) || cmd[l + 1] == '/')
-			&& (l == 0 || (l > 0 && cmd[l - 1] == ' ')))
+		&& (l == 0 || (l > 0 && cmd[l - 1] == ' ')))
 		return (1);
 	return (0);
 }

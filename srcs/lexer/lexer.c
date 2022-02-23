@@ -6,7 +6,7 @@
 /*   By: tcosse <tcosse@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 17:26:48 by tcosse            #+#    #+#             */
-/*   Updated: 2022/02/21 19:00:21 by tcosse           ###   ########.fr       */
+/*   Updated: 2022/02/23 19:31:47 by tcosse           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ int	new_cmd(t_cmd **new, char *str, int *l, int *i)
 
 int	new_cmd_quote(char *str, int i)
 {
-	int	l;
+	int		l;
 	char	c;
 
 	c = ft_is_quote(str[i]);
@@ -88,11 +88,13 @@ t_cmd	*lexer(char *str)
 			return (0);
 	}
 	if (str && str[l])
+	{
 		if (ft_creat_cmd(&new, str + l) < 0)
 		{
 			ft_free_lexer(new, str, 0);
 			return (0);
 		}
+	}
 	if (str)
 		free(str);
 	return (new);

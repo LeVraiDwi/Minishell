@@ -6,7 +6,7 @@
 /*   By: tcosse <tcosse@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 17:27:05 by tcosse            #+#    #+#             */
-/*   Updated: 2022/02/23 17:40:55 by tcosse           ###   ########.fr       */
+/*   Updated: 2022/02/23 19:30:44 by tcosse           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ int	ft_quotelen(char *str, int start, char c)
 			return (l + 1);
 		l++;
 	}
-	return (l);
+	return (1);
 }
 
 char	*ft_insertvar(char *s, char *str, int var_start, int var_l)

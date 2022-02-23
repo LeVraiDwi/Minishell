@@ -1,8 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   split.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tcosse <tcosse@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/02/23 19:18:15 by tcosse            #+#    #+#             */
+/*   Updated: 2022/02/23 19:46:25 by tcosse           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
-int     ft_var_len(char *var)
+int	ft_var_len(char *var)
 {
-	int     i;
+	int	i;
 
 	i = 0;
 	while (var[i] && (ft_isalnum(var[i]) || var[i] == '_'))
@@ -29,17 +41,8 @@ int	split_spe_char(t_cmd *cmd)
 		while (cmd && cmd->arg && cmd->arg[i])
 		{
 			flag = ft_is_special_char(cmd->arg, i, cmd->flag);
-			if (flag & VAR && !(cmd->flag & SIMPLE_QUOTE))
-			{
-				if (ft_split_var(&cmd, i) < 0)
-					return (-1);
-			}
-			else if (flag && !(cmd->flag & SIMPLE_QUOTE) && !(cmd->flag & DOUBLE_QUOTE))
-			{
-				if (ft_split_spe(&cmd, i, flag) < 0)
-					return (-1);
-				i = ft_strlen(cmd->arg);
-			}
+			if (ft_split_quote_spe(cmd, flag, &i) < 0)
+				return (-1);
 			flag = 0;
 			i++;
 		}
@@ -48,68 +51,43 @@ int	split_spe_char(t_cmd *cmd)
 	return (0);
 }
 
-int     ft_split_var(t_cmd **comd, int i)
+int	ft_split_var(t_cmd **comd, int i)
 {
-        int             l;
-        char    *tmp;
+	int		l;
+	char	*tmp;
 	t_cmd	*cmd;
 
 	cmd = *comd;
-        l = ft_var_len(cmd->arg + i + 1);
-        if (l)
-        {
-                tmp = cmd->arg;
-                cmd->arg = ft_substr(cmd->arg, 0, i);
-                if (!cmd->arg)
-                        return (ft_free((void **)&tmp));
-		if (*cmd->arg)
-		{		
-			if (ft_set_new_cmd(cmd, tmp, i, l + 1) < 0)
-				return (ft_free((void **)&tmp));
-			cmd = cmd->next;
-		}
-		else
-		{
-			if (cmd->arg)
-				free(cmd->arg);
-                	cmd->arg = ft_substr(tmp, i, l + 1);
-			if (!cmd->arg)
-				return (ft_free((void **)&tmp));
-		}
+	l = ft_var_len(cmd->arg + i + 1);
+	if (l)
+	{
+		tmp = cmd->arg;
+		if (ft_add_or_next(&cmd, tmp, i, l) < 0)
+			return (ft_free((void **)&tmp));
 		ft_add_flag(cmd, VAR);
 		if (tmp[i + l + 1])
 		{
-			if (ft_set_new_cmd(cmd,
-				tmp, i + l + 1, ft_strlen(tmp + i + l + 1)) < 0)
+			if (ft_set_new_cmd(cmd, tmp, i + l + 1,
+					ft_strlen(tmp + i + l + 1)) < 0)
 				return (ft_free((void **)&tmp));
 		}
 		free(tmp);
 		*comd = cmd;
-        }
-        return (0);
+	}
+	return (0);
 }
 
-void	ft_set_flag(t_cmd *cmd, t_cmd *new)
+int	ft_set_new_cmd(t_cmd *cmd, char *tmp, int start, int l)
 {
-	if (!(new->flag & JOIN))
-		new->flag += JOIN;
-	if ((cmd->flag & DOUBLE_QUOTE) && !(new->flag & DOUBLE_QUOTE))
-		new->flag += DOUBLE_QUOTE;
-	if ((cmd->flag & SIMPLE_QUOTE) && !(new->flag & SIMPLE_QUOTE))
-		new->flag += SIMPLE_QUOTE;
-}
+	t_cmd	*new;
 
-int     ft_set_new_cmd(t_cmd *cmd, char *tmp, int start, int l)
-{
-        t_cmd   *new;
-
-        new = ft_init_cmd();
-        if (!new)
-                return (-1);
-        ft_add_next_cmd(cmd, new);
-        new->arg = ft_substr(tmp, start, l);
-        if (!new->arg)
-                return (-1);
+	new = ft_init_cmd();
+	if (!new)
+		return (-1);
+	ft_add_next_cmd(cmd, new);
+	new->arg = ft_substr(tmp, start, l);
+	if (!new->arg)
+		return (-1);
 	ft_set_flag(cmd, new);
-        return (0);
+	return (0);
 }

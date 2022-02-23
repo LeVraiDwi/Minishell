@@ -6,7 +6,7 @@
 /*   By: tcosse <tcosse@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/17 17:06:04 by tcosse            #+#    #+#             */
-/*   Updated: 2022/02/23 14:43:45 by tcosse           ###   ########.fr       */
+/*   Updated: 2022/02/23 19:16:28 by tcosse           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ int	ft_split_quote(t_cmd **comd, char type, int start, int flag)
 	char	*tmp;
 	char	*arg;
 	t_cmd	*cmd;
-	int	l;
+	int		l;
 
 	cmd = *comd;
 	tmp = cmd->arg;
@@ -67,24 +67,9 @@ int	ft_split_quote(t_cmd **comd, char type, int start, int flag)
 	cmd->arg = ft_substr(cmd->arg, 0, start);
 	if (!cmd->arg)
 		return (0);
-	if (*cmd->arg)
-	{
-		arg = ft_substr(tmp, start + 1, l - 1);
-		if (!arg)
-			return (-1);
-		if(ft_add_new_cmd(cmd, arg, ft_make_quote_flag(flag, type, 1, 0)) < 0)
-			return (ft_free((void **)&tmp));
-		cmd = cmd->next;
-	}
-	else 
-	{
-		if (cmd->arg)
-			free(cmd->arg);
-		cmd->arg = ft_substr(tmp, start + 1, l - 1);
-		if (!cmd->arg)
-			return (ft_free((void **)&tmp));
-		cmd->flag = ft_make_quote_flag(flag, type, 1, cmd->first);
-	}
+	if (ft_next_or_replace(&cmd, tmp, start, l) < 0)
+		return (ft_free((void **)&tmp));
+	cmd->flag = ft_make_quote_flag(flag, type, 1, cmd->first);
 	if (tmp[start + l + 1])
 	{
 		arg = ft_substr(tmp, start + l + 1, ft_strlen(tmp + l + start));

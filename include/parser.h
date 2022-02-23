@@ -6,7 +6,7 @@
 /*   By: asaboure <asaboure@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/06 17:10:10 by asaboure          #+#    #+#             */
-/*   Updated: 2022/02/23 18:15:14 by tcosse           ###   ########.fr       */
+/*   Updated: 2022/02/23 19:57:24 by tcosse           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@
 # define JOIN 4096
 # define IGNORE 8192
 # define IS_SPE 124 
+# define IS_REDIR 120
 
 int		parser(t_term *term, t_cmd *cmd);
 int		ft_quote_len(char *str);
@@ -54,6 +55,13 @@ int		ft_write_tab(t_term *term, t_cmd *cmd, t_cmd *tab);
 int		ft_ahdoc(t_term *term, t_cmd *cmd, char *limiter);
 int		ft_creat_ahdoc(t_term *term, t_cmd *cmd, char *limiter);
 int		ahdoc(t_term *term, t_cmd *cmd);
+int		ft_check_redir(t_cmd *cmd);
+int		ft_next_or_replace(t_cmd **comd, char *tmp, int start, int l);
+int		ft_is_interprete(t_cmd *cmd, int flag);
+int		ft_split_quote_spe(t_cmd *cmd, int flag, int *i);
+int		ft_add_or_next(t_cmd **comd, char *tmp, int i, int l);
+int		ft_make_replace(t_term *term, t_cmd *tab, int *i);
+void	ft_set_flag(t_cmd *cmd, t_cmd *new);
 void	ft_add_flag(t_cmd *cmd, int flag);
 t_cmd	*ft_next_cmd(t_cmd *cmd);
 char	ft_is_quote(char c);
