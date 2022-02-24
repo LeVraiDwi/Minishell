@@ -6,7 +6,7 @@
 /*   By: asaboure <asaboure@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/06 17:06:14 by asaboure          #+#    #+#             */
-/*   Updated: 2022/02/22 16:39:41 by asaboure         ###   ########.fr       */
+/*   Updated: 2022/02/24 20:53:25 by asaboure         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,8 @@ char	*check_cmd(char *input, char **path)
 	char	*pathcmd;
 
 	i = 0;
+	if (access(input, X_OK | F_OK) == 0)
+		return (ft_strdup(input));
 	while (path[i])
 	{
 		pathcmd = ft_strjoin(path[i], input);
