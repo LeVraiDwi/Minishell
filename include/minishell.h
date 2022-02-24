@@ -6,7 +6,7 @@
 /*   By: asaboure <asaboure@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/06 18:22:04 by asaboure          #+#    #+#             */
-/*   Updated: 2022/02/23 17:21:31 by tcosse           ###   ########.fr       */
+/*   Updated: 2022/02/24 20:04:44 by tcosse           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@
 # include "spe_char.h"
 # include "ahdoc.h"
 # include "check.h"
+# include "err.h"
 # define STDIN 0
 # define STDOUT 1
 # define STDERR 2

@@ -6,4 +6,6 @@ int     ft_set_cmd(t_cmd *cmd);
 int     ft_check_flag(t_cmd *cmd);
 int     check_file(t_cmd *cmd);
 int		ft_isdir(char *path);
+int		ft_check_parsing(t_cmd **tab);
+int		ft_check_pipe(t_cmd *cmd);
 #endif

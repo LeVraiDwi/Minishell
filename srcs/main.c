@@ -6,7 +6,7 @@
 /*   By: asaboure <asaboure@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/24 13:17:17 by tcosse            #+#    #+#             */
-/*   Updated: 2022/02/24 19:28:02 by tcosse           ###   ########.fr       */
+/*   Updated: 2022/02/24 20:48:49 by tcosse           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,11 @@ int	main(int argc, char **argv, char **env)
 			if (parser(cmd))
 				return (-1);
 			ft_print_cmd(cmd);
+			printf("====================pipe check=====================================\n");
+			if (ft_check_pipe(cmd))
+			{
+				printf("err pipe\n");
+			}
 			printf("====================split=====================================\n");
 			tab = split_pipe(cmd);
 			if (!tab)
@@ -51,6 +56,8 @@ int	main(int argc, char **argv, char **env)
 				return (-1);
 			}
 			ft_print_tab_cmd(tab);
+			if (ft_check_parsing(tab) < 0)
+				printf("err parsing\n");
 			ft_free_cmd_tab(tab);
 			term.exit--;
 		}
