@@ -29,3 +29,16 @@ void	ft_print_cmd(t_cmd *cmd)
 	}
 	return;
 }
+
+void	ft_print_tab_cmd(t_cmd **tab)
+{
+	int	l;
+
+	l = 0;
+	while ( tab && tab[l])
+	{
+		printf("=======cmd=======\n");
+		ft_print_cmd(tab[l]);
+		l++;
+	}
+}

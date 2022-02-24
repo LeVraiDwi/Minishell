@@ -34,6 +34,10 @@
 # include "exec.h"
 # include "history.h"
 # include "utils.h"
+# include "pipe.h"
+# include "spe_char.h"
+# include "ahdoc.h"
+# include "check.h"
 # define STDIN 0
 # define STDOUT 1
 # define STDERR 2

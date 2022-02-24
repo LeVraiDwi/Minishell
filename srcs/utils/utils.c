@@ -6,7 +6,7 @@
 /*   By: tcosse <tcosse@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 17:27:05 by tcosse            #+#    #+#             */
-/*   Updated: 2022/02/23 19:30:44 by tcosse           ###   ########.fr       */
+/*   Updated: 2022/02/24 17:10:57 by tcosse           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,10 +69,11 @@ char	*ft_insertvar(char *s, char *str, int var_start, int var_l)
 	return (new);
 }
 
-void	ft_close(int fd1, int fd2)
+int	ft_close(int fd1, int fd2)
 {
 	if (fd1 > 1)
 		close(fd1);
 	if (fd2 > 1)
 		close(fd2);
+	return (-1);
 }

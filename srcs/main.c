@@ -6,7 +6,7 @@
 /*   By: asaboure <asaboure@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/24 13:17:17 by tcosse            #+#    #+#             */
-/*   Updated: 2022/02/23 17:52:37 by tcosse           ###   ########.fr       */
+/*   Updated: 2022/02/24 19:28:02 by tcosse           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ int	main(int argc, char **argv, char **env)
 	char		*str;
 	int			i;
 	t_cmd		*cmd;
+	t_cmd		**tab;
 	//char	*cmd1[] = {"export", "a=12", "jaime=", "pain=jamenfkfhssflf", "0"};
 
 	(void)argv;
@@ -30,18 +31,29 @@ int	main(int argc, char **argv, char **env)
 	{
 		i = 0;
 		str = readline("\033[34;01mMinishell\033[00m$ ");
-		ft_add_history(str);
-		cmd = lexer(str);
-		printf("%p\n", cmd);
-		if (!cmd)
-			return (-1);
-		ft_print_cmd(cmd);
-		printf("====================parser=====================================\n");
-		if (parser(&term, cmd))
-			return (-1);
-		ft_print_cmd(cmd);
-		ft_free_cmd(cmd);
-		term.exit--;
+		if (*str)
+		{
+			ft_add_history(str);
+			cmd = lexer(str);
+			printf("%p\n", cmd);
+			if (!cmd)
+				return (-1);
+			ft_print_cmd(cmd);
+			printf("====================parser=====================================\n");
+			if (parser(cmd))
+				return (-1);
+			ft_print_cmd(cmd);
+			printf("====================split=====================================\n");
+			tab = split_pipe(cmd);
+			if (!tab)
+			{
+				printf("erreur split\n");
+				return (-1);
+			}
+			ft_print_tab_cmd(tab);
+			ft_free_cmd_tab(tab);
+			term.exit--;
+		}
 /*		printf("======================debut parsing==================\n");
 		parsebuf = parse_init(str, env);
 		printf("okay:%p, %p, next:%p\n", parsebuf, parsebuf->argv, parsebuf->next);

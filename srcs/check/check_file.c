@@ -1,34 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check.c                                            :+:      :+:    :+:   */
+/*   check_file.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tcosse <tcosse@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/23 18:55:45 by tcosse            #+#    #+#             */
-/*   Updated: 2022/02/23 19:59:54 by tcosse           ###   ########.fr       */
+/*   Created: 2022/02/17 17:04:49 by tcosse            #+#    #+#             */
+/*   Updated: 2022/02/24 16:21:56 by tcosse           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	ft_check_redir(t_cmd *cmd)
+int	ft_isdir(char *path)
 {
-	t_cmd	*next;
+	DIR	*dp;
 
-	while (cmd)
+	dp = opendir(path);
+	if (dp)
 	{
-		next = (t_cmd *)cmd->next;
-		if ((cmd->flag & IS_REDIR) && !(cmd->flag & IGNORE))
-		{
-			if (!next || next->flag & IS_SPE)
-			{
-				printf("erreur\n");
-			}
-			if (next)
-				ft_add_flag(next, IGNORE);
-		}
-		cmd = cmd->next;
+		errno = EISDIR;
+		closedir(dp);
+		return (-1);
 	}
-	return (1);
+	closedir(dp);
+	return (0);
 }

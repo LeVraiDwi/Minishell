@@ -1,4 +1,4 @@
-SRCS = $(addprefix $(SRC_PATH)/,$(SRC_NAME)) $(addprefix $(HISTORY_PATH)/,$(HISTORY_NAME)) $(addprefix $(UTILS_PATH)/,$(UTILS_NAME)) $(addprefix $(LEXER_PATH)/,$(LEXER_NAME)) $(addprefix $(ENV_PATH)/,$(ENV_NAME)) $(addprefix $(BUILT_PATH)/,$(BUILT_NAME)) $(addprefix $(PARSER_PATH)/,$(PARSER_NAME))
+SRCS = $(addprefix $(CHECK_PATH)/,$(CHECK_NAME)) $(addprefix $(AHDOC_PATH)/,$(AHDOC_NAME)) $(addprefix $(PIPE_PATH)/,$(PIPE_NAME)) $(addprefix $(SPE_PATH)/,$(SPE_NAME)) $(addprefix $(SRC_PATH)/,$(SRC_NAME)) $(addprefix $(HISTORY_PATH)/,$(HISTORY_NAME)) $(addprefix $(UTILS_PATH)/,$(UTILS_NAME)) $(addprefix $(LEXER_PATH)/,$(LEXER_NAME)) $(addprefix $(ENV_PATH)/,$(ENV_NAME)) $(addprefix $(BUILT_PATH)/,$(BUILT_NAME)) $(addprefix $(PARSER_PATH)/,$(PARSER_NAME))
 
 LIBFT = ./libft/libft.a
 
@@ -22,12 +22,27 @@ LEXER_PATH = ./srcs/lexer
 
 LEXER_NAME = lexer.c
 
+PIPE_PATH = ./srcs/pipe
+
+PIPE_NAME = new_pipe.c new_pipe_utils.c pipe.c\
+
+CHECK_PATH = ./srcs/check
+
+CHECK_NAME = check.c check_file.c\
+
+SPE_PATH = ./srcs/spe_char
+
+SPE_NAME = spe_char_utils.c spe_char.c\
+
+AHDOC_PATH = ./srcs/ahdoc
+
+AHDOC_NAME = ahdoc.c ahdoc_utils.c\
+
 PARSER_PATH = ./srcs/parser
 
-PARSER_NAME = 	parser.c parser_utils.c quote.c\
-				spe_char.c quote_utils.c split.c\
-				spe_char_utils.c split_spe.c ahdoc.c\
-				ahdoc_utils.c check.c\
+PARSER_NAME = 	parser.c quote.c quote_utils.c\
+				split.c split_spe.c\
+				
 
 UTILS_PATH = ./srcs/utils
 
@@ -51,7 +66,7 @@ OBJS = ${SRCS:.c=.o}
 
 NAME = minishell
 
-FLAGS = -Wall -Wextra
+FLAGS = -Wall -Wextra -Werror
 
 HEADER = -I "./include" -I"./libft"
 

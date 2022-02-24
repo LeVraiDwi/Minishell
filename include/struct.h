@@ -53,4 +53,5 @@ void		ft_add_next_cmd(t_cmd *cmd, t_cmd *new);
 int		ft_creat_cmd(t_cmd **first, char *str);
 int		ft_make_cmd(char *str, t_cmd **cmd);
 void	ft_print_cmd(t_cmd *cmd);
+void	ft_print_tab_cmd(t_cmd **cmd);
 #endif
