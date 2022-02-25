@@ -30,6 +30,8 @@ char	*get_env_var(char **env, char *var)
 	i = ft_is_env(env, var);
 	if (i)
 		return (get_val(env[i]));
+	else
+		return (ft_strdup(""));
 	return (0);
 }
 

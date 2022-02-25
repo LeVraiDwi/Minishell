@@ -39,6 +39,7 @@
 # include "ahdoc.h"
 # include "check.h"
 # include "err.h"
+# include "expanser.h"
 # define STDIN 0
 # define STDOUT 1
 # define STDERR 2

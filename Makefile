@@ -1,4 +1,4 @@
-SRCS = $(addprefix $(CHECK_PATH)/,$(CHECK_NAME)) $(addprefix $(AHDOC_PATH)/,$(AHDOC_NAME)) $(addprefix $(PIPE_PATH)/,$(PIPE_NAME)) $(addprefix $(SPE_PATH)/,$(SPE_NAME)) $(addprefix $(SRC_PATH)/,$(SRC_NAME)) $(addprefix $(HISTORY_PATH)/,$(HISTORY_NAME)) $(addprefix $(UTILS_PATH)/,$(UTILS_NAME)) $(addprefix $(LEXER_PATH)/,$(LEXER_NAME)) $(addprefix $(ENV_PATH)/,$(ENV_NAME)) $(addprefix $(BUILT_PATH)/,$(BUILT_NAME)) $(addprefix $(PARSER_PATH)/,$(PARSER_NAME)) $(addprefix $(ERR_PATH)/,$(ERR_NAME))
+SRCS = $(addprefix $(CHECK_PATH)/,$(CHECK_NAME)) $(addprefix $(AHDOC_PATH)/,$(AHDOC_NAME)) $(addprefix $(PIPE_PATH)/,$(PIPE_NAME)) $(addprefix $(SPE_PATH)/,$(SPE_NAME)) $(addprefix $(SRC_PATH)/,$(SRC_NAME)) $(addprefix $(HISTORY_PATH)/,$(HISTORY_NAME)) $(addprefix $(UTILS_PATH)/,$(UTILS_NAME)) $(addprefix $(LEXER_PATH)/,$(LEXER_NAME)) $(addprefix $(ENV_PATH)/,$(ENV_NAME)) $(addprefix $(BUILT_PATH)/,$(BUILT_NAME)) $(addprefix $(PARSER_PATH)/,$(PARSER_NAME)) $(addprefix $(ERR_PATH)/,$(ERR_NAME)) $(addprefix $(EXPANSER_PATH)/,$(EXPANSER_NAME))
 
 LIBFT = ./libft/libft.a
 
@@ -54,9 +54,7 @@ UTILS_NAME = utils.c
 
 EXPANSER_PATH = ./srcs/expanser
 
-EXPANSER_NAME = expanser.c expanser_utils.c expanser_file.c\
-		in_out.c quote.c arg.c\
-		quote_util.c arg_util.c\
+EXPANSER_NAME = expanser.c expanser_utils.c\
 
 HISTORY_PATH = ./srcs/history
 

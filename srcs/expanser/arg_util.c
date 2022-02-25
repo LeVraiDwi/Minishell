@@ -25,29 +25,22 @@ int	ft_join(char **std, t_cmd *cmd)
 	return (0);
 }
 
-int	ft_insert_var(char **cmd, int l, int i, char **env)
+int	ft_insert_var(char **cmd, char **env)
 {
 	char	*tmp;
 	char	*var;
 
-	if ((*cmd)[i] == '$')
-	{
-		tmp = ft_substr(*cmd, i + 1, l - 1);
-		if (!tmp)
-			return (-1);
-	}
+	if (tmp->flag & VAR)
+		tmp = ft_substr(*cmd, 1, ft_strlen(cmd + 1));
 	else
-		tmp = ft_strdup(HOME);
+		tmp = ft_strdup(HOME_STR);
 	var = get_env_var(env, tmp);
 	if (tmp)
 		free(tmp);
-	tmp = ft_insertvar(*cmd, var, i, l);
-	if (var)
-		free(var);
-	if (!tmp)
+	if (!var)
 		return (-1);
 	free(*cmd);
-	*cmd = tmp;
+	*cmd = var;
 	return (0);
 }
 

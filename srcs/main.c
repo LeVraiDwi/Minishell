@@ -58,7 +58,14 @@ int	main(int argc, char **argv, char **env)
 			ft_print_tab_cmd(tab);
 			if (ft_check_parsing(tab) < 0)
 				printf("err parsing\n");
-			ft_free_cmd_tab(tab);
+			printf("====================expanser=====================================\n");
+			if (expanser(&term, tab) < 0)
+			{
+				printf("err expanser\n");
+			}
+			ft_print_tab_cmd(tab);
+			if (tab)
+				ft_free_cmd_tab(tab);
 			term.exit--;
 		}
 /*		printf("======================debut parsing==================\n");
