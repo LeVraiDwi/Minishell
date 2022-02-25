@@ -23,15 +23,7 @@ int	ft_error_pipe(t_parsing *cmd)
 	exit(EXIT_FAILURE);
 }
 
-void	ft_close(int fd1, int fd2)
-{
-	if (fd1 > 1)
-		close(fd1);
-	if (fd2 > 1)
-		close(fd2);
-}
-
-int	ft_child(t_term *term, t_parsing *cmd, int last_child)
+/*int	ft_child(t_term *term, t_parsing *cmd, int last_child)
 {
 	int	status;
 
@@ -55,7 +47,7 @@ int	ft_child(t_term *term, t_parsing *cmd, int last_child)
 	ft_free_term(term);
 	ft_free_pars(cmd);
 	exit(EXIT_FAILURE);
-}
+}*/
 
 int	ft_exec_builtin(t_term *term, t_parsing *parsing, int exec)
 {
@@ -69,18 +61,18 @@ int	ft_exec_builtin(t_term *term, t_parsing *parsing, int exec)
 	return (1);
 }
 
-int	exec(t_term *term, t_parsing *cmd)
+int	exec(t_term *term, t_cmd **tab)
 {
-	int				child;
-	int				status;
-	int				last_child;
+	t_parsing	*exec;
+	int			i;
 
-	last_child = 0;
-	while (cmd) 
+	(void)term;
+	i = 0;
+	while (tab[i])
 	{
-		if ((cmd->path || (cmd->argv && cmd->argv[0] && (ft_is_builtin(cmd->argv[0]) >= 0))) && !ft_setflux(cmd))
+		if (creat_exec(term, tab[i], &exec))
 		{
-			if (ft_exec_builtin(term, cmd, 1) == 1)
+		/*	if (ft_exec_builtin(term, cmd, 1) == 1)
 			{
 				child = fork();
 				if (child < 0)
@@ -90,12 +82,12 @@ int	exec(t_term *term, t_parsing *cmd)
 				ft_close(cmd->in, cmd->out);
 				status = 0;
 				waitpid(0, &status, 0);
-				last_child = child;
-			}
+				last_child = child;	
+			}*/
+
 		}
-		else
-			perror(cmd->argv[0]);
-		cmd = cmd->next;
+		i++;
 	}
+	print_err(term);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: asaboure <asaboure@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/24 13:17:17 by tcosse            #+#    #+#             */
-/*   Updated: 2022/02/24 20:48:49 by tcosse           ###   ########.fr       */
+/*   Updated: 2022/02/25 16:24:30 by tcosse           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,10 @@ int	main(int argc, char **argv, char **env)
 			{
 				printf("err expanser\n");
 			}
+			ft_print_tab_cmd(tab);
+			printf("====================exec=====================================\n");
+			if (exec(&term, tab) < 0)
+				printf("err exec\n");
 			ft_print_tab_cmd(tab);
 			if (tab)
 				ft_free_cmd_tab(tab);

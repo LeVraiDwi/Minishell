@@ -5,12 +5,6 @@
 int		ft_insert_var(t_cmd *cmd, char **env);
 int		replace_var(t_term *term, t_parsing *parsing);
 int		expanser(t_term *term, t_cmd **tab);
-int		ft_stdopen(char *path, int *fd, int flags, int right);
-int		ft_isfile(char *path);
-int		ft_checkright(char *path, int right);
-int		ft_openfile(char *path, int flags, int right);
-int		ft_in_out(t_parsing *parsing);
-int		ft_setfilename(t_parsing *parsing);
 int		ft_setstd(t_parsing *parsing);
 int		ft_creat_argv(t_parsing *parsing);
 int		count_argv(t_parsing *parsing);

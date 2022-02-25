@@ -6,7 +6,7 @@
 /*   By: tcosse <tcosse@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/24 13:19:17 by tcosse            #+#    #+#             */
-/*   Updated: 2022/02/21 15:20:04 by tcosse           ###   ########.fr       */
+/*   Updated: 2022/02/25 14:19:31 by tcosse           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,16 +16,9 @@ void	ft_init_struct(t_parsing *pars)
 {
 	pars->path = 0;
 	pars->argv = 0;
-	pars->flag = 0;
 	pars->next = 0;
-	pars->cmd = 0;
-	pars->quote_in = 0;
-	pars->quote_out = 0;
-	pars->quote_err = 0;
 	pars->in = STDIN;
 	pars->out = STDOUT;
-	pars->str_in = 0;
-	pars->str_out = 0;
 	pars->pipe_in[0] = 0;
 	pars->pipe_in[1] = 0;
 	pars->pipe_out[0] = 0;
@@ -77,10 +70,6 @@ int	ft_free_pars(t_parsing *pars)
 		ft_free((void **)&pars->path);
 	if (pars->argv)
 		ft_free_argv(pars->argv);
-	if (pars->str_in)
-		ft_free((void **)&pars->str_in);
-	if (pars->str_out)
-		ft_free((void **)&pars->str_out);
 	ft_free((void **)&pars);
 	return (0);
 }

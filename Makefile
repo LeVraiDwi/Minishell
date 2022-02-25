@@ -1,4 +1,4 @@
-SRCS = $(addprefix $(CHECK_PATH)/,$(CHECK_NAME)) $(addprefix $(AHDOC_PATH)/,$(AHDOC_NAME)) $(addprefix $(PIPE_PATH)/,$(PIPE_NAME)) $(addprefix $(SPE_PATH)/,$(SPE_NAME)) $(addprefix $(SRC_PATH)/,$(SRC_NAME)) $(addprefix $(HISTORY_PATH)/,$(HISTORY_NAME)) $(addprefix $(UTILS_PATH)/,$(UTILS_NAME)) $(addprefix $(LEXER_PATH)/,$(LEXER_NAME)) $(addprefix $(ENV_PATH)/,$(ENV_NAME)) $(addprefix $(BUILT_PATH)/,$(BUILT_NAME)) $(addprefix $(PARSER_PATH)/,$(PARSER_NAME)) $(addprefix $(ERR_PATH)/,$(ERR_NAME)) $(addprefix $(EXPANSER_PATH)/,$(EXPANSER_NAME))
+SRCS = $(addprefix $(CHECK_PATH)/,$(CHECK_NAME)) $(addprefix $(AHDOC_PATH)/,$(AHDOC_NAME)) $(addprefix $(PIPE_PATH)/,$(PIPE_NAME)) $(addprefix $(SPE_PATH)/,$(SPE_NAME)) $(addprefix $(SRC_PATH)/,$(SRC_NAME)) $(addprefix $(HISTORY_PATH)/,$(HISTORY_NAME)) $(addprefix $(UTILS_PATH)/,$(UTILS_NAME)) $(addprefix $(LEXER_PATH)/,$(LEXER_NAME)) $(addprefix $(ENV_PATH)/,$(ENV_NAME)) $(addprefix $(BUILT_PATH)/,$(BUILT_NAME)) $(addprefix $(PARSER_PATH)/,$(PARSER_NAME)) $(addprefix $(ERR_PATH)/,$(ERR_NAME)) $(addprefix $(EXPANSER_PATH)/,$(EXPANSER_NAME)) $(addprefix $(EXEC_PATH)/,$(EXEC_NAME))
 
 LIBFT = ./libft/libft.a
 
@@ -32,7 +32,7 @@ CHECK_NAME = check.c check_file.c check_cmd.c\
 
 ERR_PATH = ./srcs/err
 
-ERR_NAME = err.c\
+ERR_NAME = err.c err_utils.c\
 
 SPE_PATH = ./srcs/spe_char
 
@@ -62,7 +62,8 @@ HISTORY_NAME = history_add.c
 
 EXEC_PATH = ./srcs/exec
 
-EXEC_NAME = exec.c exec_util.c
+EXEC_NAME = exec.c creat_exec.c\
+			exec_file.c\
 
 OBJS = ${SRCS:.c=.o}
 
