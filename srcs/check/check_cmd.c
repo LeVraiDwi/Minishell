@@ -27,7 +27,7 @@ int	ft_set_cmd(t_cmd *cmd)
 		{
 			if (!var)
 			{
-				ft_add_flag(cmd, CMD);
+				ft_add_flag(cmd, ARG);
 				var = 1;
 			}
 			else

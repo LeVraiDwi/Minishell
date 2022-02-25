@@ -13,4 +13,7 @@ int ft_openfile(char *path, int right, int mode, int flag);
 int ft_stdopen(t_term *term, t_cmd *cmd, char *path);
 int ft_open_std_cmd(t_term *term, t_cmd *cmd);
 int	creat_exec(t_term *term, t_cmd *cmd, t_parsing **exec);
+int	ft_add_to_tab_cmd(t_parsing *exec, char *str);
+int	ft_add_redir(t_parsing *exec, t_cmd *cmd);
+char	*ft_get_next(t_cmd *cmd);
 #endif

@@ -65,13 +65,21 @@ int	exec(t_term *term, t_cmd **tab)
 {
 	t_parsing	*exec;
 	int			i;
+	int			l;
 
 	(void)term;
 	i = 0;
 	while (tab[i])
 	{
-		if (creat_exec(term, tab[i], &exec))
+		if (creat_exec(term, tab[i], &exec) == 0)
 		{
+			l = 0;
+			printf("exec:%p|argv:\n", exec);
+			while (exec->argv[l])
+			{
+				printf("exec:%s|\n", exec->argv[l]);
+				l++;
+			}
 		/*	if (ft_exec_builtin(term, cmd, 1) == 1)
 			{
 				child = fork();
