@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   struct_cmd2.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tcosse <tcosse@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/02/25 18:39:29 by tcosse            #+#    #+#             */
+/*   Updated: 2022/02/25 18:39:54 by tcosse           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
 int	ft_make_cmd(char *str, t_cmd **cmd)
@@ -27,7 +39,7 @@ void	ft_print_cmd(t_cmd *cmd)
 		printf("cmd:%s|%d|first:%d|\n", cmd->arg, cmd->flag, cmd->first);
 		cmd = cmd->next;
 	}
-	return;
+	return ;
 }
 
 void	ft_print_tab_cmd(t_cmd **tab)
@@ -35,7 +47,7 @@ void	ft_print_tab_cmd(t_cmd **tab)
 	int	l;
 
 	l = 0;
-	while ( tab && tab[l])
+	while (tab && tab[l])
 	{
 		printf("=======cmd=======\n");
 		ft_print_cmd(tab[l]);

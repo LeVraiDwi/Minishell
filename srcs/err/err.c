@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   err.c                                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tcosse <tcosse@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/02/25 18:34:26 by tcosse            #+#    #+#             */
+/*   Updated: 2022/02/25 18:36:18 by tcosse           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
 int	ft_set_err(t_cmd *cmd, t_cmd *first, int err_num)
@@ -17,7 +29,7 @@ int	ft_set_syntax_err(t_cmd *cmd)
 	if (next)
 		str[0] = next->arg[0];
 	if (!cmd->next)
-		write(2, "minishell: syntax error near unexpected token `new line'\n", 58);
+		write(2, SYNTAX_ERR_NEW_LINE, ft_strlen(SYNTAX_ERR_NEW_LINE));
 	else
 	{
 		write (2, SYNTAX_STR, ft_strlen(SYNTAX_STR));

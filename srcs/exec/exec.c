@@ -77,7 +77,7 @@ int	exec(t_term *term, t_cmd **tab)
 			printf("exec:%p|argv:\n", exec);
 			while (exec->argv[l])
 			{
-				printf("exec:%s|\n", exec->argv[l]);
+				printf("exec:%s|std in:%d|str out: %d\n", exec->argv[l], exec->in, exec->out);
 				l++;
 			}
 		/*	if (ft_exec_builtin(term, cmd, 1) == 1)

@@ -6,17 +6,15 @@
 /*   By: tcosse <tcosse@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/17 16:28:34 by tcosse            #+#    #+#             */
-/*   Updated: 2022/02/25 14:22:00 by tcosse           ###   ########.fr       */
+/*   Updated: 2022/02/25 18:37:39 by tcosse           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-
-
 int	expanser(t_term *term, t_cmd **tab)
 {
-	int	i;
+	int		i;
 	t_cmd	*tmp;
 
 	i = 0;

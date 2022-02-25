@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   err_utils.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tcosse <tcosse@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/02/25 18:33:47 by tcosse            #+#    #+#             */
+/*   Updated: 2022/02/25 18:34:18 by tcosse           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
 void	print_err(t_term *term)
@@ -5,7 +17,7 @@ void	print_err(t_term *term)
 	int	i;
 
 	if (!term->is_err || !term->err)
-		return;
+		return ;
 	i = 0;
 	while (term->err[i])
 	{
@@ -15,5 +27,5 @@ void	print_err(t_term *term)
 		i++;
 	}
 	ft_free_term_err(term);
-	return;
+	return ;
 }

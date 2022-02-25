@@ -6,12 +6,13 @@
 /*   By: asaboure <asaboure@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/06 17:10:10 by asaboure          #+#    #+#             */
-/*   Updated: 2022/02/21 17:21:59 by tcosse           ###   ########.fr       */
+/*   Updated: 2022/02/25 18:32:47 by tcosse           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LEXER_H
 # define LEXER_H
+
 int		ft_skip_space(char *str, int start);
 int		new_cmd(t_cmd **new, char *str, int *l, int *i);
 int		new_cmd_quote(char *str, int i);

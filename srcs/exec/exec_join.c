@@ -8,9 +8,10 @@ char	*ft_get_next(t_cmd *cmd)
 	new = ft_strdup(cmd->arg);
 	if (!new)
 		return (0);
+	cmd = (t_cmd *)cmd->next;
 	while (cmd && (cmd->flag & JOIN))
 	{
-		if (cmd->flag & ARG)
+		if ((cmd->flag & ARG) && !(cmd->flag & IGNORE))
 		{
 			tmp = new;
 			new = ft_strjoin(new, cmd->arg);

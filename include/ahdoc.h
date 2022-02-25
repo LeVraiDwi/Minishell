@@ -1,5 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ahdoc.h                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tcosse <tcosse@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/02/25 18:33:06 by tcosse            #+#    #+#             */
+/*   Updated: 2022/02/25 18:33:10 by tcosse           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef AHDOC_H
 # define AHDOC_H
+
 int		ft_make_var(t_term *term, t_cmd *tab);
 int		ft_replace_in_tab(t_term *term, t_cmd *tab);
 int		ft_ahdoc_var_len(char *str);

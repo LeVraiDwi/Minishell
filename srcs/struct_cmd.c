@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   struct_cmd.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tcosse <tcosse@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/02/25 18:40:05 by tcosse            #+#    #+#             */
+/*   Updated: 2022/02/25 18:41:06 by tcosse           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
 t_cmd	*ft_init_cmd(void)
@@ -51,7 +63,7 @@ int	ft_add_end_cmd(t_cmd **first, t_cmd *new)
 
 void	ft_add_next_cmd(t_cmd *cmd, t_cmd *new)
 {
-	t_cmd *tmp;
+	t_cmd	*tmp;
 
 	tmp = cmd->next;
 	cmd->next = new;
