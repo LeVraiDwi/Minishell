@@ -69,6 +69,12 @@ int	ft_exec_builtin(t_term *term, t_parsing *parsing, int exec)
 	return (1);
 }
 
+void	signal_handler_child()
+{
+	signal(SIGINT, SIG_IGN);
+	signal(SIGQUIT, SIG_IGN);
+}
+
 int	exec(t_term *term, t_parsing *cmd)
 {
 	int				child;
@@ -89,7 +95,9 @@ int	exec(t_term *term, t_parsing *cmd)
 					ft_child(term, cmd, last_child);
 				ft_close(cmd->in, cmd->out);
 				status = 0;
+				signal_handler_child();
 				waitpid(0, &status, 0);
+				signal_handler();
 				last_child = child;
 			}
 		}

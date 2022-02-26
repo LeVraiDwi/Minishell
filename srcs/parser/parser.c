@@ -6,7 +6,7 @@
 /*   By: asaboure <asaboure@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/13 14:20:53 by asaboure          #+#    #+#             */
-/*   Updated: 2022/02/22 20:17:35 by asaboure         ###   ########.fr       */
+/*   Updated: 2022/02/26 18:41:31 by asaboure         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,12 @@ char	**read_args(char *last)
 
 	i = 0;
 	args = malloc(sizeof(char *));
-	line = readline("heredoc> ");
+	line = readline("> ");
 	while (ft_strncmp(last, line, ft_strlen(last) + 1))
 	{
 		args[i] = line;
 		args = ft_realloc_args(args, i);
-		line = readline("heredoc> ");
+		line = readline("> ");
 		i++;
 	}
 	args[i] = 0;
@@ -113,12 +113,16 @@ t_parsing	*parse_init(char *line, char **env)
 	saved = lexerbuf.tokenlist;
 	if (!lexerbuf.tokenlist || !lexerbuf.path)
 		return (exit_parsing(&lexerbuf, saved));
+	lexerbuf.tokenlist->next = NULL;
 	lexerbuf.j = 0;
 	if (!lexer_build(line, ft_strlen(line), &lexerbuf))
+		return (exit_parsing(&lexerbuf, saved));
+	if (!lexer_check(&lexerbuf))
 		return (exit_parsing(&lexerbuf, saved));
 	parserbuf = malloc(sizeof(t_parsing));
 	parserbuf->flag = 0;
 	if (!parse(&lexerbuf, parserbuf))
 		return (NULL);
+	free(lexerbuf.path);
 	return (parserbuf);
 }

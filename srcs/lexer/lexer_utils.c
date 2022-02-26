@@ -6,7 +6,7 @@
 /*   By: asaboure <asaboure@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/07 18:48:48 by asaboure          #+#    #+#             */
-/*   Updated: 2022/02/22 19:41:00 by asaboure         ###   ########.fr       */
+/*   Updated: 2022/02/26 16:26:27 by asaboure         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,7 @@ int	is_separator(int chtype)
 void	destroy_tokenlist(t_token *token)
 {
 	t_token	*tmp;
+	
 	while (token)
 	{
 		tmp = token->next;

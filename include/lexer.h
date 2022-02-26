@@ -6,7 +6,7 @@
 /*   By: asaboure <asaboure@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/06 17:10:10 by asaboure          #+#    #+#             */
-/*   Updated: 2022/02/22 19:41:52 by asaboure         ###   ########.fr       */
+/*   Updated: 2022/02/26 15:29:20 by asaboure         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,5 +79,5 @@ int		lexer_build(char *input, int size, t_lexer *lexerbuf);
 char	**get_pathv(char **env);
 int		is_separator(int chtype);
 void	destroy_tokenlist(t_token *token);
-
+int		lexer_check(t_lexer *lexerbuf);
 #endif

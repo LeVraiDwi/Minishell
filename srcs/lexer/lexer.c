@@ -6,7 +6,7 @@
 /*   By: asaboure <asaboure@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/06 17:06:14 by asaboure          #+#    #+#             */
-/*   Updated: 2022/02/24 20:53:25 by asaboure         ###   ########.fr       */
+/*   Updated: 2022/02/26 19:03:42 by asaboure         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,26 @@
 #include "lexer.h"
 #include "libft.h"
 #include <unistd.h>
+
+void	ft_strjoin_free(char **str, char *buf)
+{
+	char	*tmp;
+
+	if (*str == NULL)
+		*str = ft_strdup(buf);
+	else if (**str == '\0')
+	{
+		free(*str);
+		*str = ft_strdup(buf);
+	}
+	else
+	{
+		tmp = ft_strdup(*str);
+		free(*str);
+		*str = ft_strjoin(tmp, buf);
+		free(tmp);
+	}
+}
 
 char	**get_pathv(char **env)
 {
@@ -28,7 +48,7 @@ char	**get_pathv(char **env)
 			path = ft_split(env[i] + ft_strlen("PATH="), ':');
 			i = -1;
 			while (path[++i])
-				path[i] = ft_strjoin(path[i], "/");
+				ft_strjoin_free(&(path[i]), "/");
 			return (path);
 		}
 		i++;
@@ -70,7 +90,7 @@ char	*check_cmd(char *input, char **path)
 		if (!pathcmd)
 			return (NULL);
 		if (access(pathcmd, X_OK | F_OK) == 0)
-			return (ft_strdup(pathcmd));
+			return (pathcmd);
 		free(pathcmd);
 		i++;
 	}
@@ -108,5 +128,40 @@ int	lexer_build(char *input, int size, t_lexer *lexerbuf)
 		return (0);
 	token = lexerbuf->tokenlist;
 	lexerbuf->ntokens = count_tokens(token);
+	return (1);
+}
+
+int	lexer_error(t_token *token)
+{
+	char	*data;
+
+	data = "newline";
+	if (token)
+		data = token->data;
+	printf("syntax error near unexpected token `");
+	printf("%s", data);
+	printf("'\n");
+	return (0);
+}
+
+int	lexer_check(t_lexer *lexerbuf)
+{
+	t_token *current;
+	t_token *previous;
+
+	current = lexerbuf->tokenlist;
+	previous = NULL;
+	while (current)
+	{
+		if (current->type == CHAR_PIPE)
+		{
+			if (!previous || previous->type != TOKEN)
+				return (lexer_error(current));
+		}
+		previous = current;
+		current = current->next;
+	}
+	// if (previous && (previous->type != TOKEN && previous->type != CHAR_PIPE))
+	// 	return (lexer_error(current));
 	return (1);
 }

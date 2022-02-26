@@ -6,7 +6,7 @@
 /*   By: asaboure <asaboure@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/06 18:22:04 by asaboure          #+#    #+#             */
-/*   Updated: 2022/02/22 16:29:30 by asaboure         ###   ########.fr       */
+/*   Updated: 2022/02/26 18:07:04 by asaboure         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@
 # include <errno.h>
 # include <readline/readline.h>
 # include <readline/history.h>
+# include <signal.h>
 # include "struct.h"
 # include "libft.h"
 # include "built.h"
@@ -50,4 +51,5 @@ int		ft_free(void **p);
 int		init_term(t_term *term, char **env);
 void	init_built(t_term *term);
 void	ft_set_null(char **str, int l);
+void	signal_handler();
 #endif

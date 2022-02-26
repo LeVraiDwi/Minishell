@@ -6,7 +6,7 @@
 /*   By: asaboure <asaboure@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/18 16:58:12 by asaboure          #+#    #+#             */
-/*   Updated: 2022/02/22 20:17:46 by asaboure         ###   ########.fr       */
+/*   Updated: 2022/02/26 18:10:18 by asaboure         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	is_redir(t_token *token)
 		return (0);
 	if (token->type == TOKEN && ft_isnum(token->data))
 	{
-		if (token->next->type == CHAR_GREATER)
+		if (token->next && token->next->type == CHAR_GREATER)
 			return (1);
 	}
 	if (token->type == CHAR_GREATER || token->type == CHAR_LESSER)
