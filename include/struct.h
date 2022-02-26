@@ -6,7 +6,7 @@
 /*   By: tcosse <tcosse@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/25 18:29:22 by tcosse            #+#    #+#             */
-/*   Updated: 2022/02/25 18:41:39 by tcosse           ###   ########.fr       */
+/*   Updated: 2022/02/26 16:10:10 by tcosse           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,7 @@ typedef struct s_term
 	int		(*built[6])(t_term *term, t_parsing *parsing);
 	char	**env;
 	int		last_ret;
-	int		is_err;
-	char	**err;
+	int		err;
 }				t_term;
 
 void		ft_init_struct(t_parsing *pars);

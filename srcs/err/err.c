@@ -6,7 +6,7 @@
 /*   By: tcosse <tcosse@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/25 18:34:26 by tcosse            #+#    #+#             */
-/*   Updated: 2022/02/25 18:36:18 by tcosse           ###   ########.fr       */
+/*   Updated: 2022/02/26 16:16:28 by tcosse           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ char	*ft_creat_err_msg(char *arg, int err)
 		return (0);
 	return (new);
 }
-
+/*
 int	ft_add_err(t_term *term, char *str)
 {
 	int		l;
@@ -78,19 +78,21 @@ int	ft_add_err(t_term *term, char *str)
 		free(term->err);
 	term->err = new;
 	return (0);
-}
+}*/
 
-int	ft_error_std(t_term *term, t_cmd *cmd, int err)
+int	ft_error_std(t_cmd *cmd, int err)
 {
 	t_cmd	*next;
 	char	*str;
 
+	(void)err;
+	str = strerror(err);
 	next = (t_cmd *)cmd->next;
-	str = ft_creat_err_msg(next->arg, err);
-	if (!str)
-		return (-1);
-	if (ft_add_err(term, str) < 0)
-		return (ft_free((void **)str));
-	term->is_err = 1;
+	write(2, "minishell: ", ft_strlen("minishell: "));
+	if (next && next->arg)
+		write(2, next->arg, ft_strlen(next->arg));
+	write(2, ": ", 2);
+	write(2, strerror(err), ft_strlen(strerror(err)));
+	write(2, "\n", 1);
 	return (-1);
 }

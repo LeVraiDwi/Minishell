@@ -74,7 +74,6 @@ int	exec(t_term *term, t_cmd **tab)
 		if (creat_exec(term, tab[i], &exec) == 0)
 		{
 			l = 0;
-			printf("exec:%p|argv:\n", exec);
 			while (exec->argv[l])
 			{
 				printf("exec:%s|std in:%d|str out: %d\n", exec->argv[l], exec->in, exec->out);
@@ -96,6 +95,5 @@ int	exec(t_term *term, t_cmd **tab)
 		}
 		i++;
 	}
-	print_err(term);
 	return (0);
 }

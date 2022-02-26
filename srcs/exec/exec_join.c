@@ -54,7 +54,9 @@ int	ft_add_redir(t_parsing *exec, t_cmd *cmd)
 {
 	if ((cmd->flag & SIMPLE_REDIR_OUT) || (cmd->flag & DOUBLE_REDIR_OUT))
 		exec->out = cmd->pipefd[0];
-	if ((cmd->flag & SIMPLE_REDIR_IN) && (cmd->flag & DOUBLE_REDIR_IN))
+	else if ((cmd->flag & SIMPLE_REDIR_IN) && (cmd->flag & DOUBLE_REDIR_IN))
+		exec->in = cmd->pipefd[0];
+	else if ((cmd->flag & SIMPLE_REDIR_IN) && (cmd->flag & DOUBLE_REDIR_IN))
 		exec->in = cmd->pipefd[0];
 	return (0);
 }

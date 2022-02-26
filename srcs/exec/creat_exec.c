@@ -1,6 +1,6 @@
 #include "minishell.h"
 
-int	ft_open_std_cmd(t_term *term, t_cmd *cmd)
+int	ft_open_std_cmd(t_cmd *cmd)
 {
 	t_cmd	*next;
 
@@ -11,7 +11,7 @@ int	ft_open_std_cmd(t_term *term, t_cmd *cmd)
 		{
 			ft_add_flag(next, IGNORE);
 			if (next)
-				if (ft_stdopen(term, cmd, next->arg) < 0)
+				if (ft_stdopen(cmd, next->arg) < 0)
 					return (-1);
 		}
 		cmd = next;
@@ -40,9 +40,10 @@ int	ft_join(t_parsing *exec, t_cmd *cmd)
 	return (0);
 }
 
-int	creat_exec(t_term *term, t_cmd *cmd, t_parsing **exec)
+int	creat_exec(t_term * term, t_cmd *cmd, t_parsing **exec)
 {	
-	if (ft_open_std_cmd(term, cmd) < 0)
+	if (expanser(term, cmd))
+	if (ft_open_std_cmd(cmd) < 0)
 		return (-1);
 	*exec = ft_creat_pars();
 	if (!*exec)
