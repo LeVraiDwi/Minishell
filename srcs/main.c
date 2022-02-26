@@ -6,11 +6,25 @@
 /*   By: asaboure <asaboure@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/24 13:17:17 by tcosse            #+#    #+#             */
-/*   Updated: 2022/02/26 16:40:09 by tcosse           ###   ########.fr       */
+/*   Updated: 2022/02/26 19:50:02 by asaboure         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+void	newprompt()
+{
+	printf("\n");
+	rl_on_new_line();
+	rl_replace_line("", 0);
+	rl_redisplay();
+}
+
+void	signal_handler()
+{
+	signal(SIGINT, newprompt);
+	signal(SIGQUIT, SIG_IGN);
+}
 
 int	main(int argc, char **argv, char **env)
 {
@@ -24,6 +38,7 @@ int	main(int argc, char **argv, char **env)
 
 	(void)argv;
 	(void)argc;
+	signal_handler();
 	if(init_term(&term, env))
 		return (0);
 	term.exit = 3;
@@ -31,7 +46,7 @@ int	main(int argc, char **argv, char **env)
 	{
 		i = 0;
 		str = readline("\033[34;01mMinishell\033[00m$ ");
-		if (*str)
+		if (str)
 		{
 			ft_add_history(str);
 			cmd = lexer(str);
@@ -66,6 +81,8 @@ int	main(int argc, char **argv, char **env)
 				ft_free_cmd_tab(tab);
 			term.exit--;
 		}
+		else
+			exit(0);
 /*		printf("======================debut parsing==================\n");
 		parsebuf = parse_init(str, env);
 		printf("okay:%p, %p, next:%p\n", parsebuf, parsebuf->argv, parsebuf->next);
