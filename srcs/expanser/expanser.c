@@ -6,24 +6,15 @@
 /*   By: tcosse <tcosse@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/17 16:28:34 by tcosse            #+#    #+#             */
-/*   Updated: 2022/02/25 18:37:39 by tcosse           ###   ########.fr       */
+/*   Updated: 2022/02/26 16:35:16 by tcosse           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	expanser(t_term *term, t_cmd **tab)
+int	expanser(t_term *term, t_cmd *cmd)
 {
-	int		i;
-	t_cmd	*tmp;
-
-	i = 0;
-	while (tab[i])
-	{
-		tmp = tab[i];
-		if (ft_replace_cmd(term, tmp) < 0)
-			return (-1);
-		i++;
-	}
+	if (ft_replace_cmd(term, cmd) < 0)
+		return (-1);
 	return (0);
 }

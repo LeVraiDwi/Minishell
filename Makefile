@@ -63,7 +63,7 @@ HISTORY_NAME = history_add.c
 EXEC_PATH = ./srcs/exec
 
 EXEC_NAME = exec.c creat_exec.c exec_join.c\
-			exec_file.c\
+			exec_file.c path.c exec_util.c\
 
 OBJS = ${SRCS:.c=.o}
 

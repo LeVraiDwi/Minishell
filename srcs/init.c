@@ -6,7 +6,7 @@
 /*   By: tcosse <tcosse@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/24 13:18:13 by tcosse            #+#    #+#             */
-/*   Updated: 2022/02/25 16:43:37 by tcosse           ###   ########.fr       */
+/*   Updated: 2022/02/26 17:33:05 by tcosse           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	init_term(t_term *term, char **env)
 		return (-1);
 	term->exit = 0;
 	term->err = 0;
-	term->is_err = 0;
+	term->err = 0;
 	term->last_ret = 0;
 	init_built(term);
 	rl_clear_history();

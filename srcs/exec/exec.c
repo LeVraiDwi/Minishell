@@ -23,7 +23,7 @@ int	ft_error_pipe(t_parsing *cmd)
 	exit(EXIT_FAILURE);
 }
 
-/*int	ft_child(t_term *term, t_parsing *cmd, int last_child)
+int	ft_child(t_term *term, t_parsing *cmd, int last_child)
 {
 	int	status;
 
@@ -47,7 +47,7 @@ int	ft_error_pipe(t_parsing *cmd)
 	ft_free_term(term);
 	ft_free_pars(cmd);
 	exit(EXIT_FAILURE);
-}*/
+}
 
 int	ft_exec_builtin(t_term *term, t_parsing *parsing, int exec)
 {
@@ -61,14 +61,39 @@ int	ft_exec_builtin(t_term *term, t_parsing *parsing, int exec)
 	return (1);
 }
 
+int	ft_exec(t_term *term, t_parsing *cmd)
+{
+	int	status;
+	int	child;
+	int	last_child;
+
+	last_child  = 0;
+	if (ft_exec_builtin(term, cmd, 1) == 1)
+	{
+		child = fork();
+		if (child < 0)
+			return (0);
+		else if (child == 0)
+		ft_child(term, cmd, last_child);
+		ft_close(cmd->in, cmd->out);
+		status = 0;
+		waitpid(0, &status, 0);
+		last_child = child;
+	}
+	return (0);
+}
+
 int	exec(t_term *term, t_cmd **tab)
 {
 	t_parsing	*exec;
 	int			i;
 	int			l;
+	int			pipefd[2];
 
 	(void)term;
 	i = 0;
+	pipefd[0] = 0;
+	pipefd[1] = 0;
 	while (tab[i])
 	{
 		if (creat_exec(term, tab[i], &exec) == 0)
@@ -76,22 +101,22 @@ int	exec(t_term *term, t_cmd **tab)
 			l = 0;
 			while (exec->argv[l])
 			{
-				printf("exec:%s|std in:%d|str out: %d\n", exec->argv[l], exec->in, exec->out);
+				printf("PATH:%s|exec:%s|std in:%d|str out: %d\n", exec->path, exec->argv[l], exec->in, exec->out);
 				l++;
 			}
-		/*	if (ft_exec_builtin(term, cmd, 1) == 1)
+			if (tab[i + 1])
 			{
-				child = fork();
-				if (child < 0)
-					return (0);
-				else if (child == 0)
-					ft_child(term, cmd, last_child);
-				ft_close(cmd->in, cmd->out);
-				status = 0;
-				waitpid(0, &status, 0);
-				last_child = child;	
-			}*/
-
+				ft_init_pipe(exec, pipefd);
+				ft_dup_pipe(exec->pipe_out, pipefd);
+			}
+			ft_select_std(exec, tab[i + 1]);
+			l = 0;
+			while (exec->argv[l])
+			{
+				printf("PATH:%s|exec:%s|std in:%d|str out: %d\n", exec->path, exec->argv[l], exec->in, exec->out);
+				l++;
+			}
+			ft_exec(term, exec);
 		}
 		i++;
 	}
