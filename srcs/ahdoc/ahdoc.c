@@ -6,16 +6,17 @@
 /*   By: tcosse <tcosse@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/23 19:51:25 by tcosse            #+#    #+#             */
-/*   Updated: 2022/02/27 16:16:27 by tcosse           ###   ########.fr       */
+/*   Updated: 2022/02/27 20:22:26 by tcosse           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	ft_write_tab(t_term *term, t_cmd *cmd, t_cmd *tab)
+int	ft_write_tab(t_term *term, t_cmd *cmd, t_cmd *tab, int quote)
 {
-	if (ft_make_var(term, tab) < 0)
-		return (-1);
+	if (!quote)
+		if (ft_make_var(term, tab) < 0)
+			return (-1);
 	while (tab)
 	{
 		write(cmd->pipefd[1], tab->arg, ft_strlen(tab->arg));
@@ -25,7 +26,7 @@ int	ft_write_tab(t_term *term, t_cmd *cmd, t_cmd *tab)
 	return (0);
 }
 
-int	ft_ahdoc(t_term *term, t_cmd *cmd, char *limiter)
+int	ft_ahdoc(t_term *term, t_cmd *cmd, char *limiter, int quote)
 {
 	t_cmd	*tab;
 	char	*str;
@@ -43,13 +44,13 @@ int	ft_ahdoc(t_term *term, t_cmd *cmd, char *limiter)
 			ft_free_ahdoc(term, cmd, limiter, EXIT_FAILURE);
 	}
 	free(str);
-	if (ft_write_tab(term, cmd, tab) < 0)
+	if (ft_write_tab(term, cmd, tab, quote) < 0)
 		ft_free_ahdoc(term, cmd, limiter, EXIT_FAILURE);
 	ft_free_ahdoc(term, cmd, limiter, EXIT_SUCCESS);
 	return (0);
 }
 
-int	ft_creat_ahdoc(t_term *term, t_cmd *cmd, char *limiter)
+int	ft_creat_ahdoc(t_term *term, t_cmd *cmd, char *limiter, int quote)
 {
 	int	child;
 	int	status;
@@ -61,7 +62,7 @@ int	ft_creat_ahdoc(t_term *term, t_cmd *cmd, char *limiter)
 	if (child < 0)
 		return (-1);
 	else if (child == 0)
-		ft_ahdoc(term, cmd, limiter);
+		ft_ahdoc(term, cmd, limiter, quote);
 	signal_handler_child();
 	if (waitpid(0, &status, 0) < 0)
 		return (-1);
@@ -70,37 +71,56 @@ int	ft_creat_ahdoc(t_term *term, t_cmd *cmd, char *limiter)
 	return (0);
 }
 
-char	*ft_is_ahdoc(t_cmd *cmd)
+int	ft_is_ahdoc(t_cmd *cmd, char **lim)
 {
 	t_cmd	*next;
 	char	*limiter;
+	char	*tmp;
+	int		flag;
 
-	if (!cmd || !cmd->next)
-		return (0);
-	next = cmd->next;
-	if (next->flag & IS_SPE)
-		return (0);
-	limiter = ft_strdup(next->arg);
+	if (!cmd)
+		return (-1);
+	flag = 0;
+	if ((cmd->flag & SIMPLE_QUOTE) || (cmd->flag & DOUBLE_QUOTE))
+		flag = 1;
+	limiter = ft_strdup(cmd->arg);
 	if (!limiter)
 		return (0);
-	ft_add_flag(next, IGNORE);
-	return (limiter);
+	ft_add_flag(cmd, IGNORE);
+	next = (t_cmd *)cmd->next;
+	while (next && (next->flag & JOIN) && !(next->flag & IGNORE) && !(next->flag & IS_REDIR))
+	{
+		tmp = limiter;
+		limiter = ft_strjoin(limiter, next->arg);
+		printf("%s\n", limiter);
+		free(tmp);
+		if (!limiter)
+			return (-1);
+		ft_add_flag(next, IGNORE);
+		if ((cmd->flag & SIMPLE_QUOTE) || (cmd->flag & DOUBLE_QUOTE))
+			flag = 1;
+		next = (t_cmd *)next->next;
+	}
+	*lim = limiter;
+	return (flag);
 }
 
 int	ahdoc(t_term *term, t_cmd *cmd)
 {
 	char	*limiter;
+	int		quote;
 
 	while (cmd)
 	{
 		if ((cmd->flag & DOUBLE_REDIR_IN) && !(cmd->flag & IGNORE))
 		{
-			limiter = ft_is_ahdoc(cmd);
-			if (limiter)
-				if (ft_creat_ahdoc(term, cmd, limiter) < 0)
+			quote = ft_is_ahdoc((t_cmd *)cmd->next, &limiter);
+			if (quote >= 0)
+				if (ft_creat_ahdoc(term, cmd, limiter, quote) < 0)
 					return (-1);
 			if (limiter)
 				free(limiter);
+			limiter = 0;
 		}
 		cmd = cmd->next;
 	}
