@@ -124,12 +124,6 @@ int	exec(t_term *term, t_cmd **tab)
 			ft_exec(term, exec);
 			exec = 0;
 		}
-		l = 0;
-		while (exec->argv[l])
-		{
-			printf("exec: %s| in: %d | out: %d\n", exec->argv[l], exec->in, exec->out);
-			l++;
-		}
 		ft_free_pars(exec);
 		i++;
 	}

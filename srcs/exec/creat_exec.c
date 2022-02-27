@@ -42,8 +42,6 @@ int	ft_join(t_parsing *exec, t_cmd *cmd)
 
 int	creat_exec(t_term * term, t_cmd *cmd, t_parsing **exec, int	*pipefd)
 {
-	if (pipefd[0] && pipefd[1])
-		ft_set_pipe_in(*exec, pipefd);
 	if (expanser(term, cmd) <  0)
 		return (-1);
 	if (ft_open_std_cmd(cmd) < 0)
@@ -51,9 +49,10 @@ int	creat_exec(t_term * term, t_cmd *cmd, t_parsing **exec, int	*pipefd)
 	*exec = ft_creat_pars();
 	if (!*exec)
 		return (0);
+	if (pipefd[0] && pipefd[1])
+		ft_set_pipe_in(*exec, pipefd);
 	if (ft_join(*exec, cmd) < 0)
 		return (0);
-	printf()
 	if (ft_get_path(term, *exec) < 0)
 		return (-1);
 	return (0);
