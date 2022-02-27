@@ -6,7 +6,7 @@
 /*   By: tcosse <tcosse@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/23 18:55:45 by tcosse            #+#    #+#             */
-/*   Updated: 2022/02/27 18:08:49 by tcosse           ###   ########.fr       */
+/*   Updated: 2022/02/27 20:28:01 by tcosse           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,12 +40,12 @@ int	ft_check_pipe(t_cmd *cmd)
 	t_cmd	*next;
 
 	if ((cmd->flag & PIPE))
-				return (-1);
+				return (ft_set_err(cmd, SYNTAX_ERR));
 	while (cmd)
 	{
 		next = (t_cmd *)cmd->next;
 		if ((cmd->flag & PIPE) && (!next || (next->flag & PIPE)))
-				return (-1);
+				return (ft_set_err(cmd, SYNTAX_ERR));
 		cmd = next;
 	}
 	return (0);
