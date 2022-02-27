@@ -6,7 +6,7 @@
 /*   By: tcosse <tcosse@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/24 13:19:17 by tcosse            #+#    #+#             */
-/*   Updated: 2022/02/25 16:51:38 by tcosse           ###   ########.fr       */
+/*   Updated: 2022/02/27 12:56:15 by tcosse           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,12 +64,15 @@ void	ft_free_argv(char **argv)
 
 int	ft_free_pars(t_parsing *pars)
 {
-	if (pars->next)
-		ft_free_pars(pars->next);
-	if (pars->path)
-		ft_free((void **)&pars->path);
-	if (pars->argv)
-		ft_free_argv(pars->argv);
-	ft_free((void **)&pars);
+	if (pars)
+	{
+		if (pars->next)
+			ft_free_pars(pars->next);
+		if (pars->path)
+			ft_free((void **)&pars->path);
+		if (pars->argv)
+			ft_free_argv(pars->argv);
+		ft_free((void **)&pars);
+	}
 	return (0);
 }

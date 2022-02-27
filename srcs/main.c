@@ -6,7 +6,7 @@
 /*   By: asaboure <asaboure@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/24 13:17:17 by tcosse            #+#    #+#             */
-/*   Updated: 2022/02/26 19:50:02 by asaboure         ###   ########.fr       */
+/*   Updated: 2022/02/27 13:11:58 by tcosse           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,9 @@ int	main(int argc, char **argv, char **env)
 			cmd = lexer(str);
 			printf("%p\n", cmd);
 			if (!cmd)
-				return (-1);
+			{
+				printf("lex err\n");
+			}
 			ft_print_cmd(cmd);
 			printf("====================parser=====================================\n");
 			if (parser(cmd))

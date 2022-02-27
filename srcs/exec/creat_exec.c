@@ -25,7 +25,6 @@ int	ft_join(t_parsing *exec, t_cmd *cmd)
 
 	while (cmd)
 	{
-		printf("do%s|%d\n", cmd->arg, cmd->flag);
 		if ((cmd->flag & ARG) && !(cmd->flag & IGNORE) && !(cmd->flag & JOIN))
 		{
 			str = ft_get_next(cmd);
@@ -41,8 +40,10 @@ int	ft_join(t_parsing *exec, t_cmd *cmd)
 	return (0);
 }
 
-int	creat_exec(t_term * term, t_cmd *cmd, t_parsing **exec)
-{	
+int	creat_exec(t_term * term, t_cmd *cmd, t_parsing **exec, int	*pipefd)
+{
+	if (pipefd[0] && pipefd[1])
+		ft_set_pipe_in(*exec, pipefd);
 	if (expanser(term, cmd) <  0)
 		return (-1);
 	if (ft_open_std_cmd(cmd) < 0)
@@ -52,15 +53,22 @@ int	creat_exec(t_term * term, t_cmd *cmd, t_parsing **exec)
 		return (0);
 	if (ft_join(*exec, cmd) < 0)
 		return (0);
+	printf()
 	if (ft_get_path(term, *exec) < 0)
 		return (-1);
 	return (0);
 }
 
-int	ft_init_pipe(t_parsing *exec, int *pipefd)
+void	ft_set_pipe_in(t_parsing *exec, int *pipefd)
 {
 	ft_dup_pipe(pipefd, exec->pipe_in);
+	exec->in = pipefd[0];
+}
+
+int	ft_init_pipe_out(t_parsing *exec, int *pipefd)
+{
 	if (pipe(exec->pipe_out) < 0)
 		return (-1);
+	ft_dup_pipe(exec->pipe_out, pipefd);
 	return (0);
 }

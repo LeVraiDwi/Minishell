@@ -6,7 +6,7 @@
 /*   By: tcosse <tcosse@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/26 17:20:20 by tcosse            #+#    #+#             */
-/*   Updated: 2022/02/26 19:21:43 by tcosse           ###   ########.fr       */
+/*   Updated: 2022/02/27 13:30:03 by tcosse           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,15 @@ char	**get_pathv(char **env)
 			path = ft_split(env[i] + ft_strlen("PATH="), ':');
 			i = -1;
 			while (path[++i])
+			{
+				free(path[i]);
 				path[i] = ft_strjoin(path[i], "/");
+				if (!path[i])
+				{
+					ft_free_env(path);
+					return (0);
+				}
+			}
 			return (path);
 		}
 		i++;
@@ -47,7 +55,7 @@ char	*check_cmd(char *input, char **path)
 		if (!pathcmd)
 			return (NULL);
 		if (access(pathcmd, X_OK | F_OK) == 0)
-			return (ft_strdup(pathcmd));
+			return (pathcmd);
 		free(pathcmd);
 		i++;
 	}
@@ -83,9 +91,4 @@ void	ft_select_std(t_parsing *exec, t_cmd *next)
 	}
 	else if (!exec->out)
 			exec->out = STD_OUT;
-	if (exec->pipe_in[1] > 1 && exec->pipe_in[0] > 1)
-	{
-		if (exec->in == STD_IN)
-			exec->in = exec->pipe_in[0];
-	}
 }
