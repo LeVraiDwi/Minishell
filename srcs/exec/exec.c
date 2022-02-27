@@ -87,7 +87,7 @@ int	ft_exec(t_term *term, t_parsing *cmd)
 			return (0);
 		signal_handler_child(child);
 		if (child == 0)
-			t_child(term, cmd, last_child);
+			ft_child(term, cmd, last_child);
 		ft_close(cmd->in, cmd->out);
 		status = 0;
 		waitpid(0, &status, 0);
