@@ -43,18 +43,18 @@ int	ft_join(t_parsing *exec, t_cmd *cmd)
 int	creat_exec(t_term * term, t_cmd *cmd, t_parsing **exec, int	*pipefd)
 {
 	if (expanser(term, cmd) <  0)
-		return (-1);
+		return (ft_perror());
 	if (ft_open_std_cmd(cmd) < 0)
 		return (-1);
 	*exec = ft_creat_pars();
 	if (!*exec)
-		return (0);
+		return (ft_perror());
 	if (pipefd[0] && pipefd[1])
 		ft_set_pipe_in(*exec, pipefd);
 	if (ft_join(*exec, cmd) < 0)
-		return (0);
+		return (ft_perror());
 	if (ft_get_path(term, *exec) < 0)
-		return (-1);
+		return (ft_error_cmd((*exec)->argv[0]));
 	return (0);
 }
 

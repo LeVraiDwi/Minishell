@@ -6,7 +6,7 @@
 /*   By: tcosse <tcosse@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/23 18:55:45 by tcosse            #+#    #+#             */
-/*   Updated: 2022/02/27 13:20:02 by tcosse           ###   ########.fr       */
+/*   Updated: 2022/02/27 18:08:49 by tcosse           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	ft_check_redir(t_cmd *cmd)
 
 	first = cmd;
 	if ((cmd->flag & PIPE))
-				return (ft_set_err(cmd, first, SYNTAX_ERR));
+				return (ft_set_err(cmd, SYNTAX_ERR));
 	while (cmd)
 	{
 		next = (t_cmd *)cmd->next;
@@ -28,7 +28,7 @@ int	ft_check_redir(t_cmd *cmd)
 			if (next)
 				ft_add_flag(next, IGNORE);
 			if (!next || next->flag & IS_SPE)
-				return (ft_set_err(cmd, first, SYNTAX_ERR));
+				return (ft_set_err(cmd, SYNTAX_ERR));
 		}
 		cmd = cmd->next;
 	}
@@ -40,13 +40,13 @@ int	ft_check_pipe(t_cmd *cmd)
 	t_cmd	*next;
 
 	if ((cmd->flag & PIPE))
-				return (ft_set_err(cmd, cmd, SYNTAX_ERR));
+				return (-1);
 	while (cmd)
 	{
 		next = (t_cmd *)cmd->next;
-		if ((cmd->flag & PIPE) && (next && (next->flag & PIPE)))
-				return (ft_set_err(cmd, cmd, SYNTAX_ERR));
-		cmd = cmd->next;
+		if ((cmd->flag & PIPE) && (!next || (next->flag & PIPE)))
+				return (-1);
+		cmd = next;
 	}
 	return (0);
 }

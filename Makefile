@@ -47,7 +47,6 @@ PARSER_PATH = ./srcs/parser
 PARSER_NAME = 	parser.c quote.c quote_utils.c\
 				split.c split_spe.c\
 				
-
 UTILS_PATH = ./srcs/utils
 
 UTILS_NAME = utils.c
@@ -89,7 +88,7 @@ CD = cd
 
 ${NAME}:	${OBJS}
 		cd libft; make;
-		${CC} -o ${NAME} ${OBJS} ${FLAGS} ${LIBFT} ${RL} ${DEBUG}
+		${CC} -o ${NAME} ${OBJS} ${FLAGS} ${LIBFT} ${RL}
 
 all:		${NAME}
 

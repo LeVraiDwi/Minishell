@@ -6,7 +6,7 @@
 /*   By: tcosse <tcosse@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/23 19:51:25 by tcosse            #+#    #+#             */
-/*   Updated: 2022/02/24 18:21:55 by tcosse           ###   ########.fr       */
+/*   Updated: 2022/02/27 16:16:27 by tcosse           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ int	ft_ahdoc(t_term *term, t_cmd *cmd, char *limiter)
 		if (!str)
 			ft_free_ahdoc(term, cmd, limiter, EXIT_FAILURE);
 	}
+	free(str);
 	if (ft_write_tab(term, cmd, tab) < 0)
 		ft_free_ahdoc(term, cmd, limiter, EXIT_FAILURE);
 	ft_free_ahdoc(term, cmd, limiter, EXIT_SUCCESS);
@@ -61,8 +62,11 @@ int	ft_creat_ahdoc(t_term *term, t_cmd *cmd, char *limiter)
 		return (-1);
 	else if (child == 0)
 		ft_ahdoc(term, cmd, limiter);
+	signal_handler_child();
 	if (waitpid(0, &status, 0) < 0)
 		return (-1);
+	signal_handler();
+	close(cmd->pipefd[1]);
 	return (0);
 }
 

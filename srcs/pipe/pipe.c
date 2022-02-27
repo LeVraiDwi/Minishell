@@ -20,7 +20,10 @@ t_cmd	**split_pipe(t_cmd *cmd)
 	
 	tab = ft_creat_tab(cmd);
 	if (!tab)
+	{
+		ft_free_cmd(cmd);
 		return (0);
+	}
 	first = cmd;
 	l = 0;
 	while (tab[l])
@@ -34,7 +37,7 @@ t_cmd	**split_pipe(t_cmd *cmd)
 					ft_free_cmd_tab(tab);
 					return (0);
 				}
-				cmd->next  = 0;
+				cmd->next = 0;
 			}
 			cmd = cmd->next;
 		}
