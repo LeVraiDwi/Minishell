@@ -6,7 +6,7 @@
 /*   By: asaboure <asaboure@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/26 17:20:20 by tcosse            #+#    #+#             */
-/*   Updated: 2022/02/27 22:36:53 by tcosse           ###   ########.fr       */
+/*   Updated: 2022/02/27 23:19:39 by tcosse           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ int	ft_get_path(t_term *term, t_parsing *exec)
 
 	if (!exec->argv)
 		return (-1);
-	if (ft_is_builtin(exec->argv[0]) == 0)
+	if (ft_is_builtin(exec->argv[0]) >= 0)
 		return (0);
 	pathv = get_pathv(term->env);
 	if (!pathv)
