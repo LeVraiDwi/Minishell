@@ -6,7 +6,7 @@
 /*   By: asaboure <asaboure@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/24 13:17:17 by tcosse            #+#    #+#             */
-/*   Updated: 2022/02/27 18:27:34 by tcosse           ###   ########.fr       */
+/*   Updated: 2022/02/27 21:42:25 by tcosse           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int	cmd(t_term *term)
 	char	*str;
 
 	str = readline("\033[34;01mMinishell\033[00m$ ");
-	if (str && *str)
+	if (str && *str && str[ft_skip_space(str, 0)])
 	{
 		ft_add_history(str);
 		cmd = lexer(str);
