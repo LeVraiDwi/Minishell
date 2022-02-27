@@ -6,7 +6,7 @@
 /*   By: asaboure <asaboure@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/24 13:17:17 by tcosse            #+#    #+#             */
-/*   Updated: 2022/02/27 22:01:04 by tcosse           ###   ########.fr       */
+/*   Updated: 2022/02/27 22:05:49 by asaboure         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,12 @@ void	signal_handler()
 {
 	signal(SIGINT, newprompt);
 	signal(SIGQUIT, SIG_IGN);
+}
+
+void	exit_minishell(t_term *term)
+{
+	ft_free_term(term);
+	exit(0);
 }
 
 int	cmd(t_term *term)
@@ -56,7 +62,7 @@ int	cmd(t_term *term)
 			ft_free_cmd_tab(tab);
 	}
 	else if (!str)
-		return (ft_free_term(term));
+		exit_minishell(term);
 	else
 		free(str);
 	return (0);
