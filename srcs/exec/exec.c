@@ -101,7 +101,6 @@ int	exec(t_term *term, t_cmd **tab)
 {
 	t_parsing	*exec;
 	int			i;
-	int			l;
 	int			pipefd[2];
 
 	(void)term;
@@ -113,20 +112,11 @@ int	exec(t_term *term, t_cmd **tab)
 		exec = 0;
 		if (creat_exec(term, tab[i], &exec, pipefd) == 0)
 		{
-			l = 0;
-			while (exec->argv[l])
-			{
-				l++;
-			}
 			if (tab[i + 1])
 				ft_init_pipe_out(exec, pipefd);
 			ft_select_std(exec, tab[i + 1]);
-			l = 0;
-			while (exec->argv[l])
-			{
-				l++;
-			}
-			ft_exec(term, exec);
+			if (ft_exec_builtin(term, exec, 0) == 1)
+				ft_exec(term, exec);
 		}
 		else if (tab[i + 1])
 			ft_init_pipe_out(exec, pipefd);
