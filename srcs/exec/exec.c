@@ -61,11 +61,17 @@ int	ft_exec_builtin(t_term *term, t_parsing *parsing, int exec)
 	return (1);
 }
 
-void	signal_handler_child()
+void	signal_handler_child(int id)
 {
-	signal(SIGINT, SIG_IGN);
-	signal(SIGQUIT, SIG_IGN);
+	__sighandler_t	action;
+
+	action = SIG_DFL;
+	if (id != 0)
+		action = SIG_IGN;
+	signal(SIGINT, action);
+	signal(SIGQUIT, action);
 }
+
 
 int	ft_exec(t_term *term, t_parsing *cmd)
 {
@@ -79,11 +85,11 @@ int	ft_exec(t_term *term, t_parsing *cmd)
 		child = fork();
 		if (child < 0)
 			return (0);
-		else if (child == 0)
-		ft_child(term, cmd, last_child);
+		signal_handler_child(child);
+		if (child == 0)
+			t_child(term, cmd, last_child);
 		ft_close(cmd->in, cmd->out);
 		status = 0;
-		signal_handler_child();
 		waitpid(0, &status, 0);
 		signal_handler();
 		last_child = child;

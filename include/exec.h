@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tcosse <tcosse@student.42.fr>              +#+  +:+       +#+        */
+/*   By: asaboure <asaboure@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/25 18:28:10 by tcosse            #+#    #+#             */
-/*   Updated: 2022/02/27 15:57:08 by tcosse           ###   ########.fr       */
+/*   Updated: 2022/02/27 20:26:21 by asaboure         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int		ft_get_path(t_term *term, t_parsing *exec);
 int		ft_init_pipe_out(t_parsing *exec, int *pipefd);
 int		ft_exec(t_term *term, t_parsing *exec);
 int		ft_close_exec(t_parsing *exec);
-void	signal_handler_child(void);
+void	signal_handler_child(int child);
 void	ft_set_pipe_in(t_parsing *exec, int *pipe);
 void	ft_select_std(t_parsing *execc, t_cmd *next);
 void	ft_dup_pipe(int *olf, int *new);

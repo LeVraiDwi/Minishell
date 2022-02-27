@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ahdoc.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tcosse <tcosse@student.42.fr>              +#+  +:+       +#+        */
+/*   By: asaboure <asaboure@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/23 19:51:25 by tcosse            #+#    #+#             */
-/*   Updated: 2022/02/27 20:22:26 by tcosse           ###   ########.fr       */
+/*   Updated: 2022/02/27 20:27:16 by asaboure         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,9 +61,9 @@ int	ft_creat_ahdoc(t_term *term, t_cmd *cmd, char *limiter, int quote)
 	child = fork();
 	if (child < 0)
 		return (-1);
-	else if (child == 0)
+	signal_handler_child(child);
+	if (child == 0)
 		ft_ahdoc(term, cmd, limiter, quote);
-	signal_handler_child();
 	if (waitpid(0, &status, 0) < 0)
 		return (-1);
 	signal_handler();
