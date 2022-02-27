@@ -6,7 +6,7 @@
 /*   By: tcosse <tcosse@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/26 17:20:20 by tcosse            #+#    #+#             */
-/*   Updated: 2022/02/27 14:05:07 by tcosse           ###   ########.fr       */
+/*   Updated: 2022/02/27 14:17:14 by tcosse           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,8 +80,8 @@ int	ft_get_path(t_term *term, t_parsing *exec)
 
 void	ft_dup_pipe(int *old, int *new)
 {
-	new[0] = dup(old[0]);
-	new[1] = dup(old[1]);
+	new[0] = old[0];
+	new[1] = old[1];
 }
 
 void	ft_select_std(t_parsing *exec, t_cmd *next)

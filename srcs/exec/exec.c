@@ -41,7 +41,7 @@ int	ft_child(t_term *term, t_parsing *cmd, int last_child)
 	{
 		exit(EXIT_SUCCESS);
 	}
-	ft_close(cmd->in, cmd->out);
+	ft_close_exec(cmd);
 	execve(cmd->path, cmd->argv, term->env);
 	perror("ERROR:\n");
 	ft_free_term(term);
@@ -122,7 +122,6 @@ int	exec(t_term *term, t_cmd **tab)
 				l++;
 			}
 			ft_exec(term, exec);
-			exec = 0;
 		}
 		ft_free_pars(exec);
 		i++;

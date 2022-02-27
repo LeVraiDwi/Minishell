@@ -6,7 +6,7 @@
 /*   By: tcosse <tcosse@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/25 18:28:10 by tcosse            #+#    #+#             */
-/*   Updated: 2022/02/27 12:39:55 by tcosse           ###   ########.fr       */
+/*   Updated: 2022/02/27 14:17:57 by tcosse           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ int		ft_add_redir(t_parsing *exec, t_cmd *cmd);
 int		ft_get_path(t_term *term, t_parsing *exec);
 int		ft_init_pipe_out(t_parsing *exec, int *pipefd);
 int		ft_exec(t_term *term, t_parsing *exec);
+int		ft_close_exec(t_parsing *exec);
 void	ft_set_pipe_in(t_parsing *exec, int *pipe);
 void	ft_select_std(t_parsing *execc, t_cmd *next);
 void	ft_dup_pipe(int *olf, int *new);
