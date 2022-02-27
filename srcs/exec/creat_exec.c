@@ -61,13 +61,19 @@ int	creat_exec(t_term * term, t_cmd *cmd, t_parsing **exec, int	*pipefd)
 void	ft_set_pipe_in(t_parsing *exec, int *pipefd)
 {
 	ft_dup_pipe(pipefd, exec->pipe_in);
+	close(pipefd[1]);
 	exec->in = pipefd[0];
 }
 
 int	ft_init_pipe_out(t_parsing *exec, int *pipefd)
 {
-	if (pipe(exec->pipe_out) < 0)
+	if (exec)
+	{
+		if (pipe(exec->pipe_out) < 0)
+			return (-1);
+		ft_dup_pipe(exec->pipe_out, pipefd);
+	}
+	else if (pipe(pipefd) < 0)
 		return (-1);
-	ft_dup_pipe(exec->pipe_out, pipefd);
 	return (0);
 }

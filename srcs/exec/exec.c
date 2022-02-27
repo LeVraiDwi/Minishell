@@ -104,12 +104,12 @@ int	exec(t_term *term, t_cmd **tab)
 	pipefd[1] = 0;
 	while (tab[i])
 	{
+		exec = 0;
 		if (creat_exec(term, tab[i], &exec, pipefd) == 0)
 		{
 			l = 0;
 			while (exec->argv[l])
 			{
-				printf("exec: %s| in: %d | out: %d\n", exec->argv[l], exec->in, exec->out);
 				l++;
 			}
 			if (tab[i + 1])
@@ -118,11 +118,12 @@ int	exec(t_term *term, t_cmd **tab)
 			l = 0;
 			while (exec->argv[l])
 			{
-				printf("exec: %s| in: %d | out: %d\n", exec->argv[l], exec->in, exec->out);
 				l++;
 			}
 			ft_exec(term, exec);
 		}
+		else if (tab[i + 1])
+			ft_init_pipe_out(exec, pipefd);
 		ft_free_pars(exec);
 		i++;
 	}
