@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   path.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tcosse <tcosse@student.42.fr>              +#+  +:+       +#+        */
+/*   By: asaboure <asaboure@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/26 17:20:20 by tcosse            #+#    #+#             */
-/*   Updated: 2022/02/27 19:30:49 by tcosse           ###   ########.fr       */
+/*   Updated: 2022/02/27 21:40:36 by asaboure         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,8 @@ char	*check_cmd(char *input, char **path)
 	char	*pathcmd;
 
 	i = 0;
+	if (input[0] == '\0')
+		return (NULL);
 	if (access(input, X_OK | F_OK) == 0)
 		return (ft_strdup(input));
 	while (path[i])

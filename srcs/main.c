@@ -6,7 +6,11 @@
 /*   By: asaboure <asaboure@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/24 13:17:17 by tcosse            #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2022/02/27 21:42:25 by tcosse           ###   ########.fr       */
+=======
+/*   Updated: 2022/02/27 21:47:29 by asaboure         ###   ########.fr       */
+>>>>>>> 6eda0f9794b96784f0629dd08ecbb63d5b0d2974
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +60,7 @@ int	cmd(t_term *term)
 			ft_free_cmd_tab(tab);
 	}
 	else if (!str)
-		exit(0);
+		return (ft_free_term(&term));
 	else
 		free(str);
 	return (0);
