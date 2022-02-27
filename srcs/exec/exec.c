@@ -43,7 +43,7 @@ int	ft_child(t_term *term, t_parsing *cmd, int last_child)
 	}
 	ft_close_exec(cmd);
 	execve(cmd->path, cmd->argv, term->env);
-	perror("ERROR:\n");
+	perror(MINISHELL);
 	ft_free_term(term);
 	ft_free_pars(cmd);
 	exit(EXIT_FAILURE);
