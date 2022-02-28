@@ -6,7 +6,7 @@
 /*   By: asaboure <asaboure@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/24 13:39:34 by tcosse            #+#    #+#             */
-/*   Updated: 2022/02/28 15:27:02 by asaboure         ###   ########.fr       */
+/*   Updated: 2022/02/28 19:38:27 by asaboure         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,5 +36,5 @@ int		ft_echo(t_term *term, t_parsing *parsing);
 int		ft_cd(t_term *term, t_parsing *parsing);
 int		ft_is_builtin(char *cmd);
 int		return_new_line(void);
-int		ft_exit(t_term *term, t_parsing *parsing);
+int		ft_exit(t_term *term, t_parsing *parsing, t_cmd **tab);
 #endif

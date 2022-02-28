@@ -6,7 +6,7 @@
 /*   By: asaboure <asaboure@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/24 13:20:01 by tcosse            #+#    #+#             */
-/*   Updated: 2022/02/28 18:31:15 by asaboure         ###   ########.fr       */
+/*   Updated: 2022/02/28 19:40:26 by asaboure         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,10 +60,9 @@ int	ft_update_pwd(t_term *term)
 int	ft_set_pwd(t_term *term)
 {
 	char	*tmp;
-	char	buf[1000];
 
 	getcwd(term->cwd, 1000);
-	tmp = ft_strjoin("PWD=", buf);
+	tmp = ft_strjoin("PWD=", term->cwd);
 	add_env(term, tmp);
 	free(tmp);
 	return (1);
