@@ -6,7 +6,7 @@
 /*   By: asaboure <asaboure@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/25 18:28:10 by tcosse            #+#    #+#             */
-/*   Updated: 2022/02/27 20:26:21 by asaboure         ###   ########.fr       */
+/*   Updated: 2022/02/27 23:40:03 by tcosse           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 int		ft_error_pipe(t_parsing *cmd);
 int		ft_child(t_term *term, t_parsing *cmd, int last_child);
 int		exec(t_term *term, t_cmd **tab);
-int		ft_exec_builtin(t_term *term, t_parsing *parsing, int exec);
+int		ft_exec_builtin(t_term *term, t_parsing *parsing, int exec, t_cmd *cmd);
 int		redir_flux(t_parsing *cmd, int last_child);
 int		define_flags(int flag, int std);
 int		ft_setflux(t_parsing *cmd);

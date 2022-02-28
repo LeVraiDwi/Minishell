@@ -6,7 +6,7 @@
 /*   By: asaboure <asaboure@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/25 18:29:22 by tcosse            #+#    #+#             */
-/*   Updated: 2022/02/27 23:01:19 by asaboure         ###   ########.fr       */
+/*   Updated: 2022/02/28 01:24:47 by tcosse           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,6 @@ typedef struct s_term
 	int		(*built[6])(t_term *term, t_parsing *parsing);
 	char	**env;
 	char	cwd[1000];
-	int		last_ret;
-	int		err;
 }				t_term;
 
 void		ft_init_struct(t_parsing *pars);

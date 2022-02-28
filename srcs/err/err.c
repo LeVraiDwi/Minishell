@@ -6,7 +6,7 @@
 /*   By: tcosse <tcosse@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/25 18:34:26 by tcosse            #+#    #+#             */
-/*   Updated: 2022/02/27 18:55:54 by tcosse           ###   ########.fr       */
+/*   Updated: 2022/02/28 01:55:13 by tcosse           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,13 @@
 int	ft_set_err(t_cmd *cmd, int err_num)
 {
 	if (err_num == SYNTAX_ERR)
+	{
+		err = 2;
 		ft_set_syntax_err(cmd);
+	}
 	else if(err_num == PERROR_ERR)
 	{
+		err = 1;
 		perror(MINISHELL);
 	}
 	return (-1);
@@ -52,6 +56,7 @@ int	ft_error_cmd(char *str)
 	write(2, ": ", 2);
 	write(2, CMD_NOT_FOUND, ft_strlen(CMD_NOT_FOUND));
 	write(2, "\n", 1);
+	err = 127;
 	return (-1);
 }
 

@@ -6,7 +6,7 @@
 /*   By: tcosse <tcosse@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/25 18:33:47 by tcosse            #+#    #+#             */
-/*   Updated: 2022/02/27 18:32:48 by tcosse           ###   ########.fr       */
+/*   Updated: 2022/02/28 01:04:56 by tcosse           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,13 @@ int	free_err_cmd(t_cmd *cmd, t_cmd **tab, int perr)
 
 int	ft_perror(void)
 {
+	err = 1;
 	perror(MINISHELL);
+	return (-1);
+}
+
+int	ft_set_ret_err(void)
+{
+	err = 1;
 	return (-1);
 }

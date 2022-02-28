@@ -6,7 +6,7 @@
 /*   By: asaboure <asaboure@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/23 19:51:25 by tcosse            #+#    #+#             */
-/*   Updated: 2022/02/27 22:17:40 by tcosse           ###   ########.fr       */
+/*   Updated: 2022/02/28 01:55:22 by tcosse           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,10 +116,14 @@ int	ahdoc(t_term *term, t_cmd *cmd)
 		{
 			quote = ft_is_ahdoc((t_cmd *)cmd->next, &limiter);
 			if (quote >= 0)
+			{
 				if (ft_creat_ahdoc(term, cmd, limiter, quote) < 0)
 					return (-1);
 			if (limiter)
 				free(limiter);
+			}
+			else
+				return (ft_set_err(cmd, SYNTAX_ERR));
 			limiter = 0;
 		}
 		cmd = cmd->next;

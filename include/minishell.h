@@ -6,7 +6,7 @@
 /*   By: asaboure <asaboure@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/06 18:22:04 by asaboure          #+#    #+#             */
-/*   Updated: 2022/02/26 19:44:53 by asaboure         ###   ########.fr       */
+/*   Updated: 2022/02/28 01:15:48 by tcosse           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,8 @@
 # define SIMPLE_STDERR 16
 # define DOUBLE_STDERR 32
 # define APPEND 2
+
+extern int err;
 
 int		strisstr(char *str, char *s);
 int		ft_free(void **p);
