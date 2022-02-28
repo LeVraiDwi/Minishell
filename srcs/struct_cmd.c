@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   struct_cmd.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tcosse <tcosse@student.42.fr>              +#+  +:+       +#+        */
+/*   By: asaboure <asaboure@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/25 18:40:05 by tcosse            #+#    #+#             */
-/*   Updated: 2022/02/28 15:45:17 by tcosse           ###   ########.fr       */
+/*   Updated: 2022/02/28 18:28:15 by asaboure         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ void	ft_add_next_cmd(t_cmd *cmd, t_cmd *new)
 
 int	ft_creat_cmd(t_cmd **first, char *str)
 {
-	int	i;
+	int		i;
 	t_cmd	*new;
 
 	i = 0;
