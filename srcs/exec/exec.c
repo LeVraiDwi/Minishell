@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tcosse <tcosse@student.42.fr>              +#+  +:+       +#+        */
+/*   By: asaboure <asaboure@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/28 17:37:42 by tcosse            #+#    #+#             */
-/*   Updated: 2022/02/28 17:45:34 by tcosse           ###   ########.fr       */
+/*   Updated: 2022/02/28 17:47:39 by asaboure         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,8 +68,9 @@ int	ft_exec_builtin(t_term *term, t_parsing *parsing, int exec, t_cmd *cmd)
 	return (1);
 }
 
-void	sigint_set_err(void)
+void	sigint_set_err(int sig)
 {
+	(void)sig;
 	printf("\n");
 	err = 130;
 }
