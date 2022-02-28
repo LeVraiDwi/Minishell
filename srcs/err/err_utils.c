@@ -6,7 +6,7 @@
 /*   By: tcosse <tcosse@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/25 18:33:47 by tcosse            #+#    #+#             */
-/*   Updated: 2022/02/28 17:19:06 by tcosse           ###   ########.fr       */
+/*   Updated: 2022/02/28 19:10:46 by tcosse           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,9 @@ int	set_status_err(int status, int success)
 		g_err = 1;
 	}
 	else
+	{
 		g_err = success;
+		return (0);
+	}
 	return (-1);
 }
