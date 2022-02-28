@@ -53,12 +53,13 @@ int	check_file(t_cmd *cmd)
 {
 	while (cmd)
 	{
-		if ((cmd->flag & IS_REDIR) && !(cmd->flag & DOUBLE_REDIR_IN) && !(cmd->flag & IGNORE))
+		if ((cmd->flag & IS_REDIR)
+			&& !(cmd->flag & DOUBLE_REDIR_IN) && !(cmd->flag & IGNORE))
 		{
 			if (!ft_check_file(cmd))
 				return (-1);
 		}
 		cmd = cmd->next;
 	}
-	return(0);
+	return (0);
 }

@@ -19,7 +19,7 @@ int	ft_check_redir(t_cmd *cmd)
 
 	first = cmd;
 	if ((cmd->flag & PIPE))
-				return (ft_set_err(cmd, SYNTAX_ERR));
+		return (ft_set_err(cmd, SYNTAX_ERR));
 	while (cmd)
 	{
 		next = (t_cmd *)cmd->next;
@@ -40,12 +40,12 @@ int	ft_check_pipe(t_cmd *cmd)
 	t_cmd	*next;
 
 	if ((cmd->flag & PIPE))
-				return (ft_set_err(cmd, SYNTAX_ERR));
+		return (ft_set_err(cmd, SYNTAX_ERR));
 	while (cmd)
 	{
 		next = (t_cmd *)cmd->next;
 		if ((cmd->flag & PIPE) && (!next || (next->flag & PIPE)))
-				return (ft_set_err(cmd, SYNTAX_ERR));
+			return (ft_set_err(cmd, SYNTAX_ERR));
 		cmd = next;
 	}
 	return (0);
@@ -55,7 +55,7 @@ int	ft_check_parsing(t_cmd **tab)
 {
 	int	l;
 
-	l= 0;
+	l = 0;
 	while (tab[l])
 	{
 		if (ft_check_redir(tab[l]) < 0)
