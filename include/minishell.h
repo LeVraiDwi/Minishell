@@ -6,7 +6,7 @@
 /*   By: asaboure <asaboure@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/06 18:22:04 by asaboure          #+#    #+#             */
-/*   Updated: 2022/02/28 18:02:32 by tcosse           ###   ########.fr       */
+/*   Updated: 2022/02/28 18:46:03 by asaboure         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,12 +53,11 @@
 # define DOUBLE_STDERR 32
 # define APPEND 2
 
-extern int g_err;
+extern int	g_err;
 
 int		strisstr(char *str, char *s);
 int		ft_free(void **p);
 int		init_term(t_term *term, char **env);
 void	init_built(t_term *term);
 void	ft_set_null(char **str, int l);
-void	signal_handler();
 #endif

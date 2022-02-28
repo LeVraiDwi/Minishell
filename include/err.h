@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   err.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tcosse <tcosse@student.42.fr>              +#+  +:+       +#+        */
+/*   By: asaboure <asaboure@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/25 18:26:53 by tcosse            #+#    #+#             */
-/*   Updated: 2022/02/28 15:04:11 by tcosse           ###   ########.fr       */
+/*   Updated: 2022/02/28 18:44:23 by asaboure         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 # define ERR_H
 # define SYNTAX_ERR 1
 # define SYNTAX_STR "minishell: syntax error near unexpected token `"
-# define SYNTAX_ERR_NEW_LINE "minishell: syntax error near unexpected token `new line'\n"
+# define SYNTAX_ERR_NEW_LINE "minishell: syntax error near unexpected token\
+ `new line'\n"
 # define CMD_NOT_FOUND "command not found"
 # define PERROR_ERR 2
 # define MINISHELL "minishell: "
