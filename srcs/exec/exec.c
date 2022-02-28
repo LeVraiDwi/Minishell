@@ -6,11 +6,11 @@
 /*   By: asaboure <asaboure@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/28 17:37:42 by tcosse            #+#    #+#             */
-/*   Updated: 2022/02/28 17:47:39 by asaboure         ###   ########.fr       */
+/*   Updated: 2022/02/28 18:24:04 by asaboure         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"s
+#include "minishell.h"
 
 int	ft_child(t_term *term, t_parsing *cmd, int last_child)
 {

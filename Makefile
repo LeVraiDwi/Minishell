@@ -49,7 +49,7 @@ PARSER_NAME = 	parser.c quote.c quote_utils.c\
 				
 UTILS_PATH = ./srcs/utils
 
-UTILS_NAME = utils.c
+UTILS_NAME = utils.c utils2.c
 
 EXPANSER_PATH = ./srcs/expanser
 
