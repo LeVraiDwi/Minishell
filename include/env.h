@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tcosse <tcosse@student.42.fr>              +#+  +:+       +#+        */
+/*   By: asaboure <asaboure@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/24 13:39:19 by tcosse            #+#    #+#             */
-/*   Updated: 2022/02/25 18:31:13 by tcosse           ###   ########.fr       */
+/*   Updated: 2022/02/27 23:35:30 by asaboure         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,5 +24,6 @@ int		ft_dealloc_env(t_term *term, int i);
 int		remove_env(t_term *term, char *var);
 void	print_env(t_term term, int std);
 int		ft_update_pwd(t_term *term);
+int		ft_set_pwd(t_term *term);
 char	*get_env_var(char **env, char *var);
 #endif

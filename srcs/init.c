@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tcosse <tcosse@student.42.fr>              +#+  +:+       +#+        */
+/*   By: asaboure <asaboure@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/24 13:18:13 by tcosse            #+#    #+#             */
-/*   Updated: 2022/02/27 16:46:52 by tcosse           ###   ########.fr       */
+/*   Updated: 2022/02/28 00:27:49 by asaboure         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ int	init_term(t_term *term, char **env)
 	term->err = 0;
 	term->last_ret = 0;
 	init_built(term);
+	getcwd(term->cwd, 1000);
+	ft_set_pwd(term);
 	rl_clear_history();
 	return (0);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_util_access.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tcosse <tcosse@student.42.fr>              +#+  +:+       +#+        */
+/*   By: asaboure <asaboure@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/24 13:20:01 by tcosse            #+#    #+#             */
-/*   Updated: 2022/02/17 14:04:12 by tcosse           ###   ########.fr       */
+/*   Updated: 2022/02/28 01:02:06 by asaboure         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ char	*get_env_var(char **env, char *var)
 	int	i;
 
 	i = ft_is_env(env, var);
-	if (i)
+	if (i >= 0)
 		return (get_val(env[i]));
 	else
 		return (ft_strdup(""));
@@ -39,7 +39,6 @@ int	ft_update_pwd(t_term *term)
 {
 	char	*tmp;
 	char	*var;
-	char	buf[500];
 
 	var = get_env_var(term->env, "PWD");
 	if (!var)
@@ -48,7 +47,17 @@ int	ft_update_pwd(t_term *term)
 	free(var);
 	add_env(term, tmp);
 	free(tmp);
-	getcwd(buf, 500);
+	if (ft_is_env(term->env, "PWD") >= 0)
+		return (ft_set_pwd(term));
+	return (1);
+}
+
+int	ft_set_pwd(t_term *term)
+{
+	char	*tmp;
+	char	buf[1000];
+
+	getcwd(buf, 1000);
 	tmp = ft_strjoin("PWD=", buf);
 	add_env(term, tmp);
 	free(tmp);

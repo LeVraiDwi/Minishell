@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tcosse <tcosse@student.42.fr>              +#+  +:+       +#+        */
+/*   By: asaboure <asaboure@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/24 13:20:18 by tcosse            #+#    #+#             */
-/*   Updated: 2022/02/23 16:18:46 by tcosse           ###   ########.fr       */
+/*   Updated: 2022/02/28 00:28:44 by asaboure         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ int	remove_env(t_term *term, char *var)
 	int	i;
 
 	i = ft_is_env(term->env, var);
-	if (!i)
+	if (i == -1)
 		return (0);
 	ft_dealloc_env(term, i);
 	return (0);

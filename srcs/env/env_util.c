@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_util.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tcosse <tcosse@student.42.fr>              +#+  +:+       +#+        */
+/*   By: asaboure <asaboure@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/24 13:20:12 by tcosse            #+#    #+#             */
-/*   Updated: 2022/02/23 16:18:29 by tcosse           ###   ########.fr       */
+/*   Updated: 2022/02/28 01:08:36 by asaboure         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ int	ft_is_env(char **env, char *var)
 			return (i);
 		i++;
 	}
-	return (0);
+	return (-1);
 }
 
 int	ft_realloc_env(t_term *term, char *var)
@@ -99,7 +99,7 @@ int	add_env(t_term *term, char *var)
 	if (!var)
 		return (1);
 	i = ft_is_env(term->env, var);
-	if (i)
+	if (i >= 0)
 	{
 		replace_env(term, var, i);
 		return (1);
