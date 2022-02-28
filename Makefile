@@ -24,7 +24,7 @@ LEXER_NAME = lexer.c
 
 PIPE_PATH = ./srcs/pipe
 
-PIPE_NAME = pipe.c\
+PIPE_NAME = pipe.c new_pipe.c\
 
 CHECK_PATH = ./srcs/check
 
