@@ -54,7 +54,12 @@ int	creat_exec(t_term * term, t_cmd *cmd, t_parsing **exec, int	*pipefd)
 	if (ft_join(*exec, cmd) < 0)
 		return (ft_perror());
 	if (ft_get_path(term, *exec) < 0)
-		return (ft_error_cmd((*exec)->argv[0]));
+	{
+		if (!(*exec)->argv)
+			return (-1);
+		else
+			return (ft_error_cmd((*exec)->argv[0]));
+	}
 	return (0);
 }
 
