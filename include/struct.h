@@ -6,14 +6,14 @@
 /*   By: asaboure <asaboure@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/25 18:29:22 by tcosse            #+#    #+#             */
-/*   Updated: 2022/02/28 15:29:04 by asaboure         ###   ########.fr       */
+/*   Updated: 2022/02/28 18:39:07 by asaboure         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef STRUCT_H
 # define STRUCT_H
 
-typedef struct s_term t_term;
+typedef struct s_term	t_term;
 
 typedef struct s_cmd
 {
