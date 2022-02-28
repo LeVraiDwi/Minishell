@@ -6,7 +6,7 @@
 /*   By: tcosse <tcosse@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/28 17:37:42 by tcosse            #+#    #+#             */
-/*   Updated: 2022/02/28 17:39:07 by tcosse           ###   ########.fr       */
+/*   Updated: 2022/02/28 17:45:34 by tcosse           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,10 +111,10 @@ int	ft_exec(t_term *term, t_parsing *cmd)
 	return (0);
 }
 
-int	ft_select_built_exec(t_parsing *exec, t_cmd **tab, int i)
+int	ft_select_built_exec(t_term *term, t_parsing *exec, t_cmd **tab, int i)
 {
-	if (tab[i + 1])
-		ft_init_pipe_out(exec, pipefd);
+	int	ret;
+
 	ft_select_std(exec, tab[i + 1]);
 	ret = ft_exec_builtin(term, exec, 1, tab[i + 1]) == 1;
 	if (ret == 1)
@@ -131,19 +131,19 @@ int	exec(t_term *term, t_cmd **tab)
 	t_parsing	*exec;
 	int			i;
 	int			pipefd[2];
-	int			ret;
 
 	(void)term;
 	i = 0;
 	pipefd[0] = 0;
 	pipefd[1] = 0;
-	ret = 0;
 	while (tab[i])
 	{
 		exec = 0;
 		if (creat_exec(term, tab[i], &exec, pipefd) == 0)
 		{
-			ft_select_built_exec(exec, tab, i);
+			if (tab[i + 1])
+				ft_init_pipe_out(exec, pipefd);
+			ft_select_built_exec(term, exec, tab, i);
 		}
 		else if (tab[i + 1])
 			ft_init_pipe_out(exec, pipefd);
