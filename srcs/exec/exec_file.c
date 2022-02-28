@@ -6,7 +6,7 @@
 /*   By: tcosse <tcosse@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/17 17:04:49 by tcosse            #+#    #+#             */
-/*   Updated: 2022/02/28 17:40:56 by tcosse           ###   ########.fr       */
+/*   Updated: 2022/02/28 20:53:43 by tcosse           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,9 +75,9 @@ int	ft_stdopen(t_cmd *cmd, char *path)
 	if (cmd->flag & SIMPLE_REDIR_IN)
 		fd = ft_openfile(path, O_APPEND, O_RDONLY, cmd->flag);
 	else if (cmd->flag & SIMPLE_REDIR_OUT)
-		fd = ft_openfile(path, O_APPEND, O_RDWR, cmd->flag);
-	else if (cmd->flag & DOUBLE_REDIR_OUT)
 		fd = ft_openfile(path, O_TRUNC, O_RDWR, cmd->flag);
+	else if (cmd->flag & DOUBLE_REDIR_OUT)
+		fd = ft_openfile(path, O_APPEND, O_RDWR, cmd->flag);
 	if (fd < 0)
 		return (ft_error_std(cmd, errno));
 	cmd->pipefd[0] = fd;
