@@ -6,7 +6,7 @@
 /*   By: asaboure <asaboure@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/28 18:26:36 by asaboure          #+#    #+#             */
-/*   Updated: 2022/02/28 18:40:56 by tcosse           ###   ########.fr       */
+/*   Updated: 2022/02/28 20:01:22 by asaboure         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ void	signal_handler_heredoc(int id)
 void	sigint_set_err(int sig)
 {
 	(void)sig;
-	printf("\n");
 	g_err = 130;
 }
 

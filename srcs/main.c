@@ -6,7 +6,7 @@
 /*   By: asaboure <asaboure@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/24 13:17:17 by tcosse            #+#    #+#             */
-/*   Updated: 2022/02/28 20:40:08 by tcosse           ###   ########.fr       */
+/*   Updated: 2022/02/28 20:42:42 by tcosse           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	newprompt(int sig)
 
 void	exit_minishell(t_term *term)
 {
-	printf("\n");
+	printf("exit\n");
 	ft_free_term(term);
 	exit(0);
 }
