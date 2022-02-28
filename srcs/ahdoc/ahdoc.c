@@ -6,7 +6,7 @@
 /*   By: asaboure <asaboure@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/23 19:51:25 by tcosse            #+#    #+#             */
-/*   Updated: 2022/02/28 17:51:01 by tcosse           ###   ########.fr       */
+/*   Updated: 2022/02/28 19:11:11 by tcosse           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,10 +65,9 @@ int	ft_creat_ahdoc(t_term *term, t_cmd *cmd, char *limiter, int quote)
 	if (child == 0)
 		ft_ahdoc(term, cmd, limiter, quote);
 	waitpid(child, &status, 0);
-	set_status_err(status, g_err);
 	signal_handler();
 	close(cmd->pipefd[1]);
-	return (0);
+	return (set_status_err(status, g_err));
 }
 
 int	ft_is_ahdoc(t_cmd *cmd, char **lim)
