@@ -6,7 +6,7 @@
 /*   By: asaboure <asaboure@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/28 14:19:47 by asaboure          #+#    #+#             */
-/*   Updated: 2022/02/28 20:32:41 by tcosse           ###   ########.fr       */
+/*   Updated: 2022/02/28 20:51:02 by asaboure         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,6 @@ int	ft_exit(t_term *term, t_parsing *parsing, t_cmd **tab)
 	int		code;
 
 	cmd = parsing->argv;
-	ft_free_cmd_tab(tab);
-	ft_free_pars(parsing);
-	ft_free_term(term);
 	if (!cmd[1])
 		exit(0);
 	if (!isnumber(cmd[1]))
@@ -29,6 +26,9 @@ int	ft_exit(t_term *term, t_parsing *parsing, t_cmd **tab)
 		write(2, ": exit: ", 9);
 		write(2, cmd[1], ft_strlen(cmd[1]));
 		write(2, "numeric argument required\n", 27);
+		ft_free_cmd_tab(tab);
+		ft_free_pars(parsing);
+		ft_free_term(term);
 		exit (-1);
 	}
 	if (ft_cmd_length(cmd) > 2)
@@ -37,6 +37,9 @@ int	ft_exit(t_term *term, t_parsing *parsing, t_cmd **tab)
 		write(2, ": exit: too many arguments", 9);
 		return (-1);
 	}
+	ft_free_cmd_tab(tab);
+	ft_free_pars(parsing);
+	ft_free_term(term);
 	code = ft_atoi(cmd[1]);
 	exit(code);
 }
