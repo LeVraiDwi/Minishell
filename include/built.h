@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   built.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tcosse <tcosse@student.42.fr>              +#+  +:+       +#+        */
+/*   By: asaboure <asaboure@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/24 13:39:34 by tcosse            #+#    #+#             */
-/*   Updated: 2022/02/17 14:20:23 by tcosse           ###   ########.fr       */
+/*   Updated: 2022/02/28 15:27:02 by asaboure         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # define PWD 3
 # define ENV 4
 # define ECHO 5
+# define EXIT 6
 
 typedef struct s_term	t_term;
 
@@ -35,4 +36,5 @@ int		ft_echo(t_term *term, t_parsing *parsing);
 int		ft_cd(t_term *term, t_parsing *parsing);
 int		ft_is_builtin(char *cmd);
 int		return_new_line(void);
+int		ft_exit(t_term *term, t_parsing *parsing);
 #endif

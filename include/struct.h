@@ -6,7 +6,7 @@
 /*   By: asaboure <asaboure@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/25 18:29:22 by tcosse            #+#    #+#             */
-/*   Updated: 2022/02/28 01:24:47 by tcosse           ###   ########.fr       */
+/*   Updated: 2022/02/28 15:29:04 by asaboure         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ typedef struct s_parsing
 typedef struct s_term
 {
 	int		exit;
-	int		(*built[6])(t_term *term, t_parsing *parsing);
+	int		(*built[7])(t_term *term, t_parsing *parsing);
 	char	**env;
 	char	cwd[1000];
 }				t_term;

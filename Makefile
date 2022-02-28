@@ -12,7 +12,7 @@ BUILT_PATH =    ./srcs/builtin
 
 BUILT_NAME =    env.c export.c unset.c\
                 echo.c cd.c pwd.c\
-                utils.c\
+                utils.c exit.c\
 
 ENV_PATH =      ./srcs/env
 
