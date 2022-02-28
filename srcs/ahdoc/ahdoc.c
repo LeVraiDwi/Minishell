@@ -6,7 +6,7 @@
 /*   By: asaboure <asaboure@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/23 19:51:25 by tcosse            #+#    #+#             */
-/*   Updated: 2022/02/28 15:53:00 by tcosse           ###   ########.fr       */
+/*   Updated: 2022/02/28 17:16:59 by tcosse           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,11 +71,25 @@ int	ft_creat_ahdoc(t_term *term, t_cmd *cmd, char *limiter, int quote)
 	return (0);
 }
 
+int	get_limiter(t_cmd *next, char **limiter, int *flag)
+{
+	char	*tmp;
+
+	tmp = *limiter;
+	*limiter = ft_strjoin(*limiter, next->arg);
+	free(tmp);
+	if (!*limiter)
+		return (-1);
+	ft_add_flag(next, IGNORE);
+	if ((next->flag & SIMPLE_QUOTE) || (next->flag & DOUBLE_QUOTE))
+		*flag = 1;
+	return (0);
+}
+
 int	ft_is_ahdoc(t_cmd *cmd, char **lim)
 {
 	t_cmd	*next;
 	char	*limiter;
-	char	*tmp;
 	int		flag;
 
 	if (!cmd)
@@ -90,14 +104,8 @@ int	ft_is_ahdoc(t_cmd *cmd, char **lim)
 	next = (t_cmd *)cmd->next;
 	while (next && (next->flag & JOIN) && !(next->flag & IGNORE) && !(next->flag & IS_REDIR))
 	{
-		tmp = limiter;
-		limiter = ft_strjoin(limiter, next->arg);
-		free(tmp);
-		if (!limiter)
+		if (get_limiter(next, &limiter, &flag) < 0)
 			return (-1);
-		ft_add_flag(next, IGNORE);
-		if ((cmd->flag & SIMPLE_QUOTE) || (cmd->flag & DOUBLE_QUOTE))
-			flag = 1;
 		next = (t_cmd *)next->next;
 	}
 	*lim = limiter;

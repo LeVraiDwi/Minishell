@@ -12,6 +12,24 @@ t_cmd	**ft_creat_tab(t_cmd *cmd)
 	return (tab);
 }
 
+int	ft_split_pipe_cmd(t_cmd ***tab, t_cmd *cmd)
+{
+	while (cmd)
+	{
+		if (!(cmd->flag & IGNORE) && (cmd->flag & PIPE))
+		{
+			if (ft_split_tab(tab, cmd) < 0)
+			{
+				ft_free_cmd_tab(*tab);
+				return (-1);
+			}
+			cmd->next = 0;
+		}
+		cmd = cmd->next;
+	}
+	return (0);
+}
+
 t_cmd	**split_pipe(t_cmd *cmd)
 {
 	t_cmd	**tab;
@@ -28,19 +46,8 @@ t_cmd	**split_pipe(t_cmd *cmd)
 	l = 0;
 	while (tab[l])
 	{
-		while (cmd)
-		{
-			if (!(cmd->flag & IGNORE) && (cmd->flag & PIPE))
-			{
-				if (ft_split_tab(&tab, cmd) < 0)
-				{
-					ft_free_cmd_tab(tab);
-					return (0);
-				}
-				cmd->next = 0;
-			}
-			cmd = cmd->next;
-		}
+		if (ft_split_pipe_cmd(&tab, cmd) < 0)
+			return (0);
 		l++;
 		cmd = tab[l];
 	}
