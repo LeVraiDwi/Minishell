@@ -6,17 +6,36 @@
 /*   By: asaboure <asaboure@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/26 17:20:20 by tcosse            #+#    #+#             */
-/*   Updated: 2022/02/28 14:21:25 by tcosse           ###   ########.fr       */
+/*   Updated: 2022/02/28 17:39:39 by tcosse           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
+int	add_slash(char **path)
+{
+	char	*tmp;
+	int		i;
+
+	i = -1;
+	while (path[++i])
+	{
+		tmp = path[i];
+		path[i] = ft_strjoin(path[i], "/");
+		free(tmp);
+		if (!path[i])
+		{
+			ft_free_env(path);
+			return (-1);
+		}
+	}
+	return (0);
+}
+
 char	**get_pathv(char **env)
 {
 	int		i;
 	char	**path;
-	char	*tmp;
 
 	i = 0;
 	while (env[i])
@@ -24,18 +43,8 @@ char	**get_pathv(char **env)
 		if (ft_strncmp(env[i], "PATH=", 5) == 0)
 		{
 			path = ft_split(env[i] + ft_strlen("PATH="), ':');
-			i = -1;
-			while (path[++i])
-			{
-				tmp = path[i];
-				path[i] = ft_strjoin(path[i], "/");
-				free(tmp);
-				if (!path[i])
-				{
-					ft_free_env(path);
-					return (0);
-				}
-			}
+			if (add_slash(path) < 0)
+				return (0);
 			return (path);
 		}
 		i++;
@@ -98,5 +107,5 @@ void	ft_select_std(t_parsing *exec, t_cmd *next)
 			exec->out = exec->pipe_out[1];
 	}
 	else if (!exec->out)
-			exec->out = STD_OUT;
+		exec->out = STD_OUT;
 }
