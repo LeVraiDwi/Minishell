@@ -12,7 +12,7 @@
 
 #include "minishell.h"
 
-int err = 0;
+int g_err = 0;
 
 void	newprompt()
 {
@@ -85,7 +85,7 @@ int	main(int argc, char **argv, char **env)
 
 	(void)argv;
 	(void)argc;
-	err = 0;
+	g_err = 0;
 	signal_handler();
 	if(init_term(&term, env))
 		return (0);

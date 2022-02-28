@@ -28,7 +28,7 @@ void	sigint_set_err(int sig)
 {
 	(void)sig;
 	printf("\n");
-	err = 130;
+	g_err = 130;
 }
 
 void	signal_handler_child(int id)

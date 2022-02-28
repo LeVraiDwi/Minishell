@@ -53,7 +53,7 @@
 # define DOUBLE_STDERR 32
 # define APPEND 2
 
-extern int err;
+extern int g_err;
 
 int		strisstr(char *str, char *s);
 int		ft_free(void **p);

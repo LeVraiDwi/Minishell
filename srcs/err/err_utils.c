@@ -27,27 +27,27 @@ int	free_err_cmd(t_cmd *cmd, t_cmd **tab, int perr)
 
 int	ft_perror(void)
 {
-	err = 1;
+	g_err = 1;
 	perror(MINISHELL);
 	return (-1);
 }
 
 int	ft_set_ret_err(void)
 {
-	err = 1;
+	g_err = 1;
 	return (-1);
 }
 
 int	set_status_err(int status, int success)
 {
 	if (status == 2)
-		err = 130;
+		g_err = 130;
 	else if (status)
 	{
 		perror(MINISHELL);
-		err = 1;
+		g_err = 1;
 	}
 	else
-		err = success;
+		g_err = success;
 	return (-1);
 }
