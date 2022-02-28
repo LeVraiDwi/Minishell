@@ -6,7 +6,7 @@
 /*   By: asaboure <asaboure@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/25 18:28:10 by tcosse            #+#    #+#             */
-/*   Updated: 2022/02/28 18:40:10 by asaboure         ###   ########.fr       */
+/*   Updated: 2022/02/28 20:38:27 by tcosse           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ int		ft_get_path(t_term *term, t_parsing *exec);
 int		ft_init_pipe_out(t_parsing *exec, int *pipefd);
 int		ft_exec(t_term *term, t_parsing *exec);
 int		ft_close_exec(t_parsing *exec);
+int		ft_is_exit(t_term *term, t_parsing *exec, t_cmd **tab, int i);
 void	signal_handler_child(int child);
 void	sigint_set_err(int sig);
 void	ft_set_pipe_in(t_parsing *exec, int *pipe);

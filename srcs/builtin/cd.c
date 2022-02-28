@@ -6,7 +6,7 @@
 /*   By: asaboure <asaboure@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/24 13:20:33 by tcosse            #+#    #+#             */
-/*   Updated: 2022/02/28 02:29:04 by asaboure         ###   ########.fr       */
+/*   Updated: 2022/02/28 20:28:29 by tcosse           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	ft_cd(t_term *term, t_parsing *parsing)
 	if (l > 2)
 	{
 		errno = E2BIG;
-		return (-1);
+		return (ft_perror());
 	}
 	if (!cmd[1])
 	{

@@ -6,7 +6,7 @@
 /*   By: asaboure <asaboure@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/24 13:18:13 by tcosse            #+#    #+#             */
-/*   Updated: 2022/02/28 15:28:46 by asaboure         ###   ########.fr       */
+/*   Updated: 2022/02/28 20:33:40 by tcosse           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,14 +20,14 @@ void	init_built(t_term *term)
 	term->built[3] = &ft_pwd;
 	term->built[4] = &ft_env;
 	term->built[5] = &ft_echo;
-	term->built[6] = &ft_exit;
+	term->exit = &ft_exit;
+	
 }
 
 int	init_term(t_term *term, char **env)
 {
 	if (!ft_init_env(term, env))
 		return (-1);
-	term->exit = 0;
 	init_built(term);
 	getcwd(term->cwd, 1000);
 	ft_set_pwd(term);

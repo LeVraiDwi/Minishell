@@ -6,7 +6,7 @@
 /*   By: asaboure <asaboure@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/24 13:17:17 by tcosse            #+#    #+#             */
-/*   Updated: 2022/02/28 18:43:21 by asaboure         ###   ########.fr       */
+/*   Updated: 2022/02/28 20:40:08 by tcosse           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,6 @@ int	main(int argc, char **argv, char **env)
 	signal_handler();
 	if (init_term(&term, env))
 		return (0);
-	term.exit = 3;
 	while (1)
 	{
 		cmd(&term);
