@@ -1,9 +1,21 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   pipe.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: asaboure <asaboure@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/02/28 17:51:46 by asaboure          #+#    #+#             */
+/*   Updated: 2022/02/28 17:52:10 by asaboure         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
 t_cmd	**ft_creat_tab(t_cmd *cmd)
 {
 	t_cmd	**tab;
-	
+
 	tab = (t_cmd **)malloc(sizeof(t_cmd *) * (2));
 	if (!tab)
 		return (0);
@@ -35,7 +47,7 @@ t_cmd	**split_pipe(t_cmd *cmd)
 	t_cmd	**tab;
 	t_cmd	*first;
 	int		l;
-	
+
 	tab = ft_creat_tab(cmd);
 	if (!tab)
 	{
