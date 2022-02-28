@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tcosse <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: asaboure <asaboure@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/24 13:29:32 by tcosse            #+#    #+#             */
-/*   Updated: 2022/02/23 16:18:06 by tcosse           ###   ########.fr       */
+/*   Updated: 2022/02/28 15:20:01 by asaboure         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	ft_is_builtin(char *cmd)
 		return (ENV);
 	if (strisstr("echo", cmd))
 		return (ECHO);
-	if (strisstr("EXIT", cmd))
-		return (-1);
+	if (strisstr("exit", cmd))
+		return (EXIT);
 	return (-1);
 }

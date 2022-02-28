@@ -57,7 +57,7 @@ int	ft_exec_builtin(t_term *term, t_parsing *parsing, int exec, t_cmd *cmd)
 	int	i;
 
 	i = ft_is_builtin(parsing->argv[0]);
-	if (i >= 0 && i < 3 && exec)
+	if (((i >= 0 && i < 3) || (i == 6)) && exec)
 	{
 		if (!cmd)
 			return (term->built[i](term, parsing));
