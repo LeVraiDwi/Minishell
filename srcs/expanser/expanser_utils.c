@@ -31,7 +31,7 @@ int	get_ret(t_cmd *cmd)
 {
 	if (cmd->arg)
 		free(cmd->arg);
-	cmd->arg = ft_itoa(err);
+	cmd->arg = ft_itoa(g_err);
 	if (!cmd->arg)
 		return (-1);
 	return (0);

@@ -44,3 +44,9 @@ void	signal_handler_child(int id)
 		signal(SIGQUIT, SIG_DFL);
 	}
 }
+
+void	signal_handler(void)
+{
+	signal(SIGINT, newprompt);
+	signal(SIGQUIT, SIG_IGN);
+}

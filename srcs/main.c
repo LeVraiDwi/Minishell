@@ -12,20 +12,14 @@
 
 #include "minishell.h"
 
-int g_err = 0;
+int	g_err = 0;
 
-void	newprompt()
+void	newprompt(void)
 {
 	printf("\n");
 	rl_on_new_line();
 	rl_replace_line("", 0);
 	rl_redisplay();
-}
-
-void	signal_handler()
-{
-	signal(SIGINT, newprompt);
-	signal(SIGQUIT, SIG_IGN);
 }
 
 void	exit_minishell(t_term *term)
@@ -60,8 +54,8 @@ int	ft_exec_cmd(t_term *term, char *str)
 	if (tab)
 		ft_free_cmd_tab(tab);
 	return (0);
-
 }
+
 int	cmd(t_term *term)
 {
 	char	*str;
@@ -87,7 +81,7 @@ int	main(int argc, char **argv, char **env)
 	(void)argc;
 	g_err = 0;
 	signal_handler();
-	if(init_term(&term, env))
+	if (init_term(&term, env))
 		return (0);
 	term.exit = 3;
 	while (1)
