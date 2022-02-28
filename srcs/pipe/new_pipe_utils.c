@@ -1,6 +1,6 @@
 #include "minishell.h"
 
-char	*ft_get_str_pipe(int *pipefd)
+/*char	*ft_get_str_pipe(int *pipefd)
 {
 	int		l;
 	char	*str;
@@ -29,4 +29,4 @@ char	*ft_get_str_pipe(int *pipefd)
 		}
 	}
 	return (str);
-}
+}*/

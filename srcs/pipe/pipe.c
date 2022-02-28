@@ -32,7 +32,7 @@ t_cmd	**split_pipe(t_cmd *cmd)
 		{
 			if (!(cmd->flag & IGNORE) && (cmd->flag & PIPE))
 			{
-				if (ft_split_tab(&tab, cmd->next) < 0)
+				if (ft_split_tab(&tab) < 0)
 				{
 					ft_free_cmd_tab(tab);
 					return (0);
@@ -47,7 +47,7 @@ t_cmd	**split_pipe(t_cmd *cmd)
 	return (tab);
 }
 
-int	ft_split_tab(t_cmd ***tab, t_cmd *first)
+int	ft_split_tab(t_cmd ***tab)
 {
 	t_cmd	**tmp;
 	int		l;
@@ -65,12 +65,6 @@ int	ft_split_tab(t_cmd ***tab, t_cmd *first)
 		tmp[l] = (*tab)[l];
 		l++;
 	}
-	if (!first)
-	{
-		if (ft_creat_new_pipe(&first) < 0)
-			return (-1);	
-	}
-	tmp[l] = first;
 	free(*tab);
 	*tab = tmp;
 	return (0);
