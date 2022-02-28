@@ -6,7 +6,7 @@
 /*   By: asaboure <asaboure@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/28 14:19:47 by asaboure          #+#    #+#             */
-/*   Updated: 2022/02/28 20:51:02 by asaboure         ###   ########.fr       */
+/*   Updated: 2022/02/28 20:59:19 by asaboure         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ int	ft_exit(t_term *term, t_parsing *parsing, t_cmd **tab)
 		ft_free_cmd_tab(tab);
 		ft_free_pars(parsing);
 		ft_free_term(term);
+		rl_clear_history();
 		exit (-1);
 	}
 	if (ft_cmd_length(cmd) > 2)
@@ -40,6 +41,7 @@ int	ft_exit(t_term *term, t_parsing *parsing, t_cmd **tab)
 	ft_free_cmd_tab(tab);
 	ft_free_pars(parsing);
 	ft_free_term(term);
+	rl_clear_history();
 	code = ft_atoi(cmd[1]);
 	exit(code);
 }
