@@ -6,7 +6,7 @@
 /*   By: asaboure <asaboure@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 17:27:05 by tcosse            #+#    #+#             */
-/*   Updated: 2022/02/28 15:06:57 by asaboure         ###   ########.fr       */
+/*   Updated: 2022/02/28 18:21:51 by asaboure         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,27 +67,4 @@ char	*ft_insertvar(char *s, char *str, int var_start, int var_l)
 		new[l++] = *s++;
 	}
 	return (new);
-}
-
-int	ft_close(int fd1, int fd2)
-{
-	if (fd1 > 1)
-		close(fd1);
-	if (fd2 > 1)
-		close(fd2);
-	return (-1);
-}
-
-int	isnumber(char *str)
-{
-	int	i;
-
-	i = 0;
-	while (str[i])
-	{
-		if (str[i] < '0' || str[i] > '9')
-			return (0);
-		i++;
-	}
-	return (1);
 }
