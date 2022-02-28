@@ -6,7 +6,7 @@
 /*   By: asaboure <asaboure@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/24 13:17:17 by tcosse            #+#    #+#             */
-/*   Updated: 2022/02/28 01:56:51 by tcosse           ###   ########.fr       */
+/*   Updated: 2022/02/28 02:20:35 by asaboure         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ void	signal_handler()
 
 void	exit_minishell(t_term *term)
 {
+	printf("\n");
 	ft_free_term(term);
 	exit(0);
 }

@@ -69,15 +69,24 @@ int	ft_exec_builtin(t_term *term, t_parsing *parsing, int exec, t_cmd *cmd)
 	return (1);
 }
 
+void	sigint_set_err()
+{
+	printf("\n");
+	err = 130;
+}
+
 void	signal_handler_child(int id)
 {
-	__sighandler_t	action;
-
-	action = SIG_DFL;
 	if (id != 0)
-		action = SIG_IGN;
-	signal(SIGINT, action);
-	signal(SIGQUIT, action);
+	{
+		signal(SIGINT, sigint_set_err);
+		signal(SIGQUIT, SIG_IGN);
+	}
+	else
+	{
+		signal(SIGINT, SIG_DFL);
+		signal(SIGQUIT, SIG_DFL);
+	}
 }
 
 
