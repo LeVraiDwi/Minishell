@@ -6,7 +6,7 @@
 /*   By: tcosse <tcosse@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/23 19:51:35 by tcosse            #+#    #+#             */
-/*   Updated: 2022/02/28 15:51:54 by tcosse           ###   ########.fr       */
+/*   Updated: 2022/02/28 19:53:48 by tcosse           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ int	ft_make_replace(t_term *term, t_cmd *tab, int *i)
 	int		l;
 
 	l = ft_ahdoc_var_len(tab->arg + *i);
-	var = ft_substr(tab->arg, *i + 1, l);
+	var = ft_substr(tab->arg, *i + 1, l - 1);
 	if (!var)
 		return (-1);
 	tmp = get_env_var(term->env, var);
