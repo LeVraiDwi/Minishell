@@ -1,4 +1,4 @@
-SRCS = $(addprefix $(CHECK_PATH)/,$(CHECK_NAME)) $(addprefix $(AHDOC_PATH)/,$(AHDOC_NAME)) $(addprefix $(PIPE_PATH)/,$(PIPE_NAME)) $(addprefix $(SPE_PATH)/,$(SPE_NAME)) $(addprefix $(SRC_PATH)/,$(SRC_NAME)) $(addprefix $(HISTORY_PATH)/,$(HISTORY_NAME)) $(addprefix $(UTILS_PATH)/,$(UTILS_NAME)) $(addprefix $(LEXER_PATH)/,$(LEXER_NAME)) $(addprefix $(ENV_PATH)/,$(ENV_NAME)) $(addprefix $(BUILT_PATH)/,$(BUILT_NAME)) $(addprefix $(PARSER_PATH)/,$(PARSER_NAME)) $(addprefix $(ERR_PATH)/,$(ERR_NAME)) $(addprefix $(EXPANSER_PATH)/,$(EXPANSER_NAME)) $(addprefix $(EXEC_PATH)/,$(EXEC_NAME))
+SRCS = $(addprefix $(CHECK_PATH)/,$(CHECK_NAME)) $(addprefix $(AHDOC_PATH)/,$(AHDOC_NAME)) $(addprefix $(PIPE_PATH)/,$(PIPE_NAME)) $(addprefix $(SPE_PATH)/,$(SPE_NAME)) $(addprefix $(SRC_PATH)/,$(SRC_NAME)) $(addprefix $(HISTORY_PATH)/,$(HISTORY_NAME)) $(addprefix $(UTILS_PATH)/,$(UTILS_NAME)) $(addprefix $(LEXER_PATH)/,$(LEXER_NAME)) $(addprefix $(ENV_PATH)/,$(ENV_NAME)) $(addprefix $(BUILT_PATH)/,$(BUILT_NAME)) $(addprefix $(PARSER_PATH)/,$(PARSER_NAME)) $(addprefix $(ERR_PATH)/,$(ERR_NAME)) $(addprefix $(EXPANSER_PATH)/,$(EXPANSER_NAME)) $(addprefix $(EXEC_PATH)/,$(EXEC_NAME)) $(addprefix $(SIGNAL_PATH)/,$(SIGNAL_NAME))
 
 LIBFT = ./libft/libft.a
 
@@ -40,7 +40,7 @@ SPE_NAME = spe_char_utils.c spe_char.c\
 
 AHDOC_PATH = ./srcs/ahdoc
 
-AHDOC_NAME = ahdoc.c ahdoc_utils.c\
+AHDOC_NAME = ahdoc.c ahdoc_utils.c ahdoc_quote.c\
 
 PARSER_PATH = ./srcs/parser
 
@@ -58,6 +58,10 @@ EXPANSER_NAME = expanser.c expanser_utils.c\
 HISTORY_PATH = ./srcs/history
 
 HISTORY_NAME = history_add.c
+
+SIGNAL_PATH = ./srcs/signal
+
+SIGNAL_NAME = signal.c
 
 EXEC_PATH = ./srcs/exec
 

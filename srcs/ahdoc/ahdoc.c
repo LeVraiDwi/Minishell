@@ -6,7 +6,7 @@
 /*   By: asaboure <asaboure@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/23 19:51:25 by tcosse            #+#    #+#             */
-/*   Updated: 2022/02/28 17:20:40 by asaboure         ###   ########.fr       */
+/*   Updated: 2022/02/28 17:51:01 by tcosse           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,18 +50,6 @@ int	ft_ahdoc(t_term *term, t_cmd *cmd, char *limiter, int quote)
 	return (0);
 }
 
-void	signal_handler_heredoc(int id)
-{
-	struct sigaction	heredoc_act;
-
-	heredoc_act.sa_handler = SIG_DFL;
-	sigemptyset(&heredoc_act.sa_mask);
-	if (id != 0)
-		signal(SIGINT, sigint_set_err);
-	else
-		sigaction(SIGINT, &heredoc_act, NULL);
-}
-
 int	ft_creat_ahdoc(t_term *term, t_cmd *cmd, char *limiter, int quote)
 {
 	int	child;
@@ -83,21 +71,6 @@ int	ft_creat_ahdoc(t_term *term, t_cmd *cmd, char *limiter, int quote)
 	return (0);
 }
 
-int	get_limiter(t_cmd *next, char **limiter, int *flag)
-{
-	char	*tmp;
-
-	tmp = *limiter;
-	*limiter = ft_strjoin(*limiter, next->arg);
-	free(tmp);
-	if (!*limiter)
-		return (-1);
-	ft_add_flag(next, IGNORE);
-	if ((next->flag & SIMPLE_QUOTE) || (next->flag & DOUBLE_QUOTE))
-		*flag = 1;
-	return (0);
-}
-
 int	ft_is_ahdoc(t_cmd *cmd, char **lim)
 {
 	t_cmd	*next;
@@ -114,7 +87,8 @@ int	ft_is_ahdoc(t_cmd *cmd, char **lim)
 		return (0);
 	ft_add_flag(cmd, IGNORE);
 	next = (t_cmd *)cmd->next;
-	while (next && (next->flag & JOIN) && !(next->flag & IGNORE) && !(next->flag & IS_REDIR))
+	while (next && (next->flag & JOIN)
+		&& !(next->flag & IGNORE) && !(next->flag & IS_REDIR))
 	{
 		if (get_limiter(next, &limiter, &flag) < 0)
 			return (-1);
@@ -138,8 +112,8 @@ int	ahdoc(t_term *term, t_cmd *cmd)
 			{
 				if (ft_creat_ahdoc(term, cmd, limiter, quote) < 0)
 					return (-1);
-			if (limiter)
-				free(limiter);
+				if (limiter)
+					free(limiter);
 			}
 			else
 				return (ft_set_err(cmd, SYNTAX_ERR));

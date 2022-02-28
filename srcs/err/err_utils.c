@@ -20,7 +20,7 @@ int	free_err_cmd(t_cmd *cmd, t_cmd **tab, int perr)
 		ft_free_cmd(cmd);
 	if (tab)
 		ft_free_cmd_tab(tab);
-	cmd  = 0;
+	cmd = 0;
 	tab = 0;
 	return (-1);
 }
@@ -38,7 +38,7 @@ int	ft_set_ret_err(void)
 	return (-1);
 }
 
-int	set_status_err(int	status, int success)
+int	set_status_err(int status, int success)
 {
 	if (status == 2)
 		err = 130;

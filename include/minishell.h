@@ -6,7 +6,7 @@
 /*   By: asaboure <asaboure@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/06 18:22:04 by asaboure          #+#    #+#             */
-/*   Updated: 2022/02/28 01:15:48 by tcosse           ###   ########.fr       */
+/*   Updated: 2022/02/28 18:02:32 by tcosse           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@
 # include "check.h"
 # include "err.h"
 # include "expanser.h"
+# include "sig.h"
 # define STDIN 0
 # define STDOUT 1
 # define STDERR 2

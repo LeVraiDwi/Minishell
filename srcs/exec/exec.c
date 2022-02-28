@@ -10,17 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
-
-int	ft_error_pipe(t_parsing *cmd)
-{
-	if (cmd->in >= 0)
-		close(cmd->in);
-	if (cmd->out >= 0)
-		close(cmd->out);
-	ft_free_pars(cmd);
-	exit(EXIT_FAILURE);
-}
+#include "minishell.h"s
 
 int	ft_child(t_term *term, t_parsing *cmd, int last_child)
 {
@@ -66,27 +56,6 @@ int	ft_exec_builtin(t_term *term, t_parsing *parsing, int exec, t_cmd *cmd)
 	if (i >= 3 && i <= 5 && !exec)
 		return (term->built[i](term, parsing));
 	return (1);
-}
-
-void	sigint_set_err(int sig)
-{
-	(void)sig;
-	printf("\n");
-	err = 130;
-}
-
-void	signal_handler_child(int id)
-{
-	if (id != 0)
-	{
-		signal(SIGINT, sigint_set_err);
-		signal(SIGQUIT, SIG_IGN);
-	}
-	else
-	{
-		signal(SIGINT, SIG_DFL);
-		signal(SIGQUIT, SIG_DFL);
-	}
 }
 
 int	ft_exec(t_term *term, t_parsing *cmd)

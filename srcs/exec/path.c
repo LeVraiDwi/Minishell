@@ -93,12 +93,6 @@ int	ft_get_path(t_term *term, t_parsing *exec)
 	return (0);
 }
 
-void	ft_dup_pipe(int *old, int *new)
-{
-	new[0] = old[0];
-	new[1] = old[1];
-}
-
 void	ft_select_std(t_parsing *exec, t_cmd *next)
 {
 	if (next)

@@ -57,7 +57,7 @@ int	ft_openfile(char *path, int right, int mode, int flag)
 	}
 	else if (!(flag & SIMPLE_REDIR_IN))
 		fd = open(path, O_CREAT | right | mode,
-			S_IRUSR | S_IWUSR | S_IRGRP | S_IWGRP | S_IROTH | S_IWOTH);
+				S_IRUSR | S_IWUSR | S_IRGRP | S_IWGRP | S_IROTH | S_IWOTH);
 	else
 		return (-1);
 	if (fd < 0)

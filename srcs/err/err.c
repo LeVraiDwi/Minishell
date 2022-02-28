@@ -19,7 +19,7 @@ int	ft_set_err(t_cmd *cmd, int err_num)
 		err = 2;
 		ft_set_syntax_err(cmd);
 	}
-	else if(err_num == PERROR_ERR)
+	else if (err_num == PERROR_ERR)
 	{
 		err = 1;
 		perror(MINISHELL);

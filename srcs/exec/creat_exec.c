@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   creat_exec.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tcosse <tcosse@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/02/28 18:15:59 by tcosse            #+#    #+#             */
+/*   Updated: 2022/02/28 18:16:00 by tcosse           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
 int	ft_open_std_cmd(t_cmd *cmd)
@@ -40,9 +52,9 @@ int	ft_join(t_parsing *exec, t_cmd *cmd)
 	return (0);
 }
 
-int	creat_exec(t_term * term, t_cmd *cmd, t_parsing **exec, int	*pipefd)
+int	creat_exec(t_term *term, t_cmd *cmd, t_parsing **exec, int	*pipefd)
 {
-	if (expanser(term, cmd) <  0)
+	if (expanser(term, cmd) < 0)
 		return (ft_perror());
 	if (ft_open_std_cmd(cmd) < 0)
 		return (ft_set_ret_err());
