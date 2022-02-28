@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tcosse <tcosse@student.42.fr>              +#+  +:+       +#+        */
+/*   By: asaboure <asaboure@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/24 13:21:27 by tcosse            #+#    #+#             */
-/*   Updated: 2022/02/28 16:26:54 by tcosse           ###   ########.fr       */
+/*   Updated: 2022/02/28 22:23:04 by asaboure         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,10 +39,10 @@ void	remove_env_lst(t_term *term, char **cmd, int *ret)
 		}
 		else
 		{
-			write(2, "unset: %s: invalide parameter name\n", ft_strlen(cmd[0]));
+			write(2, "unset: %s: invalid parameter name\n", ft_strlen(cmd[0]));
 			write(2, ": ", 2);
 			write(2, cmd[l], ft_strlen(cmd[l]));
-			write(2, ": invalide parameter name\n", 26);
+			write(2, ": invalid parameter name\n", 26);
 			*ret = 1;
 		}
 		l++;

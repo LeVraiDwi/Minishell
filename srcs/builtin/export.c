@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tcosse <tcosse@student.42.fr>              +#+  +:+       +#+        */
+/*   By: asaboure <asaboure@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/24 13:21:12 by tcosse            #+#    #+#             */
-/*   Updated: 2022/02/28 20:20:50 by tcosse           ###   ########.fr       */
+/*   Updated: 2022/02/28 22:23:07 by asaboure         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ int	ft_is_var(char *var)
 	flag = 0;
 	i = 0;
 	if (!var)
+		return (0);
+	if (ft_isdigit(var[i]))
 		return (0);
 	while (var[i] && (ft_isalnum(var[i]) || var[i] == '_'))
 		i++;
@@ -42,10 +44,10 @@ int	ft_export_lst(t_term *term, char **cmd, int *ret)
 		}
 		else if (cmd[l][i])
 		{
-			write(2, "export: %s: invalide parameter name\n", ft_strlen(cmd[0]));
+			write(2, "export: %s: invalid parameter name\n", ft_strlen(cmd[0]));
 			write(2, ": ", 2);
 			write(2, cmd[l], ft_strlen(cmd[l]));
-			write(2, ": invalide parameter name\n", 26);
+			write(2, ": invalid parameter name\n", 26);
 			*ret = -1;
 		}
 		l++;
