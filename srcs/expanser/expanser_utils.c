@@ -6,7 +6,7 @@
 /*   By: tcosse <tcosse@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/17 17:06:04 by tcosse            #+#    #+#             */
-/*   Updated: 2022/02/28 16:45:35 by tcosse           ###   ########.fr       */
+/*   Updated: 2022/02/28 18:23:05 by tcosse           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,8 @@ int	ft_replace_cmd(t_term *term, t_cmd *cmd)
 		return (0);
 	while (cmd)
 	{
-		if (cmd->arg && ((cmd->flag & VAR) || (cmd->flag & HOME) || (cmd->flag & LAST_RET)))
+		if (cmd->arg && ((cmd->flag & VAR)
+				|| (cmd->flag & HOME) || (cmd->flag & LAST_RET)))
 			if (ft_insert_var(cmd, term->env) < 0)
 				return (-1);
 		cmd = cmd->next;
@@ -35,6 +36,7 @@ int	get_ret(t_cmd *cmd)
 		return (-1);
 	return (0);
 }
+
 int	ft_insert_var(t_cmd *cmd, char **env)
 {
 	char	*var;
