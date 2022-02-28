@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tcosse <tcosse@student.42.fr>              +#+  +:+       +#+        */
+/*   By: asaboure <asaboure@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/24 13:20:33 by tcosse            #+#    #+#             */
-/*   Updated: 2022/01/24 13:34:02 by tcosse           ###   ########.fr       */
+/*   Updated: 2022/02/28 02:29:04 by asaboure         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	ft_cd(t_term *term, t_parsing *parsing)
 
 	cmd = parsing->argv;
 	l = ft_cmd_length(cmd);
-	if (l != 2)
+	if (l > 2)
 	{
 		errno = E2BIG;
 		return (-1);
