@@ -66,7 +66,6 @@ int	creat_exec(t_term * term, t_cmd *cmd, t_parsing **exec, int	*pipefd)
 void	ft_set_pipe_in(t_parsing *exec, int *pipefd)
 {
 	ft_dup_pipe(pipefd, exec->pipe_in);
-	close(pipefd[1]);
 	exec->in = pipefd[0];
 }
 

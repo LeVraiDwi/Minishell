@@ -107,12 +107,7 @@ int	ft_exec(t_term *term, t_parsing *cmd)
 	status = 0;
 	errno = 0;
 	waitpid(0, &status, 0);
-	if (status == 2)
-		err = 130;
-	else if (status)
-		err = 1;
-	else
-		err = 0;
+	set_status_err(status, 0);
 	signal_handler();
 	last_child = child;
 	return (0);
@@ -142,7 +137,7 @@ int	exec(t_term *term, t_cmd **tab)
 			if (ret == 1)
 				ft_exec(term, exec);
 			else if (ret < 0)
-				err = 1;
+				ft_set_err(0, PERROR_ERR);
 			else
 				err = 0;
 		}

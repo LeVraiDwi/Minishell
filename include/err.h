@@ -6,7 +6,7 @@
 /*   By: tcosse <tcosse@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/25 18:26:53 by tcosse            #+#    #+#             */
-/*   Updated: 2022/02/28 01:20:13 by tcosse           ###   ########.fr       */
+/*   Updated: 2022/02/28 15:04:11 by tcosse           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ int		ft_add_err(t_term *term, char *str);
 int		free_err_cmd(t_cmd *cmd, t_cmd **tab, int perr);
 int		ft_perror(void);
 int		ft_set_ret_err(void);
+int		set_status_err(int status, int success);
 char	*ft_creat_err_msg(char *arg, int err);
 void	print_err(t_term *term);
 #endif

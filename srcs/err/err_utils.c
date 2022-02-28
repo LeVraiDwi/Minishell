@@ -6,7 +6,7 @@
 /*   By: tcosse <tcosse@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/25 18:33:47 by tcosse            #+#    #+#             */
-/*   Updated: 2022/02/28 01:04:56 by tcosse           ###   ########.fr       */
+/*   Updated: 2022/02/28 15:15:19 by tcosse           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,5 +35,19 @@ int	ft_perror(void)
 int	ft_set_ret_err(void)
 {
 	err = 1;
+	return (-1);
+}
+
+int	set_status_err(int	status, int success)
+{
+	if (status == 2)
+		err = 130;
+	else if (status)
+	{
+		perror(MINISHELL);
+		err = 1;
+	}
+	else
+		err = success;
 	return (-1);
 }

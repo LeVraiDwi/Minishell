@@ -6,7 +6,7 @@
 /*   By: asaboure <asaboure@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/23 19:51:25 by tcosse            #+#    #+#             */
-/*   Updated: 2022/02/28 01:58:24 by tcosse           ###   ########.fr       */
+/*   Updated: 2022/02/28 15:53:00 by tcosse           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,11 +61,11 @@ int	ft_creat_ahdoc(t_term *term, t_cmd *cmd, char *limiter, int quote)
 	child = fork();
 	if (child < 0)
 		return (-1);
-	signal_handler_child(child);
+	//signal_handler_child(child);
 	if (child == 0)
 		ft_ahdoc(term, cmd, limiter, quote);
-	if (waitpid(0, &status, 0) < 0)
-		return (-1);
+	waitpid(child, &status, 0);
+	set_status_err(status, err);
 	signal_handler();
 	close(cmd->pipefd[1]);
 	return (0);
@@ -92,7 +92,6 @@ int	ft_is_ahdoc(t_cmd *cmd, char **lim)
 	{
 		tmp = limiter;
 		limiter = ft_strjoin(limiter, next->arg);
-		printf("%s\n", limiter);
 		free(tmp);
 		if (!limiter)
 			return (-1);
