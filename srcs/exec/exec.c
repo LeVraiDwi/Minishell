@@ -107,7 +107,9 @@ int	ft_exec(t_term *term, t_parsing *cmd)
 	status = 0;
 	errno = 0;
 	waitpid(0, &status, 0);
-	if (status)
+	if (status == 2)
+		err = 130;
+	else if (status)
 		err = 1;
 	else
 		err = 0;
