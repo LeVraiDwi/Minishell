@@ -16,12 +16,12 @@ int	ft_set_err(t_cmd *cmd, int err_num)
 {
 	if (err_num == SYNTAX_ERR)
 	{
-		err = 2;
+		g_err = 2;
 		ft_set_syntax_err(cmd);
 	}
 	else if (err_num == PERROR_ERR)
 	{
-		err = 1;
+		g_err = 1;
 		perror(MINISHELL);
 	}
 	return (-1);
@@ -56,7 +56,7 @@ int	ft_error_cmd(char *str)
 	write(2, ": ", 2);
 	write(2, CMD_NOT_FOUND, ft_strlen(CMD_NOT_FOUND));
 	write(2, "\n", 1);
-	err = 127;
+	g_err = 127;
 	return (-1);
 }
 

@@ -65,7 +65,7 @@ int	ft_creat_ahdoc(t_term *term, t_cmd *cmd, char *limiter, int quote)
 	if (child == 0)
 		ft_ahdoc(term, cmd, limiter, quote);
 	waitpid(child, &status, 0);
-	set_status_err(status, err);
+	set_status_err(status, g_err);
 	signal_handler();
 	close(cmd->pipefd[1]);
 	return (0);

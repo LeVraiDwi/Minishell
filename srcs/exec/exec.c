@@ -17,11 +17,11 @@ int	ft_child(t_term *term, t_parsing *cmd, int last_child)
 	int	status;
 
 	redir_flux(cmd, last_child);
-	err = 0;
+	g_err = 0;
 	status = ft_exec_builtin(term, cmd, 0, 0);
 	if (status <= 0)
 	{
-		err = 1;
+		g_err = 1;
 		ft_close(cmd->in, cmd->out);
 		ft_free_term(term);
 		ft_free_pars(cmd);
@@ -35,7 +35,7 @@ int	ft_child(t_term *term, t_parsing *cmd, int last_child)
 	ft_close_exec(cmd);
 	execve(cmd->path, cmd->argv, term->env);
 	perror(MINISHELL);
-	err = 1;
+	g_err = 1;
 	ft_free_term(term);
 	ft_free_pars(cmd);
 	exit(EXIT_FAILURE);
@@ -92,7 +92,7 @@ int	ft_select_built_exec(t_term *term, t_parsing *exec, t_cmd **tab, int i)
 	else if (ret < 0)
 		ft_set_err(0, PERROR_ERR);
 	else
-		err = 0;
+		g_err = 0;
 	return (0);
 }
 
