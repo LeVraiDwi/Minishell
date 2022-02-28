@@ -6,11 +6,13 @@
 /*   By: asaboure <asaboure@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/24 13:17:17 by tcosse            #+#    #+#             */
-/*   Updated: 2022/02/27 22:05:49 by asaboure         ###   ########.fr       */
+/*   Updated: 2022/02/28 01:56:51 by tcosse           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+int err = 0;
 
 void	newprompt()
 {
@@ -50,7 +52,7 @@ int	cmd(t_term *term)
 		if (ft_check_pipe(cmd))
 			return (free_err_cmd(cmd, 0, 0));
 		if (ahdoc(term, cmd) < 0)
-			return (free_err_cmd(cmd, 0, PERROR_ERR));
+			return (free_err_cmd(cmd, 0, 0));
 		tab = split_pipe(cmd);
 		if (!tab)
 			return (free_err_cmd(cmd, 0, PERROR_ERR));
@@ -74,14 +76,14 @@ int	main(int argc, char **argv, char **env)
 
 	(void)argv;
 	(void)argc;
+	err = 0;
 	signal_handler();
 	if(init_term(&term, env))
 		return (0);
 	term.exit = 3;
 	while (1)
 	{
-		if (cmd(&term) < 0)
-			term.err = 1;
+		cmd(&term);
 	}
 	ft_free_term(&term);
 	rl_clear_history();
