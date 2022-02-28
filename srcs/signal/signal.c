@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   signal.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: asaboure <asaboure@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/02/28 18:26:36 by asaboure          #+#    #+#             */
+/*   Updated: 2022/02/28 18:26:57 by asaboure         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
 void	signal_handler_heredoc(int id)
@@ -11,6 +23,7 @@ void	signal_handler_heredoc(int id)
 	else
 		sigaction(SIGINT, &heredoc_act, NULL);
 }
+
 void	sigint_set_err(int sig)
 {
 	(void)sig;
