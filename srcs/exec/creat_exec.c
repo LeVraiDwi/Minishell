@@ -45,7 +45,7 @@ int	creat_exec(t_term * term, t_cmd *cmd, t_parsing **exec, int	*pipefd)
 	if (expanser(term, cmd) <  0)
 		return (ft_perror());
 	if (ft_open_std_cmd(cmd) < 0)
-		return (-1);
+		return (ft_set_ret_err());
 	*exec = ft_creat_pars();
 	if (!*exec)
 		return (ft_perror());

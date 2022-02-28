@@ -28,9 +28,11 @@ int	ft_child(t_term *term, t_parsing *cmd, int last_child)
 	int	status;
 
 	redir_flux(cmd, last_child);
-	status = ft_exec_builtin(term, cmd, 0);
+	err = 0;
+	status = ft_exec_builtin(term, cmd, 0, 0);
 	if (status <= 0)
 	{
+		err = 1;
 		ft_close(cmd->in, cmd->out);
 		ft_free_term(term);
 		ft_free_pars(cmd);
@@ -44,18 +46,24 @@ int	ft_child(t_term *term, t_parsing *cmd, int last_child)
 	ft_close_exec(cmd);
 	execve(cmd->path, cmd->argv, term->env);
 	perror(MINISHELL);
+	err = 1;
 	ft_free_term(term);
 	ft_free_pars(cmd);
 	exit(EXIT_FAILURE);
 }
 
-int	ft_exec_builtin(t_term *term, t_parsing *parsing, int exec)
+int	ft_exec_builtin(t_term *term, t_parsing *parsing, int exec, t_cmd *cmd)
 {
 	int	i;
 
 	i = ft_is_builtin(parsing->argv[0]);
 	if (i >= 0 && i < 3 && exec)
-		return (term->built[i](term, parsing));
+	{
+		if (!cmd)
+			return (term->built[i](term, parsing));
+		else
+			return (0);
+	}
 	if (i >= 3 && i <= 5 && !exec)
 		return (term->built[i](term, parsing));
 	return (1);
@@ -80,20 +88,22 @@ int	ft_exec(t_term *term, t_parsing *cmd)
 	int	last_child;
 
 	last_child  = 0;
-	if (ft_exec_builtin(term, cmd, 1) == 1)
-	{
-		child = fork();
-		if (child < 0)
-			return (0);
-		signal_handler_child(child);
-		if (child == 0)
-			ft_child(term, cmd, last_child);
-		ft_close(cmd->in, cmd->out);
-		status = 0;
-		waitpid(0, &status, 0);
-		signal_handler();
-		last_child = child;
-	}
+	child = fork();
+	if (child < 0)
+		return (0);
+	signal_handler_child(child);
+	if (child == 0)
+		ft_child(term, cmd, last_child);
+	ft_close(cmd->in, cmd->out);
+	status = 0;
+	errno = 0;
+	waitpid(0, &status, 0);
+	if (status)
+		err = 1;
+	else
+		err = 0;
+	signal_handler();
+	last_child = child;
 	return (0);
 }
 
@@ -102,11 +112,13 @@ int	exec(t_term *term, t_cmd **tab)
 	t_parsing	*exec;
 	int			i;
 	int			pipefd[2];
+	int			ret;
 
 	(void)term;
 	i = 0;
 	pipefd[0] = 0;
 	pipefd[1] = 0;
+	ret = 0;
 	while (tab[i])
 	{
 		exec = 0;
@@ -115,8 +127,13 @@ int	exec(t_term *term, t_cmd **tab)
 			if (tab[i + 1])
 				ft_init_pipe_out(exec, pipefd);
 			ft_select_std(exec, tab[i + 1]);
-			if (ft_exec_builtin(term, exec, 0) == 1)
+			ret = ft_exec_builtin(term, exec, 1, tab[i + 1]) == 1;
+			if (ret == 1)
 				ft_exec(term, exec);
+			else if (ret < 0)
+				err = 1;
+			else
+				err = 0;
 		}
 		else if (tab[i + 1])
 			ft_init_pipe_out(exec, pipefd);
