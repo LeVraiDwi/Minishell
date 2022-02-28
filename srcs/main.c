@@ -6,7 +6,7 @@
 /*   By: asaboure <asaboure@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/24 13:17:17 by tcosse            #+#    #+#             */
-/*   Updated: 2022/02/28 13:48:12 by tcosse           ###   ########.fr       */
+/*   Updated: 2022/02/28 18:43:21 by asaboure         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,9 @@
 
 int	g_err = 0;
 
-void	newprompt(void)
+void	newprompt(int sig)
 {
+	(void)sig;
 	printf("\n");
 	rl_on_new_line();
 	rl_replace_line("", 0);
