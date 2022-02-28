@@ -6,7 +6,7 @@
 /*   By: asaboure <asaboure@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/06 17:10:10 by asaboure          #+#    #+#             */
-/*   Updated: 2022/02/28 14:59:03 by asaboure         ###   ########.fr       */
+/*   Updated: 2022/02/28 18:36:54 by asaboure         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,6 @@ int		ft_isquote(char c);
 int		ft_quotelen(char *str, int start, char c);
 int		ft_close(int fd1, int fd2);
 char	*ft_insertvar(char *s, char *str, int var_start, int var_L);
-void	newprompt();
+void	newprompt(void);
 int		isnumber(char *str);
 #endif
