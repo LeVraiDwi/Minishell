@@ -6,7 +6,7 @@
 /*   By: asaboure <asaboure@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/23 19:51:25 by tcosse            #+#    #+#             */
-/*   Updated: 2022/02/28 15:53:00 by tcosse           ###   ########.fr       */
+/*   Updated: 2022/02/28 17:12:06 by asaboure         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,18 @@ int	ft_ahdoc(t_term *term, t_cmd *cmd, char *limiter, int quote)
 	return (0);
 }
 
+void	signal_handler_heredoc(int id)
+{
+	struct sigaction	heredoc_act;
+
+	heredoc_act.sa_handler = SIG_DFL;
+	sigemptyset(&heredoc_act.sa_mask);
+	if (id != 0)
+		signal(SIGINT, sigint_set_err);
+	else
+		sigaction(SIGINT, &heredoc_act, NULL);
+}
+
 int	ft_creat_ahdoc(t_term *term, t_cmd *cmd, char *limiter, int quote)
 {
 	int	child;
@@ -61,7 +73,7 @@ int	ft_creat_ahdoc(t_term *term, t_cmd *cmd, char *limiter, int quote)
 	child = fork();
 	if (child < 0)
 		return (-1);
-	//signal_handler_child(child);
+	signal_handler_heredoc(child);
 	if (child == 0)
 		ft_ahdoc(term, cmd, limiter, quote);
 	waitpid(child, &status, 0);
