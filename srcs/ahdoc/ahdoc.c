@@ -6,7 +6,7 @@
 /*   By: asaboure <asaboure@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/23 19:51:25 by tcosse            #+#    #+#             */
-/*   Updated: 2022/02/28 19:50:20 by tcosse           ###   ########.fr       */
+/*   Updated: 2022/03/01 18:16:53 by tcosse           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,11 @@
 
 int	ft_write_tab(t_term *term, t_cmd *cmd, t_cmd *tab, int quote)
 {
-	if (!quote)
-		if (ft_make_var(term, tab) < 0)
-			return (-1);
+	if (!quote && ft_make_var(term, tab) < 0)
+	{
+		ft_free_cmd(tab);
+		return (-1);
+	}
 	while (tab)
 	{
 		write(cmd->pipefd[1], tab->arg, ft_strlen(tab->arg));
@@ -33,20 +35,22 @@ int	ft_ahdoc(t_term *term, t_cmd *cmd, char *limiter, int quote)
 
 	str = readline("> ");
 	if (!str)
-		ft_free_ahdoc(term, cmd, limiter, EXIT_FAILURE);
+		ft_free_ahdoc(term, term->act_cmd, limiter, 0);
 	while (!strisstr(limiter, str))
 	{
 		if (ft_creat_cmd(&tab, str) < 0)
-			ft_free_ahdoc(term, cmd, limiter, EXIT_FAILURE);
+			ft_free_ahdoc(term, term->act_cmd, limiter, tab);
 		free(str);
 		str = readline("> ");
 		if (!str)
-			ft_free_ahdoc(term, cmd, limiter, EXIT_FAILURE);
+			ft_free_ahdoc(term, term->act_cmd, limiter, tab);
 	}
 	free(str);
 	if (ft_write_tab(term, cmd, tab, quote) < 0)
-		ft_free_ahdoc(term, cmd, limiter, EXIT_FAILURE);
-	ft_free_ahdoc(term, cmd, limiter, EXIT_SUCCESS);
+		ft_free_ahdoc(term, term->act_cmd, limiter, tab);
+	ft_free_cmd(tab);
+	ft_close(cmd->pipefd[0], cmd->pipefd[1]);
+	ft_free_ahdoc(term, term->act_cmd, limiter, 0);
 	return (0);
 }
 

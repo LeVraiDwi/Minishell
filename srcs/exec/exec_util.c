@@ -6,7 +6,7 @@
 /*   By: tcosse <tcosse@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/28 18:15:35 by tcosse            #+#    #+#             */
-/*   Updated: 2022/03/01 16:19:09 by tcosse           ###   ########.fr       */
+/*   Updated: 2022/03/01 18:18:42 by tcosse           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,6 @@
 int	redir_flux(t_parsing *cmd, int last_child)
 {
 	(void)last_child;
-/*	int	status;
-
-	status = 0;
-	if (last_child != 0)
-		waitpid(last_child, &status, 0);*/
 	if (cmd->in != STDIN)
 		if (dup2(cmd->in, STDIN) < 0)
 			return (ft_error_pipe(cmd));
@@ -56,11 +51,8 @@ int	ft_launch_exec(t_term *term, t_parsing **exec, int *pipefd, t_cmd **tab)
 		{
 			new = ft_get_last_pars(*exec);
 			ft_set_pipe(new, pipefd, tab[i + 1]);
-			if (ft_is_exit(new))
-			{
-				if (!in_pipe)
-					ft_exit(term, *exec, tab, new);
-			}
+			if (ft_is_exit(new) && !in_pipe)
+				ft_exit(term, *exec, tab, new);
 			else
 				nb_fork += ft_select_built_exec(term, new, in_pipe, tab[i + 1]);
 		}
@@ -100,5 +92,4 @@ void	ft_wait_child(int nb_fork)
 		set_status_err(status, 0);
 	}
 	signal_handler();
-
 }

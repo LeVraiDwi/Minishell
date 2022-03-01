@@ -6,7 +6,7 @@
 /*   By: tcosse <tcosse@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/23 19:51:35 by tcosse            #+#    #+#             */
-/*   Updated: 2022/02/28 19:53:48 by tcosse           ###   ########.fr       */
+/*   Updated: 2022/03/01 17:46:47 by tcosse           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,16 +52,20 @@ int	ft_ahdoc_var_len(char *str)
 	return (i);
 }
 
-int	ft_free_ahdoc(t_term *term, t_cmd *cmd, char *str, int exit_state)
+int	ft_free_ahdoc(t_term *term, t_cmd *cmd, char *str, t_cmd *tab)
 {
 	if (term)
 		ft_free_term(term);
 	if (cmd)
 		ft_free_cmd(cmd);
+	if (tab)
+		ft_free_cmd(tab);
 	if (str)
 		free(str);
-	ft_close(cmd->pipefd[0], cmd->pipefd[1]);
-	exit(exit_state);
+	if (!tab)
+		exit(EXIT_SUCCESS);
+	else
+		exit(EXIT_FAILURE);
 	return (-1);
 }
 

@@ -6,7 +6,7 @@
 /*   By: asaboure <asaboure@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/25 18:28:10 by tcosse            #+#    #+#             */
-/*   Updated: 2022/03/01 18:56:50 by asaboure         ###   ########.fr       */
+/*   Updated: 2022/03/01 18:58:02 by asaboure         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,8 @@
 int		ft_error_pipe(t_parsing *cmd);
 int		ft_launch_exec(t_term *term,
 			t_parsing **exec, int *pipefd, t_cmd **tab);
-int		ft_make_exit(t_term *term, t_parsing *exec, t_cmd **tab, t_parsing *pars);
+int		ft_make_exit(t_term *term,
+			t_parsing *exec, t_cmd **tab, t_parsing *pars);
 void	ft_wait_child(int nb_fork);
 int		ft_child(t_term *term, t_parsing *cmd, int last_child);
 int		exec(t_term *term, t_cmd **tab);
