@@ -6,7 +6,7 @@
 /*   By: tcosse <tcosse@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/25 18:33:47 by tcosse            #+#    #+#             */
-/*   Updated: 2022/03/01 21:36:26 by tcosse           ###   ########.fr       */
+/*   Updated: 2022/03/01 21:52:06 by tcosse           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,11 +41,17 @@ int	ft_set_ret_err(void)
 int	set_status_err(int status, int success)
 {
 	if (status == 2)
-		g_err = 130;
-	else if (status)
 	{
-		g_err = 1;
+		write(1, "\n", 1);
+		g_err = 130;
 	}
+	else if (status == 131)
+	{
+		write(1, "\n", 1);
+		g_err = 131;
+	}
+	else if (status)
+		g_err = 1;
 	else
 	{
 		g_err = success;

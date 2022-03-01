@@ -6,7 +6,7 @@
 /*   By: asaboure <asaboure@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/28 18:26:36 by asaboure          #+#    #+#             */
-/*   Updated: 2022/03/01 21:14:54 by asaboure         ###   ########.fr       */
+/*   Updated: 2022/03/01 21:53:42 by tcosse           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ void	signal_handler(void)
 {
 	struct sigaction	main_act;
 	struct sigaction	ignore_act;
-	
+
 	main_act.sa_sigaction = main_handler;
 	main_act.sa_flags = SA_SIGINFO;
 	sigemptyset(&main_act.sa_mask);
