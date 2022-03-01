@@ -6,7 +6,7 @@
 /*   By: asaboure <asaboure@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/28 14:19:47 by asaboure          #+#    #+#             */
-/*   Updated: 2022/03/01 16:21:34 by tcosse           ###   ########.fr       */
+/*   Updated: 2022/03/01 16:52:10 by tcosse           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,10 @@ int	ft_exit(t_term *term, t_parsing *parsing, t_cmd **tab, t_parsing *pars)
 
 	cmd = pars->argv;
 	if (!cmd[1])
+	{
+		destroy_minishell(tab, parsing, term);
 		exit(0);
+	}
 	if (!isnumber(cmd[1]))
 	{
 		write(2, MINISHELL, ft_strlen(MINISHELL));
