@@ -6,7 +6,7 @@
 /*   By: asaboure <asaboure@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/24 13:20:40 by tcosse            #+#    #+#             */
-/*   Updated: 2022/03/01 01:47:51 by asaboure         ###   ########.fr       */
+/*   Updated: 2022/03/01 17:38:40 by asaboure         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	ft_echo_new_line(int flag)
 {
-	if (flag != FLAG_N)
+	if (flag == 1)
 		write(1, "\n", 1);
 }
 
@@ -24,21 +24,11 @@ int	return_new_line(void)
 	return (0);
 }
 
-static int	flag_ternary(int flag)
+int	ft_echo_end(int l, t_parsing *parsing, char **cmd, int i)
 {
-	int	i;
+	int	flag;
 
-	i = 1;
-	if (flag)
-		i = 2;
-	return (i);
-}
-
-int	ft_echo_end(int l, t_parsing *parsing, char **cmd, int flag)
-{
-	int	i;
-
-	i = flag_ternary(flag);
+	flag = i;
 	while (i < l)
 	{
 		write(parsing->out, cmd[i], ft_strlen(cmd[i]));
@@ -70,6 +60,6 @@ int	ft_echo(t_term *term, t_parsing *parsing)
 		return (return_new_line());
 	}
 	else if (l > 1)
-		flag = is_flag(cmd[1]);
+		flag = is_flag(cmd);
 	return (ft_echo_end(l, parsing, cmd, flag));
 }
