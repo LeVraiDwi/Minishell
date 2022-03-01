@@ -6,7 +6,7 @@
 /*   By: asaboure <asaboure@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/24 13:17:17 by tcosse            #+#    #+#             */
-/*   Updated: 2022/02/28 20:42:42 by tcosse           ###   ########.fr       */
+/*   Updated: 2022/03/01 01:01:51 by tcosse           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,9 @@ int	ft_exec_cmd(t_term *term, char *str)
 		return (free_err_cmd(cmd, 0, PERROR_ERR));
 	if (ft_check_parsing(tab) < 0)
 		return (free_err_cmd(cmd, 0, 0));
+	if (expanser(term, tab) < 0)
+		return (free_err_cmd(cmd, 0, 0));
+	ft_print_tab_cmd(tab);
 	if (exec(term, tab) < 0)
 		return (free_err_cmd(cmd, 0, 0));
 	if (tab)

@@ -6,7 +6,7 @@
 /*   By: asaboure <asaboure@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/25 18:29:22 by tcosse            #+#    #+#             */
-/*   Updated: 2022/02/28 20:33:25 by tcosse           ###   ########.fr       */
+/*   Updated: 2022/02/28 23:37:17 by tcosse           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,8 +53,10 @@ int			ft_free_cmd(t_cmd *cmd);
 int			ft_add_end_cmd(t_cmd **first, t_cmd *new);
 void		ft_free_term_err(t_term *term);
 void		ft_add_next_cmd(t_cmd *cmd, t_cmd *new);
+void		ft_add_end_pars(t_parsing **first, t_parsing *new);
 int			ft_creat_cmd(t_cmd **first, char *str);
 int			ft_make_cmd(char *str, t_cmd **cmd);
+t_parsing	*ft_get_last_pars(t_parsing *pars);
 void		ft_print_cmd(t_cmd *cmd);
 void		ft_print_tab_cmd(t_cmd **cmd);
 #endif

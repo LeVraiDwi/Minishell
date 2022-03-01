@@ -6,7 +6,7 @@
 /*   By: asaboure <asaboure@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/28 17:37:42 by tcosse            #+#    #+#             */
-/*   Updated: 2022/02/28 20:39:27 by tcosse           ###   ########.fr       */
+/*   Updated: 2022/03/01 02:14:50 by tcosse           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,20 +14,20 @@
 
 int	ft_child(t_term *term, t_parsing *cmd, int last_child)
 {
-	int	status;
+	int	built;
 
 	redir_flux(cmd, last_child);
 	g_err = 0;
-	status = ft_exec_builtin(term, cmd, 0, 0);
-	if (status <= 0)
+	built = ft_exec_builtin(term, cmd, 0, 0);
+	if (built <= 0)
 	{
 		ft_close(cmd->in, cmd->out);
 		ft_free_term(term);
 		ft_free_pars(cmd);
 	}
-	if (status < 0)
+	if (built < 0)
 		exit(EXIT_FAILURE);
-	else if (!status)
+	else if (!built)
 	{
 		exit(EXIT_SUCCESS);
 	}
@@ -45,7 +45,7 @@ int	ft_exec_builtin(t_term *term, t_parsing *parsing, int exec, t_cmd *cmd)
 	int	i;
 
 	i = ft_is_builtin(parsing->argv[0]);
-	if (((i >= 0 && i < 3) || (i == 6)) && exec)
+	if ((i >= 0 && i < 3) && exec)
 	{
 		if (!cmd)
 			return (term->built[i](term, parsing));
@@ -59,7 +59,6 @@ int	ft_exec_builtin(t_term *term, t_parsing *parsing, int exec, t_cmd *cmd)
 
 int	ft_exec(t_term *term, t_parsing *cmd)
 {
-	int	status;
 	int	child;
 	int	last_child;
 
@@ -71,54 +70,43 @@ int	ft_exec(t_term *term, t_parsing *cmd)
 	if (child == 0)
 		ft_child(term, cmd, last_child);
 	ft_close(cmd->in, cmd->out);
-	status = 0;
-	errno = 0;
-	waitpid(0, &status, 0);
-	set_status_err(status, 0);
+	ft_close(cmd->pipe_out[1], 0);
 	signal_handler();
 	last_child = child;
 	return (0);
 }
 
-int	ft_select_built_exec(t_term *term, t_parsing *exec, t_cmd **tab, int i)
+int	ft_select_built_exec(t_term *term, t_parsing *exec, int in_pipe, t_cmd *next)
 {
-	int	ret;
+	int	i;
+	(void)term;
+	(void)exec;
+	(void)in_pipe;
+	(void)next;
 
-	ft_select_std(exec, tab[i + 1]);
-	ret = ft_exec_builtin(term, exec, 1, tab[i + 1]) == 1;
-	if (ret == 1)
-		ft_exec(term, exec);
-	else if (ret < 0)
-		ft_set_err(0, PERROR_ERR);
+
+	i = ft_is_builtin(exec->argv[0]);
+	if (i >= 0 && i <= 3)
+		ft_exec_builtin(term, exec, 1, next);
 	else
-		g_err = 0;
+	{
+		ft_exec(term, exec);
+		return (1);
+	}
 	return (0);
 }
 
 int	exec(t_term *term, t_cmd **tab)
 {
 	t_parsing	*exec;
-	int			i;
 	int			pipefd[2];
 
 	(void)term;
-	i = 0;
 	pipefd[0] = 0;
 	pipefd[1] = 0;
-	while (tab[i])
-	{
-		exec = 0;
-		if (creat_exec(term, tab[i], &exec, pipefd) == 0)
-		{
-			ft_is_exit(term, exec, tab, i);
-			if (tab[i + 1])
-				ft_init_pipe_out(exec, pipefd);
-			ft_select_built_exec(term, exec, tab, i);
-		}
-		else if (tab[i + 1])
-			ft_init_pipe_out(exec, pipefd);
-		ft_free_pars(exec);
-		i++;
-	}
+	exec = 0;
+	printf("exec\n");
+	ft_launch_exec(term , &exec, pipefd, tab);
+	//ft_free_pars(exec);
 	return (0);
 }

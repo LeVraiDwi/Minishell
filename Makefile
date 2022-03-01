@@ -7,6 +7,7 @@ SRC_PATH =      ./srcs
 SRC_NAME =      main.c strisstr.c init.c\
                 term.c struct_pars.c struct_cmd.c\
 				string_utils.c struct_cmd2.c\
+				struct_pars2.c\
 
 BUILT_PATH =    ./srcs/builtin
 

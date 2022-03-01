@@ -6,7 +6,7 @@
 /*   By: tcosse <tcosse@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/28 18:15:59 by tcosse            #+#    #+#             */
-/*   Updated: 2022/02/28 18:16:00 by tcosse           ###   ########.fr       */
+/*   Updated: 2022/03/01 01:49:27 by tcosse           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,23 +54,24 @@ int	ft_join(t_parsing *exec, t_cmd *cmd)
 
 int	creat_exec(t_term *term, t_cmd *cmd, t_parsing **exec, int	*pipefd)
 {
-	if (expanser(term, cmd) < 0)
-		return (ft_perror());
+	t_parsing	*new;
+
 	if (ft_open_std_cmd(cmd) < 0)
 		return (ft_set_ret_err());
-	*exec = ft_creat_pars();
-	if (!*exec)
+	new = ft_creat_pars();
+	if (!new)
 		return (ft_perror());
+	ft_add_end_pars(exec, new);
 	if (pipefd[0] && pipefd[1])
-		ft_set_pipe_in(*exec, pipefd);
-	if (ft_join(*exec, cmd) < 0)
+		ft_set_pipe_in(new, pipefd);
+	if (ft_join(new, cmd) < 0)
 		return (ft_perror());
-	if (ft_get_path(term, *exec) < 0)
+	if (ft_get_path(term, new) < 0)
 	{
-		if (!(*exec)->argv)
+		if (!(new)->argv)
 			return (-1);
 		else
-			return (ft_error_cmd((*exec)->argv[0]));
+			return (ft_error_cmd(new->argv[0]));
 	}
 	return (0);
 }

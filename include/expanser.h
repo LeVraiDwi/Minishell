@@ -6,7 +6,7 @@
 /*   By: tcosse <tcosse@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/25 18:32:35 by tcosse            #+#    #+#             */
-/*   Updated: 2022/02/28 01:06:39 by tcosse           ###   ########.fr       */
+/*   Updated: 2022/03/01 00:18:05 by tcosse           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 
 int		ft_insert_var(t_cmd *cmd, char **env);
 int		replace_var(t_term *term, t_parsing *parsing);
-int		expanser(t_term *term, t_cmd *cmd);
+int		expanser(t_term *term, t_cmd **tab);
 int		ft_setstd(t_parsing *parsing);
 int		ft_creat_argv(t_parsing *parsing);
 int		count_argv(t_parsing *parsing);

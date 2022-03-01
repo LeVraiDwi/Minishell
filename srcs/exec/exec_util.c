@@ -6,7 +6,7 @@
 /*   By: tcosse <tcosse@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/28 18:15:35 by tcosse            #+#    #+#             */
-/*   Updated: 2022/02/28 20:39:53 by tcosse           ###   ########.fr       */
+/*   Updated: 2022/03/01 02:12:40 by tcosse           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,4 +37,65 @@ int	ft_is_exit(t_term *term, t_parsing *exec, t_cmd **tab, int i)
 		term->exit(term, exec, tab);
 	}
 	return (0);
+}
+
+int	ft_launch_exec(t_term *term, t_parsing **exec, int *pipefd, t_cmd **tab)
+{
+	t_parsing	*new;
+	int			i;
+	int			nb_fork;
+	int			in_pipe;
+
+	i = 0;
+	in_pipe = 0;
+	if (tab[i + 1])
+		in_pipe = 1;
+	nb_fork = 0;
+	printf("start launch\n");
+	while (tab[i])
+	{
+		printf("creat start\n");
+		if (creat_exec(term, tab[i], exec, pipefd) == 0)
+		{
+			printf("creat end\n");
+			new = ft_get_last_pars(*exec);
+			ft_set_pipe(new, pipefd, tab[i + 1]);
+			printf("end create %s|%s|in%d|out%d\n", new->argv[0], new->path, new->in, new->out);
+			nb_fork += ft_select_built_exec(term, new, in_pipe, tab[i + 1]);
+		}
+		i++;
+	}
+	ft_wait_child(nb_fork);
+	return (0);
+}
+
+int	ft_set_pipe(t_parsing *exec, int *pipefd, t_cmd *next)
+{
+	if (exec->pipe_out[0] == 0 && exec->pipe_out[1] ==0)
+	{
+		if (pipe(exec->pipe_out) < 0)
+			return (-1);
+		ft_dup_pipe(exec->pipe_out, pipefd);
+	}
+	if (next)
+	{
+		if (!exec->out || exec->out == STD_OUT)
+			exec->out = exec->pipe_out[1];
+	}
+	else
+		if (!exec->out)
+			exec->out = STD_OUT;
+	return (0);
+}
+
+void	ft_wait_child(int nb_fork)
+{
+	int	status;
+
+	while (nb_fork--)
+	{
+		status = 0;
+		waitpid(0, &status, 0);
+	}
+	printf("end wait\n");
 }
