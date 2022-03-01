@@ -6,7 +6,7 @@
 /*   By: asaboure <asaboure@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/28 17:37:42 by tcosse            #+#    #+#             */
-/*   Updated: 2022/03/01 19:59:34 by tcosse           ###   ########.fr       */
+/*   Updated: 2022/03/01 20:21:59 by tcosse           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,14 +27,13 @@ int	ft_child(t_term *term, t_parsing *cmd, int last_child)
 		ft_free_pars(term->act_pars);
 	}
 	if (built < 0)
-		exit(EXIT_FAILURE);
+		ft_ret_err();
 	else if (!built)
 	{
 		exit(EXIT_SUCCESS);
 	}
 	ft_close_exec(cmd);
 	execve(cmd->path, cmd->argv, term->env);
-	perror(MINISHELL);
 	g_err = 1;
 	ft_free_term(term);
 	ft_free_pars(cmd);
@@ -86,7 +85,7 @@ int	ft_select_built_exec(t_term *term,
 		ft_exec_builtin(term, exec, 1, next);
 	else if (i == 0 && !in_pipe)
 		ft_exec_builtin(term, exec, 1, next);
-	else
+	else if (i != 0)
 	{
 		ft_exec(term, exec);
 		return (1);
