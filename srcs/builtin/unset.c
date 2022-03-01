@@ -6,7 +6,7 @@
 /*   By: asaboure <asaboure@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/24 13:21:27 by tcosse            #+#    #+#             */
-/*   Updated: 2022/03/01 01:12:24 by asaboure         ###   ########.fr       */
+/*   Updated: 2022/03/01 21:58:13 by tcosse           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ int	ft_is_valid_name(char *cmd)
 	int	i;
 
 	i = 0;
+	if (!*cmd)
+		return (0);
 	while (cmd[i])
 	{
 		if (!ft_isalnum(cmd[i]))

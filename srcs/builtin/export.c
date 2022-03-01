@@ -6,7 +6,7 @@
 /*   By: asaboure <asaboure@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/24 13:21:12 by tcosse            #+#    #+#             */
-/*   Updated: 2022/03/01 01:05:42 by asaboure         ###   ########.fr       */
+/*   Updated: 2022/03/01 21:59:00 by tcosse           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int	ft_export_lst(t_term *term, char **cmd, int *ret)
 			if (add_env(term, cmd[l]) < 0)
 				return (-1);
 		}
-		else if (cmd[l][i] || (i == 0 && cmd[l][i] == '='))
+		else if (!cmd[l][0] || (cmd[l][i] || (i == 0 && cmd[l][i] == '=')))
 		{
 			write(2, "export: %s: invalid parameter name\n", ft_strlen(cmd[0]));
 			write(2, ": ", 2);
