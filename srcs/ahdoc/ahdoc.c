@@ -6,7 +6,7 @@
 /*   By: asaboure <asaboure@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/23 19:51:25 by tcosse            #+#    #+#             */
-/*   Updated: 2022/03/01 18:16:53 by tcosse           ###   ########.fr       */
+/*   Updated: 2022/03/01 22:31:35 by asaboure         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ int	ft_ahdoc(t_term *term, t_cmd *cmd, char *limiter, int quote)
 	t_cmd	*tab;
 	char	*str;
 
+	tab = NULL;
 	str = readline("> ");
 	if (!str)
 		ft_free_ahdoc(term, term->act_cmd, limiter, 0);

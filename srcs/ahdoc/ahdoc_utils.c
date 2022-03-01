@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ahdoc_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tcosse <tcosse@student.42.fr>              +#+  +:+       +#+        */
+/*   By: asaboure <asaboure@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/23 19:51:35 by tcosse            #+#    #+#             */
-/*   Updated: 2022/03/01 17:46:47 by tcosse           ###   ########.fr       */
+/*   Updated: 2022/03/01 22:55:57 by asaboure         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,8 @@ int	ft_replace_in_tab(t_term *term, t_cmd *tab)
 			if (ft_make_replace(term, tab, &i))
 				return (-1);
 		}
-		i++;
+		if (tab->arg[i])
+			i++;
 	}
 	return (0);
 }

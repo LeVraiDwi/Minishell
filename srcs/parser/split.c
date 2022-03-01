@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   split.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tcosse <tcosse@student.42.fr>              +#+  +:+       +#+        */
+/*   By: asaboure <asaboure@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/23 19:18:15 by tcosse            #+#    #+#             */
-/*   Updated: 2022/02/23 19:46:25 by tcosse           ###   ########.fr       */
+/*   Updated: 2022/03/01 22:50:51 by asaboure         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,8 @@ int	split_spe_char(t_cmd *cmd)
 			if (ft_split_quote_spe(cmd, flag, &i) < 0)
 				return (-1);
 			flag = 0;
-			i++;
+			if (cmd->arg[i])
+				i++;
 		}
 		cmd = cmd->next;
 	}
