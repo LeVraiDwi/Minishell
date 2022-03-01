@@ -6,7 +6,7 @@
 /*   By: asaboure <asaboure@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/24 13:20:18 by tcosse            #+#    #+#             */
-/*   Updated: 2022/02/28 00:28:44 by asaboure         ###   ########.fr       */
+/*   Updated: 2022/03/01 23:07:42 by asaboure         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,11 +57,10 @@ int	ft_dealloc_env(t_term *term, int i)
 	while (term->env[l])
 	{
 		if (l == i)
-		{
-			free(term->env[l]);
+			free(term->env[l++]);
+		tmp[j++] = term->env[l];
+		if (term->env[l])
 			l++;
-		}
-		tmp[j++] = term->env[l++];
 	}
 	free(term->env);
 	term->env = tmp;
