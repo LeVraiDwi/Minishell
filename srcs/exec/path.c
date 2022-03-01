@@ -6,7 +6,7 @@
 /*   By: asaboure <asaboure@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/26 17:20:20 by tcosse            #+#    #+#             */
-/*   Updated: 2022/03/01 19:53:01 by asaboure         ###   ########.fr       */
+/*   Updated: 2022/03/01 20:01:15 by tcosse           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,15 +107,4 @@ int	ft_get_path(t_term *term, t_parsing *exec)
 	if (!exec->path)
 		return (-1);
 	return (0);
-}
-
-void	ft_select_std(t_parsing *exec, t_cmd *next)
-{
-	if (next)
-	{
-		if (exec->out == STD_OUT)
-			exec->out = exec->pipe_out[1];
-	}
-	else if (!exec->out)
-		exec->out = STD_OUT;
 }

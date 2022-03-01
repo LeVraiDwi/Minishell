@@ -6,7 +6,7 @@
 /*   By: tcosse <tcosse@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/28 18:16:12 by tcosse            #+#    #+#             */
-/*   Updated: 2022/03/01 00:14:20 by tcosse           ###   ########.fr       */
+/*   Updated: 2022/03/01 20:00:57 by tcosse           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,4 +33,15 @@ int	ft_error_pipe(t_parsing *cmd)
 		close(cmd->out);
 	ft_free_pars(cmd);
 	exit(EXIT_FAILURE);
+}
+
+void	ft_select_std(t_parsing *exec, t_cmd *next)
+{
+	if (next)
+	{
+		if (exec->out == STD_OUT)
+			exec->out = exec->pipe_out[1];
+	}
+	else if (!exec->out)
+		exec->out = STD_OUT;
 }

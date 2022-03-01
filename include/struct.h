@@ -6,7 +6,7 @@
 /*   By: asaboure <asaboure@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/25 18:29:22 by tcosse            #+#    #+#             */
-/*   Updated: 2022/03/01 19:52:24 by tcosse           ###   ########.fr       */
+/*   Updated: 2022/03/01 20:00:25 by tcosse           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ typedef struct s_term
 {
 	int			(*built[7])(t_term *term, t_parsing *parsing);
 	int			(*exit)(t_term *term,
-				t_parsing *parsing, t_cmd **cmd, t_parsing *pars);
+			t_parsing *parsing, t_cmd **cmd, t_parsing *pars);
 	char		**env;
 	char		cwd[1000];
 	t_cmd		*act_cmd;
