@@ -6,7 +6,7 @@
 /*   By: asaboure <asaboure@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/24 13:18:13 by tcosse            #+#    #+#             */
-/*   Updated: 2022/03/01 14:58:46 by tcosse           ###   ########.fr       */
+/*   Updated: 2022/03/01 17:56:29 by tcosse           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ int	init_term(t_term *term, char **env)
 	init_built(term);
 	getcwd(term->cwd, 1000);
 	ft_set_pwd(term);
+	term->act_cmd  = 0;
 	rl_clear_history();
 	return (0);
 }

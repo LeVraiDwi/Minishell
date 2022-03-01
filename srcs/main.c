@@ -6,7 +6,7 @@
 /*   By: asaboure <asaboure@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/24 13:17:17 by tcosse            #+#    #+#             */
-/*   Updated: 2022/03/01 14:57:26 by tcosse           ###   ########.fr       */
+/*   Updated: 2022/03/01 18:03:47 by tcosse           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,28 +32,27 @@ void	exit_minishell(t_term *term)
 
 int	ft_exec_cmd(t_term *term, char *str)
 {
-	t_cmd	*cmd;
 	t_cmd	**tab;
 
 	ft_add_history(str);
-	cmd = lexer(str);
-	if (!cmd)
+	term->act_cmd = lexer(str);
+	if (!term->act_cmd)
 		return (free_err_cmd(0, 0, PERROR_ERR));
-	if (parser(cmd))
-		return (free_err_cmd(cmd, 0, PERROR_ERR));
-	if (ft_check_pipe(cmd))
-		return (free_err_cmd(cmd, 0, 0));
-	if (ahdoc(term, cmd) < 0)
-		return (free_err_cmd(cmd, 0, 0));
-	tab = split_pipe(cmd);
+	if (parser(term->act_cmd))
+		return (free_err_cmd(term->act_cmd, 0, PERROR_ERR));
+	if (ft_check_pipe(term->act_cmd))
+		return (free_err_cmd(term->act_cmd, 0, 0));
+	if (ahdoc(term, term->act_cmd) < 0)
+		return (free_err_cmd(term->act_cmd, 0, 0));
+	tab = split_pipe(term->act_cmd);
 	if (!tab)
-		return (free_err_cmd(cmd, 0, PERROR_ERR));
+		return (free_err_cmd(term->act_cmd, 0, PERROR_ERR));
 	if (ft_check_parsing(tab) < 0)
-		return (free_err_cmd(cmd, 0, 0));
+		return (free_err_cmd(term->act_cmd, 0, 0));
 	if (expanser(term, tab) < 0)
-		return (free_err_cmd(cmd, 0, 0));
+		return (free_err_cmd(term->act_cmd, 0, 0));
 	if (exec(term, tab) < 0)
-		return (free_err_cmd(cmd, 0, 0));
+		return (free_err_cmd(term->act_cmd, 0, 0));
 	if (tab)
 		ft_free_cmd_tab(tab);
 	return (0);
