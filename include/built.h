@@ -6,7 +6,7 @@
 /*   By: asaboure <asaboure@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/24 13:39:34 by tcosse            #+#    #+#             */
-/*   Updated: 2022/03/01 16:27:28 by tcosse           ###   ########.fr       */
+/*   Updated: 2022/03/01 17:33:53 by asaboure         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 
 typedef struct s_term	t_term;
 
-int		is_flag(char *arg);
+int		is_flag(char **arg);
 void	ft_echo_new_line(int flag);
 int		ft_is_var(char *var);
 int		ft_is_valid_name(char *cmd);

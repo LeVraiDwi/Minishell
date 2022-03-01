@@ -6,7 +6,7 @@
 /*   By: asaboure <asaboure@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/24 13:29:32 by tcosse            #+#    #+#             */
-/*   Updated: 2022/03/01 16:45:33 by asaboure         ###   ########.fr       */
+/*   Updated: 2022/03/01 17:36:17 by asaboure         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,22 +41,24 @@ int	ft_cmd_length(char **cmd)
 	return (l);
 }
 
-int	is_flag(char *arg)
+int	is_flag(char **arg)
 {
 	int	i;
+	int	j;
 
-	i = 1;
-	if (!arg)
-		return (0);
-	if (arg[0] == '-')
+	j = 1;
+	if (!arg[j][0])
+		return (j);
+	while (arg[j][0] == '-')
 	{
-		while (arg[i])
+		i = 1;
+		while (arg[j][i])
 		{
-			if (arg[i] != 'n')
-				return (0);
+			if (arg[j][i] != 'n')
+				return (j);
 			i++;
 		}
-		return (FLAG_N);
+		j++;
 	}
-	return (0);
+	return (j);
 }
