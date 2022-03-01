@@ -6,7 +6,7 @@
 /*   By: asaboure <asaboure@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/24 13:21:27 by tcosse            #+#    #+#             */
-/*   Updated: 2022/03/01 22:11:38 by tcosse           ###   ########.fr       */
+/*   Updated: 2022/03/01 23:56:22 by asaboure         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ int	ft_is_valid_name(char *cmd)
 
 	i = 0;
 	if (!*cmd)
+		return (0);
+	if (ft_isdigit(cmd[i]))
 		return (0);
 	while (cmd[i])
 	{
@@ -41,10 +43,9 @@ void	remove_env_lst(t_term *term, char **cmd)
 		}
 		else
 		{
-			write(2, "unset: %s: invalid parameter name\n", ft_strlen(cmd[0]));
-			write(2, ": ", 2);
+			write(2, "unset: `", 9);
 			write(2, cmd[l], ft_strlen(cmd[l]));
-			write(2, ": invalid parameter name\n", 26);
+			write(2, "': invalid parameter name\n", 27);
 			g_err = 1;
 		}
 		l++;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   err_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tcosse <tcosse@student.42.fr>              +#+  +:+       +#+        */
+/*   By: asaboure <asaboure@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/25 18:33:47 by tcosse            #+#    #+#             */
-/*   Updated: 2022/03/01 21:52:06 by tcosse           ###   ########.fr       */
+/*   Updated: 2022/03/01 23:27:50 by asaboure         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ int	set_status_err(int status, int success)
 	}
 	else if (status == 131)
 	{
-		write(1, "\n", 1);
+		write(1, "Quit (core dumped)\n", 20);
 		g_err = 131;
 	}
 	else if (status)
