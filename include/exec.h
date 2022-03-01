@@ -6,7 +6,7 @@
 /*   By: asaboure <asaboure@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/25 18:28:10 by tcosse            #+#    #+#             */
-/*   Updated: 2022/03/01 00:31:33 by tcosse           ###   ########.fr       */
+/*   Updated: 2022/03/01 02:23:39 by tcosse           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,8 @@
 # define STD_OUT 1
 
 int		ft_error_pipe(t_parsing *cmd);
-int		ft_launch_exec(t_term *term, t_parsing **exec, int *pipefd, t_cmd **tab);
+int		ft_launch_exec(t_term *term,
+			t_parsing **exec, int *pipefd, t_cmd **tab);
 void	ft_wait_child(int nb_fork);
 int		ft_child(t_term *term, t_parsing *cmd, int last_child);
 int		exec(t_term *term, t_cmd **tab);
@@ -38,7 +39,8 @@ int		ft_exec(t_term *term, t_parsing *exec);
 int		ft_close_exec(t_parsing *exec);
 int		ft_is_exit(t_term *term, t_parsing *exec, t_cmd **tab, int i);
 int		ft_set_pipe(t_parsing *exec, int *pipefd, t_cmd *next);
-int		ft_select_built_exec(t_term *term, t_parsing *exec, int in_pipe, t_cmd *next);
+int		ft_select_built_exec(t_term *term,
+			t_parsing *exec, int in_pipe, t_cmd *next);
 void	signal_handler_child(int child);
 void	sigint_set_err(int sig);
 void	ft_set_pipe_in(t_parsing *exec, int *pipe);

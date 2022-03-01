@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   struct_pars2.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tcosse <tcosse@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/03/01 02:22:22 by tcosse            #+#    #+#             */
+/*   Updated: 2022/03/01 02:22:48 by tcosse           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
 void	ft_add_end_pars(t_parsing **first, t_parsing *new)
@@ -11,7 +23,7 @@ void	ft_add_end_pars(t_parsing **first, t_parsing *new)
 			*first = new;
 		else
 		{
-			tmp  = *first;
+			tmp = *first;
 			printf("seg %p\n", tmp);
 			while (tmp && tmp->next)
 				tmp = tmp->next;

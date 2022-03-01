@@ -6,7 +6,7 @@
 /*   By: asaboure <asaboure@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/28 17:37:42 by tcosse            #+#    #+#             */
-/*   Updated: 2022/03/01 02:16:20 by tcosse           ###   ########.fr       */
+/*   Updated: 2022/03/01 02:20:00 by tcosse           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,14 +76,10 @@ int	ft_exec(t_term *term, t_parsing *cmd)
 	return (0);
 }
 
-int	ft_select_built_exec(t_term *term, t_parsing *exec, int in_pipe, t_cmd *next)
+int	ft_select_built_exec(t_term *term,
+	t_parsing *exec, int in_pipe, t_cmd *next)
 {
 	int	i;
-	(void)term;
-	(void)exec;
-	(void)in_pipe;
-	(void)next;
-
 
 	i = ft_is_builtin(exec->argv[0]);
 	if (i >= 0 && i <= 3)
@@ -106,7 +102,6 @@ int	exec(t_term *term, t_cmd **tab)
 	pipefd[1] = 0;
 	exec = 0;
 	printf("exec\n");
-	ft_launch_exec(term , &exec, pipefd, tab);
-	//ft_free_pars(exec);
+	ft_launch_exec(term, &exec, pipefd, tab);
 	return (0);
 }
