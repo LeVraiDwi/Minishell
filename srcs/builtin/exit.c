@@ -6,7 +6,7 @@
 /*   By: asaboure <asaboure@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/28 14:19:47 by asaboure          #+#    #+#             */
-/*   Updated: 2022/03/01 02:29:39 by asaboure         ###   ########.fr       */
+/*   Updated: 2022/03/01 16:19:54 by tcosse           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,12 @@ void	destroy_minishell(t_cmd **tab, t_parsing *parsing, t_term *term)
 	rl_clear_history();
 }
 
-int	ft_exit(t_term *term, t_parsing *parsing, t_cmd **tab)
+int	ft_exit(t_term *term, t_parsing *parsing, t_cmd **tab, t_parsing *pars)
 {
 	char	**cmd;
 	int		code;
 
-	cmd = parsing->argv;
+	cmd = pars->argv;
 	if (!cmd[1])
 		exit(0);
 	if (!isnumber(cmd[1]))
