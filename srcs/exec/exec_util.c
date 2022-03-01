@@ -6,7 +6,7 @@
 /*   By: tcosse <tcosse@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/28 18:15:35 by tcosse            #+#    #+#             */
-/*   Updated: 2022/03/01 02:20:42 by tcosse           ###   ########.fr       */
+/*   Updated: 2022/03/01 02:46:35 by tcosse           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,13 +28,11 @@ int	redir_flux(t_parsing *cmd, int last_child)
 	return (0);
 }
 
-int	ft_is_exit(t_term *term, t_parsing *exec, t_cmd **tab, int i)
+int	ft_is_exit(t_parsing *exec)
 {
-	if (i != 0 || tab[i + 1])
-		return (0);
 	if (strisstr(exec->argv[0], "exit"))
 	{	
-		term->exit(term, exec, tab);
+		return (1);
 	}
 	return (0);
 }
@@ -57,7 +55,8 @@ int	ft_launch_exec(t_term *term, t_parsing **exec, int *pipefd, t_cmd **tab)
 		{
 			new = ft_get_last_pars(*exec);
 			ft_set_pipe(new, pipefd, tab[i + 1]);
-			nb_fork += ft_select_built_exec(term, new, in_pipe, tab[i + 1]);
+			if (!ft_make_exit(term, *exec, tab, in_pipe))
+				nb_fork += ft_select_built_exec(term, new, in_pipe, tab[i + 1]);
 		}
 		i++;
 	}
@@ -93,5 +92,4 @@ void	ft_wait_child(int nb_fork)
 		status = 0;
 		waitpid(0, &status, 0);
 	}
-	printf("end wait\n");
 }

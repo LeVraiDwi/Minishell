@@ -6,7 +6,7 @@
 /*   By: asaboure <asaboure@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/25 18:28:10 by tcosse            #+#    #+#             */
-/*   Updated: 2022/03/01 02:23:39 by tcosse           ###   ########.fr       */
+/*   Updated: 2022/03/01 02:45:54 by tcosse           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 int		ft_error_pipe(t_parsing *cmd);
 int		ft_launch_exec(t_term *term,
 			t_parsing **exec, int *pipefd, t_cmd **tab);
+int		ft_make_exit(t_term *term, t_parsing *exec, t_cmd **tab, int in_pipe);
 void	ft_wait_child(int nb_fork);
 int		ft_child(t_term *term, t_parsing *cmd, int last_child);
 int		exec(t_term *term, t_cmd **tab);
@@ -37,7 +38,7 @@ int		ft_get_path(t_term *term, t_parsing *exec);
 int		ft_init_pipe_out(t_parsing *exec, int *pipefd);
 int		ft_exec(t_term *term, t_parsing *exec);
 int		ft_close_exec(t_parsing *exec);
-int		ft_is_exit(t_term *term, t_parsing *exec, t_cmd **tab, int i);
+int		ft_is_exit(t_parsing *exec);
 int		ft_set_pipe(t_parsing *exec, int *pipefd, t_cmd *next);
 int		ft_select_built_exec(t_term *term,
 			t_parsing *exec, int in_pipe, t_cmd *next);

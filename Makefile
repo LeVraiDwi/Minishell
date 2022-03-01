@@ -68,7 +68,7 @@ EXEC_PATH = ./srcs/exec
 
 EXEC_NAME = exec.c creat_exec.c exec_join.c\
 			exec_file.c path.c exec_util.c\
-			close.c\
+			close.c exec_exit.c\
 
 OBJS = ${SRCS:.c=.o}
 
