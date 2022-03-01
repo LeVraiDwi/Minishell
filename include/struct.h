@@ -6,7 +6,7 @@
 /*   By: asaboure <asaboure@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/25 18:29:22 by tcosse            #+#    #+#             */
-/*   Updated: 2022/03/01 20:00:25 by tcosse           ###   ########.fr       */
+/*   Updated: 2022/03/01 20:43:42 by tcosse           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ typedef struct s_term
 	t_cmd		*act_cmd;
 	t_parsing	*act_pars;
 	t_cmd		**act_tab;
+	int			in_pipe;
 }				t_term;
 
 void		ft_init_struct(t_parsing *pars);

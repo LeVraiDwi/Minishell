@@ -6,7 +6,7 @@
 /*   By: tcosse <tcosse@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/25 18:33:47 by tcosse            #+#    #+#             */
-/*   Updated: 2022/03/01 20:17:29 by tcosse           ###   ########.fr       */
+/*   Updated: 2022/03/01 21:36:26 by tcosse           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,6 @@ int	set_status_err(int status, int success)
 
 int	ft_ret_err(void)
 {
-	perror(MINISHELL);
 	exit(EXIT_FAILURE);
 	return (-1);
 }

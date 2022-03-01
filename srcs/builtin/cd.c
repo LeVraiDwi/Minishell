@@ -6,7 +6,7 @@
 /*   By: asaboure <asaboure@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/24 13:20:33 by tcosse            #+#    #+#             */
-/*   Updated: 2022/03/01 01:04:38 by asaboure         ###   ########.fr       */
+/*   Updated: 2022/03/01 21:37:12 by tcosse           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,12 @@ int	go_to_path(char *path, t_parsing *parsing, t_term *term, int flag)
 {
 	if (chdir(path) < 0)
 	{
-		perror("Error:");
 		if (parsing->out > 1)
 			close(parsing->out);
 		parsing->out = 0;
 		if (flag)
 			free(path);
-		return (-1);
+		return (ft_perror());
 	}
 	if (flag)
 		free(path);

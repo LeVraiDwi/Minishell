@@ -6,7 +6,7 @@
 /*   By: tcosse <tcosse@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/24 13:21:05 by tcosse            #+#    #+#             */
-/*   Updated: 2022/03/01 20:24:00 by tcosse           ###   ########.fr       */
+/*   Updated: 2022/03/01 21:37:57 by tcosse           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ int	ft_env(t_term *term, t_parsing *parsing)
 	if (cmd[1])
 	{
 		errno = E2BIG;
+		perror(MINISHELL);
 		if (parsing->out > 1)
 			close(parsing->out);
 		parsing->out = 0;
