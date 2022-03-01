@@ -6,7 +6,7 @@
 /*   By: asaboure <asaboure@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/24 13:29:32 by tcosse            #+#    #+#             */
-/*   Updated: 2022/03/01 01:34:20 by asaboure         ###   ########.fr       */
+/*   Updated: 2022/03/01 16:45:33 by asaboure         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,9 +43,20 @@ int	ft_cmd_length(char **cmd)
 
 int	is_flag(char *arg)
 {
-	if (!arg || ft_strlen(arg) != 2)
+	int	i;
+
+	i = 1;
+	if (!arg)
 		return (0);
-	if (arg[0] == '-' && arg[1] == 'n')
+	if (arg[0] == '-')
+	{
+		while (arg[i])
+		{
+			if (arg[i] != 'n')
+				return (0);
+			i++;
+		}
 		return (FLAG_N);
+	}
 	return (0);
 }
