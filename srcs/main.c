@@ -6,7 +6,7 @@
 /*   By: asaboure <asaboure@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/24 13:17:17 by tcosse            #+#    #+#             */
-/*   Updated: 2022/03/01 18:03:47 by tcosse           ###   ########.fr       */
+/*   Updated: 2022/03/01 19:55:48 by tcosse           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,6 @@ void	exit_minishell(t_term *term)
 
 int	ft_exec_cmd(t_term *term, char *str)
 {
-	t_cmd	**tab;
-
 	ft_add_history(str);
 	term->act_cmd = lexer(str);
 	if (!term->act_cmd)
@@ -44,17 +42,17 @@ int	ft_exec_cmd(t_term *term, char *str)
 		return (free_err_cmd(term->act_cmd, 0, 0));
 	if (ahdoc(term, term->act_cmd) < 0)
 		return (free_err_cmd(term->act_cmd, 0, 0));
-	tab = split_pipe(term->act_cmd);
-	if (!tab)
+	term->act_tab = split_pipe(term->act_cmd);
+	if (!term->act_tab)
 		return (free_err_cmd(term->act_cmd, 0, PERROR_ERR));
-	if (ft_check_parsing(tab) < 0)
+	if (ft_check_parsing(term->act_tab) < 0)
 		return (free_err_cmd(term->act_cmd, 0, 0));
-	if (expanser(term, tab) < 0)
+	if (expanser(term, term->act_tab) < 0)
 		return (free_err_cmd(term->act_cmd, 0, 0));
-	if (exec(term, tab) < 0)
+	if (exec(term, term->act_tab) < 0)
 		return (free_err_cmd(term->act_cmd, 0, 0));
-	if (tab)
-		ft_free_cmd_tab(tab);
+	if (term->act_tab)
+		ft_free_cmd_tab(term->act_tab);
 	return (0);
 }
 
@@ -92,6 +90,9 @@ int	main(int argc, char **argv, char **env)
 		return (0);
 	while (1)
 	{
+		term.act_cmd = 0;
+		term.act_tab = 0;
+		term.act_pars = 0;
 		cmd(&term);
 	}
 	ft_free_term(&term);
