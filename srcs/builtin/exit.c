@@ -6,7 +6,7 @@
 /*   By: asaboure <asaboure@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/28 14:19:47 by asaboure          #+#    #+#             */
-/*   Updated: 2022/03/01 16:52:10 by tcosse           ###   ########.fr       */
+/*   Updated: 2022/03/01 17:07:01 by asaboure         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int	ft_exit(t_term *term, t_parsing *parsing, t_cmd **tab, t_parsing *pars)
 		write(2, cmd[1], ft_strlen(cmd[1]));
 		write(2, ": numeric argument required\n", 29);
 		destroy_minishell(tab, parsing, term);
-		exit (-1);
+		exit(-1);
 	}
 	if (ft_cmd_length(cmd) > 2)
 	{
@@ -46,7 +46,7 @@ int	ft_exit(t_term *term, t_parsing *parsing, t_cmd **tab, t_parsing *pars)
 		write(2, ": exit: too many arguments", 9);
 		return (-1);
 	}
-	destroy_minishell(tab, parsing, term);
 	code = ft_atoi(cmd[1]);
+	destroy_minishell(tab, parsing, term);
 	exit(code);
 }
