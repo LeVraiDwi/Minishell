@@ -6,7 +6,7 @@
 /*   By: tcosse <tcosse@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/28 18:15:35 by tcosse            #+#    #+#             */
-/*   Updated: 2022/03/01 02:46:35 by tcosse           ###   ########.fr       */
+/*   Updated: 2022/03/01 03:29:38 by tcosse           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,12 @@
 
 int	redir_flux(t_parsing *cmd, int last_child)
 {
-	int	status;
+	(void)last_child;
+/*	int	status;
 
 	status = 0;
 	if (last_child != 0)
-		waitpid(last_child, &status, 0);
+		waitpid(last_child, &status, 0);*/
 	if (cmd->in != STDIN)
 		if (dup2(cmd->in, STDIN) < 0)
 			return (ft_error_pipe(cmd));
@@ -92,4 +93,6 @@ void	ft_wait_child(int nb_fork)
 		status = 0;
 		waitpid(0, &status, 0);
 	}
+	signal_handler();
+
 }

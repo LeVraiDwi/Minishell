@@ -6,7 +6,7 @@
 /*   By: asaboure <asaboure@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/28 17:37:42 by tcosse            #+#    #+#             */
-/*   Updated: 2022/03/01 02:53:52 by tcosse           ###   ########.fr       */
+/*   Updated: 2022/03/01 03:29:42 by tcosse           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,6 @@ int	ft_exec(t_term *term, t_parsing *cmd)
 		ft_child(term, cmd, last_child);
 	ft_close(cmd->in, cmd->out);
 	ft_close(cmd->pipe_out[1], 0);
-	signal_handler();
 	last_child = child;
 	return (0);
 }
