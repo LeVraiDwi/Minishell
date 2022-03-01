@@ -6,7 +6,7 @@
 /*   By: asaboure <asaboure@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/24 13:21:12 by tcosse            #+#    #+#             */
-/*   Updated: 2022/02/28 22:57:07 by asaboure         ###   ########.fr       */
+/*   Updated: 2022/03/01 01:05:42 by asaboure         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ int	ft_export_lst(t_term *term, char **cmd, int *ret)
 
 int	ft_export(t_term *term, t_parsing *parsing)
 {
-	int	ret;
+	int		ret;
 	char	**cmd;
 
 	ret = 0;

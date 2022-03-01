@@ -6,7 +6,7 @@
 /*   By: asaboure <asaboure@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/24 13:21:27 by tcosse            #+#    #+#             */
-/*   Updated: 2022/02/28 22:23:04 by asaboure         ###   ########.fr       */
+/*   Updated: 2022/03/01 01:12:24 by asaboure         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ void	remove_env_lst(t_term *term, char **cmd, int *ret)
 
 int	ft_unset(t_term *term, t_parsing *parsing)
 {
-	int	ret;
+	int		ret;
 	char	**cmd;
 
 	ret = 0;
