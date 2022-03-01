@@ -6,7 +6,7 @@
 /*   By: asaboure <asaboure@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/24 13:20:40 by tcosse            #+#    #+#             */
-/*   Updated: 2022/03/01 17:38:40 by asaboure         ###   ########.fr       */
+/*   Updated: 2022/03/01 19:14:12 by asaboure         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ int	ft_echo(t_term *term, t_parsing *parsing)
 	(void)term;
 	l = ft_cmd_length(cmd);
 	flag = 0;
-	if (l == 1)
+	if (l == 1 || is_flag(cmd) == 1 + l)
 	{
 		if (parsing->out > 1)
 			close(parsing->out);
