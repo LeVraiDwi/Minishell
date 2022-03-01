@@ -6,7 +6,7 @@
 /*   By: asaboure <asaboure@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/28 17:37:42 by tcosse            #+#    #+#             */
-/*   Updated: 2022/03/01 21:54:02 by tcosse           ###   ########.fr       */
+/*   Updated: 2022/03/01 23:16:38 by tcosse           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ int	ft_exec_builtin(t_term *term, t_parsing *parsing, int exec, t_cmd *cmd)
 		else
 			return (0);
 	}
-	if ((i == 0 | i >= 3 && i <= 5) && !exec)
+	if ((i >= 0 && i <= 5) && !exec)
 		return (term->built[i](term, parsing));
 	return (1);
 }
@@ -81,9 +81,7 @@ int	ft_select_built_exec(t_term *term,
 	int	i;
 
 	i = ft_is_builtin(exec->argv[0]);
-	if (i > 0 && i < 3)
-		ft_exec_builtin(term, exec, 1, next);
-	else if (i == 0 && !in_pipe)
+	if (i >= 0 && i < 3 && !in_pipe)
 		ft_exec_builtin(term, exec, 1, next);
 	else
 	{
