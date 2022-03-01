@@ -6,7 +6,7 @@
 /*   By: asaboure <asaboure@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/28 14:19:47 by asaboure          #+#    #+#             */
-/*   Updated: 2022/03/01 02:29:39 by asaboure         ###   ########.fr       */
+/*   Updated: 2022/03/01 15:06:46 by asaboure         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int	ft_exit(t_term *term, t_parsing *parsing, t_cmd **tab)
 		write(2, MINISHELL, ft_strlen(MINISHELL));
 		write(2, ": exit: ", 9);
 		write(2, cmd[1], ft_strlen(cmd[1]));
-		write(2, "numeric argument required\n", 27);
+		write(2, ": numeric argument required\n", 29);
 		destroy_minishell(tab, parsing, term);
 		exit (-1);
 	}
