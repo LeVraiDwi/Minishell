@@ -6,7 +6,7 @@
 /*   By: asaboure <asaboure@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/24 13:21:20 by tcosse            #+#    #+#             */
-/*   Updated: 2022/03/01 21:38:17 by tcosse           ###   ########.fr       */
+/*   Updated: 2022/03/01 21:41:18 by tcosse           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,11 @@ int	ft_pwd(t_term *term, t_parsing *parsing)
 
 	cmd = parsing->argv;
 	(void)term;
+	if (ft_cmd_length(parsing->argv) > 1)
+	{
+		errno = E2BIG;
+		return (-1);
+	}
 	if (!strisstr(cmd[0], "pwd"))
 	{
 		if (parsing->out > 1)
