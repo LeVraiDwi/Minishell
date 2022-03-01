@@ -6,7 +6,7 @@
 /*   By: asaboure <asaboure@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/26 17:20:20 by tcosse            #+#    #+#             */
-/*   Updated: 2022/03/01 15:56:52 by asaboure         ###   ########.fr       */
+/*   Updated: 2022/03/01 19:53:01 by asaboure         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,22 @@ char	**get_pathv(char **env)
 	return (NULL);
 }
 
+int	is_path(char *input)
+{
+	int	i;
+	int	ret;
+
+	i = 0;
+	ret = 0;
+	while (input[i])
+	{
+		if (input[i] == '/')
+			ret = 1;
+		i++;
+	}
+	return (ret);
+}
+
 char	*check_cmd(char *input, char **path)
 {
 	int		i;
@@ -60,7 +76,7 @@ char	*check_cmd(char *input, char **path)
 	i = 0;
 	if (input[0] == '\0')
 		return (NULL);
-	if (input[0] == '.' && input[1] == '/' && access(input, X_OK | F_OK) == 0)
+	if (is_path(input) && access(input, X_OK | F_OK) == 0)
 		return (ft_strdup(input));
 	while (path[i])
 	{

@@ -6,7 +6,7 @@
 /*   By: asaboure <asaboure@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/28 18:21:01 by asaboure          #+#    #+#             */
-/*   Updated: 2022/03/01 00:14:03 by tcosse           ###   ########.fr       */
+/*   Updated: 2022/03/01 19:50:42 by asaboure         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ int	isnumber(char *str)
 	int	i;
 
 	i = 0;
+	if (str[i] == '-')
+		i++;
 	while (str[i])
 	{
 		if (str[i] < '0' || str[i] > '9')
