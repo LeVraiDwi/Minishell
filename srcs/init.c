@@ -6,7 +6,7 @@
 /*   By: asaboure <asaboure@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/24 13:18:13 by tcosse            #+#    #+#             */
-/*   Updated: 2022/02/28 20:33:40 by tcosse           ###   ########.fr       */
+/*   Updated: 2022/03/01 01:11:50 by asaboure         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ void	init_built(t_term *term)
 	term->built[4] = &ft_env;
 	term->built[5] = &ft_echo;
 	term->exit = &ft_exit;
-	
 }
 
 int	init_term(t_term *term, char **env)

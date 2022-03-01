@@ -6,7 +6,7 @@
 /*   By: asaboure <asaboure@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/24 13:17:17 by tcosse            #+#    #+#             */
-/*   Updated: 2022/03/01 01:01:51 by tcosse           ###   ########.fr       */
+/*   Updated: 2022/03/01 02:17:15 by tcosse           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,11 @@ int	main(int argc, char **argv, char **env)
 	(void)argv;
 	(void)argc;
 	g_err = 0;
+	if (!isatty(0))
+	{
+		printf("forbidden input\n");
+		return (0);
+	}
 	signal_handler();
 	if (init_term(&term, env))
 		return (0);

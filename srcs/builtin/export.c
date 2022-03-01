@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tcosse <tcosse@student.42.fr>              +#+  +:+       +#+        */
+/*   By: asaboure <asaboure@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/24 13:21:12 by tcosse            #+#    #+#             */
-/*   Updated: 2022/02/28 20:20:50 by tcosse           ###   ########.fr       */
+/*   Updated: 2022/03/01 01:05:42 by asaboure         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ int	ft_is_var(char *var)
 	flag = 0;
 	i = 0;
 	if (!var)
+		return (0);
+	if (ft_isdigit(var[i]))
 		return (0);
 	while (var[i] && (ft_isalnum(var[i]) || var[i] == '_'))
 		i++;
@@ -35,17 +37,17 @@ int	ft_export_lst(t_term *term, char **cmd, int *ret)
 	while (cmd[l])
 	{
 		i = ft_is_var(cmd[l]);
-		if (cmd[l][i] == '=')
+		if (cmd[l][i] == '=' && i != 0)
 		{
 			if (add_env(term, cmd[l]) < 0)
 				return (-1);
 		}
-		else if (cmd[l][i])
+		else if (cmd[l][i] || (i == 0 && cmd[l][i] == '='))
 		{
-			write(2, "export: %s: invalide parameter name\n", ft_strlen(cmd[0]));
+			write(2, "export: %s: invalid parameter name\n", ft_strlen(cmd[0]));
 			write(2, ": ", 2);
 			write(2, cmd[l], ft_strlen(cmd[l]));
-			write(2, ": invalide parameter name\n", 26);
+			write(2, ": invalid parameter name\n", 26);
 			*ret = -1;
 		}
 		l++;
@@ -55,7 +57,7 @@ int	ft_export_lst(t_term *term, char **cmd, int *ret)
 
 int	ft_export(t_term *term, t_parsing *parsing)
 {
-	int	ret;
+	int		ret;
 	char	**cmd;
 
 	ret = 0;
