@@ -6,7 +6,7 @@
 /*   By: asaboure <asaboure@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/24 13:21:27 by tcosse            #+#    #+#             */
-/*   Updated: 2022/03/01 21:58:13 by tcosse           ###   ########.fr       */
+/*   Updated: 2022/03/01 22:11:38 by tcosse           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	ft_is_valid_name(char *cmd)
 	return (1);
 }
 
-void	remove_env_lst(t_term *term, char **cmd, int *ret)
+void	remove_env_lst(t_term *term, char **cmd)
 {
 	int	l;
 
@@ -45,7 +45,7 @@ void	remove_env_lst(t_term *term, char **cmd, int *ret)
 			write(2, ": ", 2);
 			write(2, cmd[l], ft_strlen(cmd[l]));
 			write(2, ": invalid parameter name\n", 26);
-			*ret = 1;
+			g_err = 1;
 		}
 		l++;
 	}
@@ -53,17 +53,15 @@ void	remove_env_lst(t_term *term, char **cmd, int *ret)
 
 int	ft_unset(t_term *term, t_parsing *parsing)
 {
-	int		ret;
 	char	**cmd;
 
-	ret = 0;
 	cmd = parsing->argv;
 	if (!parsing->next)
 	{
-		remove_env_lst(term, cmd, &ret);
+		remove_env_lst(term, cmd);
 	}
 	if (parsing->out > 1)
 		close(parsing->out);
 	parsing->out = 0;
-	return (ret);
+	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: asaboure <asaboure@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/24 13:21:12 by tcosse            #+#    #+#             */
-/*   Updated: 2022/03/01 21:59:00 by tcosse           ###   ########.fr       */
+/*   Updated: 2022/03/01 22:10:49 by tcosse           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	ft_is_var(char *var)
 	return (i);
 }
 
-int	ft_export_lst(t_term *term, char **cmd, int *ret)
+int	ft_export_lst(t_term *term, char **cmd)
 {
 	int	l;
 	int	i;
@@ -48,7 +48,7 @@ int	ft_export_lst(t_term *term, char **cmd, int *ret)
 			write(2, ": ", 2);
 			write(2, cmd[l], ft_strlen(cmd[l]));
 			write(2, ": invalid parameter name\n", 26);
-			*ret = -1;
+			g_err = 1;
 		}
 		l++;
 	}
@@ -57,10 +57,8 @@ int	ft_export_lst(t_term *term, char **cmd, int *ret)
 
 int	ft_export(t_term *term, t_parsing *parsing)
 {
-	int		ret;
 	char	**cmd;
 
-	ret = 0;
 	cmd = parsing->argv;
 	if (!cmd[1])
 	{
@@ -68,10 +66,10 @@ int	ft_export(t_term *term, t_parsing *parsing)
 		return (0);
 	}
 	if (!parsing->next)
-		if (ft_export_lst(term, cmd, &ret) < 0)
+		if (ft_export_lst(term, cmd) < 0)
 			return (-1);
 	if (parsing->out > 1)
 		close(parsing->out);
 	parsing->out = 0;
-	return (ret);
+	return (0);
 }
