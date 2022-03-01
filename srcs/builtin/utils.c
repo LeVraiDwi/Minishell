@@ -6,7 +6,7 @@
 /*   By: asaboure <asaboure@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/24 13:29:32 by tcosse            #+#    #+#             */
-/*   Updated: 2022/03/01 17:36:17 by asaboure         ###   ########.fr       */
+/*   Updated: 2022/03/01 18:52:35 by asaboure         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,18 +47,23 @@ int	is_flag(char **arg)
 	int	j;
 
 	j = 1;
+printf("enter\n");
 	if (!arg[j][0])
 		return (j);
+printf("read arg[j][0]\n");
 	while (arg[j][0] == '-')
 	{
+
 		i = 1;
 		while (arg[j][i])
 		{
+printf("i: %i\n", j);
 			if (arg[j][i] != 'n')
 				return (j);
 			i++;
 		}
 		j++;
 	}
+printf("j: %i\n", j);
 	return (j);
 }

@@ -6,7 +6,7 @@
 /*   By: asaboure <asaboure@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/28 18:26:36 by asaboure          #+#    #+#             */
-/*   Updated: 2022/03/01 17:14:47 by asaboure         ###   ########.fr       */
+/*   Updated: 2022/03/01 18:46:01 by asaboure         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,20 +15,26 @@
 void	signal_handler_heredoc(int id)
 {
 	struct sigaction	heredoc_act;
+	struct sigaction	parent_act;
 
+	parent_act.sa_sigaction = signal_set_err;
+	parent_act.sa_flags = SA_SIGINFO;
+	sigemptyset(&parent_act.sa_mask);
 	heredoc_act.sa_handler = SIG_DFL;
 	heredoc_act.sa_flags = 0;
 	sigemptyset(&heredoc_act.sa_mask);
 	if (id != 0)
-		signal(SIGINT, sigint_set_err);
+		sigaction(SIGINT, &parent_act, NULL);
 	else
 		sigaction(SIGINT, &heredoc_act, NULL);
 }
 
-void	sigint_set_err(int sig)
+void	signal_set_err(int sig, siginfo_t *info, void *context)
 {
-	(void)sig;
-	g_err = 130;
+	(void)info;
+	(void)context;
+	if (sig == SIGINT)
+		g_err = 130;
 }
 
 void	signal_handler_child(int id)
@@ -44,23 +50,31 @@ void	signal_handler_child(int id)
 	sigemptyset(&parent_act.sa_mask);
 	if (id != 0)
 	{
-		signal(SIGINT, sigint_set_err);
+		sigaction(SIGINT, &parent_act, NULL);
 		sigaction(SIGQUIT, &parent_act, NULL);
 	}
 	else
 	{
-		signal(SIGINT, SIG_DFL);
+		sigaction(SIGINT, &child_act, NULL);
 		sigaction(SIGQUIT, &child_act, NULL);
 	}
+}
+
+void	main_handler(int sig, siginfo_t *info, void *context)
+{
+	(void)context;
+	(void)info;
+	if (sig == SIGINT)
+		newprompt(sig);
 }
 
 void	signal_handler(void)
 {
 	struct sigaction	main_act;
 
-	main_act.sa_handler = SIG_IGN;
-	main_act.sa_flags = 0;
+	main_act.sa_sigaction = main_handler;
+	main_act.sa_flags = SA_SIGINFO;
 	sigemptyset(&main_act.sa_mask);
-	signal(SIGINT, newprompt);
+	sigaction(SIGINT, &main_act, NULL);
 	sigaction(SIGQUIT, &main_act, NULL);
 }
